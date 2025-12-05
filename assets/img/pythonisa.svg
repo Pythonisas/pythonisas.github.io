@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#306998"/>
+  
+  <!-- Python snake body -->
+  <path d="M60 80 Q40 100 60 120 Q80 140 100 130 Q120 120 140 130 Q160 140 160 120 Q160 100 140 100 Q120 100 100 100 Q80 100 60 80" fill="#FFD43B" stroke="#306998" stroke-width="2"/>
+  
+  <!-- Snake head -->
+  <ellipse cx="60" cy="75" rx="15" ry="12" fill="#FFD43B"/>
+  <circle cx="55" cy="72" r="3" fill="#306998"/>
+  <path d="M45 75 Q42 78 45 81" stroke="#306998" stroke-width="2" fill="none"/>
+  
+  <!-- Witch hat -->
+  <path d="M40 65 L60 20 L80 65 Z" fill="#2B2B2B"/>
+  <ellipse cx="60" cy="65" rx="25" ry="8" fill="#2B2B2B"/>
+  <circle cx="65" cy="45" r="3" fill="#FFD43B"/>
+  
+  <!-- Stars -->
+  <polygon points="150,40 152,46 158,46 153,50 155,56 150,52 145,56 147,50 142,46 148,46" fill="#FFD43B"/>
+  <polygon points="170,70 171,73 175,73 172,75 173,79 170,77 167,79 168,75 165,73 169,73" fill="#FFD43B"/>
+  <polygon points="165,130 166,132 169,132 167,134 168,137 165,135 162,137 163,134 160,132 164,132" fill="#FFD43B"/>
+  
+  <!-- Text -->
+  <text x="100" y="175" text-anchor="middle" font-family="sans-serif" font-size="14" fill="white">Pythonisas</text>
+</svg>
