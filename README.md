@@ -1,6 +1,6 @@
 # Bienvenide a pythonisas.github.io
 
-![Pythonisa](ttps://pythonisas.github.io/assets/img/pythonisa.png)
+![Pythonisa](assets/img/pythonisa.png)
 
 Las Github (Web) Pages de la (auto)organización ‘Pythonisas’. Brujas del teclado. 
 Alquimistas de los bits ~ https://pythonisas.github.io
