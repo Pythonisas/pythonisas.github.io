@@ -1,0 +1,31 @@
+# CLAUDE
+
+Este es un repositorio para estudiantes del lenguaje de programación Python, publicado como Github Pages 
+
+https://pythonisas.github.io
+
+
+
+## Tareas
+
+Claude,
+
+- lee el README.md.
+
+
+- informate del repo. origen 
+```bash
+git remote -v
+```
+
+
+- ayudame a generar el sitio Github Pages Web localmente, en un sistema que
+```bash
+fenix@anka4 ~/EducaMadrid-NC/PROGRAMACION/pythonisas.github.io (main)
+$ uname -a && ruby -v && jekyll -v
+Linux anka4 6.12.57+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.57-1 (2025-11-05) x86_64 GNU/Linux
+ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [x86_64-linux]
+jekyll 4.3.2
+fenix@anka4 ~/EducaMadrid-NC/PROGRAMACION/pythonisas.github.io (main)
+```
+

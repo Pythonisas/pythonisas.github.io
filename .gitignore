@@ -1,0 +1,13 @@
+# Jekyll generated
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Local development
+Gemfile.lock
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

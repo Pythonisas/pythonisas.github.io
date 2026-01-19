@@ -1,0 +1,27 @@
+# Pythonisas - Brujas del teclado
+title: Pythonisas
+description: "Brujas del teclado. Alquimistas de los bits."
+url: "https://pythonisas.github.io"
+baseurl: ""
+
+# Tema - compatible con GitHub Pages
+theme: minima
+
+# Configuración
+markdown: kramdown
+highlighter: rouge
+
+# Plugins (compatibles con GitHub Pages)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Excluir archivos
+exclude:
+  - CLAUDE
+  - LICENSE
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-cache
+  - vendor
