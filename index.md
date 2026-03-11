@@ -17,6 +17,10 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 - [Uso de entornos virtuales mágicos](https://pythonisas.github.io/Pythonisas/entornos-virtuales-en-python.html)
 - [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
+## Prácticas
+
+- [🐕 Práctica POO — Pyrro: perros ASCII con clases](/poo/)
+
 ## Recursos
 
 - [Documentación Oficial en ES](https://docs.python.org/es/3/)
