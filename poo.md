@@ -4,6 +4,8 @@ title: "Práctica POO — Pyrro"
 permalink: /poo/
 ---
 
+![Pythonisa](/assets/img/pyrro-art-NLLM.png)
+
 # 🐕 Práctica POO — Pyrro: Programación Orientada a Objetos con perros ASCII
 
 ## 📋 Descripción
