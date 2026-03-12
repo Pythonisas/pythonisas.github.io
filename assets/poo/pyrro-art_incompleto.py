@@ -47,9 +47,9 @@ PERROS = {
 # --- Clase Pyrro con pyrro_dice() como método ---
 
 class ___:
-    def __init__(self, name, age, raza="labrador"):
+    def __init__(self, name, edad, raza="labrador"):
         self.___ = name
-        self.___ = age
+        self.___ = edad
         self.___ = raza if raza in PERROS else "labrador"
 
     def sentarse(___):

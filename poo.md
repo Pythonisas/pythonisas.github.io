@@ -28,7 +28,7 @@ La práctica se compone de **dos scripts progresivos**:
 Completa los huecos marcados con `___` y `...` en los dos ficheros incompletos que se te proporcionan, de forma que:
 
 1. ✅ **`pyrro-dice.py`** — El perro "habla" mostrando un mensaje dentro de una viñeta ASCII
-2. ✅ **`pyrro-art.py`** — Se define una clase `Pyrro` con atributos (`name`, `age`, `raza`) y métodos que muestran arte ASCII según la raza
+2. ✅ **`pyrro-art.py`** — Se define una clase `Pyrro` con atributos (`name`, `edad`, `raza`) y métodos que muestran arte ASCII según la raza
 
 ### 📥 Descarga los ficheros incompletos
 
@@ -137,9 +137,9 @@ PERROS = {
 # --- Clase Pyrro con pyrro_dice() como método ---
 
 class ___:
-    def __init__(self, name, age, raza="labrador"):
+    def __init__(self, name, edad, raza="labrador"):
         self.___ = name
-        self.___ = age
+        self.___ = edad
         self.___ = raza if raza in PERROS else "labrador"
 
     def sentarse(___):
@@ -254,7 +254,7 @@ Si quieres ir a por el **10**, elige **una o más** de estas ampliaciones:
 | **Bonus** | **Descripción** | **Puntos** |
 |:---|:---|:---:|
 | 🐕 **Nueva raza** | Añade una 5ª raza al diccionario `PERROS` con su arte ASCII propio | **+0.5** |
-| 🎂 **Método `cumpleaños()`** | Crea un método que incremente `self.age` en 1 y muestre un mensaje festivo | **+0.5** |
+| 🎂 **Método `cumpleaños()`** | Crea un método que incremente `self.edad` en 1 y muestre un mensaje festivo | **+0.5** |
 | 📊 **Método `__str__()`** | Implementa `__str__` para que `print(willie)` muestre info del perro | **+0.5** |
 
 > 💡 Con el bonus puedes llegar hasta **10** puntos (máximo). No es necesario hacer todos.
@@ -268,7 +268,7 @@ Si quieres ir a por el **10**, elige **una o más** de estas ampliaciones:
 | **Funciones puras** | `hacer_viñeta()` en ambos scripts |
 | **Constantes globales** | `PYRRO` y `PERROS` (diccionario) |
 | **Clase y constructor `__init__`** | `class Pyrro:` → `def __init__(self, ...)` |
-| **Atributos de instancia** | `self.name`, `self.age`, `self.raza` |
+| **Atributos de instancia** | `self.name`, `self.edad`, `self.raza` |
 | **Métodos de instancia** | `sentarse()`, `pyrro_dice()`, `arte_aleatorio()` |
 | **`self`** | Primer parámetro de todos los métodos |
 | **Diccionarios** | `PERROS = { "labrador": ..., "caniche": ... }` |
@@ -294,9 +294,9 @@ Si quieres ir a por el **10**, elige **una o más** de estas ampliaciones:
 | **Imports correctos** | **0.5** | Importa `textwrap` y `random` |
 | **Razas del diccionario** | **0.5** | Completa las claves: `caniche`, `salchicha`, `shiba` |
 | **Definición de la clase** | **1** | `class Pyrro:` — nombre correcto de la clase |
-| **Constructor `__init__`** | **1** | Asigna correctamente `self.name`, `self.age`, `self.raza` |
+| **Constructor `__init__`** | **1** | Asigna correctamente `self.name`, `self.edad`, `self.raza` |
 | **Uso de `self`** | **1** | `self` como primer parámetro en `sentarse()` y referencia correcta en `dar_la_vuelta()` |
-| **Método `pyrro_dice()`** | **1** | Accede a `self.name`, `self.age`, pasa `msg` a `hacer_viñeta()`, usa `self.raza` como clave |
+| **Método `pyrro_dice()`** | **1** | Accede a `self.name`, `self.edad`, pasa `msg` a `hacer_viñeta()`, usa `self.raza` como clave |
 | **Método `arte_aleatorio()`** | **0.5** | Usa `random.choice()`, `.keys()` y llama a `self.pyrro_dice()` |
 | **Bloque `__main__`** | **0.5** | Instancia objetos con `Pyrro(...)` y llama a los métodos correctos |
 
