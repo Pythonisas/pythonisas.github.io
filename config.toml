@@ -1,15 +1,15 @@
-baseURL = "https://eduardo-robles.github.io/"
-title   = "Eduardo Robles Site"
-languageCode = "en-us"
-timeZone = "America/Chicago"
+baseURL = "https://pythonisas.github.io/"
+title   = "Pythonisas"
+languageCode = "es"
+timeZone = "Europe/Madrid"
 theme = "smol"
 canonifyurls = true
 # Parameters
 [params]
-    author = "Eduardo Robles"
-    authorGithub = "https://github.com/eduardo-robles"
+    author = "Pythonisas"
+    authorGithub = "https://github.com/pythonisas"
     mainSections = ["posts"]
-    Subtitle = "Hola Mundo 🌮"
+    Subtitle = "Brujas del teclado. Alquimistas de los bits."
     dateFmt = "02 Jan 2006"
 
 [markup.goldmark.renderer]
@@ -18,34 +18,9 @@ canonifyurls = true
 # Header
 [menu]
   [[menu.main]]
-    identifier = "about"
-    name       = "About"
-    url        = "/pages/about"
-    weight     = -100
-  [[menu.main]]
-    identifier = "Links"
-    name       = "Links"
-    url        = "/pages/links"
-    weight     = -100
-  [[menu.main]]
-    identifier = "Contribute"
-    name       = "Contribute"
-    url        = "/pages/contribute"
-    weight     = -100
-  [[menu.main]]
     identifier = "posts"
     name       = "Posts"
     url        = "/posts/"
-    weight     = -100
-  [[menu.main]]
-    identifier = "videos"
-    name       = "Videos"
-    url        = "/pages/videos/"
-    weight     = -100
-  [[menu.main]]
-    identifier = "Certs"
-    name       = "Certs"
-    url        = "/pages/certs/"
     weight     = -100
   [[menu.main]]
     identifier = "rss"
@@ -56,15 +31,5 @@ canonifyurls = true
 # Footer
   [[menu.footer]]
         name = "Github"
-        url = "https://github.com/eduardo-robles"
+        url = "https://github.com/pythonisas"
         weight = 1
-
-    [[menu.footer]]
-        name = "Mastodon"
-        url = "https://emacs.ch/@tacosandlinux"
-        weight = 2
-
-    [[menu.footer]]
-        name = "Linkedin"
-        url = "https://www.linkedin.com/in/hello-im-eduardo/"
-        weight = 3
