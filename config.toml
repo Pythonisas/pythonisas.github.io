@@ -18,6 +18,11 @@ canonifyurls = true
 # Header
 [menu]
   [[menu.main]]
+    identifier = "inicio"
+    name       = "Inicio"
+    url        = "/pages/inicio"
+    weight     = -200
+  [[menu.main]]
     identifier = "posts"
     name       = "Posts"
     url        = "/posts/"
