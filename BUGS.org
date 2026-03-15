@@ -1,0 +1,41 @@
+#+title:      BUGS
+#+date:       [2026-03-13]
+#+filetags:   :project:bugs:
+#+identifier: 20260313T000001
+
+* Active Issues
+
+** BUG [Bug description]
+:PROPERTIES:
+:STATUS:   ACTIVE
+:CREATED:  [2026-03-13]
+:SEVERITY: [HIGH/MEDIUM/LOW]
+:END:
+
+*** Steps to Reproduce
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+*** Expected Behavior
+[What should happen]
+
+*** Actual Behavior
+[What actually happens]
+
+*** Investigation Notes
+- [Notes from debugging]
+
+*** Potential Fix
+- [Ideas for resolution]
+
+* Resolved Issues
+
+** FIXED [Example fixed bug]
+CLOSED: [2026-03-13]
+:PROPERTIES:
+:STATUS:   FIXED
+:CREATED:  [2026-03-13]
+:SEVERITY: MEDIUM
+:END:
+- Resolution: [How it was fixed]

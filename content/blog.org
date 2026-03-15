@@ -14,16 +14,11 @@
 :EXPORT_HUGO_PUBLISHDATE: 2022-01-01
 :END:
 
-Hi 👋 I'm Eduardo Robles
+Hola 👋 bienvenide a al Blog de les Pythonisas, Brujas del teclado.
+Alquimistas de los bits.
 
-Linux nerd interested in Information Security, Cyber Security, Open Source, tacos, and coffee. I've been using #linux for 12+ yrs, learned emacs and never looked back.
+Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
-Founder of the South Texas Linux Users Group.
-
-Currently reading...
-- DNS and BIND by Cricket Liu and Paul Albitz
-- Children of Dune by Frank Hebert
-- Thinking, Fast and Slow by Daniel Kahneman
 
 ** Videos
 :PROPERTIES:
@@ -864,7 +859,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 
 ***** Tip with some Sats
 [[https://getalby.com/p/tacosandlinux][Tip Some Sats ⚡]]
-** DONE Quick look at REMnux MCP Server
+** TODO [#B] Quick look at REMnux MCP Server
 CLOSED: [2026-02-10 Tue 06:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: remnux-mcp-server
@@ -2703,12 +2698,12 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 **** Setup
 - Keyboard: Keyboardio Atreus (JWICk Ultimate Black Linear)
 - Mouse: MX Master (Original)
-** DONE Conducting Cybersecurity Investigations in Emacs
+** TEST Conducting Cybersecurity Investigations in Emacs
 CLOSED: [2023-11-05 Sun 20:24]
 :PROPERTIES:
 :EXPORT_FILE_NAME: conducting-cybersecurity-investigations-in-emacs
 :END:
-*** Emacs + Orgmode + Cybersecurity = Winning
+*** DONE Emacs + Orgmode + Cybersecurity = Winning
 I work as a Cybersecurity Analyst and I use Emacs as my primary note taking application. Naturally I have developed some techniques and writing practices around my work and the use of Emacs aids in the process. I think the power of Emacs and Orgmode are a winning combination for the type of work I do. So let me share with you a some of the templates I created that help me in getting work done!
 *** The /Investigation/ Template
 Recently, I published my [[https://github.com/eduardo-robles/cyber-work-templates][templates]] on Github. Let's take a look at my /Investigations/ template.
@@ -2778,7 +2773,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 **** Setup
 - Keyboard: Anne Pro 2 (Kalih Box White)
 - Mouse: MX Master (Original)
-** DONE Cyber Work Templates by Me!
+** TEST Cyber Work Templates by Me!
 CLOSED: [2023-10-22 Sun 09:08]
 :PROPERTIES:
 :EXPORT_FILE_NAME: cyber-work-templates-by-me
@@ -2834,7 +2829,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :align:    left
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-** DONE Certs for Homelab
+** TEST Certs for Homelab
 CLOSED: [2023-04-27 Thu 18:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: certs-for-homelab
@@ -2908,7 +2903,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** DONE Using a Reverse Proxy and Pi-Hole
+** TEST Using a Reverse Proxy and Pi-Hole
 CLOSED: [2022-10-20 Thu 06:37]
 :PROPERTIES:
 :EXPORT_FILE_NAME: reverse-proxy-and-pihole
@@ -3017,124 +3012,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** Using GNU Screen
-:PROPERTIES:
-:EXPORT_FILE_NAME: using-gnu-screen
-:EXPORT_HUGO_PUBLISHDATE: 2021-12-18
-:END:
-*** The Problem
-So it all started with a simple problem. /How to I connect to the console port on my Extreme Summit X440 switch?/ Luckily in the past I remembered that I could use =minicom=. It a great application to connect to console sessions. I used it way back in the day to connect to Cisco switches. If it wasn't for the fact that I had use an actual Cisco switch for a class I would have totally forgotten about it. But what does this have to do with =GNU Screen=?
-*** A Surprising Solution
-One afternoon I was surfing the web and came across a blerb of information that blew my mind. Screen can be used to connect to console sessions! I had recently been trying to redo my workflow to incorporate a terminal multiplexer. Most folks use TMUX and TMUX is a great choice. But at first glance the keybinding just seem weird and not very intituive for me. So went down the rabbit hole of Youtube videos on Screen vs. TMUX. In the end I decided to give Screen a try and see if it was really true that you can connect to serial console sessions.
-*** Screen and ttyUSB
-In Linux console cables interface with =/dev/ttyUSB= ([[https://www.amazon.com/OIKWAN-Compatible-Opengear-Aruba%EF%BC%8CJuniper-Switches/dp/B075V1RGQK/ref=sr_1_1_sspa?crid=2MB6VVSMG5FAG&keywords=console%2Bcable&qid=1639881636&sprefix=console%2Bcabl%2Caps%2C190&sr=8-1-spons&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFIMExNREg5MUozSEcmZW5jcnlwdGVkSWQ9QTEwMjA3NzIzSEIwVllKTTBOM0JCJmVuY3J5cHRlZEFkSWQ9QTAwOTQxMzgzTEdHNTE3NktaWlVOJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ&th=1][My console cable]]), this allows me to connect programs like minicom or screen to the serial connection. I did run into one small permissions issue when trying to run =screen /dev/ttyUSB0 9600=. Which led me to find out that I needed to add my user to the =dialout= group ([[https://www.arduino.cc/en/guide/linux#toc6][Arduino post]]). So I added my user like so =sudo usermod -a -G dialout myuser= and a quick reboot (a logout will work too) just to get things sorted. Once you log back in all you have to do is execute =screen /dev/ttyUSB0 9600= and you will get connected to your console session.
-*** Old tools to the job
-Sometimes old, tried, and true tools are the best. I'm glad I found out that GNU Screen can connect to console sessions. This allows me the flexibility of having a terminal multiplexer that is well rounded.
-*** Some useful links
-- GNU Screen Manual: https://www.gnu.org/software/screen/manual/screen.html
-- Screen Baud Rate: https://www.cyberciti.biz/faq/unix-linux-apple-osx-bsd-screen-set-baud-rate/
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Accessing my homelab with Cloudflare
-:PROPERTIES:
-:EXPORT_FILE_NAME: accessing-homelab-with-cloudflare
-:EXPORT_HUGO_PUBLISHDATE: 2021-07-18
-:END:
-
-  Cloudflare Access for my Homelab
-
-I decided to use Cloudflare to setup a Secure Web Gateway and establish some Zero Trust access for my homelab services. Cloudflare offers a great service called “Cloudflare Access”. Basically it leverages Cloudflare’s edge network to create secure web routing. Setting up this service is just a matter of running a simple daemon. Once configured you setup Cloudflare DNS to route traffic. Let’s discuss how I setup Cloudflare Access.
-Create an SSH Bastion with Cloudflared
-Setup a Raspberry Pi with Raspberry Pi OS or Ubuntu
-
-    Install Cloudflared
-        Ubuntu/Debian install
-#+BEGIN_SRC sh
-    wget -q https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb
-    dpkg -i cloudflared-stable-linux-amd64.deb
-#+END_SRC
-        Raspberry Pi
-#+BEGIN_SRC sh
-    wget -q https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.tgz
-    tar -xyzf cloudflared-stable-linux-arm.tgz
-    sudo cp ./cloudflared /usr/local/bin
-    sudo chmod +x /usr/local/bin/cloudflared
-    cloudflared -v
-#+END_SRC
-    Create a tunnel with Cloudflared
-
-    cloudflared tunnel login A browser window will open asking for authentication from Cloudflare.
-    Setup a “Self-hosted App” on Cloudflare Teams.
-
-    See this https://developers.cloudflare.com/cloudflare-one/applications/configure-apps/self-hosted-apps
-    Configure tunnel on Raspberry Pi (or jump host)
-        Find tunnel Id
-#+BEGIN_SRC sh
-        cloudflared tunnel list
-        #+END_SRC
-
-        Create/Edit Cloudflared Configurations
-            location: =/home/pi/.cloudflared/config.yml=
-        tunnel: TUNNEL_ID_GOES_HERE
-        credentials-file: =/home/pi/.cloudflared/TUNNEL_ID.json=
-#+BEGIN_EXAMPLE
-        ingress:
-          - hostname: rterm.eduardorobles.com
-            service: ssh://localhost:22
-          - service: http_status:404
-#+END_EXAMPLE
-        Execute the tunnel
-#+BEGIN_SRC sh
-        cloudflared tunnel run TUNNEL_NAME
-#+END_SRC
-Route DNS for tunnel
-
-        cloudflared tunnel route dns TUNNEL_ID rterm.eduardorobles.com
-    Access Raspberry Pi (or jump host)
-        In browser go to https://rterm.eduardorobles.com
-        Go through the login steps and you should be able to login to your jump host
-    Connect from a client machine
-        Install Cloudflared
-        Configure SSH Config
-#+BEGIN_SRC sh
-    Host rterm.eduardorobles.com
-      ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
-#+END_SRC
-
-    Adding another service
-        Add settings to config.yml file
-            Delete old config file /etc/cloudflared/config.yml
-                Install service again
-
-
-
-
-Accessing All of my Services
-
-If you followed along you can see that in the last step we can add multiple ingress rules. For each service you want to router traffic to simply add it your configurations. In the example above I setup SSH access to my Raspberry Pi. Cloudflare can even render the SSH session in the browser for you.
-
-rendering an SSH session in the browser
-
-You can setup another machine with SSH to proxy your connection. But adding multiple ingress points allows you to access any and all of your services. Since you are using a Secure Web Gateway, your services are not automatically open on the internet.
-
-I also a Zero Trust Policy was setup which allows for very locked down sites. I setup 2 Factor Authentication for my Web Gateway. In the end I feel happy with the results and recommend anyone try Cloudflare Access.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Starting a Homelab with Proxmox
+** TEST Starting a Homelab with Proxmox
 :PROPERTIES:
 :EXPORT_FILE_NAME: starting-homelab-proxmox
 :EXPORT_HUGO_PUBLISHDATE: 2021-07-04
@@ -3169,37 +3047,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** Installation of Fog Project 1.5.8
-:PROPERTIES:
-:EXPORT_FILE_NAME: installation-fog-server
-:EXPORT_HUGO_PUBLISHDATE: 2021-06-02
-:END:
-#+begin_export md
-{{< youtube id="rH4vVjs5NpU" title="Fog Project 1.5.8 Installation (no commentary)">}}
-#+end_export
-
-Hi there!
-
-Follow along with me in this video as I install Fog Server. To learn more about Fog Project check out there website https://fogproject.org/. The installation is done with a simple script that you download from the project website.
-
-For this example I used Cent OS which you can get at the website here https://centos.org. You can use a Debian based OS as well but I chose Cent OS.
-
-Somethings to keep in mind:
-
-1. Never run as root. Create a user and elevate privileges.
-2. Be sure to have a password ready, during the installation you will be prompted to create a MySQL account for the database.
-3. The Fog Project login page is located at http://localhost.lan/fog/management
-4. The installation can take a while so be patient.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** SSH Port Forward a VNC Connection
+** TEST SSH Port Forward a VNC Connection
 :PROPERTIES:
 :EXPORT_FILE_NAME: ssh-port-forward-vnc
 :EXPORT_HUGO_PUBLISHDATE: 2020-02-05
@@ -3255,102 +3103,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** My 2020 Ubuntu Laptop Setup
-:PROPERTIES:
-:EXPORT_FILE_NAME: 2020-laptop-update
-:EXPORT_HUGO_PUBLISHDATE: 2020-01-24
-:END:
-  New Year, New Setup
-
-Ubuntu 19.10 Desktop
-
-I began the new year by buying a new 500GB SSD. My laptop had 2 drives: a 32GB SSD was my /root drive and a 120GB SSD was /home partition. This served me just well but obviously I would run out of space quickly if I was working with virtual machines. With a new drive I had to make the decision to start from scratch or use backups. I decided to start from scratch mainly because I wanted a clean and fast experience.
-Operating System
-
-Though I have used Pop!OS in the past this time around I decided to install Ubuntu 19.10. I have Ubuntu 19.10 installed on my desktop and I really enjoyed it’s speed and perfomance. Plus it helps to know that both my laptop and desktop are running the same OS and version. Other distro’s I considered were: Fedora, and Manjaro.
-Theme
-
-I recently came acros the Dracula theme for Emacs and I decided I needed this theme everywhere. Luckily you can go to https://draculatheme.com/ and see all the theme options for a lot of apps.
-Apps
-
-This is a list of my go to apps.
-#+BEGIN_QUOTE
-    Emacs
-    Spotify
-    Evolution (Email client)
-    Audacity
-    Tizonia (Spotify terminal client)
-    VLC
-    Keybase
-#+END_QUOTE
-Other apps I install depending on the use case:
-#+BEGIN_QUOTE
-    VPN
-    Audacity
-    Open Broadcaster
-    GNOME Tweaks
-    Syncthing
-    Chromium
-#+END_QUOTE
-Configurations
-
-Ok, so let’s talk how I setup my laptop the quickest way possible.
-Sign into my Google account in GNOME online accounts.
-
-This is to have Evolution setup as soon as it’s installed and launched.
-Run my setup scripts
-
-I came across this great post by software dev Victoria Drake. She wrote a great bash script that she uses to setup her Ubuntu laptop (or even a VM). So I cloned it and modified it for my use. Here are some key take aways.
-#+BEGIN_SRC sh
-# Snap packages
-
-sudo snap install spotify
-
-sudo snap install chromium
-
-sudo snap install tizonia
-
-# GNOME
-install gnome-tweaks
-
-# File Backup
-install deja-dup
-install git
-install curl
-
-# add more apps as needed
-
-This is the script that is called to install my apps. This is only an example, in the real world I edited the script to add or remove apps that I wanted installed or removed. Another part of my setup scripts is the desktop.sh script.
-
-# Set GNOME Settings
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'IBM Plex Sans Bold 11'
-gsettings set org.gnome.desktop.interface monospace-font-name 'IBM Plex Mono 13'
-gsettings set org.gnome.desktop.interface document-font-name 'IBM Plex Sans Medium 11'
-gsettings set org.gnome.desktop.interface font-name 'IBM Plex Sans 11'
-#+END_SRC
-Ubuntu 19.10 Terminal Dracula Theme
-
-I use this script to setup my fonts. It downloads IBM Plex font and installs it on my system. I love this font and thus I use it everywhere. My setup scripts do other things depending on what I want to do, like setup some PPA’s or change other GNOME settings.
-
-One thing that I found after I setup my laptop was this great script to change the terminal theme. It’s called Gogh and you can find it here https://github.com/Mayccoll/Gogh.
-GPG, Git, and Emacs setup
-
-I do the basic GPG configurations, like download my GPG keys and setup my SSH keys. I also setup Git by adding SSH login, user name and email. Then I setup Emacs by downloading my configuration from my private repo. I set Emacs to run in daemon mode cause it’s faster than lighting this way :smile:. To run Emacs in daemon mode I simply run systemctl --user enable emacs.service and systemctl start emacs.service.
-
-Emacs 26.3
-And that’s it
-
-The setup scripts do most of the grunt work. So I simply run them and a few minutes later all my apps and laptop is setup. After I do some post installation tweaks I’m ready to get to work in about 15 minutes. So I hope you all found this post insightful and useful. Some things that I didn’t discuss here but I did do were: I encrypted my drive on initial installation and I downloaded updates while I installed Ubuntu.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Fixing Grub on a Dual Boot
+** TEST Fixing Grub on a Dual Boot
 :PROPERTIES:
 :EXPORT_FILE_NAME: fix-grub-dual-boot
 :EXPORT_HUGO_PUBLISHDATE: 2019-12-18
@@ -3385,167 +3138,6 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** DuckDuckGo Mobile Browser
-:PROPERTIES:
-:EXPORT_FILE_NAME: duckduckgo-mobile-browser
-:EXPORT_HUGO_PUBLISHDATE: 2019-11-07
-:END:
-I blogged before about switching from Firefox Focus to DuckDuckGo mobile. Now it’s been 3 weeks since I made the switch and I wanted to do a quick post about my experience.
-
-First, it’s going great. I really like the fact that a search widget is included. I replaced the Google search with DuckDuckGo and I find myself using it a lot more. Which is great because I really like using DuckDuckGo as my default search engine.
-
-Another great feature is the snappy-ness of the browser. DuckDuckGo mobile “feels” faster that Firefox Focus. I don’t know if that’s because it was built with Chromium but it just feels faster. I was never really bothered by FF’s slowness but pages to render faster in DuckDuckGo.
-
-Also it’s been nice to have the option to have multiple tabs open. This was possible in FF but it was not as intuitive as it is DuckDuckGo. Though the ability to delete all tabs with one click is rock solid on both browsers.
-
-The one down side that I really experienced was the fact that not all apps were able to send URL links to DuckDuckGo mobile. For example, when I click on a link in a Youtube video description I do not get the option to open it in DuckDuckGo. I only get regular Firefox or Chrome. When I had Firefox Focus installed I could open that same link easily.
-
-Overall I am really happy with DuckDuckGo mobile and I would recommend it for anyone wanting a “privacy” browser. I still using Firefox Focus and may download it again in the future. But for now I’m sticking with DuckDuckGo mobile.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Region One Cybersecurity Summit 2019
-:PROPERTIES:
-:EXPORT_FILE_NAME: region-one-summit-2019
-:EXPORT_HUGO_PUBLISHDATE: 2019-10-26
-:END:
-Region One hosted a Cybersecurity Summit for 2019 in Edinburg, TX. The event was free and I signed up to attend. It was a great event that had many great presenters. The theme of the summit was Cybersecurity on a regional level. Here are some of the talks I attended and the takeaways I got from them.
-
-Reduce Your Cybersecurity Risk and Get Complaint with SB 820
-
-– Develop Policy: use already established policies as blueprints
-– Items to invest in: Malware protection/Endpoint protection, Firewalls, IDS/IPS, Spam Filtering, Log Monitoring
-
-
-
-Sharpen your Cybersecurity Skills in 1 Hour
-
-– Leverage free courses
-
-– Practice as much as possible (1 hour a day)
-
-– Find and compete in Cybersecurity competitions
-
-
-
-Ransomware: How to Detect, Prevent, and Respond
-
-– “Not a matter of If but When”
-
-– Leverage immutable storage
-
-– Develop strategies and policies.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Escape Rooms Challenge at STC
-:PROPERTIES:
-:EXPORT_FILE_NAME: escapre-rooms-stc
-:EXPORT_HUGO_PUBLISHDATE: 2019-08-24
-:END:
-To help celebrate National CyberSecurity Awareness month the Information Security office at South Texas College created an “Escape Room” challenge. I got to participate in this years festivities. I like the challenge of doing escape rooms so one that had a cybersecurity theme seemed even more fun. The activity was quite fun despite not being able to “escape” in time.
-
-The challenge consisted of finding the decryption key to decrypt a computer that was attacked with Ransomware. The whole exercise was intended to show the damaging effects ransomware can have on a business or institution. After the challenge the moderators gave a brief talk on tips and tricks to securing your online identities and business.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** Firefox Focus
-:PROPERTIES:
-:EXPORT_FILE_NAME: firefox-focus
-:EXPORT_HUGO_PUBLISHDATE: 2019-10-17
-:END:
-I have been using Firefox Focus for about half a year now. I came to use because I was using Chrome and simply got paranoid of what stuff Google was collecting via Chrome. So I made the switch to Firefox on my PC and started using Firefox for Android. Now before I started using Firefox Focus I was using Brave Browser for Android.
-
-Brave Browser is a Chromium based browser that tauts privacy for the end user. Since I became paranoid of Google I naturally was paranoid of Google based technologies. Chromium though open source is a Google project. It’s development is steered by Google. So Google has a vested interest in Chromium. While making the switch to Firefox I came to learn about Firefox Focus via a Mozilla Newsletter. So I downloaded it and gave it a try.
-
-It was a bit weird getting used to it but after a while it was my default mobile browser. What made it great was the fact that my history was deleted after each use. I never had to worry about cookies or deleting search history. It kept my browsing experience as pure and fast as possible.
-
-This is why I was a bit disappointed at the latest update. The app started to have memory leak issues. Causing some battery drain on my phone. The issue wasn’t all that bad but it was annoying enough that I just unistalled the app.
-
-But I loved having a mobile browser that deleted search and use history after each use. When I looked in the Google Play store for other mobile browsers, DuckDuckGo, was recommnended. DuckDuckGo is my favorite search engine, so I was excited to see they offered a mobile browser. And it was highly rated (4.7 out 5) with a lot of positive reviews. I decided to give it a try.
-
-On first impressions I really like it and it feels faster than Firefox Focus. Plus if I want I can get DuckDuckGo browser via F-Droid store too. It’s only been a few days since I downloaded it but so far I’m really impressed with it. I’ll continue to test it out and see if I stick to it or go back to Firefox Focus.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** My thoughts on “The Alchemist” by Paulo Coelho
-:PROPERTIES:
-:EXPORT_FILE_NAME: the-alchemist-thoughts
-:EXPORT_HUGO_PUBLISHDATE: 2019-09-30
-:END:
-  The Alchemist by Paulo Coelho
-
-Since I have been reading “self-help” books my wife suggested I check out The Alchemist. Luckily she owned a copy, so I grabbed it from our bookshelf and stuffed it in my backpack. I gotta say that I really enjoyed this book. I can now see why so many people consider it a “self-help”, book. Here are a two of my favorite passages:
-
-#+BEGIN_QUOTE
-My heart is afraid that it will have to suffer”, the boy told the alchemist one night as they looked up at the moonless sky.
-
-“Tell your heart that the fear of suffering is worse that the suffering itself. And that no heart has ever suffered when it goes in search of its dreams, because every second of the search is a second’s encounter with God and with eternity”.
-#+END_QUOTE
-
-I loved this part because it closely aligns with my own personal beliefs on suffering. You cannot hope to succeed without a bit of hard work.
-
-#+BEGIN_QUOTE
-“Every second of the search is an encounter with God”, the boy told his heart. “When I have been truly searching for my treasure, every day has been luminous, because I’ve know that every hour was a part of the dream that I find it. When I have been truly searching for my treasure, I’ve discovered things along the way that I never would have seen had I not had the courage to try things that seemed impossible for a shepherd to achieve”.
-#+END_QUOTE
-
-I got teary eyed when reading this part. It’s funny how sometimes you read something and it spurs such a deep emotion. That’s how I felt reading this part in the book. I’ve always characterized myself as an optimist and I believe that it takes a bit of courage to remain an optimist in this day and age.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** My thoughts on “Smarter Faster Better: The Transformative Powe r of Real Productivity” by Charles Duhigg
-:PROPERTIES:
-:EXPORT_FILE_NAME: smarter-faster-better
-:EXPORT_HUGO_PUBLISHDATE: 2019-09-01
-:END:
-  Smarter Faster Better: The Transformative Power of Real Productivity by Charles Duhigg
-
-I had heard so much of Charles Duhigg from many “entrepreneurial youtubers”, so naturally I became curious of his work. Most people recommend his book The Power of Habit, I even remember a colleague reading it. But I didn’t find a copy of it at my local library but I did find a copy of Smarter Faster Better instead. Oh boy was I happy with this book. I highly recommend this book for anyone, especially if you are looking for ways to be more “productive”. The book is full of stories of how people, organizations, or businesses overcame serious obstacles to come out on top. Here’s my favorite part from the book.
-
-#+BEGIN_QUOTE
-This, ultimately, is one of the most important lessons of places such as NUMMI and the lean and agile philosophies: Employees work smarter and better when they believed they have more decision-making authority and when they believe their colleagues are committed to their success. A sense of control can fuel motivations, people need to know their suggestions won’t be ignored, that their mistakes won’t be held against them. And they need to know that everyone else has their back.
-#+END_QUOTE
-
-There has been very few work environments where I felt trust between myself and management. This always left me alienated and demotivated. But I’ve had other jobs where I truly felt like I was part of the team. Those were great jobs and enjoyed my time at them. Not just because it was a fun working environment but because at the end of the day I felt that my work meant something.
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
 ** Why I got a Library Card in 2019
 :PROPERTIES:
 :EXPORT_FILE_NAME: library-card-2019
@@ -3569,7 +3161,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** Reset Windows Password with Linux
+** TEST Reset Windows Password with Linux
 :PROPERTIES:
 :EXPORT_FILE_NAME: reset-windows-password-linux
 :EXPORT_HUGO_PUBLISHDATE: 2019-07-15
@@ -3602,30 +3194,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** Relaunching my personal website
-:PROPERTIES:
-:EXPORT_FILE_NAME: relaunching-website
-:EXPORT_HUGO_PUBLISHDATE: 2019-03-08
-:END:
-Leaving social media
-
-So this week I found myself falling down a crazy rabbit hole. It all happened when I watched this video on the indieweb concept. I was hooked on the idea and philosophy of the indeweb! Just recently I had been putting a lot of thought on leaving social media behind. But of course in this day and age doing that is much easier said than done. Still I had this gut feeling telling me that I just didn’t want to be on platforms like facebook any more.
-Indieweb FTW
-
-One of the core concepts of the indieweb is to “own”, your content. This is the by far the thing that drew me into the movement. Over the past 2 month I had relaunched my business website and stepped up my video creation. I was happy that I was writing more original content and creating at my own pace. But after watching that video I knew I had to do more with ALL of my content. Oh boy we sometime forget just how much content we create on a daily basis. Indieweb movement tries to get you to understand your content and most importantly allows you to put out onto the world the way you want it.
-So here we are
-
-This site was relaunched with wordpress and with indieweb principles in mind. I’m happy I took the plunge even though it drove me a bit crazy at times. I think I’ll do more of a deep dive on all the moving parts in a later post. But it feels good to be taking control of my content, soon I’ll be saying goodbye to social media!
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** DONE Adding SSH Key To Agent
+** DOING Adding SSH Key To Agent
 CLOSED: [2022-03-22 Tue 08:11]
 :PROPERTIES:
 :EXPORT_FILE_NAME: add-ssh-key-to-agent
@@ -3664,50 +3233,7 @@ If you enjoyed or found any of the content on my site helpful, you can buy me a 
 :END:
 [[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
 
-** DONE SSH on Extreme and Cisco Devices
-CLOSED: [2022-04-18 Mon 06:58]
-:PROPERTIES:
-:EXPORT_FILE_NAME: ssh-on-extreme-and-cisco-devices
-:END:
-*** Enable SSH on Extreme Devices
-A key will be generated. To upload a public key simply use =sftp= or =scp= to upload key. But be sure to change the extension to =.ssh= for example =id_rsa.pub= will be =id_rsa.ssh= on the switch. Also you can assign a key to a user by simply appending the username to the key file for example =admin.id_rsa.pub=.
-
-Extreme switches have a limitation of only being able to use RSA or DSA keys. Recommend to use RSA 2048
-**** Enabling SSH on an Extreme Switch
-=enable ssh2=
-**** Chaning SSH port
-=enable ssh2 port tcp 766=
-**** Enable SSH on VR-Mgmt Only
-=enable ssh2 vr VR-Mgmt=
-*** Enable SSH On Cisco Devices
-**** Add hostname to the device
-=ip domain-name ex.cisco.com=
-**** Generate SSH Key for device
-=crypto key generate rsa=
-**** Chose SSH Key size
-Default is ~512~ but ~1024~ is better
-**** Change SSH version
-=ssh version 2=
-**** Add a username and password for SSH access
-=username admin secret admin123=
-**** Configure the lines which will have SSH access
-=line vty 0 15= or =line vty 0 2=
-**** Enable SSH on enable lines
-=transport input ssh=
-**** Keep SSH to local logins
-=login local=
-**** Save config
-=copy run start=
-
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee so I can continue to bring you amazing content for free!
-**** Thank You
-:PROPERTIES:
-:CUSTOM_ID: support
-:align: left
-:END:
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
-
-** DONE SSH Config File - Make SSH Easier
+** DOING SSH Config File - Make SSH Easier
 CLOSED: [2022-04-27 Wed 07:30]
 :PROPERTIES:
 :EXPORT_FILE_NAME: ssh-config-file-make-ssh-easier

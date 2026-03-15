@@ -1,0 +1,253 @@
+
+#+title:      BYT3 — Eduardo Robles Blog Architecture Study
+#+date:       [2026-03-13]
+#+filetags:   :study:architecture:literate-programming:
+#+identifier: 20260313T000002
+
+* Architecture Summary
+
+** Tech Stack
+- Generator: Hugo (v0.128.0, static site generator)
+- Source Format: Org-mode (blog.org) → Markdown (.md) via ox-hugo
+- Theme: smol (minimal, privacy-first, no-JS, monospace, dark mode)
+- Hosting: GitHub Pages
+- Deployment: GitHub Actions (automated on push to main)
+- Versioning: Git
+
+** Workflow
+1. Write content in *blog.org* using Org-mode (single master file)
+2. Export sections to Markdown via ox-hugo property drawers
+3. Hugo generates static site from markdown + smol theme
+4. GitHub Actions builds and deploys to GitHub Pages
+
+* Repository Structure
+
+#+begin_example
+eduardo-robles.github.io/
+├── archetypes/
+│   └── default.md           (Hugo archetype template)
+├── content/
+│   ├── blog.org            (Master Org-Mode file: 3,742 lines)
+│   ├── pages/              (5 Markdown pages)
+│   │   ├── about.md
+│   │   ├── certs.md
+│   │   ├── contribute.md
+│   │   ├── links.md
+│   │   └── videos.md
+│   └── posts/              (44 posts, ALL Markdown .md)
+├── static/
+│   └── images/             (Post assets: JPEG, PNG, GIF)
+├── themes/smol/            (Minimal Hugo theme)
+│   ├── layouts/            (Hugo templates)
+│   ├── static/
+│   ├── archetypes/
+│   ├── images/
+│   ├── theme.toml
+│   ├── LICENSE.md
+│   └── README.md
+├── .github/workflows/      (3 CI/CD pipelines)
+├── config.toml             (Hugo configuration)
+├── README.org              (Project notes)
+└── TASKS.org               (Task tracking)
+#+end_example
+
+* Hugo Configuration (config.toml)
+
+- =baseURL=: https://eduardo-robles.github.io/
+- =theme=: smol
+- =mainSections=: ["posts"]
+- =Subtitle=: "Hola Mundo 🌮"
+- =markup.goldmark.renderer.unsafe=: true (allows raw HTML in Markdown)
+
+** Menu Structure
+| Menu Item   | URL                |
+|-------------+--------------------|
+| About       | /pages/about       |
+| Links       | /pages/links       |
+| Contribute  | /pages/contribute  |
+| Posts       | /posts/            |
+| Videos      | /pages/videos/     |
+| Certs       | /pages/certs/      |
+| RSS         | /index.xml         |
+
+** Footer Links
+- Github: https://github.com/eduardo-robles
+- Mastodon: https://emacs.ch/@tacosandlinux
+- Linkedin: https://www.linkedin.com/in/hello-im-eduardo/
+
+* The Master File: content/blog.org
+
+** Key Facts
+- 3,742 lines — ALL content in one Org file
+- Hugo export headers: =#+hugo_base_dir: ../= and =#+hugo_section: [pages|posts]=
+- Each section uses PROPERTIES drawers:
+  - =:EXPORT_FILE_NAME:= → maps heading to .md filename
+  - =:EXPORT_HUGO_PUBLISHDATE:= → publication date
+  - =:EXPORT_HUGO_SECTION:= → target section (posts or pages)
+
+** Example Pattern
+#+begin_example
+,#+hugo_base_dir: ../
+,#+hugo_section: pages
+
+,* Pages
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: pages
+:END:
+
+,** About
+:PROPERTIES:
+:EXPORT_FILE_NAME: about
+:EXPORT_HUGO_PUBLISHDATE: 2022-01-01
+:END:
+#+end_example
+
+** Code Blocks (62 total)
+| Language | Count | Purpose                          |
+|----------+-------+----------------------------------|
+| sh       |    25 | Shell commands, SSH configs       |
+| shell    |    23 | Container commands, system admin  |
+| bash     |    10 | Scripting, Ansible, automation    |
+| conf     |     6 | Configuration files               |
+| yara     |     2 | Malware detection rules           |
+
+- Zero =:tangle= headers — educational samples only, not literate programming (yet)
+- Uses =#+BEGIN_EXPORT html= for embedding videos and rich content
+- Uses =#+begin_example= for code samples
+
+* All 44 Posts (content/posts/)
+
+** LLMs & Local AI                                                      :llm:
+| Post                        | Date       | Key Topics                              |
+|-----------------------------+------------+-----------------------------------------|
+| local-llm-labs.md           | 2025-05-21 | Ollama in Podman, IBM Granite 3.3 8B    |
+| agents-with-remnuxai.md     | 2026-02-23 | REMnux MCP agents, agent.md specs       |
+| remnux-mcp-server.md        | 2026-02-10 | OpenCode, kimi-2.5, container MCP       |
+
+** Infrastructure as Code                                           :ansible:
+| Post                        | Date       | Key Topics                              |
+|-----------------------------+------------+-----------------------------------------|
+| ansible-cyberwork-pt1.md    | 2024-07-12 | Ansible + DevSecOps, WinRM, cross-plat  |
+| ansible-cyberwork-pt2.md    | -          | Continuation, playbooks                 |
+| tool-stack-containers.md    | -          | Container-based DevOps tooling          |
+
+** Emacs & Org-mode                                                  :emacs:
+| Post                              | Date       | Key Topics                        |
+|-----------------------------------+------------+-----------------------------------|
+| conducting-cybersec-in-emacs.md   | 2023-11-05 | Investigation templates, Org-mode |
+| cyber-work-templates-by-me.md     | -          | Org-mode for security work        |
+| streaming-music-in-emacs.md       | -          | Emacs multimedia                  |
+| real-notes-hack.md                | -          | Note-taking workflows             |
+
+** Cybersecurity                                                   :security:
+| Post                              | Date       | Key Topics                        |
+|-----------------------------------+------------+-----------------------------------|
+| cyberchef-infosec-ir-2025.md      | -          | Incident response tooling         |
+| containers-for-malware.md         | -          | Malware analysis environments     |
+| easy-dfir-tools.md                | -          | Digital forensics                 |
+| certs-for-homelab.md              | -          | SSL/TLS certificates              |
+
+** Homelab & Networking                                            :homelab:
+| Post                              | Date       | Key Topics                        |
+|-----------------------------------+------------+-----------------------------------|
+| starting-homelab-proxmox.md       | -          | Proxmox setup                     |
+| accessing-homelab-cloudflare.md   | -          | Cloudflare tunnels                |
+| reverse-proxy-and-pihole.md       | -          | DNS + reverse proxy               |
+| installation-fog-server.md        | -          | FOG deployment server             |
+
+** SSH Series                                                          :ssh:
+| Post                              | Key Topics                                |
+|-----------------------------------+-------------------------------------------|
+| create-ssh-key.md                 | Key generation                            |
+| add-ssh-key-to-agent.md           | Agent forwarding                          |
+| ssh-config-file.md                | Config management                         |
+| ssh-port-forward-vnc.md           | Port forwarding, remote access            |
+| ssh-on-extreme-and-cisco.md       | Network device management                 |
+| 256-color-in-ssh-sessions.md      | Terminal configuration                    |
+
+** Conferences & Personal                                         :personal:
+- bsides-austin-2024.md, bsides-rgv-2022/2023/2025.md
+- tagitm-regional-summit-2024.md, region-one-summit-2019.md
+- the-alchemist-thoughts.md, smarter-faster-better.md
+- Various meta/blog posts
+
+* Theme: smol
+
+** Metadata
+- Author: colorchestra
+- License: MIT
+- Homepage: https://github.com/colorchestra/smol
+- Tags: blog, minimal, monospace, dark mode, simple, clean, responsive, fast, no-js, no-tracking, privacy
+
+** Template Structure
+#+begin_example
+themes/smol/layouts/
+├── _default/
+│   ├── baseof.html           (Base layout)
+│   ├── list.html             (Archive/listing pages)
+│   ├── single.html           (Post/page display)
+│   ├── summary.html          (Post summaries)
+│   └── _markup/
+│       └── render-image.html (Image rendering override)
+├── index.html                (Homepage)
+└── partials/
+    ├── footer.html           (Footer with social links)
+    ├── header.html           (Navigation header)
+    ├── pagination.html       (Post pagination)
+    └── sidebar.html          (Sidebar widget)
+#+end_example
+
+** Characteristics
+- Monospace font emphasis
+- Dark mode support
+- No JavaScript required
+- No external tracking
+- Privacy-first design
+- Responsive layout
+
+* CI/CD Pipelines (.github/workflows/)
+
+** pages.yml (original)
+- Hugo v0.99.0
+- Basic: checkout → build → deploy to GitHub Pages
+
+** hugo.yml (current)
+- Hugo v0.128.0
+- Added: Dart Sass, Node.js dependencies
+- Environment: =HUGO_ENVIRONMENT=production=
+- Concurrency: =cancel-in-progress: false= (production-safe)
+
+** hugo_updated.yml
+- Backup/latest copy of hugo.yml
+
+* Companion Repositories
+
+| Repo                   | Relation                                      |
+|------------------------+-----------------------------------------------|
+| cyber-work-templates   | Org-mode investigation templates (confirmed)  |
+| (survey needed)        | Ollama / LLM repos?                           |
+| (survey needed)        | Ansible playbooks?                            |
+| (survey needed)        | Emacs dotfiles?                               |
+
+* Literate Programming Potential
+
+** Current State
+- 62 src blocks in blog.org — all educational, zero =:tangle= headers
+- No tangled companion scripts
+- Code blocks serve as documentation, not executable artifacts
+
+** Opportunities
+- Tangle bash/conf blocks → runnable scripts for readers
+- Tangle yara blocks → detection rule files
+- Tangle ansible blocks → playbooks
+- Single source of truth: blog post = documentation + code
+- Compare with Pythonisas approach (org-static-blog + tangle)
+
+* Key Takeaways for Pythonisas / ValdeLAB36
+
+1. *Single master .org file* pattern — Eduardo writes everything in one blog.org (3,742 lines). Pros: single source, easy search. Cons: massive file, merge conflicts.
+2. *ox-hugo vs org-static-blog* — Eduardo uses Hugo as the renderer, Org as the authoring tool. We use Org as both author and renderer.
+3. *Privacy-first theme* — smol has zero JS/tracking. Our Pythonisas uses highlight.js CDN (small trade-off).
+4. *LLM experiments* — Ollama + Podman + MCP agents pattern directly applicable to ValdeLAB36.
+5. *IaC with Emacs* — Ansible playbooks authored in Org-mode, a pattern we could adopt.
+6. *No tangling yet* — Eduardo hasn't tapped Org Babel's full literate programming power. We're ahead with our faker post's =#+begin_src python= blocks.
