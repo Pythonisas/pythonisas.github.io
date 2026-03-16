@@ -19,7 +19,10 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 ## Prácticas
 
-- [🐕 Práctica POO — Pyrro: perros ASCII con clases](/poo/)
+- [ Práctica 3.1 — Modelando bases de datos SQLite con Python](/sqlite/)
+- 🐕[Práctica 3.2 — Pyrro: perros ASCII con clases](/poo/)
+- 🚀[Práctica 3.3 — Modelando Naves espaciales con Python](/poo3/)
+
 
 ## Recursos
 

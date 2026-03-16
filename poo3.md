@@ -4,7 +4,7 @@ title: "Práctica POO 3.3 — Modelando Naves espaciales con Python "
 permalink: /poo3/
 ---
 
-![Nostromo](/assets/img/nostromo.png "Nostromo")
+![Nostromo](/assets/img/nostromo.png)
 
 # 🚀 Las Naves Espaciales como Clases Python
 
