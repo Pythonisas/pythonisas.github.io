@@ -30,7 +30,7 @@ será el corazón del juego. Esta práctica es el calentamiento.
 
 > **Adelanto:** En `alien_invasion` la nave tendrá atributos como
 > `posicion_x`, `velocidad`, `moviendo_derecha` y métodos como
-> `update()` y `blitme()`. Hoy construimos la versión "sin gráficos"
+> `actualiza()` y `blitme()`. Hoy construimos la versión "sin gráficos"
 > para dominar la mecánica de clases antes de llegar a Pygame.
 
 Pero no corramos tanto! &#x2026; como diría el poeta, 'hagamos camino al andar'. Paso a paso.
@@ -224,14 +224,14 @@ de la actualización internamente.
     		"""Imprime el kilometraje del coche."""
     		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilómetros.")
     
-    	def update_cuentakilomentros(self, kilometraje):
+    	def actualiza_cuentakilomentros(self, kilometraje):
     		"""Establece la lectura del cuentakilómetros al valor dado."""
     		self.cuentakilomentros_lectura = kilometraje
     
     mi_nuevo_coche = Coche('audi', 'a4', 2024)
     print(mi_nuevo_coche.nombra_descriptivamente())
     
-    mi_nuevo_coche.update_cuentakilomentros(23)              # ← a través de método
+    mi_nuevo_coche.actualiza_cuentakilomentros(23)              # ← a través de método
     mi_nuevo_coche.lee_cuentakilometros()
 
     2024 Audi A4
@@ -240,7 +240,7 @@ de la actualización internamente.
 
 ### Añadir lógica de protección
 
-Podemos extender `update_cuentakilomentros()` para que nadie intente
+Podemos extender `actualiza_cuentakilomentros()` para que nadie intente
 *retroceder* el cuentakilómetros:
 
     class Coche:
@@ -262,7 +262,7 @@ Podemos extender `update_cuentakilomentros()` para que nadie intente
     		"""Imprime el kilometraje del coche."""
     		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilómetros.")
     
-    	def update_cuentakilomentros(self, kilometraje):
+    	def actualiza_cuentakilomentros(self, kilometraje):
     		"""
     		Establece la lectura del cuentakilómetros al valor dado.
     		Rechaza el cambio si intenta retroceder el cuentakilómetros.
@@ -273,16 +273,16 @@ Podemos extender `update_cuentakilomentros()` para que nadie intente
     			print("¡No puedes retroceder el cuentakilómetros!")
     
     mi_nuevo_coche = Coche('audi', 'a4', 2024)
-    mi_nuevo_coche.update_cuentakilomentros(23)
+    mi_nuevo_coche.actualiza_cuentakilomentros(23)
     mi_nuevo_coche.lee_cuentakilometros()
     
     # Intentamos retroceder el odómetro:
-    mi_nuevo_coche.update_cuentakilomentros(10)
+    mi_nuevo_coche.actualiza_cuentakilomentros(10)
 
     Este coche ha recorrido 23 kilómetros.
     ¡No puedes retroceder el cuentakilómetros!
 
-Ahora `update_cuentakilomentros()` comprueba que la nueva lectura tiene
+Ahora `actualiza_cuentakilomentros()` comprueba que la nueva lectura tiene
 sentido antes de modificar el atributo. Si el valor proporcionado es
 **mayor o igual** que el kilometraje existente, se actualiza. Si es
 **menor**, se muestra una advertencia.
@@ -317,7 +317,7 @@ compra y el registro.
     		"""Imprime el kilometraje del coche."""
     		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilómetros.")
     
-    	def update_cuentakilomentros(self, kilometraje):
+    	def actualiza_cuentakilomentros(self, kilometraje):
     		"""
     		Establece la lectura del cuentakilómetros al valor dado.
     		Rechaza el cambio si intenta retroceder el cuentakilómetros.
@@ -334,7 +334,7 @@ compra y el registro.
     mi_coche_usado = Coche('opel', 'corsa', 2019)
     print(mi_coche_usado.nombra_descriptivamente())
     
-    mi_coche_usado.update_cuentakilomentros(23_500)
+    mi_coche_usado.actualiza_cuentakilomentros(23_500)
     mi_coche_usado.lee_cuentakilometros()
     
     mi_coche_usado.incrementa_cuentakilomentros(100)
@@ -350,7 +350,7 @@ compra y el registro.
 -   `incrementa_cuentakilomentros()` recibe un número de millas y **suma** ese
     valor a `self.cuentakilomentros_lectura`.
 -   Primero creamos un coche usado (`mi_coche_usado`).
--   Le asignamos 23.500 millas con `update_cuentakilomentros()`.
+-   Le asignamos 23.500 millas con `actualiza_cuentakilomentros()`.
 -   Luego llamamos a `incrementa_cuentakilomentros(100)` para añadir las 100
     millas recorridas entre la compra y el registro.
 
@@ -415,7 +415,7 @@ compra y el registro.
 <tr>
 <td class="org-left"><b>Método setter</b></td>
 <td class="org-left">Método que asigna un nuevo valor</td>
-<td class="org-left"><code>update_cuentakilomentros(23)</code></td>
+<td class="org-left"><code>actualiza_cuentakilomentros(23)</code></td>
 </tr>
 
 
