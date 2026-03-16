@@ -11,3 +11,4 @@ Gemfile.lock
 # OS files
 .DS_Store
 Thumbs.db
+/.agent-shell/
