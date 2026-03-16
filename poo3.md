@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Práctica POO -2 — Naves espaciales y coches"
+title: "Práctica POO 3.3 — Modelando Naves espaciales con Python "
 permalink: /poo3/
 ---
 
-# 🚀 PRACTICA 3.3 — Clases, Objetos y Naves Espaciales
+# 🚀 Las Naves Espaciales como Clases Python
 
 ## 📋 Descripcion
 
