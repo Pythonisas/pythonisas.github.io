@@ -4,11 +4,14 @@ title: "Práctica POO 3.3 — Modelando Naves espaciales con Python "
 permalink: /poo3/
 ---
 
+![Nostromo](/assets/img/nostromo.png "Nostromo")
+
 # 🚀 Las Naves Espaciales como Clases Python
 
 ## 📋 Descripcion
 
-Vamos a modelar una **nave espacial** usando Programacion Orientada a Objetos (POO). La practica se compone de **dos scripts progresivos**:
+Anteriormente modelamos un `Coche`. Vamos ahora a modelar una **nave espacial** usando Programacion Orientada a Objetos (POO). 
+La practica se compone de **dos scripts progresivos**:
 
 | **Script** | **Enfoque** | **Concepto clave** |
 |:---|:---|:---|
@@ -247,5 +250,5 @@ Si quieres ir a por el **10**, elige **una o mas** de estas ampliaciones:
 
 ---
 
-> 💬 *"Las naves de Star Wars no se programan solas... pero con POO, casi."* 🚀
+> 💬 *"Las naves de Star Wars y Alien no se programan solas... pero con POO, casi."* 🚀
 

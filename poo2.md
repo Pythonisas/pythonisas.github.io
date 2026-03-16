@@ -12,8 +12,8 @@ permalink: /poo2/
     1.  [Definición básica de la clase](#orgfa01631)
 3.  [Establecer un Valor por Defecto para un Atributo de 'nuestro coche'](#orgbe573ca)
 4.  [Modificando los Valores de Atributos de 'nuestro coche'](#org0994e11)
-    1.  [Forma 1 — Modificoche un atributo directamente](#org64136c1)
-    2.  [Forma 2 — Modificoche un atributo mediante un método](#org9077a61)
+    1.  [Forma 1 — Modificar un atributo directamente](#org64136c1)
+    2.  [Forma 2 — Modificar un atributo mediante un método](#org9077a61)
     3.  [Forma 3 — Incrementar un atributo mediante un método](#org2041a3e)
 5.  [Resumen de Conceptos](#orgff15180)
 
@@ -23,8 +23,6 @@ permalink: /poo2/
 
 # Trabajando con Clases e Instancias — Naves Espaciales
 
-En la práctica anterior modelamos un `Coche`. Ahora vamos a modelar
-una **nave espacial** usando exactamente los mismos conceptos de OOP.
 
 ¿Por qué naves? Porque más adelante (Capítulo 12) crearemos nuestro
 propio videojuego **Alien Invasion** con Pygame, donde la clase `Ship`
@@ -159,7 +157,7 @@ Veamos cada enfoque.
 
 <a id="org64136c1"></a>
 
-## Forma 1 — Modifica del coche un atributo directamente
+## Forma 1 — Modificar un atributo directamente
 
 La forma más sencilla es acceder al atributo directamente a través de
 la instancia usando la **notación de punto**:
@@ -201,10 +199,10 @@ veces preferirás escribir un **método** que actualice el valor por ti.
 
 <a id="org9077a61"></a>
 
-## Forma 2 — Modifica del coche che un atributo mediante un método
+## Forma 2 — Modificar un atributo mediante un método
 
 Es útil tener métodos que actualicen ciertos atributos. En lugar de
-acceder directamente, pasas el nuevo valor a un método que se encochega
+acceder directamente, pasas el nuevo valor a un método que se encarga
 de la actualización internamente.
 
     class Coche:
@@ -285,7 +283,7 @@ Podemos extender `update_cuentakilomentros()` para que nadie intente
     ¡No puedes retroceder el cuentakilómetros!
 
 Ahora `update_cuentakilomentros()` comprueba que la nueva lectura tiene
-sentido antes de modificoche el atributo. Si el valor proporcionado es
+sentido antes de modificar el atributo. Si el valor proporcionado es
 **mayor o igual** que el kilometraje existente, se actualiza. Si es
 **menor**, se muestra una advertencia.
 
@@ -409,7 +407,7 @@ compra y el registro.
 
 <tr>
 <td class="org-left"><b>Acceso directo</b></td>
-<td class="org-left">Modificoche atributo con notación de punto</td>
+<td class="org-left">Modificar atributo con notación de punto</td>
 <td class="org-left"><code>coche.cuentakilomentros_lectura = 23</code></td>
 </tr>
 
