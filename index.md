@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 title: Bienvenide a Pythonisas
 ---
 
@@ -17,12 +17,13 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 - [Uso de entornos virtuales mágicos](https://pythonisas.github.io/Pythonisas/entornos-virtuales-en-python.html)
 - [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
+
 ## Prácticas
 
-- [ Práctica 3.1 — Modelando bases de datos SQLite con Python](/sqlite/)
-- 🐕[Práctica 3.2 — Pyrro: perros ASCII con clases](/poo/)
-- 🚀[Práctica 3.3 — Modelando Naves espaciales con Python](/poo3/)
-
+{% assign sorted_posts = site.posts | sort: "date" %}
+{% for post in sorted_posts %}
+- {{ post.date | date: "%b %d, %Y" }} — [{{ post.title }}]({{ post.url }})
+{% endfor %}
 
 ## Recursos
 

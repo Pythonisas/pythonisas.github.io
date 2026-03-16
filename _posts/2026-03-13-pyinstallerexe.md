@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Empaquetar un juego Python+Pygame como ejecutable"
+date: 2026-03-13
+permalink: /pyinstallerexe/
+---
+
 **Transcripción literal:**
 
 ```
