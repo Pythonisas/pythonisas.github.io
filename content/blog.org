@@ -7,6 +7,148 @@
 :EXPORT_HUGO_SECTION: posts
 :END:
 
+** DONE Uso de entornos virtuales mágicos
+CLOSED: [2026-01-15 Wed 12:00]
+:PROPERTIES:
+:EXPORT_FILE_NAME: entornos-virtuales-en-python
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-01-15
+:EXPORT_HUGO_URL: /entornos-virtuales/
+:END:
+
+*** ¿Por qué entornos virtuales?
+
+Durante el desarrollo de aplicaciones en Python, pueden surgir problemas relacionados con el uso de diferentes versiones de bibliotecas. Por ejemplo, dos aplicaciones diferentes pueden necesitar la misma biblioteca, pero de diferentes versiones. O puede que necesites asegurar el funcionamiento correcto de una aplicación independientemente de las actualizaciones de la versión de la biblioteca que utiliza.
+
+Para solucionar estos problemas, los desarrolladores idearon una forma interesante: *ejecutar cada aplicación con su propio conjunto de versiones de bibliotecas en entornos aislados*. De esta manera, un entorno virtual (/virtual environment/) en Python permite gestionar proyectos de forma aislada:
+
+-   Cada proyecto puede tener sus propias dependencias.
+-   Las dependencias de un proyecto no afectan a las dependencias de otro proyecto.
+
+Usaremos el módulo *venv*, que viene integrado en Python desde la versión 3.3+ — no hay que instalar nada adicional.
+
+#+begin_quote
+*Importante:* antes de empezar, debes tener instalado Python 3 y pip. Si usas Windows, reemplaza =pip3= por =pip= y =python3= por =python=.
+#+end_quote
+
+*** Creación de un proyecto
+
+Empecemos creando un proyecto. Primero, crea una carpeta para el proyecto y accede a ella:
+
+#+begin_src bash
+mkdir my_python_project
+cd my_python_project
+#+end_src
+
+*** Creación del entorno virtual
+
+Crea un entorno virtual dentro de la carpeta del proyecto:
+
+#+begin_src bash
+python3 -m venv venv
+#+end_src
+
+#+begin_quote
+Si encuentras un error relacionado con =ensurepip=, en Ubuntu/Debian ejecuta:
+
+=sudo apt-get install python3-venv -y=
+#+end_quote
+
+Esto crea una carpeta =venv/= que contiene una copia del intérprete de Python y un directorio =lib/= donde se instalarán los paquetes de este proyecto — completamente aislados del sistema.
+
+*** Activación del entorno virtual
+
+Para activar el entorno virtual en *Linux/macOS*:
+
+#+begin_src bash
+source venv/bin/activate
+#+end_src
+
+En *Windows*:
+
+#+begin_src bash
+venv\Scripts\activate
+#+end_src
+
+Cuando el entorno está activo, verás el nombre del entorno entre paréntesis al inicio del prompt:
+
+#+begin_example
+(venv) usuario@maquina:~/my_python_project$
+#+end_example
+
+*** Comprobación de paquetes instalados
+
+Comprueba los paquetes pip instalados dentro del entorno virtual:
+
+#+begin_src bash
+pip3 list
+#+end_src
+
+La salida inicial incluye solo =pip= y =setuptools= — el entorno está limpio y aislado.
+
+Instala un paquete de ejemplo:
+
+#+begin_src bash
+pip3 install requests
+#+end_src
+
+Vuelve a comprobar:
+
+#+begin_src bash
+pip3 list
+#+end_src
+
+Ahora verás =requests= y sus dependencias, instaladas solo dentro de este entorno.
+
+*** Salida del entorno virtual
+
+Para salir (desactivar) el entorno virtual:
+
+#+begin_src bash
+deactivate
+#+end_src
+
+El prompt vuelve a la normalidad — ya no estás dentro del entorno aislado.
+
+*** Exportar paquetes instalados (requirements.txt)
+
+Para crear un archivo con la lista de paquetes instalados y sus versiones:
+
+#+begin_src bash
+pip3 freeze > requirements.txt
+#+end_src
+
+Este fichero =requirements.txt= permite reproducir el mismo entorno en otra máquina.
+
+*** Importar paquetes en otro entorno
+
+En otra máquina (o en un entorno nuevo), crea un nuevo entorno virtual, actívalo, e importa los paquetes:
+
+#+begin_src bash
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+#+end_src
+
+*** Resumen de comandos
+
+- *Crear entorno* — =python3 -m venv venv=
+- *Activar (Linux/macOS)* — =source venv/bin/activate=
+- *Activar (Windows)* — =venv\Scripts\activate=
+- *Ver paquetes* — =pip3 list=
+- *Instalar paquete* — =pip3 install nombre=
+- *Exportar paquetes* — =pip3 freeze > requirements.txt=
+- *Importar paquetes* — =pip3 install -r requirements.txt=
+- *Desactivar* — =deactivate=
+
+#+begin_quote
+*Recuerda:* =venv= es la herramienta nativa de Python 3 y es suficiente para la mayoría de proyectos. No necesitas instalar nada adicional.
+#+end_quote
+
+-----
+
+/Artículo basado en [[https://codigonautas.com/venv-virtualenv-python-como-utilizarlos/][CodigoNautas — Qué son venv y virtualenv en Python]]/
+
 ** DONE Práctica 3.1 — Modelando bases de datos SQLite con Python
 CLOSED: [2026-03-12 Sat 12:00]
 :PROPERTIES:
@@ -1228,7 +1370,7 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 *** Recetas y pócimas Python
 
-- [[https://pythonisas.github.io/Pythonisas/entornos-virtuales-en-python.html][Uso de entornos virtuales mágicos]]
+- [[/entornos-virtuales/][Uso de entornos virtuales mágicos]]
 - [[https://pythonisas.github.io/Pythonisas][Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?]]
 
 *** Prácticas

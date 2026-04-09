@@ -17,7 +17,7 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 ## Recetas y pócimas Python {#recetas-y-pócimas-python}
 
--   [Uso de entornos virtuales mágicos](https://pythonisas.github.io/Pythonisas/entornos-virtuales-en-python.html)
+-   [Uso de entornos virtuales mágicos](/entornos-virtuales/)
 -   [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
 
