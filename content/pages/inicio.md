@@ -21,10 +21,6 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 -   [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
 
-## Prácticas {#prácticas}
-
--   [Práctica 3.2 — Pyrro: perros ASCII con clases](/poo/)
-
 
 ## Recursos {#recursos}
 

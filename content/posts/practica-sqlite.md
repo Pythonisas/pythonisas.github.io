@@ -1,0 +1,192 @@
++++
+title = "Práctica 3.1 — Modelando bases de datos SQLite con Python"
+author = ["fenix"]
+date = 2026-03-12T12:00:00+01:00
+publishDate = 2026-03-12
+url = "/sqlite/"
+tags = ["prácticas"]
+draft = false
++++
+
+{{< figure src="/images/sqlite-db.jpg" >}}
+
+---
+
+
+## Descripcion {#descripcion}
+
+Queremos construir el **prototipo** de una aplicacion que ayude a la gestion del dia a dia de una **Escuela**.
+
+El programa debera crear una base de datos SQLite con dos tablas relacionadas:
+
+**TABLA `profesores`**
+
+| **id** | **nombre** | **asignatura** |
+|:---|:---|:---|
+| 1 | Pedro Garcia | Matematicas |
+| 2 | Laura Martinez | Fisica |
+| 3 | Jose Rodriguez | Quimica |
+
+**TABLA `alumnos`**
+
+| **id** | **nombre** | **edad** | **id\_profesor** |
+|:---|:---|:---:|:---|
+| 1 | Carlos Perez | 20 | 1 |
+| 2 | Ana Lopez | 22 | 2 |
+| 3 | Luis Fernandez | 21 | 3 |
+
+> Observa que `id_profesor` en la tabla `alumnos` es una **clave foranea** (`FOREIGN KEY`) que referencia al `id` de la tabla `profesores`. Asi se establece la **relacion** entre ambas tablas.
+
+---
+
+
+## Objetivo {#objetivo}
+
+Completa el fichero `crud_incompleto_sqlite.py` (renombralo a `crud_sqlite.py`) de tal forma que:
+
+-   [ ] **Conecte** a una base de datos SQLite llamada `dam.db`
+-   [ ] **Cree** las tablas `profesores` y `alumnos` con la estructura indicada arriba
+-   [ ] **Inserte** los datos de ejemplo en ambas tablas
+-   [ ] **Consulte** los datos haciendo un `JOIN` entre ambas tablas y los muestre por pantalla
+
+---
+
+
+## Punto de partida: el fichero incompleto {#punto-de-partida-el-fichero-incompleto}
+
+Este es el esqueleto del programa que se te proporciona. Los huecos marcados con `...` y `__` son las partes que **tu debes completar**:
+
+```python
+#!/usr/bin/env python3
+"""
+PRACTICA3.1: Accediendo a bases de datos
+Este es un CRUD (Create, Read, Update, Delete) incompleto.
+El acceso a SQLite desde Python (CREATE + READ) requiere que tu
+completes algunas partes del codigo para que realmente funcione :
+"""
+
+import __
+import __
+
+
+def conectar():
+    ...
+    ...
+
+def crear_tablas(conn)
+    ...
+    ...
+
+
+def insertar_datos(conn)
+   """
+   funcion que imprime los datos de la base de datos en la terminal
+   """
+
+def consultar(__):
+
+def main():
+   """
+   funcion PROGRAMA principal
+   """
+    ...
+    try:
+        ...
+        ...
+    ...
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+
+## Pistas {#pistas}
+
+-   Python incluye el modulo `sqlite3` en su **biblioteca estandar** (no necesitas instalar nada)
+-   El modulo `pathlib` te sera [util para trabajar con rutas de archivos](https://www.datacamp.com/es/tutorial/comprehensive-tutorial-on-using-pathlib-in-python-for-file-system-manipulation)
+-   Para relacionar alumnos con profesores necesitaras un `JOIN` en tu consulta SQL
+-   Usa `try...finally` para asegurarte de que la conexion se cierra siempre, incluso si hay errores
+-   Investiga `cursor.execute()` y `cursor.executemany()` — ¿cuando usar cada uno?
+-   Puedes [inspirarte en el Libro de Python](https://ellibrodepython.com/bases-datos-sqlite-python)
+
+---
+
+
+## Salida esperada {#salida-esperada}
+
+Al ejecutar tu programa, la salida debe ser **similar** a esta:
+
+```
+$ python3 crud_sqlite.py
+Hello and welcome!
+
+Conexion establecida: /home/.../PRACTICA3.1-accediendo-a-datos-SQLite/dam.db
+Tablas creadas exitosamente.
+Datos insertados.
+
+Alumnos y sus profesores:
+  Alumno: Carlos Perez | Profesor: Pedro Garcia
+  Alumno: Ana Lopez | Profesor: Laura Martinez
+  Alumno: Luis Fernandez | Profesor: Jose Rodriguez
+
+Conexion cerrada.
+```
+
+---
+
+
+## Entrega {#entrega}
+
+-   Sube tu fichero `crud_sqlite.py` completo y funcional una carpeta en el servidor ([Ojo! : pues estamos poniendo en practica una nueva forma de entregar las practicas : leelo aqui](https://aulavirtual33.educa.madrid.org/ies.quevedo.madrid/mod/page/view.php?id=109522))
+-   Asegurate de que al ejecutarlo se genera el fichero `dam.db` y se muestra la salida esperada
+-   **No subas** el fichero `dam.db` a la carpeta de entrega en nuestro servididor (la base de datos se genera cada vez que ejecutas el programa)
+
+---
+
+
+## BONUS — CRUD completo (para nota maxima) {#bonus-crud-completo}
+
+La practica base solo cubre la **C** (Create) y la **R** (Read) del acronimo **CRUD**. Si quieres ir a por el **10**, amplia tu programa para que tambien implemente:
+
+| **Letra** | **Operacion** | **SQL** | **Ejemplo** |
+|:---:|:---|:---|:---|
+| **C** | Create | `INSERT INTO` | Ya implementado |
+| **R** | Read | `SELECT ... JOIN` | Ya implementado |
+| **U** | **Update** | `UPDATE ... SET ... WHERE` | Cambiar la asignatura de un profesor |
+| **D** | **Delete** | `DELETE FROM ... WHERE` | Eliminar un alumno por su nombre |
+
+**Sugerencia para el BONUS:**
+
+-   Implementa una funcion `actualizar_profesor(conn, id, nueva_asignatura)` que modifique la asignatura de un profesor
+-   Implementa una funcion `eliminar_alumno(conn, nombre)` que borre un alumno de la base de datos
+-   Muestra por pantalla el estado de las tablas **antes y despues** de cada operacion para verificar que funciona
+
+---
+
+
+## Rubrica de evaluacion {#rubrica-de-evaluacion}
+
+| **Criterio** | **Puntos** | **Descripcion** |
+|:---|:---:|:---|
+| **Conexion a la BD** | 1 | El programa conecta correctamente a `dam.db` usando `sqlite3` |
+| **Creacion de tablas** | 2 | Se crean las tablas `profesores` y `alumnos` con los campos y tipos correctos, incluyendo la clave foranea |
+| **Insercion de datos** | 2 | Se insertan los datos de ejemplo correctamente en ambas tablas |
+| **Consulta con JOIN** | 2 | Se realiza un `SELECT` con `JOIN` que relaciona alumnos con sus profesores y se muestran los resultados formateados |
+| **Gestion de conexion** | 1 | Se usa `try...finally` (o similar) para garantizar el cierre de la conexion |
+| **Codigo limpio** | 1 | El codigo esta organizado en funciones, es legible y sigue buenas practicas Python |
+| **BONUS: Update** | +0.5 | Implementa correctamente la operacion de actualizacion |
+| **BONUS: Delete** | +0.5 | Implementa correctamente la operacion de borrado |
+
+---
+
+| | |
+|:---|:---:|
+| **Practica base (C + R)** | **9** |
+| **Con BONUS completo (CRUD)** | **10** |
+
+---
+
+> "Las bases de datos son como los armarios: si no los organizas bien desde el principio, luego no encuentras nada."

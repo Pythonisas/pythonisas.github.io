@@ -3,11 +3,15 @@
 		{{ with .Site.GetPage "/pages/inicio" }}
 			{{ .Content }}
 		{{ end }}
-		<hr>
-		{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
-		{{ range $paginator.Pages }}
-			{{ .Render "summary" }}
+
+		{{ $posts := where .Site.RegularPages "Type" "posts" }}
+		{{ with $posts }}
+		<h2 id="blogposts">Blogposts</h2>
+		<ul>
+			{{ range sort . "Date" "asc" }}
+			<li>{{ .Date.Format "Jan 2, 2006" }} — <a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+			{{ end }}
+		</ul>
 		{{ end }}
-		{{ partial "pagination.html" . }}
 	</main>
 {{ end }}

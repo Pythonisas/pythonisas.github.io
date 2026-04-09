@@ -7,275 +7,1204 @@
 :EXPORT_HUGO_SECTION: posts
 :END:
 
-** TODO Conducting Cybersecurity Investigations in Emacs
-CLOSED: [2023-11-05 Sun 20:24]
+** DONE Práctica 3.1 — Modelando bases de datos SQLite con Python
+CLOSED: [2026-03-12 Sat 12:00]
 :PROPERTIES:
-:EXPORT_FILE_NAME: conducting-cybersecurity-investigations-in-emacs
-:EXPORT_HUGO_PUBLISHDATE: 2023-11-05
-:EXPORT_HUGO_DRAFT: true
-:END:
-*** DONE Emacs + Orgmode + Cybersecurity = Winning
-I work as a Cybersecurity Analyst and I use Emacs as my primary note taking application. Naturally I have developed some techniques and writing practices around my work and the use of Emacs aids in the process. I think the power of Emacs and Orgmode are a winning combination for the type of work I do. So let me share with you a some of the templates I created that help me in getting work done!
-*** The /Investigation/ Template
-Recently, I published my [[https://github.com/eduardo-robles/cyber-work-templates][templates]] on Github. Let's take a look at my /Investigations/ template.
-
-**** Creating notes on investigations
-#+begin_example
-#+TITLE:
-#+AUTHOR:
-#+EMAIL:
-
- * Investigations
- * * IN-PROGRESS Investigation#: Suspicious Powershell Command  Date Created: 20230101
-:properties:
-:export_file_name: 20230101_investigation_suspciouspowershell
-:end:
-#+end_example
-Here I am laying out the main information about this document. I set a title, author, and email address. I also include information about the date it was created and what the status of the to-do item is. In the =properties= drawer, I include an =export_file_name= section, so I can carefully curate my export to HTML or whatever I want.
-
-**** The meat and bones
-#+begin_example
- * * * Vendor
-Super Duper Cybers Corps.
- *** Title
-Suspicious Powershell Command Executed by Finance Department
- *** Assigned:
-Eduardo Robles
- *** Contacts
-- Cyber Team
-- Eduardo Robles
- *** Description
-Our IDR logged an a suspicious Powershell command executed from the Finance department.
- *** Questions
-1. Was this an intentional execution?
-2. What is the purpose of the Powershell command?
-3. Did anyone verify with I.T department regarding the Powershell command in question?
- *** Solutions [%]
-- [ ] Investigate the origin of the Powershell command
-- [ ] Speak with employee who's work station is in question and their supervisor
-- [ ] Flag the Powershell command as suspicious
- *** Notes
-:LOGBOOK:
-:END:
- *** Debug/Troubleshooting Logs
-:LOGBOOK:
-:END:
- *** Email/Chat Logs
-:LOGBOOK:
-
-:END:
-#+end_example
-In this portion, I include as many details as I can about the ongoing investigation. These notes usually end up as a report that I hand into upper management. So I have to be as descriptive as I can be.
-
-I tend to use =org-contacts= in my /Contacts/ section to make it easier to show email address when I export my content to HTML. In the /Solutions/ section I include =org-checkboxes= so I can keep track of work. In my /Notes/, /Debug+Troubleshooting Logs/, and /Email+Chat Logs/ sections I take advantage of =LOGBOOK= to create timestamped notes of events.
-*** It's all about writing it down
-Alerts are constant in my line of work. So it's easy to get distracted and disorganized with all the noise. Developing a practice of consistently writing out notes is key to finding calm in all the noise. I developed this template after a lot of trial and error. And I am still working on them but for now they work for me. The best part is that they modular. Use what works and add or remove what doesn't.
-
-** TODO Cyber Work Templates by Me!
-CLOSED: [2023-10-22 Sun 09:08]
-:PROPERTIES:
-:EXPORT_FILE_NAME: cyber-work-templates-by-me
-:EXPORT_HUGO_PUBLISHDATE: 2023-10-22
-:EXPORT_HUGO_DRAFT: true
+:EXPORT_FILE_NAME: practica-sqlite
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-03-12
+:EXPORT_HUGO_URL: /sqlite/
+:EXPORT_HUGO_TAGS: prácticas
 :END:
 
-*** The obvious approach
-I use Emacs + Org-mode for my note-taking workflow as a Cybersecurity Analyst. Emacs is my geeky cred at my job, plus it is genuinely useful. So one day when working on taking some repetitive notes on an incident I had a bright idea. Why don't I just create a few templates that speed up my workflow?
-- A demonstration of my workflow for capturing notes on an incident
-   #+begin_example
-   Incident --> Get Data --> Investigation --> Capture Templates --> Notes
-   #+end_example
-*** Expanding the approach
-Once I became comfortable with the approach of my capture templates, I expanded them to use the full power of Emacs and Org-mode! I began integrating Org-babel into my workflow. I use a Window 10 PC for my day job and I have WSL2 for all my Linux needs. Furthermore, I can call WSL from a regular shell (by default it calls the Windows Command Prompt) in Emacs. Org-babel does the work of putting the results in my notes. If this sounds familiar to you ~#Emacs~ nerds, well it's the concept of [[https://howardism.org/Technical/Emacs/literate-devops.html][Literate Devops]] by Howard Abrams. I as many others was inspired by the work of Howard Abrams and decided to incorporate their ideas into my workflow. It's a little weird to use these tools in a Windows environment, but hey it works ¯\_(ツ)_/¯.
+[[/images/sqlite-db.jpg]]
+
+---
+
+*** Descripcion
+
+Queremos construir el *prototipo* de una aplicacion que ayude a la gestion del dia a dia de una *Escuela*.
+
+El programa debera crear una base de datos SQLite con dos tablas relacionadas:
+
+*TABLA =profesores=*
+
+| *id* | *nombre*        | *asignatura* |
+|------+-----------------+--------------|
+|    1 | Pedro Garcia    | Matematicas  |
+|    2 | Laura Martinez  | Fisica       |
+|    3 | Jose Rodriguez  | Quimica      |
+
+*TABLA =alumnos=*
+
+| *id* | *nombre*       | *edad* | *id_profesor* |
+|------+----------------+--------+---------------|
+|    1 | Carlos Perez   |     20 |             1 |
+|    2 | Ana Lopez      |     22 |             2 |
+|    3 | Luis Fernandez |     21 |             3 |
 
 #+begin_quote
-Here I am explaining one of my weird workflows.
-
-https://emacs.ch/@tacosandlinux/111108755456994431
+Observa que =id_profesor= en la tabla =alumnos= es una *clave foranea* (=FOREIGN KEY=) que referencia al =id= de la tabla =profesores=. Asi se establece la *relacion* entre ambas tablas.
 #+end_quote
 
-*** The templates and beyond
-So I put up my templates on [[https://github.com/eduardo-robles/cyber-work-templates][Github]] and licensed them under ~CC BY-SA 4.0~. I will continue working on them and updating them as needed. At the time of writing this blog post, I move my note-taking workflow to [[https://www.orgroam.com/][Org Roam]] and I will be tweaking the templates to better fit that workflow. But I plan on creating a different set of templates, I do change them.
+---
 
-I mentioned Literate Devops earlier and while my workflow isn't "Devops" but it is "Literate". It's more like /Literate Pentesting/ which is very useful for me. I am not the first one to try this idea for Pentesting. [[https://github.com/mttaggart][Michael Taggart]] and [[https://github.com/HuskyHacks][@HuskyHacks]] have the really cool project [[https://github.com/mttaggart/blue-jupyter][Blue Jupyter]]. They take the Jupyter Notebooks and apply them to Blue Team work.
+*** Objetivo
 
-So check out and fork my templates on github! Happy Hacking!
+Completa el fichero =crud_incompleto_sqlite.py= (renombralo a =crud_sqlite.py=) de tal forma que:
 
-https://github.com/eduardo-robles/cyber-work-templates
+- [ ] *Conecte* a una base de datos SQLite llamada =dam.db=
+- [ ] *Cree* las tablas =profesores= y =alumnos= con la estructura indicada arriba
+- [ ] *Inserte* los datos de ejemplo en ambas tablas
+- [ ] *Consulte* los datos haciendo un =JOIN= entre ambas tablas y los muestre por pantalla
 
-** TODO Certs for Homelab
-CLOSED: [2023-04-27 Thu 18:00]
+---
+
+*** Punto de partida: el fichero incompleto
+
+Este es el esqueleto del programa que se te proporciona. Los huecos marcados con =...= y =__= son las partes que *tu debes completar*:
+
+#+begin_src python
+#!/usr/bin/env python3
+"""
+PRACTICA3.1: Accediendo a bases de datos
+Este es un CRUD (Create, Read, Update, Delete) incompleto.
+El acceso a SQLite desde Python (CREATE + READ) requiere que tu
+completes algunas partes del codigo para que realmente funcione :
+"""
+
+import __
+import __
+
+
+def conectar():
+    ...
+    ...
+
+def crear_tablas(conn)
+    ...
+    ...
+
+
+def insertar_datos(conn)
+   """
+   funcion que imprime los datos de la base de datos en la terminal
+   """
+
+def consultar(__):
+
+def main():
+   """
+   funcion PROGRAMA principal
+   """
+    ...
+    try:
+        ...
+        ...
+    ...
+
+
+if __name__ == "__main__":
+    main()
+#+end_src
+
+---
+
+*** Pistas
+
+- Python incluye el modulo =sqlite3= en su *biblioteca estandar* (no necesitas instalar nada)
+- El modulo =pathlib= te sera [[https://www.datacamp.com/es/tutorial/comprehensive-tutorial-on-using-pathlib-in-python-for-file-system-manipulation][util para trabajar con rutas de archivos]]
+- Para relacionar alumnos con profesores necesitaras un =JOIN= en tu consulta SQL
+- Usa =try...finally= para asegurarte de que la conexion se cierra siempre, incluso si hay errores
+- Investiga =cursor.execute()= y =cursor.executemany()= — ¿cuando usar cada uno?
+- Puedes [[https://ellibrodepython.com/bases-datos-sqlite-python][inspirarte en el Libro de Python]]
+
+---
+
+*** Salida esperada
+
+Al ejecutar tu programa, la salida debe ser *similar* a esta:
+
+#+begin_example
+$ python3 crud_sqlite.py
+Hello and welcome!
+
+Conexion establecida: /home/.../PRACTICA3.1-accediendo-a-datos-SQLite/dam.db
+Tablas creadas exitosamente.
+Datos insertados.
+
+Alumnos y sus profesores:
+  Alumno: Carlos Perez | Profesor: Pedro Garcia
+  Alumno: Ana Lopez | Profesor: Laura Martinez
+  Alumno: Luis Fernandez | Profesor: Jose Rodriguez
+
+Conexion cerrada.
+#+end_example
+
+---
+
+*** Entrega
+
+- Sube tu fichero =crud_sqlite.py= completo y funcional una carpeta en el servidor ([[https://aulavirtual33.educa.madrid.org/ies.quevedo.madrid/mod/page/view.php?id=109522][Ojo! : pues estamos poniendo en practica una nueva forma de entregar las practicas : leelo aqui]])
+- Asegurate de que al ejecutarlo se genera el fichero =dam.db= y se muestra la salida esperada
+- *No subas* el fichero =dam.db= a la carpeta de entrega en nuestro servididor (la base de datos se genera cada vez que ejecutas el programa)
+
+---
+
+*** BONUS — CRUD completo (para nota maxima)
+
+La practica base solo cubre la *C* (Create) y la *R* (Read) del acronimo *CRUD*. Si quieres ir a por el *10*, amplia tu programa para que tambien implemente:
+
+| *Letra* | *Operacion* | *SQL*                          | *Ejemplo*                                 |
+|---------+-------------+--------------------------------+-------------------------------------------|
+| *C*     | Create      | =INSERT INTO=                  | Ya implementado                           |
+| *R*     | Read        | =SELECT ... JOIN=              | Ya implementado                           |
+| *U*     | *Update*    | =UPDATE ... SET ... WHERE=     | Cambiar la asignatura de un profesor      |
+| *D*     | *Delete*    | =DELETE FROM ... WHERE=        | Eliminar un alumno por su nombre          |
+
+*Sugerencia para el BONUS:*
+
+- Implementa una funcion =actualizar_profesor(conn, id, nueva_asignatura)= que modifique la asignatura de un profesor
+- Implementa una funcion =eliminar_alumno(conn, nombre)= que borre un alumno de la base de datos
+- Muestra por pantalla el estado de las tablas *antes y despues* de cada operacion para verificar que funciona
+
+---
+
+*** Rubrica de evaluacion
+
+| *Criterio*             | *Puntos* | *Descripcion*                                                                                                      |
+|------------------------+----------+--------------------------------------------------------------------------------------------------------------------|
+| *Conexion a la BD*     |        1 | El programa conecta correctamente a =dam.db= usando =sqlite3=                                                     |
+| *Creacion de tablas*   |        2 | Se crean las tablas =profesores= y =alumnos= con los campos y tipos correctos, incluyendo la clave foranea        |
+| *Insercion de datos*   |        2 | Se insertan los datos de ejemplo correctamente en ambas tablas                                                     |
+| *Consulta con JOIN*    |        2 | Se realiza un =SELECT= con =JOIN= que relaciona alumnos con sus profesores y se muestran los resultados formateados |
+| *Gestion de conexion*  |        1 | Se usa =try...finally= (o similar) para garantizar el cierre de la conexion                                       |
+| *Codigo limpio*        |        1 | El codigo esta organizado en funciones, es legible y sigue buenas practicas Python                                |
+| *BONUS: Update*        |     +0.5 | Implementa correctamente la operacion de actualizacion                                                             |
+| *BONUS: Delete*        |     +0.5 | Implementa correctamente la operacion de borrado                                                                   |
+
+---
+
+|                              |     |
+|------------------------------+-----|
+| *Practica base (C + R)*     | *9* |
+| *Con BONUS completo (CRUD)* | *10* |
+
+---
+
+#+begin_quote
+/"Las bases de datos son como los armarios: si no los organizas bien desde el principio, luego no encuentras nada."/
+#+end_quote
+
+** DONE POO — Naves espaciales, coches y Python
+CLOSED: [2026-03-15 Sat 12:00]
 :PROPERTIES:
-:EXPORT_FILE_NAME: certs-for-homelab
-:EXPORT_HUGO_PUBLISHDATE: 2023-04-27
-:EXPORT_HUGO_DRAFT: true
+:EXPORT_FILE_NAME: poo-naves-coches-python
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-03-15
+:EXPORT_HUGO_URL: /poo2/
+:EXPORT_HUGO_TAGS: prácticas
 :END:
-I recently had the opportunity to add an ~ssl~ certificate in my homelab environment. It was really easy and only took one command in Linux. Once I created my ~ssl~ certificate all I had to do was upload it to NGINX Proxy Manager and have it serve it to my proxied sites.
 
-You can use any other proxy manager such as Caddy but I had NGINX Proxy Manager in my homelab environment. Be sure to upload both the ~.crt~ and ~.key~ files.
+*** Tabla de Contenido
 
-Let's examine what the following commands does.
+1. [[*Trabajando con Clases e Instancias — Naves Espaciales][Trabajando con Clases e Instancias — Naves Espaciales]]
+2. [[*La Clase =Coche=][La Clase Coche]]
+3. [[*Establecer un Valor por Defecto para un Atributo de 'nuestro coche'][Establecer un Valor por Defecto]]
+4. [[*Modificando los Valores de Atributos de 'nuestro coche'][Modificando los Valores de Atributos]]
+5. [[*Resumen de Conceptos][Resumen de Conceptos]]
 
-#+BEGIN_SRC bash
-openssl req -newkey rsa:4096 -x509 -sha256 365 -nodes -out homessl.crt -keyout homessl.key
-#+END_SRC
+*** Trabajando con Clases e Instancias — Naves Espaciales
 
-First ~openssl req -newkey rsa:4096 -x509 -sha256 365~ stating that we want openssl to create a new certificate using ~rsa 4096~ with type of ~x509~ a hash of ~sha 256~ for ~365~ days.
+¿Por que naves? Porque mas adelante (Capitulo 12) crearemos nuestro
+propio videojuego *Alien Invasion* con Pygame, donde la clase =Ship=
+sera el corazon del juego. Esta practica es el calentamiento.
 
-Then ~-nodes -out homessl.crt -keyout homessl.key~ is telling openssl that we want the cert file and a key file.
+#+begin_quote
+*Adelanto:* En =alien_invasion= la nave tendra atributos como
+=posicion_x=, =velocidad=, =moviendo_derecha= y metodos como
+=actualiza()= y =blitme()=. Hoy construimos la version "sin graficos"
+para dominar la mecanica de clases antes de llegar a Pygame.
+#+end_quote
 
-Once you run this command you should have 2 files on your system. In this example they would be ~homessl.crt~ and ~homessl.key~. Those 2 files you simply upload to your proxy manager or cert authority of choice and you will have valid self-signed openssl certificates. If you are curious to learn more about OpenSSL you can always check out the manpages online at https://www.openssl.org/docs/man3.0/man7/crypto.html.
+Pero no corramos tanto! ... como diria el poeta, 'hagamos camino al andar'. Paso a paso.
+Veamos un ejemplo de todo esto basado en unos vehiculos mas terrenales. Veamos un ejemplo basado en
+coches y como manejar parametros como fabricante, año de fabricacion, kilometraje etc...
 
-** TODO Using a Reverse Proxy and Pi-Hole
-CLOSED: [2022-10-20 Thu 06:37]
+*** La Clase =Coche=
+
+Vamos a escribir una clase que represente un coche. Nuestra clase
+almacenara informacion sobre el tipo de coche y tendra un metodo que
+resuma esa informacion.
+
+**** Definicion basica de la clase
+
+En la clase =Coche= definimos el metodo =__init__()= con el parametro
+=self= en primer lugar, igual que hicimos con la clase =Pyrro= en la practica anterior.
+Le damos tambien tres parametros mas: =fabricante=, =modelo= y =año=.
+
+El metodo =__init__()= recibe estos parametros y los asigna a los
+*atributos* que se asociaran con las instancias generadas a partir de
+esta clase.
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+mi_nuevo_coche = Coche('audi', 'a4', 2024)
+print(mi_nuevo_coche.nombra_descriptivamente())
+#+end_src
+
+#+begin_example
+2024 Audi A4
+#+end_example
+
+***** Que ocurre aqui
+
+- =nombra_descriptivamente()= combina el año, la marca y el modelo en un solo string que describe el coche de forma legible.
+- Para acceder a los valores de los atributos dentro del metodo usamos =self.fabricante=, =self.modelo= y =self.año=.
+- Fuera de la clase, creamos una instancia de =Coche= y la asignamos a la variable =mi_nuevo_coche=.
+- Llamamos a =nombra_descriptivamente()= para mostrar que coche tenemos.
+
+*** Establecer un Valor por Defecto para un Atributo de 'nuestro coche'
+
+Cuando se crea una instancia, los atributos pueden definirse *sin
+necesidad de pasarlos como parametros*. Estos atributos se definen
+dentro del metodo =__init__()=, donde se les asigna un valor por
+defecto.
+
+Vamos a añadir un atributo llamado =lectura_cuentakilometros= que siempre
+empiece con valor =0=. Tambien añadiremos un metodo =lee_cuentakilometros()=
+que nos ayude a leer el cuentakilometros de cada coche.
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+		self.cuentakilomentros_lectura = 0           # valor por defecto
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+	def lee_cuentakilometros(self):
+		"""Imprime el kilometraje del coche."""
+		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+
+mi_nuevo_coche = Coche('audi', 'a4', 2024)
+print(mi_nuevo_coche.nombra_descriptivamente())
+mi_nuevo_coche.lee_cuentakilometros()
+#+end_src
+
+#+begin_example
+2024 Audi A4
+Este coche ha recorrido 0 kilometros.
+#+end_example
+
+***** Que ocurre aqui
+
+- Python crea un nuevo atributo =cuentakilomentros_lectura= y le asigna el valor inicial =0= — no hace falta pasarlo como argumento al crear la instancia.
+- El metodo =lee_cuentakilometros()= simplemente imprime el valor actual del cuentakilometros.
+- Nuestro coche empieza con 0 millas. Pocos coches se venden con exactamente 0 millas, asi que necesitamos una forma de cambiar este valor...
+
+*** Modificando los Valores de Atributos de 'nuestro coche'
+
+Se puede cambiar el valor de un atributo de *tres formas*:
+
+1. Directamente a traves de la instancia
+2. A traves de un metodo (setter)
+3. Incrementandolo a traves de un metodo
+
+Veamos cada enfoque.
+
+**** Forma 1 — Modificar un atributo directamente
+
+La forma mas sencilla es acceder al atributo directamente a traves de
+la instancia usando la *notacion de punto*:
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+		self.cuentakilomentros_lectura = 0
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+	def lee_cuentakilometros(self):
+		"""Imprime el kilometraje del coche."""
+		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+
+mi_nuevo_coche = Coche('audi', 'a4', 2024)
+print(mi_nuevo_coche.nombra_descriptivamente())
+
+mi_nuevo_coche.cuentakilomentros_lectura = 23            # acceso directo
+mi_nuevo_coche.lee_cuentakilometros()
+#+end_src
+
+#+begin_example
+2024 Audi A4
+Este coche ha recorrido 23 kilometros.
+#+end_example
+
+Esta linea le dice a Python: /toma la instancia =mi_nuevo_coche=, busca el
+atributo =cuentakilometros_lectura= y asignale el valor 23/.
+
+A veces querras acceder a los atributos directamente asi, pero otras
+veces preferiras escribir un *metodo* que actualice el valor por ti.
+
+**** Forma 2 — Modificar un atributo mediante un metodo
+
+Es util tener metodos que actualicen ciertos atributos. En lugar de
+acceder directamente, pasas el nuevo valor a un metodo que se encarga
+de la actualizacion internamente.
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+		self.cuentakilomentros_lectura = 0
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+	def lee_cuentakilometros(self):
+		"""Imprime el kilometraje del coche."""
+		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+
+	def actualiza_cuentakilomentros(self, kilometraje):
+		"""Establece la lectura del cuentakilometros al valor dado."""
+		self.cuentakilomentros_lectura = kilometraje
+
+mi_nuevo_coche = Coche('audi', 'a4', 2024)
+print(mi_nuevo_coche.nombra_descriptivamente())
+
+mi_nuevo_coche.actualiza_cuentakilomentros(23)              # a traves de metodo
+mi_nuevo_coche.lee_cuentakilometros()
+#+end_src
+
+#+begin_example
+2024 Audi A4
+Este coche ha recorrido 23 kilometros.
+#+end_example
+
+***** Añadir logica de proteccion
+
+Podemos extender =actualiza_cuentakilomentros()= para que nadie intente
+/retroceder/ el cuentakilometros:
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+		self.cuentakilomentros_lectura = 0
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+	def lee_cuentakilometros(self):
+		"""Imprime el kilometraje del coche."""
+		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+
+	def actualiza_cuentakilomentros(self, kilometraje):
+		"""
+		Establece la lectura del cuentakilometros al valor dado.
+		Rechaza el cambio si intenta retroceder el cuentakilometros.
+		"""
+		if kilometraje >= self.cuentakilomentros_lectura:
+			self.cuentakilomentros_lectura = kilometraje
+		else:
+			print("¡No puedes retroceder el cuentakilometros!")
+
+mi_nuevo_coche = Coche('audi', 'a4', 2024)
+mi_nuevo_coche.actualiza_cuentakilomentros(23)
+mi_nuevo_coche.lee_cuentakilometros()
+
+# Intentamos retroceder el odometro:
+mi_nuevo_coche.actualiza_cuentakilomentros(10)
+#+end_src
+
+#+begin_example
+Este coche ha recorrido 23 kilometros.
+¡No puedes retroceder el cuentakilometros!
+#+end_example
+
+Ahora =actualiza_cuentakilomentros()= comprueba que la nueva lectura tiene
+sentido antes de modificar el atributo. Si el valor proporcionado es
+*mayor o igual* que el kilometraje existente, se actualiza. Si es
+*menor*, se muestra una advertencia.
+
+**** Forma 3 — Incrementar un atributo mediante un metodo
+
+A veces querras *sumar* una cantidad al valor de un atributo, en lugar
+de asignarle un valor completamente nuevo.
+
+Ejemplo: compramos un coche usado y le hacemos 100 millas entre la
+compra y el registro.
+
+#+begin_src python
+class Coche:
+	"""Intento sencillo de representar un coche."""
+
+	def __init__(self, fabricante, modelo, año):
+		"""Inicializa los atributos para describir un coche."""
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.año = año
+		self.cuentakilomentros_lectura = 0
+
+	def nombra_descriptivamente(self):
+		"""Devuelve un nombre descriptivo con formato legible."""
+		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+		return nombre_descriptivo.title()
+
+	def lee_cuentakilometros(self):
+		"""Imprime el kilometraje del coche."""
+		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+
+	def actualiza_cuentakilomentros(self, kilometraje):
+		"""
+		Establece la lectura del cuentakilometros al valor dado.
+		Rechaza el cambio si intenta retroceder el cuentakilometros.
+		"""
+		if kilometraje >= self.cuentakilomentros_lectura:
+			self.cuentakilomentros_lectura = kilometraje
+		else:
+			print("¡No puedes hacer retroceder el cuentakilometros!")
+
+	def incrementa_cuentakilomentros(self, miles):
+		"""Suma la cantidad dada a la lectura del cuentakilometros."""
+		self.cuentakilomentros_lectura += miles
+
+mi_coche_usado = Coche('opel', 'corsa', 2019)
+print(mi_coche_usado.nombra_descriptivamente())
+
+mi_coche_usado.actualiza_cuentakilomentros(23_500)
+mi_coche_usado.lee_cuentakilometros()
+
+mi_coche_usado.incrementa_cuentakilomentros(100)
+mi_coche_usado.lee_cuentakilometros()
+#+end_src
+
+#+begin_example
+2019 Opel Corsa
+Este coche ha recorrido 23500 kilometros.
+Este coche ha recorrido 23600 kilometros.
+#+end_example
+
+***** Que ocurre aqui
+
+- =incrementa_cuentakilomentros()= recibe un numero de millas y *suma* ese valor a =self.cuentakilomentros_lectura=.
+- Primero creamos un coche usado (=mi_coche_usado=).
+- Le asignamos 23.500 millas con =actualiza_cuentakilomentros()=.
+- Luego llamamos a =incrementa_cuentakilomentros(100)= para añadir las 100 millas recorridas entre la compra y el registro.
+
+#+begin_quote
+*NOTA:* Puedes usar metodos como estos para controlar como los
+usuarios de tu programa actualizan valores como el cuentakilometros,
+pero cualquier persona con acceso al programa puede asignar
+directamente cualquier valor accediendo al atributo. La seguridad
+efectiva requiere una atencion extrema al detalle, ademas de las
+comprobaciones basicas mostradas aqui.
+#+end_quote
+
+*** Resumen de Conceptos
+
+| *Concepto*                | *Descripcion*                               | *Ejemplo*                                     |
+|---------------------------+---------------------------------------------+-----------------------------------------------|
+| *Atributo con parametro*  | Se pasa al crear la instancia               | =self.fabricante = fabricante=                 |
+| *Atributo por defecto*    | Se define en =__init__()= sin parametro     | =self.cuentakilomentros_lectura = 0=          |
+| *Acceso directo*          | Modificar atributo con notacion de punto    | =coche.cuentakilomentros_lectura = 23=        |
+| *Metodo setter*           | Metodo que asigna un nuevo valor            | =actualiza_cuentakilomentros(23)=             |
+| *Metodo incremento*       | Metodo que suma al valor existente          | =incrementa_cuentakilomentros(100)=           |
+| *Logica de proteccion*    | Validacion dentro del setter                | =if kilometraje >= self.cuentakilomentros...= |
+
+** DONE Práctica 3.3 — Modelando Naves espaciales con Python
+CLOSED: [2026-03-16 Sat 12:00]
 :PROPERTIES:
-:EXPORT_FILE_NAME: reverse-proxy-and-pihole
-:EXPORT_HUGO_PUBLISHDATE: 2022-10-20
-:EXPORT_HUGO_DRAFT: true
+:EXPORT_FILE_NAME: practica-naves-espaciales
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-03-16
+:EXPORT_HUGO_URL: /poo3/
+:EXPORT_HUGO_TAGS: prácticas
 :END:
-I recently setup NGINX Proxy Manager to help manage all of my self-hosted services. How did I do this? I installed NGINX Proxy Manager in a LXC container in my Proxmox server. I then configured several of my services to route to their respective IP addresses and ports. In NGINX Proxy Manager you can assign local domain name to your services. I chose to go with something simple like =example.home=. Once I finished configuring NGINX Proxy Manager I moved over to configure my Pi-Hole server. I run the latest version of Pi-Hole on a Raspberry Pi 4 B+ which works fantastic. In my Pi-Hole I simply added some new DNS record to match my NGINX configurations.
 
-*** Example of my Pi-Hole DNSMASQ Settings
+[[/images/nostromo.png]]
 
-**** A Record: =proxy.homeserver.home= --> =10.0.11.1000=
+*** Las Naves Espaciales como Clases Python
 
-**** CNAME Record: =proxmox.home= --> =proxy.homeserver.home=
+*** Descripcion
 
-**** CNAME Record: =plex.home= --> =proxy.homeserver.home=
+Anteriormente modelamos un =Coche=. Vamos ahora a modelar una *nave espacial* usando Programacion Orientada a Objetos (POO).
+La practica se compone de *dos scripts progresivos*:
 
-Since I am using Pi-Hole as my DNS server I need to have the custom domains I setup in NPM (NGINX Proxy Manager) to route traffic correctly. I start by setting up an =A Record= of my NPM custom domain to point to the IP of NPM. Doing so will ensure that all traffic that goes to that IP gets routed only to NPM. Any traffic that NPM then reads it can then route to the proper service. Next, I make CNAME  records of all the services I have running with custom domains. Now here I state that any request to my custom domains be routed to the A record of my NPM. The reason I need to do this is because traffic needs to route NPM so NPM can decide how to serve up the service. That after all is the job of a reverse proxy.
+| *Script*          | *Enfoque*                                    | *Concepto clave*                                    |
+|-------------------+----------------------------------------------+-----------------------------------------------------|
+| =nave_basica.py=  | Clase sencilla con constructor y metodo      | *Clase, =__init__=, atributos, metodos*             |
+| =nave_combate.py= | Clase completa con modificacion de atributos | *Setters, incrementos, logica de proteccion*        |
 
-And that's it! Once I have all settings in place I can start using my custom domains on my local LAN. This make so much easier to reach my local services instead of memorizing IP addresses. In the future I look forward to setting up some local SSL certificates to secure my local custom domains with SSL.
+#+begin_quote
+Primero construiras la nave con lo basico (=nave_basica.py=), y despues le daras escudos, combustible y la meteras en combate (=nave_combate.py=).
+#+end_quote
 
-** TODO Starting a Homelab with Proxmox
+---
+
+*** Objetivo
+
+Completa los huecos marcados con =___= y =...= en los dos ficheros incompletos que se te proporcionan, de forma que:
+
+1. =nave_basica.py= — Define una clase =NaveEspacial= con atributos basicos y un metodo de descripcion
+2. =nave_combate.py= — Amplia la nave con escudo, combustible y metodos para recibir daño, consumir y recargar combustible
+
+---
+
+*** Fichero 1: =nave_basica.py= (clase sencilla)
+
+Este script define una clase basica con constructor y un metodo. Completa los huecos:
+
+#+begin_src python
+#!/usr/bin/env python3
+# nave_basica.py — Mi primera nave espacial con POO
+
+class ___:
+    """Intento sencillo de representar una nave espacial."""
+
+    def ___(self, nombre, tipo, velocidad_maxima):
+        """Inicializa los atributos para describir una nave."""
+        self.___ = nombre
+        self.___ = tipo
+        self.___ = velocidad_maxima
+
+    def descripcion(___):
+        """Devuelve una descripcion legible de la nave."""
+        texto = f"{self.___} — {self.___} (max. {self.___} km/s)"
+        return texto.title()
+
+
+# --- Crear instancias y probarlas ---
+
+mi_nave = ___(  'halcon milenario', 'carguero ligero', 1050)
+nave_2  = ___('x-wing',            'caza estelar',    1050)
+
+print(mi_nave.___())
+print(nave_2.___())
+#+end_src
+
+**** Pistas para =nave_basica.py=
+
+- Una *clase* se define con =class NombreClase:= — el nombre de nuestra clase es =NaveEspacial=
+- El metodo *constructor* se llama =__init__= — se ejecuta automaticamente al crear cada objeto
+- =self= es la referencia al *propio objeto* — todos los metodos de instancia lo reciben como primer parametro
+- =self.atributo = valor= asigna un atributo al objeto dentro del constructor
+- Para *crear un objeto* (instancia), se llama a la clase como si fuera una funcion: =NombreClase(args...)=
+- Para llamar a un *metodo* del objeto, usa notacion de punto: =objeto.metodo()=
+
+---
+
+*** Fichero 2: =nave_combate.py= (clase completa con combate)
+
+Aqui ampliamos la nave con escudo, combustible y metodos de combate. Completa los huecos:
+
+#+begin_src python
+#!/usr/bin/env python3
+# nave_combate.py — Nave espacial con escudo, combustible y combate
+
+class NaveEspacial:
+    """Nave espacial con sistemas de escudo y combustible."""
+
+    def __init__(self, nombre, tipo, velocidad_maxima):
+        """Inicializa atributos basicos y valores por defecto."""
+        self.nombre = nombre
+        self.tipo = tipo
+        self.velocidad_maxima = velocidad_maxima
+        self.___ = 100        # escudo empieza al 100%
+        self.___ = 100        # combustible empieza al 100%
+
+    def descripcion(self):
+        """Devuelve una descripcion legible de la nave."""
+        texto = f"{self.nombre} — {self.tipo} (max. {self.velocidad_maxima} km/s)"
+        return texto.title()
+
+    def estado(self):
+        """Imprime el estado actual de la nave."""
+        print(f"Escudo: {self.___}% | Combustible: {self.___}%")
+
+
+    # --- Forma 1: Modificar atributo directamente (se hace fuera de la clase) ---
+    # (No hay metodo aqui — se accede con: mi_nave.nivel_escudo = 75)
+
+
+    # --- Forma 2: Modificar atributo mediante un metodo (setter) ---
+
+    def actualizar_escudo(self, nuevo_nivel):
+        """
+        Establece el nivel de escudo al valor dado.
+        Limita el rango entre 0 y 100.
+        """
+        if nuevo_nivel ___ 0:
+            self.nivel_escudo = 0
+            print("¡Escudo desactivado! La nave es vulnerable.")
+        elif nuevo_nivel ___ 100:
+            self.nivel_escudo = 100
+            print("El escudo no puede superar el 100%.")
+        else:
+            self.___ = nuevo_nivel
+
+
+    # --- Forma 3: Incrementar/decrementar un atributo mediante un metodo ---
+
+    def recibir_daño(self, puntos):
+        """Reduce el escudo en la cantidad de puntos de daño recibidos."""
+        self.nivel_escudo ___ puntos
+        if self.nivel_escudo < 0:
+            self.nivel_escudo = 0
+        print(f"¡Impacto! Daño recibido: {puntos}. Escudo restante: {self.___}%")
+
+    def consumir_combustible(___, cantidad):
+        """Reduce el combustible en la cantidad consumida."""
+        self.combustible ___ cantidad
+        if ___.combustible < 0:
+            self.combustible = 0
+        print(f"Combustible consumido: {cantidad}. Restante: {self.combustible}%")
+
+    def recargar(self, combustible_extra):
+        """Suma combustible a la nave (sin superar el 100%)."""
+        self.combustible ___ combustible_extra
+        if self.combustible ___ 100:
+            self.combustible = 100
+        print(f"Recarga completada. Combustible: {self.___}%")
+
+
+# --- Simulacion de mision ---
+
+if __name__ == "___":
+
+    mi_nave = ___('x-wing', 'caza estelar', 1050)
+    print(mi_nave.___())
+    mi_nave.___()
+
+    print("\n--- Entramos en combate ---")
+    mi_nave.___(30)
+    mi_nave.___(45)
+
+    print("\n--- Huimos a velocidad maxima ---")
+    mi_nave.___(40)
+
+    print("\n--- Llegamos a la base y recargamos ---")
+    mi_nave.___(25)
+
+    print("\n--- Estado final de la nave ---")
+    mi_nave.___()
+#+end_src
+
+**** Pistas para =nave_combate.py=
+
+- Los atributos por defecto (=nivel_escudo=, =combustible=) se definen dentro de =__init__= *sin* pasarlos como parametro
+- En =actualizar_escudo()=: piensa que operador de comparacion necesitas — ¿"menor que" o "mayor que"?
+- =recibir_daño()= y =consumir_combustible()= *restan* del valor actual: el operador es =-==
+- =recargar()= *suma* al valor actual: el operador es =+==
+- =self= aparece como primer parametro en *todos* los metodos — ¡no lo olvides en =consumir_combustible=!
+- =__name__ == "___"= — ¿Que valor especial tiene =__name__= cuando ejecutas un script directamente? (pista: empieza por doble guion bajo)
+- Para llamar a metodos: =objeto.nombre_del_metodo(argumentos)=
+
+---
+
+*** Salida esperada
+
+**** =nave_basica.py=
+
+#+begin_example
+Halcon Milenario — Carguero Ligero (Max. 1050 Km/S)
+X-Wing — Caza Estelar (Max. 1050 Km/S)
+#+end_example
+
+**** =nave_combate.py=
+
+#+begin_example
+X-Wing — Caza Estelar (Max. 1050 Km/S)
+Escudo: 100% | Combustible: 100%
+
+--- Entramos en combate ---
+¡Impacto! Daño recibido: 30. Escudo restante: 70%
+¡Impacto! Daño recibido: 45. Escudo restante: 25%
+
+--- Huimos a velocidad maxima ---
+Combustible consumido: 40. Restante: 60%
+
+--- Llegamos a la base y recargamos ---
+Recarga completada. Combustible: 85%
+
+--- Estado final de la nave ---
+Escudo: 25% | Combustible: 85%
+#+end_example
+
+---
+
+*** Entrega
+
+- Sube ambos ficheros (=nave_basica.py= y =nave_combate.py=) completados y funcionales
+- Asegurate de que ambos se ejecutan sin errores con =python3 nombre.py=
+- *No modifiques* los textos de los =print()= ni los docstrings — solo completa los huecos =___=
+
+---
+
+*** BONUS — Amplia la nave (para nota maxima)
+
+Si quieres ir a por el *10*, elige *una o mas* de estas ampliaciones:
+
+| *Bonus*                       | *Descripcion*                                                                                                                                | *Puntos* |
+|-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+----------|
+| Metodo =__str__()=            | Implementa =__str__= para que =print(mi_nave)= muestre la descripcion de la nave directamente                                               |     +0.5 |
+| Metodo =reparar_escudo(pts)=  | Crea un metodo que sume puntos al escudo (sin superar 100%) — similar a =recargar()= pero para el escudo                                    |     +0.5 |
+| Simulacion extendida          | Crea una segunda nave enemiga, hazlas combatir entre si (que una le haga =recibir_daño= a la otra) y muestra el estado final de ambas        |     +0.5 |
+
+#+begin_quote
+Con el bonus puedes llegar hasta *10* puntos (maximo). No es necesario hacer todos.
+#+end_quote
+
+---
+
+*** Conceptos clave que aprenderas
+
+| *Concepto*                               | *Donde lo ves*                                            |
+|------------------------------------------+-----------------------------------------------------------|
+| *Clase y constructor =__init__=*         | =class NaveEspacial:= → =def __init__(self, ...)=        |
+| *Atributos de instancia*                 | =self.nombre=, =self.tipo=, =self.velocidad_maxima=      |
+| *Atributos con valor por defecto*        | =self.nivel_escudo = 100=, =self.combustible = 100=      |
+| *Metodos de instancia*                   | =descripcion()=, =estado()=, =recibir_daño()=, etc.     |
+| *=self=*                                 | Primer parametro de todos los metodos                    |
+| *Setter (Forma 2)*                       | =actualizar_escudo(nuevo_nivel)= — asigna con validacion |
+| *Incremento/Decremento (Forma 3)*        | =+== y =-== dentro de metodos                            |
+| *=if __name__ == "__main__"=*            | Patron estandar para scripts ejecutables                 |
+
+---
+
+#+begin_quote
+/"Las naves de Star Wars y Alien no se programan solas... pero con POO, casi."/
+#+end_quote
+
+** DONE Práctica 3.4 — Clases, herencia y coches
+CLOSED: [2026-03-23 Sat 12:00]
 :PROPERTIES:
-:EXPORT_FILE_NAME: starting-homelab-proxmox
-:EXPORT_HUGO_PUBLISHDATE: 2021-07-04
-:EXPORT_HUGO_DRAFT: true
+:EXPORT_FILE_NAME: practica-herencia-coches
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-03-23
+:EXPORT_HUGO_URL: /poo4/
+:EXPORT_HUGO_TAGS: prácticas
 :END:
-  The Beginning
 
-So if you hadn't heard of the idea of a "homelab", let me give you the quick run down of what is a "homelab". Basically, a homelab is a collection of technologies (hardware and software) that you install, maintain, and configure in your home. Imagine a datacenter in your home or an electronics lab can also be a homelab. At the heart of the homelab movement is the idea of tinkering and learning.
+*** Tabla de Contenidos
 
-Inspired by the idea of tinkering and learning I went down the path of building my own homelab. Luckily you don't need a lot to started, older hardware can be a great start for beginners. That's were my trusty old Dell Xeon workstation comes in. I was gifted this Dell Xeon workstation from a former client and I used it as a Ubuntu workstation for many years. It is a great machine and despite its age work like a champ. Unfortunately, it's loud and does not meet the "Wife Approval Factor". To keep my wife and to start a new journey for this Dell, I decided to turn into my Proxmox machine!
-The Homelab
+1. [[*Herencia][Herencia]]
+2. [[*El metodo =__init__()= en una Clase Hija][El metodo __init__() en una Clase Hija]]
+3. [[*Definir Atributos y Metodos para la Clase Hija][Definir Atributos y Metodos para la Clase Hija]]
+4. [[*Instancias como Atributos][Instancias como Atributos]]
+5. [[*Añadir mas detalle a la clase =Bateria=][Añadir mas detalle a la clase Bateria]]
+6. [[*Resumen de Conceptos][Resumen de Conceptos]]
+7. [[*Diagrama de la Jerarquia][Diagrama de la Jerarquia]]
+8. [[*Progresion del codigo — las 4 versiones][Progresion del codigo]]
 
-Now what is Proxmox?
+*** Herencia
 
-Proxmox is Type 1 Hypervisor that you can install on your own hardware. It allows you to run multiple Virtual Machines and Linux Containers (LXC). This is how I'm going be able to run various technologies in my home. Proxmox is a great hypervisor, it's user friendly and built on a stable Debian base. I'm quite comfortable on Debian based distros, so going with Proxmox was a no-brainer.
-The Services
+Cuando escribes clases no siempre tienes que partir de cero. Si la
+clase que estas escribiendo es una *version especializada* de otra
+clase que ya has escrito, puedes usar *herencia*. Cuando una clase
+/hereda/ de otra, adquiere automaticamente todos los atributos y
+metodos de la clase original. La clase original se llama *clase padre*
+(o /parent class/), y la nueva clase es la *clase hija* (o /child
+class/).
 
-In order to stay a bit organized I made a list of services/technologies I wanted to run on my homelab. Below are the services I currently have installed.
-#+BEGIN_QUOTE
-    File server
-    Plex server
-    Syncthing
-    Git server
-    Home Assistant
-    GNS3 VM
-#+END_QUOTE
+La clase hija hereda cada atributo y metodo de su padre, pero tambien
+es libre de *definir atributos y metodos nuevos* propios.
 
-** TODO SSH Port Forward a VNC Connection
-:PROPERTIES:
-:EXPORT_FILE_NAME: ssh-port-forward-vnc
-:EXPORT_HUGO_PUBLISHDATE: 2020-02-05
-:EXPORT_HUGO_DRAFT: true
-:END:
-  Recently I wanted to access a Virtual Machine I had created on my desktop from my laptop. I had access to the desktop via SSH but I wanted access to the virtual machine. To make things more interesting I wanted to access the VM(virtual machine) via a graphical interface.
+#+begin_quote
+*Continuidad:* En la Practica 3.3 construimos la clase =Coche= y la
+clase =NaveEspacial= para dominar la mecanica de clases, atributos y
+metodos. Ahora vamos a *reutilizar* la clase =Coche= como padre para
+crear un tipo mas especifico: el *coche electrico*.
+#+end_quote
 
-So I figured out that I could use SSH to "port forward" the VNC connection from the desktop to my laptop. It's actually very easy and only requires a few basic SSH commands. All you have to know before hand is the IP addresses and ports of the application and what port you want to connect to locally.
+*** El metodo =__init__()= en una Clase Hija
 
-Definitions:
+Cuando escribes una clase hija, lo primero que Python necesita hacer
+es *inicializar los atributos de la clase padre*. Para ello, el
+metodo =__init__()= de la clase hija llama al =__init__()= del padre.
 
-pc-1: Is the computer you are connecting from, in this case the laptop.
+Vamos a modelar un coche electrico. Un =CocheElectrico= es una
+version especializada de =Coche=, asi que podemos basar =CocheElectrico=
+en la clase =Coche= que ya tenemos y centrar nuestra codificacion
+solamente en los atributos y comportamientos especificos de los
+coches electricos.
 
-pc-2: Is the computer you are connecting to, in this case the desktop with the VM.
+**** Version 0 — La herencia mas basica
 
-So I use KVM to run the VM, so to get the VNC port from the running VM do the following.
+Empecemos creando una version sencilla de =CocheElectrico= que haga
+todo lo que puede hacer =Coche=:
 
-#+BEGIN_SRC sh
-sudo virsh dumpxml NameOfVM | grep vnc
-#+END_SRC
-You should see an output like this one.
+#+begin_src python
+class Coche:
+    """Intento sencillo de representar un coche."""
 
-#+BEGIN_QUOTE
-<graphics type='vnc' port='5901' autoport='yes' listen='127.0.0.1'>
-#+END_QUOTE
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilometros_lectura = 0
 
-This tells you that KVM is running vnc on port 5901 on address 127.0.0.1 (localhost) for this virtual machine. Now it's time to connect to the virtual machine from pc-1.
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-In pc-1 run the following command to create an SSH tunnel that port forward the VNC connection.
-#+BEGIN_SRC sh
-ssh user@pc-2 -L 5901:127.0.0.1:5901
-#+END_SRC
-What is is command doing?
-#+BEGIN_QUOTE
-    ssh user@pc-2 is establishing the SSH connection to pc-2 with the user "user". In your case, the user and IP address might be different e.g batman@10.10.0.1.
-    -L 5901:127.0.0.1:5901 is telling SSH agent to create a tunnel using local port 5901 and bind it to the remote machine address 127.0.0.1 on port 5901. The address on the remote machine might be different so that's why we ran the virsh command to find it.
-#+END_QUOTE
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilometros_lectura} kilometros.")
 
-Now that the SSH tunnel is established connect to the VM via VNC. You can use any remote viewer software like Remmina, TightVNC, or even Remote Viewer (part of Virtual Machine Viewer). Simply connect with the following parameters.
-#+BEGIN_SRC sh
-vnc://localhost:5901
-#+END_SRC
-And the VNC connection should open up and start working. You can do everything you could locally via a remote VNC connection. Once you are done simply close the VNC connection and exit the SSH session.
+    def update_cuentakilometros(self, kilometraje):
+        """Establece la lectura del cuentakilometros al valor dado."""
+        if kilometraje >= self.cuentakilometros_lectura:
+            self.cuentakilometros_lectura = kilometraje
+        else:
+            print("¡No puedes retroceder el cuentakilometros!")
 
-In this tutorial I showed how to this in KVM but VirtualBox and VMware have their own methods of doing this. Simply search for "headless" virtual machine for each to find out how to accomplish the same procedure.
-
-Congrats, you are now running a headless VM with a secure connection. SSH is cool tool that can do alot and if you combine it with other tools you can accomplish even more.
-
-** TODO Fixing Grub on a Dual Boot
-:PROPERTIES:
-:EXPORT_FILE_NAME: fix-grub-dual-boot
-:EXPORT_HUGO_PUBLISHDATE: 2019-12-18
-:EXPORT_HUGO_DRAFT: true
-:END:
-  I recently decided to move my Ubuntu installation from my laptop to my desktop without having to reinstall. So basically all I wanted to do is move the SSD (which had Ubuntu 19.10 installed) in my laptop to my desktop. This process is not hard at all but in my case it was a little more complicated. I wanted to do a dual boot on my desktop computer with 2 different hard drives. One spinning disk hard drive will have a Windows 10 installation while the SSD from my laptop will have Ubuntu 19.10. Again I did not want to do any reinstall of Windows 10 or Ubuntu. So how can you accomplish this? Simple with the command update-grub.
+    def incrementa_cuentakilometros(self, kms):
+        """Suma la cantidad dada a la lectura del cuentakilometros."""
+        self.cuentakilometros_lectura += kms
 
 
+class CocheElectrico(Coche):
+    """Representa aspectos de un coche especificos de vehiculos electricos."""
 
-First I removed the SSD in the laptop and installed it in my desktop. I ensured that it was on the first SATA port so it can be the first hard drive the system recognizes. Once installed I booted up the computer and Ubuntu booted up correctly. Ok, so now I knew Ubuntu worked fine on the desktop.
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos de la clase padre."""
+        super().__init__(fabricante, modelo, año)
 
-Next, I had to update grub inside of Ubuntu in order to add the Windows 10 disk to my boot order. Grub is actually pretty good at adding additional operating systems to the boot order. So turned off the computer ensured that my drives were in the correct SATA ports. After this step I ran into a small problem, Grub was not updating inside my Ubuntu installation. So I decided to boot into a Linux LiveUSB to help troubleshoot the errors.
 
-Inside the LiveUSB Linux environment I used a chroot environment to reach my Ubuntu  19.10 installation. To do so simply follow these steps.
+mi_leaf = CocheElectrico('nissan', 'leaf', 2024)
+print(mi_leaf.nombra_descriptivamente())
+#+end_src
 
-#+BEGIN_SRC sh
-sudo mount /dev/sdaX /mnt
+#+begin_example
+2024 Nissan Leaf
+#+end_example
 
-for i in /dev/ /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+***** Que ocurre aqui
 
-sudo chroot /mnt
-#+END_SRC
-Once in the chroot environment I ran update-grub and I still got an error. So I decided it would be best to simply reinstall grub. To do so simply run reinstall grub-pc (if you're on a efi system please use grub-efi-amd64). This command worked and prompted me to chose where I wanted to install grub. I chose on the main disk since this is where I wanted to have grub installed. Once that process was done, I rebooted the system and was prompted with a working grub boot screen with both operating systems showing up correctly.
+- Empezamos con =Coche=. Cuando creas una clase hija, la clase padre debe estar definida *antes* en el mismo archivo. Aqui situamos =Coche= primero.
+- Definimos la clase hija: =CocheElectrico=. El nombre de la clase padre debe ir *entre parentesis* en la definicion de la clase hija: =class CocheElectrico(Coche):=
+- La funcion =super()= es una funcion especial que permite *llamar a un metodo de la clase padre*. La linea =super().__init__(fabricante, modelo, año)= le dice a Python que llame al =__init__()= de =Coche=, lo que da a =CocheElectrico= todos los atributos definidos en el padre. El nombre =super= viene de la convencion de llamar a la clase padre /superclase/ y a la hija /subclase/.
+- Probamos que la herencia funciona creando un coche electrico con los argumentos ='nissan'=, ='leaf'= y =2024=. Llamamos a =nombra_descriptivamente()=, que esta definida en =Coche= pero esta disponible en cualquier instancia de =CocheElectrico=.
 
-Tip: If you want to customize your Grub boot screen you can do with the app Grub Customizer. Simply install it with sudo apt install grub-customizer. This allows you to add a background to Grub bootscreen, change the boot order, and much more.
+#+begin_quote
+*En resumen:* aparte de =__init__()=, todavia no hay atributos ni metodos propios de un coche electrico. De momento, solo estamos comprobando que la herencia funciona correctamente.
+#+end_quote
 
-** TODO Reset Windows Password with Linux
-:PROPERTIES:
-:EXPORT_FILE_NAME: reset-windows-password-linux
-:EXPORT_HUGO_PUBLISHDATE: 2019-07-15
-:EXPORT_HUGO_DRAFT: true
-:END:
-  Ever needed to reset your Windows password but forgot to make a Windows Reset Password disk? If so, you can easily reset a Windows Users password with a Live Linux USB. Let's see just how easy it is to so.
+*** Definir Atributos y Metodos para la Clase Hija
 
-    If you don't a Live Linux USB go ahead an create one. This tutorial is Ubuntu based so any Ubuntu flavor will work. And you will need a working internet connection to download software.
-    Start the computer and boot into the Live Linux environment.
-    Once in the Live Linux environment make sure you connect to the internet and open a terminal.
-    You will need to install tool called chntpw. So ahead and run the following command to install chntpw apt-get install chntpw
-    Once installed you will have to mount the hard drive that has Windows installed. There are many ways of doing this but you can use the File Manager (Nautilus in Ubuntu) to make things easy.
-    Once you have the Windows Harddrive mounted go to the following directory /windowsHarddrive/Windows/System32/config/
-    Now that you are at the correct directory, right click and chose Open With
-    Terminal Here.
-    In the terminal simply type the following command to interact with chntpwsudo chntpw SAM
-    Now you are editing the Administrator user if you would like to edit another user use this command.sudo chntpw -u USERYOUWANTTOEDIT SAM
-    After you've chosen your user it's time to reset their password. Simply type 1 in ther User Edit Menu. And then chose y when prompted to Write hive
-    files
-    Then to quit type q and this will exit chntpw
-    Close the terminal and restart your computer making sure to remove the Live Linux USB.
-    You should boot into Windows desktop directly without any login. Be sure to add a new password!
+Una vez que tienes una clase hija que hereda de la padre, puedes
+añadir cualquier *atributo y metodo nuevo* que sea necesario para
+diferenciar la clase hija de la padre.
 
-Congratulations you have successfully reset your Windows with Linux! And that's it!
+Vamos a añadir un atributo especifico de los coches electricos (el
+tamaño de la bateria) y un metodo para informar sobre el.
+
+**** Version 1 — Atributos y metodos propios de la clase hija
+
+#+begin_src python
+class Coche:
+    """Intento sencillo de representar un coche."""
+
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilometros_lectura = 0
+
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
+
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilometros_lectura} kilometros.")
+
+    def update_cuentakilometros(self, kilometraje):
+        """Establece la lectura del cuentakilometros al valor dado."""
+        if kilometraje >= self.cuentakilometros_lectura:
+            self.cuentakilometros_lectura = kilometraje
+        else:
+            print("¡No puedes retroceder el cuentakilometros!")
+
+    def incrementa_cuentakilometros(self, kms):
+        """Suma la cantidad dada a la lectura del cuentakilometros."""
+        self.cuentakilometros_lectura += kms
+
+
+class CocheElectrico(Coche):
+    """Representa aspectos de un coche especificos de vehiculos electricos."""
+
+    def __init__(self, fabricante, modelo, año):
+        """
+        Inicializa los atributos de la clase padre.
+        Despues inicializa los atributos especificos del coche electrico.
+        """
+        super().__init__(fabricante, modelo, año)
+        self.tamaño_bateria = 40
+
+    def describir_bateria(self):
+        """Imprime una descripcion del tamaño de la bateria."""
+        print(f"Este coche tiene una bateria de {self.tamaño_bateria} kWh.")
+
+
+mi_leaf = CocheElectrico('nissan', 'leaf', 2024)
+print(mi_leaf.nombra_descriptivamente())
+mi_leaf.describir_bateria()
+#+end_src
+
+#+begin_example
+2024 Nissan Leaf
+Este coche tiene una bateria de 40 kWh.
+#+end_example
+
+***** Que ocurre aqui
+
+- Añadimos el atributo =self.tamaño_bateria= y le asignamos un valor inicial de =40= (kWh). Este atributo se asociara a todas las instancias creadas a partir de =CocheElectrico= pero *no* a las instancias de =Coche=.
+- Tambien añadimos el metodo =describir_bateria()=, que imprime informacion sobre la bateria. Este metodo solo estara disponible para instancias de =CocheElectrico=.
+- No hay limite en cuanto puedes especializar la clase hija. Puedes añadir tantos atributos y metodos como necesites para modelar un coche electrico con la precision que quieras.
+
+#+begin_quote
+*Consejo de diseño:* Si un atributo o metodo pertenece a /cualquier/ coche, no solo a un coche electrico, deberia ir en =Coche= y no en =CocheElectrico=. Cualquiera que use la clase =Coche= obtendra esa funcionalidad, y la clase =CocheElectrico= solo contendra lo especifico de los vehiculos electricos.
+#+end_quote
+
+*** Instancias como Atributos
+
+Al modelar objetos del mundo real en codigo, puedes encontrar que
+estas añadiendo mas y mas detalle a una clase. Llega un momento en
+que tus listas de atributos y metodos crecen tanto que es buena idea
+*extraer parte de la clase en una clase separada*. Puedes dividir tu
+clase grande en clases mas pequeñas que trabajen juntas; esta tecnica
+se llama *composicion*.
+
+Por ejemplo, si seguimos añadiendo detalles a la clase
+=CocheElectrico=, podriamos acabar con muchos atributos y metodos
+especificos de la bateria. Cuando eso ocurre, podemos parar y mover
+esos atributos y metodos a una clase separada llamada =Bateria=.
+Entonces usamos una instancia de =Bateria= como *atributo* de
+=CocheElectrico=:
+
+**** Version 2 — Instancias como atributos (composicion)
+
+#+begin_src python
+class Coche:
+    """Intento sencillo de representar un coche."""
+
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilometros_lectura = 0
+
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
+
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilometros_lectura} kilometros.")
+
+    def update_cuentakilometros(self, kilometraje):
+        """Establece la lectura del cuentakilometros al valor dado."""
+        if kilometraje >= self.cuentakilometros_lectura:
+            self.cuentakilometros_lectura = kilometraje
+        else:
+            print("¡No puedes retroceder el cuentakilometros!")
+
+    def incrementa_cuentakilometros(self, kms):
+        """Suma la cantidad dada a la lectura del cuentakilometros."""
+        self.cuentakilometros_lectura += kms
+
+
+class Bateria:
+    """Intento sencillo de modelar la bateria de un coche electrico."""
+
+    def __init__(self, tamaño_bateria=40):
+        """Inicializa los atributos de la bateria."""
+        self.tamaño_bateria = tamaño_bateria
+
+    def describir_bateria(self):
+        """Imprime una descripcion del tamaño de la bateria."""
+        print(f"Este coche tiene una bateria de {self.tamaño_bateria} kWh.")
+
+
+class CocheElectrico(Coche):
+    """Representa aspectos de un coche especificos de vehiculos electricos."""
+
+    def __init__(self, fabricante, modelo, año):
+        """
+        Inicializa los atributos de la clase padre.
+        Despues inicializa los atributos especificos del coche electrico.
+        """
+        super().__init__(fabricante, modelo, año)
+        self.bateria = Bateria()
+
+
+mi_leaf = CocheElectrico('nissan', 'leaf', 2024)
+print(mi_leaf.nombra_descriptivamente())
+mi_leaf.bateria.describir_bateria()
+#+end_src
+
+#+begin_example
+2024 Nissan Leaf
+Este coche tiene una bateria de 40 kWh.
+#+end_example
+
+***** Que ocurre aqui
+
+- Definimos una nueva clase llamada =Bateria= que *no hereda de ninguna otra clase*. Su =__init__()= tiene un parametro =tamaño_bateria= con valor por defecto =40=. El metodo =describir_bateria()= tambien se ha movido aqui, desde =CocheElectrico=.
+- En =CocheElectrico=, ahora añadimos un atributo =self.bateria=. Esta linea le dice a Python que cree una nueva instancia de =Bateria= (con el valor por defecto de 40 kWh) y la asigne al atributo =self.bateria=. Esto ocurrira *cada vez que se llame a* =__init__()=; cualquier instancia de =CocheElectrico= tendra automaticamente una instancia de =Bateria= asociada.
+- Para acceder a los atributos de la bateria hay que usar *doble notacion de punto*: =mi_leaf.bateria.describir_bateria()=
+
+#+begin_quote
+*¿Por que composicion?* Esto puede parecer mucho trabajo extra. Pero ahora puedes describir la bateria con todo el detalle que quieras *sin ensuciar* la clase =CocheElectrico=. Ademas, la clase =Bateria= es reutilizable: podria usarse en una moto electrica, un patinete, o cualquier otro vehiculo.
+#+end_quote
+
+*** Añadir mas detalle a la clase =Bateria=
+
+Cuando la bateria es su propia clase, es natural seguir
+enriqueciendola. Vas a añadir tu mismo/a un metodo =obtener_autonomia()= que
+informe de la distancia que el coche puede recorrer segun el tamaño
+de la bateria:
+
+*** Objetivo de la practica : ampliar las caracteristicas del coche
+
+**** Inventa una Version 3 que implemente sobre la Version 2 un Metodo =obtener_autonomia()=
+
+#+begin_quote
+*Tu tarea:* Estudia cada version, ejecutala, modificala.
+Experimenta cambiando valores, añadiendo metodos, creando nuevas
+subclases. La mejor forma de aprender POO es /romper cosas y
+arreglarlas/.
+#+end_quote
+
+#+begin_quote
+*Reflexion sobre el diseño:* En este punto podemos preguntarnos:
+¿Donde deberia vivir un metodo como =obtener_autonomia()=? ¿En
+=CocheElectrico= o en =Bateria=? Si la autonomia depende *solo* del
+tamaño de la bateria, entonces pertenece a =Bateria=. Pero si la
+autonomia tambien dependiera del peso del coche, la aerodinamica, o
+el tipo de neumaticos... entonces quiza =CocheElectrico= seria mejor
+lugar. El arte de decidir donde poner cada metodo es lo que hace la
+POO interesante.
+#+end_quote
+
+Demuestra tu arte como programador/a,
+
+- Ampliando unas 2 o 3 caracteristicas del vehiculo usando el concepto de *herencia*. Inspirate en como hemos hecho con la bateria.
+
+*** Resumen de Conceptos
+
+| *Concepto*                    | *Descripcion*                                  | *Ejemplo*                                              |
+|-------------------------------+------------------------------------------------+--------------------------------------------------------|
+| *Herencia*                    | Una clase hija adquiere atributos/metodos del padre | =class CocheElectrico(Coche):=                    |
+| *Clase padre (superclase)*    | La clase original de la que se hereda          | =Coche=                                                |
+| *Clase hija (subclase)*       | La nueva clase que hereda y especializa        | =CocheElectrico=                                       |
+| *=super()=*                   | Llama a un metodo de la clase padre            | =super().__init__(fabricante, modelo, año)=             |
+| *Atributo propio de la hija*  | Atributo que solo existe en la subclase        | =self.tamaño_bateria = 40=                             |
+| *Metodo propio de la hija*    | Metodo exclusivo de la subclase                | =describir_bateria()=                                  |
+| *Composicion*                 | Usar una instancia de otra clase como atributo | =self.bateria = Bateria()=                             |
+| *Doble notacion de punto*     | Acceder a atributos de un objeto anidado       | =mi_leaf.bateria.describir_bateria()=                  |
+
+*** Diagrama de la Jerarquia
+
+#+begin_example
+ ┌─────────────┐
+ │   Coche     │  ← clase padre (superclase)
+ │─────────────│
+ │ fabricante  │
+ │ modelo      │
+ │ año         │
+ │ cuentakm    │
+ │─────────────│
+ │ nombra..()  │
+ │ lee_ckm()   │
+ │ update_ckm()│
+ │ increm_ckm()│
+ └──────┬──────┘
+        │ hereda
+        ▼
+┌───────────────┐
+│CocheElectrico │  ← clase hija (subclase)
+│───────────────│
+│ bateria ──────┼──────┐
+│───────────────│      │ composicion
+│               │      ▼
+└───────────────┘  ┌──────────┐
+                   │ Bateria  │
+                   │──────────│
+                   │ tamaño   │
+                   │──────────│
+                   │ describir│
+                   │ autonomia│
+                   └──────────┘
+#+end_example
+
+*** Progresion del codigo — las 4 versiones
+
+A continuacion tienes un resumen de como hemos ido construyendo el
+codigo, paso a paso:
+
+| *Version* | *Fichero*                | *Que añade*                                             |
+|-----------+--------------------------+---------------------------------------------------------|
+| *v0*      | =coche_electrico_v0.py=  | Herencia basica: =CocheElectrico(Coche)= + =super()=   |
+| *v1*      | =coche_electrico_v1.py=  | Atributo (=tamaño_bateria=) y metodo propios            |
+| *v2*      | =coche_electrico_v2.py=  | Composicion: clase =Bateria= como atributo              |
+|           | A Crear por Ti           | Caracteristicas adicionales del vehiculo.               |
+| *v3*      | =coche_electrico_v3.py?= | Metodo =obtener_autonomia()= en =Bateria= ?             |
+
+Happy coding !
 
 * Pages
 :PROPERTIES:
@@ -304,7 +1233,11 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 *** Prácticas
 
-- [[/posts/practica-poo-pyrro/][Práctica POO — Pyrro: perros ASCII con clases]]
+- [[/sqlite/][Práctica 3.1 — Modelando bases de datos SQLite con Python]]
+- [[/poo/][Práctica 3.2 — Pyrro: perros ASCII con clases]]
+- [[/poo2/][POO — Naves espaciales, coches y Python]]
+- [[/poo3/][Práctica 3.3 — Modelando Naves espaciales con Python]]
+- [[/poo4/][Práctica 3.4 — Clases, herencia y coches]]
 
 *** Recursos
 
@@ -318,6 +1251,7 @@ CLOSED: [2026-03-15 Sat 12:00]
 :EXPORT_HUGO_SECTION: posts
 :EXPORT_HUGO_PUBLISHDATE: 2026-03-15
 :EXPORT_HUGO_URL: /poo/
+:EXPORT_HUGO_TAGS: prácticas
 :END:
 
 [[/images/pyrro-art-NLLM.png]]
@@ -631,6 +1565,7 @@ CLOSED: [2026-03-15 Sat 12:00]
 :EXPORT_FILE_NAME: empaquetar-python-pygame-ejecutable
 :EXPORT_HUGO_SECTION: posts
 :EXPORT_HUGO_PUBLISHDATE: 2026-03-14
+:EXPORT_HUGO_URL: /pyinstallerexe/
 :END:
 
 *** ¿Es posible? Sí, con PyInstaller
