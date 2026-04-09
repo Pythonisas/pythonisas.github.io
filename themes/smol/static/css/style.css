@@ -9,3 +9,6 @@ article{padding:24px 0}
 figcaption {color: #888; font: 12px/1.5 monospace; text-align: center;}
 figure {margin: auto}
 img {display: block; max-width: 100%; height: auto; margin: auto}
+table{border-collapse:collapse;width:100%;margin:1em 0}
+th,td{border:1px solid var(--fontcolor);padding:6px 12px;text-align:left}
+th{font-weight:bold}

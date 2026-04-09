@@ -311,12 +311,13 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 - [[https://docs.python.org/es/3/][Documentación Oficial en ES]]
 - [[https://inventwithpython.com/es/][Inventa tus propios juegos de computadora con Python]]
 
-** DONE Práctica POO — Pyrro
+** DONE Práctica 3.2 — Pyrro
 CLOSED: [2026-03-15 Sat 12:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-poo-pyrro
 :EXPORT_HUGO_SECTION: posts
 :EXPORT_HUGO_PUBLISHDATE: 2026-03-15
+:EXPORT_HUGO_URL: /poo/
 :END:
 
 [[/images/pyrro-art-NLLM.png]]
@@ -356,7 +357,7 @@ Renómbralos a =pyrro-dice.py= y =pyrro-art.py= antes de empezar.
 
 Este script usa *funciones puras* (sin clases). Completa los huecos:
 
-#+begin_src python
+#+begin_src python :tangle ../static/code/poo/pyrro-dice_incompleto.py
 #!/usr/bin/env python3
 # pyrro-dice.py — KISS + estilo funcional
 
@@ -398,7 +399,7 @@ if __name__ == "___":
 
 Aquí damos el salto a *POO*. Completa los huecos:
 
-#+begin_src python
+#+begin_src python :tangle ../static/code/poo/pyrro-art_incompleto.py
 #!/usr/bin/env python3
 # pyrro-art.py — clase Pyrro con pyrro_dice() como método
 
@@ -654,7 +655,7 @@ Este tutorial usa *PyInstaller* (KISS).
 
 *** Juego de ejemplo mínimo
 
-#+begin_src python
+#+begin_src python :tangle ../static/code/empaquetar-python-pygame-ejecutable/snake.py
 # Rationale: Snake game mínimo para demostrar el empaquetado con PyInstaller
 # Version: 1.0
 # Author: fenix & LLM friends
@@ -857,7 +858,7 @@ Windows (o usar Wine / una VM / GitHub Actions).
 
 *** Cross-compilation con GitHub Actions (avanzado)
 
-#+begin_src yaml
+#+begin_src yaml :tangle ../static/code/empaquetar-python-pygame-ejecutable/build.yml
 # .github/workflows/build.yml
 name: Build executables
 

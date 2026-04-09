@@ -20,11 +20,11 @@ canonifyurls = true
   [[menu.main]]
     identifier = "inicio"
     name       = "Inicio"
-    url        = "/pages/inicio"
+    url        = "/"
     weight     = -200
   [[menu.main]]
     identifier = "posts"
-    name       = "Posts"
+    name       = "Blog"
     url        = "/posts/"
     weight     = -100
   [[menu.main]]

@@ -23,7 +23,7 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 ## Prácticas {#prácticas}
 
--   [Práctica POO — Pyrro: perros ASCII con clases](/posts/practica-poo-pyrro/)
+-   [Práctica 3.2 — Pyrro: perros ASCII con clases](/poo/)
 
 
 ## Recursos {#recursos}
