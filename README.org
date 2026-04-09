@@ -1,14 +1,61 @@
-* Eduardo Robles Site
+[[file:static/images/pythonisa.png]]
 
+* Pythonisas
 
-**** Thank You
+GH Web Pages de la (auto)organización *Pythonisas*.
+/Brujas del teclado. Alquimistas de los bits./
+
+https://pythonisas.github.io
+
+** Propósito
+
+Este sitio es un espacio de aprendizaje colaborativo de Python y tecnología, orientado a la práctica y la experimentación. Aquí compartimos recetas, ejercicios y recursos que surgen del camino de aprender haciendo.
+
+** Stack técnico
+
+- Generador estático: [[https://gohugo.io][Hugo]] (v0.160.1, extended)
+- Tema: [[https://github.com/colorchestra/smol][smol]] (minimalista, sin JS)
+- Contenido: [[https://ox-hugo.scripter.co/][ox-hugo]] (Org-mode → Markdown → Hugo)
+- Despliegue: GitHub Actions → GitHub Pages
+
+** Flujo de despliegue (GitHub Pages + Actions)
 
 #+BEGIN_QUOTE
-If you enjoyed or found any of the content on my site helpful, you can buy me a cup of coffee or send some bitcoin  ⚡ so I can continue to bring you amazing content for free!
+Lo que aprendimos montándolo nosotras mismas.
 #+END_QUOTE
 
-***** You can Buy Me A Coffee
-[[https://www.buymeacoffee.com/eduardorobles][https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png]]
+1. *Configurar el repositorio*: En GitHub → Settings → Pages → Source, seleccionar *"GitHub Actions"* (no "Deploy from a branch")
 
-***** Tip with some Sats
-[[https://getalby.com/p/tacosandlinux][Tip Some Sats ⚡]]
+2. *Un solo workflow*: =.github/workflows/hugo.yaml= hace todo el trabajo:
+   - Descarga Hugo (tarball, no .deb)
+   - Hace checkout del código
+   - Construye el sitio con =hugo --gc --minify=
+   - Sube el artefacto y despliega en Pages
+
+3. *Se dispara automáticamente*: cada =git push= a =main= lanza el workflow. También se puede lanzar manualmente desde la pestaña Actions (=workflow_dispatch=)
+
+4. *Sin dependencias innecesarias*: el tema smol no usa Sass, Node.js ni Go modules — el workflow es limpio y rápido (~30s)
+
+5. *Verificar*: después del push, monitorizar con =gh run watch= y visitar el sitio
+
+** Desarrollo local
+
+#+BEGIN_SRC bash
+# Previsualizar con borradores
+hugo server -D
+
+# Build de producción
+hugo --gc --minify
+#+END_SRC
+
+** Agradecimientos
+
+A [[https://www.eduardorobles.com/][Eduardo Robles]] de quién tomo prestado 'la plantilla' de sitio web (hecho en [[https://gohugo.io][Hugo]] ).
+
+A mis alumnos y compañeros del equipo docente de los que aprendo cada día más.
+
+** Licencia : WTFPL
+
+El contenido de este sitio se comparte con fines educativos.
+
+
