@@ -50,7 +50,7 @@ hugo --gc --minify
 
 ** Agradecimientos
 
-A [[https://www.eduardorobles.com/][Eduardo Robles]] de quién tomo prestado 'la plantilla' de sitio web (hecho en [[https://gohugo.io][Hugo]] ).
+A [[https://www.eduardorobles.com/][Eduardo Robles]] de quién tomo prestada 'la plantilla' de sitio web (hecho en [[https://gohugo.io][Hugo]] ).
 
 A mis alumnos y compañeros del equipo docente de los que aprendo cada día más.
 

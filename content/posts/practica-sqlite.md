@@ -1,10 +1,10 @@
 +++
 title = "Práctica 3.1 — Modelando bases de datos SQLite con Python"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-03-12T12:00:00+01:00
 publishDate = 2026-03-12
-url = "/sqlite/"
 tags = ["prácticas"]
+url = "/sqlite/"
 draft = false
 +++
 
@@ -21,19 +21,19 @@ El programa debera crear una base de datos SQLite con dos tablas relacionadas:
 
 **TABLA `profesores`**
 
-| **id** | **nombre** | **asignatura** |
-|:---|:---|:---|
-| 1 | Pedro Garcia | Matematicas |
-| 2 | Laura Martinez | Fisica |
-| 3 | Jose Rodriguez | Quimica |
+| **id** | **nombre**     | **asignatura** |
+|--------|----------------|----------------|
+| 1      | Pedro Garcia   | Matematicas    |
+| 2      | Laura Martinez | Fisica         |
+| 3      | Jose Rodriguez | Quimica        |
 
 **TABLA `alumnos`**
 
-| **id** | **nombre** | **edad** | **id\_profesor** |
-|:---|:---|:---:|:---|
-| 1 | Carlos Perez | 20 | 1 |
-| 2 | Ana Lopez | 22 | 2 |
-| 3 | Luis Fernandez | 21 | 3 |
+| **id** | **nombre**     | **edad** | **id_profesor** |
+|--------|----------------|----------|-----------------|
+| 1      | Carlos Perez   | 20       | 1               |
+| 2      | Ana Lopez      | 22       | 2               |
+| 3      | Luis Fernandez | 21       | 3               |
 
 > Observa que `id_profesor` en la tabla `alumnos` es una **clave foranea** (`FOREIGN KEY`) que referencia al `id` de la tabla `profesores`. Asi se establece la **relacion** entre ambas tablas.
 
@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
 Al ejecutar tu programa, la salida debe ser **similar** a esta:
 
-```
+```text
 $ python3 crud_sqlite.py
 Hello and welcome!
 
@@ -147,16 +147,16 @@ Conexion cerrada.
 ---
 
 
-## BONUS — CRUD completo (para nota maxima) {#bonus-crud-completo}
+## BONUS — CRUD completo (para nota maxima) {#bonus-crud-completo--para-nota-maxima}
 
 La practica base solo cubre la **C** (Create) y la **R** (Read) del acronimo **CRUD**. Si quieres ir a por el **10**, amplia tu programa para que tambien implemente:
 
-| **Letra** | **Operacion** | **SQL** | **Ejemplo** |
-|:---:|:---|:---|:---|
-| **C** | Create | `INSERT INTO` | Ya implementado |
-| **R** | Read | `SELECT ... JOIN` | Ya implementado |
-| **U** | **Update** | `UPDATE ... SET ... WHERE` | Cambiar la asignatura de un profesor |
-| **D** | **Delete** | `DELETE FROM ... WHERE` | Eliminar un alumno por su nombre |
+| **Letra** | **Operacion** | **SQL**                    | **Ejemplo**                          |
+|-----------|---------------|----------------------------|--------------------------------------|
+| **C**     | Create        | `INSERT INTO`              | Ya implementado                      |
+| **R**     | Read          | `SELECT ... JOIN`          | Ya implementado                      |
+| **U**     | **Update**    | `UPDATE ... SET ... WHERE` | Cambiar la asignatura de un profesor |
+| **D**     | **Delete**    | `DELETE FROM ... WHERE`    | Eliminar un alumno por su nombre     |
 
 **Sugerencia para el BONUS:**
 
@@ -169,24 +169,24 @@ La practica base solo cubre la **C** (Create) y la **R** (Read) del acronimo **C
 
 ## Rubrica de evaluacion {#rubrica-de-evaluacion}
 
-| **Criterio** | **Puntos** | **Descripcion** |
-|:---|:---:|:---|
-| **Conexion a la BD** | 1 | El programa conecta correctamente a `dam.db` usando `sqlite3` |
-| **Creacion de tablas** | 2 | Se crean las tablas `profesores` y `alumnos` con los campos y tipos correctos, incluyendo la clave foranea |
-| **Insercion de datos** | 2 | Se insertan los datos de ejemplo correctamente en ambas tablas |
-| **Consulta con JOIN** | 2 | Se realiza un `SELECT` con `JOIN` que relaciona alumnos con sus profesores y se muestran los resultados formateados |
-| **Gestion de conexion** | 1 | Se usa `try...finally` (o similar) para garantizar el cierre de la conexion |
-| **Codigo limpio** | 1 | El codigo esta organizado en funciones, es legible y sigue buenas practicas Python |
-| **BONUS: Update** | +0.5 | Implementa correctamente la operacion de actualizacion |
-| **BONUS: Delete** | +0.5 | Implementa correctamente la operacion de borrado |
+| **Criterio**            | **Puntos** | **Descripcion**                                                                                                     |
+|-------------------------|------------|---------------------------------------------------------------------------------------------------------------------|
+| **Conexion a la BD**    | 1          | El programa conecta correctamente a `dam.db` usando `sqlite3`                                                       |
+| **Creacion de tablas**  | 2          | Se crean las tablas `profesores` y `alumnos` con los campos y tipos correctos, incluyendo la clave foranea          |
+| **Insercion de datos**  | 2          | Se insertan los datos de ejemplo correctamente en ambas tablas                                                      |
+| **Consulta con JOIN**   | 2          | Se realiza un `SELECT` con `JOIN` que relaciona alumnos con sus profesores y se muestran los resultados formateados |
+| **Gestion de conexion** | 1          | Se usa `try...finally` (o similar) para garantizar el cierre de la conexion                                         |
+| **Codigo limpio**       | 1          | El codigo esta organizado en funciones, es legible y sigue buenas practicas Python                                  |
+| **BONUS: Update**       | +0.5       | Implementa correctamente la operacion de actualizacion                                                              |
+| **BONUS: Delete**       | +0.5       | Implementa correctamente la operacion de borrado                                                                    |
 
 ---
 
-| | |
-|:---|:---:|
-| **Practica base (C + R)** | **9** |
+|                               |        |
+|-------------------------------|--------|
+| **Practica base (C + R)**     | **9**  |
 | **Con BONUS completo (CRUD)** | **10** |
 
 ---
 
-> "Las bases de datos son como los armarios: si no los organizas bien desde el principio, luego no encuentras nada."
+> _"Las bases de datos son como los armarios: si no los organizas bien desde el principio, luego no encuentras nada."_
