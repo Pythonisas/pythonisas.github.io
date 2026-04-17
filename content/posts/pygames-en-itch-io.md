@@ -4,12 +4,14 @@ author = ["Fénix"]
 publishDate = 2026-04-17
 tags = ["pygame", "juegos"]
 url = "/pygames-itch-io/"
-draft = true
+draft = false
 +++
 
 {{< figure src="/images/El-Cosmos-de-la-Modularidad-Arquitectura-para-videojuegos-Pygame.png" >}}
 
 Pygame no es un juguete. Es una librería con la que se construyen juegos de verdad — juegos que puedes jugar en el navegador, descargar, compartir con tus amigos. Y muchos de ellos están publicados en [itch.io](https://itch.io), la plataforma indie por excelencia.
+
+Si bien nosotris nos centraremos en las próximas semanas en el clásico 'space invaders / invasión alienígena...
 
 En este artículo repasamos **9 proyectos hechos con Pygame** que puedes jugar, estudiar y usar como inspiración para tus propios juegos. Cada uno enseña algo diferente — desde física 2D hasta motores narrativos.
 
