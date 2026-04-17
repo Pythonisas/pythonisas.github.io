@@ -1521,7 +1521,7 @@ codigo, paso a paso:
 
 Happy coding !
 
-** DONE Práctica 3.5 — Mejora POO del duelo de naves espaciales
+** DONE Práctica 3.5 — Refactoriza el duelo de naves espaciales
 CLOSED: [2026-04-14 Mon 12:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-mejora-poo-naves
@@ -1539,7 +1539,7 @@ Alguien ha escrito un *juego de combate espacial* increible. Tiene de todo: menu
 
 Pero hay un problema: *la clase =Nave= esta practicamente vacia*.
 
-En esta practica vas a tomar ese juego como punto de partida y *mejorar su arquitectura POO* sin cambiar como funciona. El juego seguira siendo el mismo — pero su codigo sera mejor.
+En esta practica vas a tomar ese juego como punto de partida y *mejorar su arquitectura POO* sin cambiar como funciona. El juego seguira siendo el mismo — pero su codigo sera mejor. Es lo que llamamos "refactorizar" el código fuente.
 
 ---
 
@@ -1822,7 +1822,7 @@ Sube tu fichero =duelo_naves_poo.py= refactorizado con:
 | *Encapsulacion* | La logica de modificar escudo/combustible vive DENTRO de la clase |
 | *=self=* | Todos los metodos acceden al estado del objeto via =self.atributo= |
 | *Proteccion de estado* | Los metodos validan limites (0-100) — el objeto se protege a si mismo |
-| *Refactoring* | Mejorar la estructura del codigo sin cambiar su comportamiento |
+| *Refactorización* | Mejorar la estructura del codigo sin cambiar su comportamiento |
 | *=-== y =min()=* | Operadores de incremento/decremento con limites |
 
 ---
@@ -1830,6 +1830,7 @@ Sube tu fichero =duelo_naves_poo.py= refactorizado con:
 #+begin_quote
 /"Un buen juego merece una buena arquitectura. Tu nave ya vuela — ahora dale su armadura POO."/ 🚀
 #+end_quote
+
 
 * Pages
 :PROPERTIES:
@@ -2318,3 +2319,170 @@ pip3 install -r requirements.txt
 -----
 
 /Artículo basado en [[https://codigonautas.com/venv-virtualenv-python-como-utilizarlos/][CodigoNautas — Qué son venv y virtualenv en Python]]/
+** DONE Pygames en itch.io — ¡a Jugarr!
+:PROPERTIES:
+:EXPORT_FILE_NAME: pygames-en-itch-io
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-04-17
+:EXPORT_HUGO_URL: /pygames-itch-io/
+:EXPORT_HUGO_TAGS: pygame juegos
+:END:
+
+[[/images/El-Cosmos-de-la-Modularidad-Arquitectura-para-videojuegos-Pygame.png]]
+
+Pygame no es un juguete. Es una librería con la que se construyen juegos de verdad — juegos que puedes jugar en el navegador, descargar, compartir con tus amigos. Y muchos de ellos están publicados en [[https://itch.io][itch.io]], la plataforma indie por excelencia.
+
+Si bien nosotris nos centraremos en las próximas semanas en el clásico 'space invaders / invasión alienígena...
+
+En este artículo repasamos *9 proyectos hechos con Pygame* que puedes jugar, estudiar y usar como inspiración para tus propios juegos. Cada uno enseña algo diferente — desde física 2D hasta motores narrativos.
+
+---
+
+*** 🪐 Project Space — Simulación orbital 2D
+
+[[https://www.pygame.org/project/4145][Project Space en pygame.org]] · [[https://itch.io/search?q=Project+Space][Buscar en itch.io]]
+
+Un simulador de órbitas donde los cuerpos se atraen según la ley de gravedad. No hay enemigos ni puntuación — solo física pura y el placer de ver planetas girar.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- El *game loop* clásico de Pygame: eventos → actualizar → dibujar
+- Vectores de velocidad y aceleración (física 2D)
+- Uso de =delta time= para que la simulación sea fluida en cualquier máquina
+#+end_quote
+
+*** 🚀 Flyre — Shoot'em up de game jam
+
+[[https://www.pygame.org/project/5523][Flyre en pygame.org]] · [[https://itch.io/search?q=Flyre][Buscar en itch.io]]
+
+Un shoot'em up vertical nacido en una game jam y pulido después. Oleadas de enemigos, disparos, explosiones — el clásico arcade llevado a Pygame.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- =pygame.sprite.Group()= para gestionar decenas de sprites sin perder el control
+- Scrolling de fondo para crear sensación de movimiento
+- Cómo una game jam te obliga a priorizar: MVP primero, mejoras después
+#+end_quote
+
+*** 🧱 ArkaPygame — Colisiones y dificultad
+
+[[https://www.pygame.org/project/4891][ArkaPygame en pygame.org]] · [[https://itch.io/search?q=ArkaPygame][Buscar en itch.io]]
+
+Un clon de Arkanoid: pelota, pala, ladrillos. Simple en concepto, rico en mecánicas — cada nivel sube la dificultad.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- Detección de colisiones con =pygame.Rect.colliderect()=
+- Curvas de dificultad: cómo hacer que cada nivel sea un poco más difícil
+- Matemáticas con rectángulos: rebotes, ángulos, velocidad
+#+end_quote
+
+*** 🎁 Don't Touch My Presents — Sprint 72h → MVP
+
+[[https://www.pygame.org/project/5643][Don't Touch My Presents en pygame.org]] · [[https://itch.io/search?q=Don't+Touch+My+Presents][Buscar en itch.io]]
+
+Un micro-arcade navideño creado en 72 horas. Defiende tus regalos de los ladrones. Pequeño, divertido, terminado.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- La mentalidad *MVP*: ¿qué es lo mínimo que necesita tu juego para ser jugable?
+- Desarrollo bajo presión de tiempo — priorizar mecánicas sobre polish
+- Que un juego terminado y pequeño vale más que un juego ambicioso sin acabar
+#+end_quote
+
+*** 🧙 Skeletris — Roguelike con inventario en rejilla
+
+[[https://www.pygame.org/project/4506][Skeletris en pygame.org]] · [[https://itch.io/search?q=Skeletris][Buscar en itch.io]]
+
+Un roguelike donde la gestión del inventario es parte del gameplay. Rejilla tipo Tetris para organizar tus objetos — cada decisión importa.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- Inventario basado en rejilla (grid): matrices 2D en Python aplicadas al juego
+- Generación procedural de mazmorras
+- Máquinas de estado para controlar las fases del juego (explorar, combatir, inventario)
+#+end_quote
+
+*** 🐱 stuntcat — Git y trabajo en equipo
+
+[[https://www.pygame.org/project/4266][stuntcat en pygame.org]] · [[https://pygame.itch.io/][stuntcat en itch.io]]
+
+El juego oficial de la comunidad Pygame. Un gato acróbata que esquiva objetos. Pero lo interesante no es solo el juego — es *cómo se hizo*: colaboración abierta en GitHub, con contribuciones de decenas de personas.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- Flujo de trabajo con *Git*: branches, pull requests, code review
+- Cómo contribuir a un proyecto open source real
+- Estructura de un proyecto Pygame profesional: carpetas, assets, tests
+#+end_quote
+
+*** 🧠 The N — Motor narrativo
+
+[[https://www.pygame.org/project/3085][The N en pygame.org]] · [[https://itch.io/search?q=The+N][Buscar en itch.io]]
+
+Un juego narrativo donde la historia se cuenta a través de texto y decisiones. Lo fascinante es la arquitectura: el *motor* (código) está separado del *contenido* (historia).
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- Separar el motor del contenido: el código no cambia cuando cambias la historia
+- Diseño dirigido por datos (data-driven): la narrativa vive en ficheros, no en el código
+- Cómo Pygame puede servir para más que juegos de acción
+#+end_quote
+
+*** 🧩 Pygame Weapons Source Code — Módulos reutilizables
+
+[[https://www.pygame.org/project/5540][Pygame Weapons en pygame.org]] · [[https://itch.io/search?q=Pygame+Weapons][Buscar en itch.io]]
+
+No es un juego completo — es una colección de *sistemas de armas* listos para usar en tus propios proyectos. Espadas, proyectiles, escudos, cada uno como un módulo independiente.
+
+#+begin_quote
+*¿Qué puedes aprender?*
+- Diseño modular: cada arma es un módulo que puedes importar y reutilizar
+- Patrones de diseño aplicados a juegos (Strategy, Factory)
+- Cómo escribir código que otros puedan usar — documentación y API limpia
+#+end_quote
+
+*** 🐱 El ecosistema Pygame — más allá de un solo juego
+
+[[https://pygame.itch.io/][Página de pygame en itch.io]] · [[https://www.pygame.org/project/4266][stuntcat en pygame.org]]
+
+stuntcat no es solo un juego — es la puerta de entrada al ecosistema [[https://github.com/pygame-community][pygame-community]] en GitHub. Una organización con decenas de proyectos, herramientas y recursos mantenidos por la comunidad.
+
+Si te gusta Pygame y quieres ir más allá de tus propios proyectos, este es el sitio donde contribuir, aprender y conectar con otros desarrolladores.
+
+---
+
+*** ¿Qué tienen en común estos juegos?
+
+| *Juego*                   | *Concepto clave*                     |
+|---------------------------+--------------------------------------|
+| Project Space             | Game loop + física 2D                |
+| Flyre                     | Sprite groups + scrolling            |
+| ArkaPygame                | Colisiones + dificultad progresiva   |
+| Don't Touch My Presents   | MVP en tiempo limitado               |
+| Skeletris                 | Inventario en rejilla + estado       |
+| stuntcat                  | Git + colaboración open source       |
+| The N                     | Motor vs contenido (data-driven)     |
+| Pygame Weapons            | Módulos reutilizables                |
+
+Todos empezaron como un fichero =.py= vacío. Todos terminaron publicados y jugables.
+
+---
+
+*** Tu turno: publica en itch.io
+
+Si ya sabes hacer un juego con Pygame, estás más cerca de lo que crees de publicarlo. Los pasos son:
+
+1. *Empaqueta tu juego* como ejecutable con PyInstaller ([[/pyinstallerexe/][ver nuestro tutorial]])
+2. *Crea una cuenta* en [[https://itch.io][itch.io]] (es gratis)
+3. *Sube tu juego*: arrastra el =.zip= con tu ejecutable y assets
+4. *Escribe una página* con capturas de pantalla y descripción
+5. *Comparte el enlace* — tu juego ya está en internet
+
+#+begin_quote
+*Recuerda:* No necesitas un juego perfecto. Necesitas un juego *terminado*. Los 9 juegos de este artículo empezaron igual que los tuyos — con un =pygame.init()= y una idea.
+#+end_quote
+
+-----
+
+/Artículo elaborado con fines docentes — FP Informática/
