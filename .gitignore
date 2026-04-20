@@ -3,3 +3,7 @@
 TASKS.org
 /.agent-shell/
 BUGS.org
+
+
+.nextcloudsync.log
+.sync_*
