@@ -6,6 +6,170 @@
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: posts
 :END:
+** TODO Practica1-Adivina-el-numero
+:PROPERTIES:
+:CUSTOM_ID: adivina-el-número
+:END:
+Hola Programador/a! tras familiarizarte con los conceptos más básicos
+del lenguaje de programación Python, como por ejemplo - el intérprete -
+variables - funciones como 'print()' y input()' ya te sientes
+preparado/a para programar tu primer juego.
+
+En esta práctica crearás el juego "Adivina el Número". La computadora
+pensará un número aleatorio entre 1 y 20, y te pedirá que intentes
+adivinarlo. La computadora te dirá si cada intento es muy alto o muy
+bajo. Tú ganas si adivinas el número en seis intentos o menos. Este es
+un buen juego para codificar ya que usa números aleatorios y bucles, y
+recibe entradas del usuario en un programa corto. Aprenderás cómo
+convertir valores a diferentes tipos de datos, y por qué es necesario
+hacer esto. Dado que este programa es un juego, nos referiremos al
+usuario como el jugador/a. Pero llamarlo "usuario/a" también sería
+correcto.
+
+BONUS: puedes ir más allá,... y ponerte creativo/a, y por ejemplo - ...
+hacer ¿que el intervalo de números (1 - 20) sea programable? - ... hacer
+¿ que en vez de números haya que adivinar un letra del alfabeto ? - ...
+¿explorar otras posibilidades adivinatorias?
+
+*** Conceptos Tratados En Esta Práctica:
+:PROPERTIES:
+:CUSTOM_ID: conceptos-tratados-en-esta-práctica
+:END:
+ Sentencias import  Módulos  Sentencias while  Condiciones  Bloques
+ Booleanos  Operadores de comparación  La diferencia entre = y == 
+Sentencias if  La palabra reservada break  Las funciones str(), int()
+y float()  La función random.randint()
+
+*** Entregable:
+:PROPERTIES:
+:CUSTOM_ID: entregable
+:END:
+- un fichero Python conteniendo tu juego : adivina-el-numero.py
+- recuerda agregar comentarios a tu programa
+
+** TODO PRACTICA2.1-fakeando-datos (está ya en [[*Pages][Pages]] más abajo ?)
+** TODO PRACTICA2.3_elAhorcado
+** TODO Practica 2.2-Reino-De-Dragones
+:PROPERTIES:
+:CUSTOM_ID: reino-de-dragones
+:END:
+En el juego "Reino de Dragones" la jugadora decide entre dos cuevas, una
+de ellas contiene un tesoro y otra un destino desafortunado.
+
+*** ¿Cómo jugar a Reino de dragones?
+:PROPERTIES:
+:CUSTOM_ID: cómo-jugar-a-reino-de-dragones
+:END:
+/En este juego, la jugadora está en una tierra llena de dragones. Todos
+los dragones viven en cuevas junto a sus grandes montones de tesoros
+encontrados. Algunos dragones son amigables, y compartirán sus tesoros
+contigo. Otros son codiciosos y hambrientos, y se comerán a cualquiera
+que entre a su cueva. La jugadora se encuentra frente a dos cuevas, una
+con un dragón amigable y la otra con un dragón hambriento, pero no sabe
+cuál dragón está en qué cueva. La jugadora tiene que elegir entre las
+dos./
+
+*** $ Temas cubiertos en este capítulo:
+:PROPERTIES:
+:CUSTOM_ID: temas-cubiertos-en-este-capítulo
+:END:
+- Diagramas de flujo
+- Creando nuestras propias funciones con la palabra reservada /def/
+- Hileras de caracteres de múltiples líneas
+- Sentencias /while/
+- Los operadores Booleanos /and, or y not/
+- Tablas de verdad
+- La palabra reservada /return/
+- Entorno de variables (Global y Local)
+- Parámetros y Argumentos
+- La función /sleep()/
+
+Prueba de ejecución de Reino de dragones
+
+Así es como se vería el el juego Reino de dragones al ejecutarlo. Las
+entradas proporcionadas por la jugadora /aparecen encerradas en
+cursiva./
+
+/Estás en una tierra llena de dragones. Frente a tí/ \\
+/hay dos cuevas. En una de ellas, el dragón es generoso/ \\
+/y amigable y compartirá su tesoro contigo. El otro dragón/ \\
+/es codicioso y está hambriento, y te devorará inmediatamente./\\
+/¿A qué cueva quieres entrar? (1 ó 2)/\\
+/*1*/\\
+/Te aproximas a la cueva.../\\
+/Es oscura y espeluznante.../\\
+/¡Un gran dragon aparece súbitamente frente a tí! Abre sus fauces
+y.../\\
+/¡Te engulle de un bocado!/\\
+/¿Quieres jugar de nuevo? (sí or no)/\\
+/*no*/
+
+#+caption: dragones y caballeros
+[[https://aulavirtual33.educa.madrid.org/ies.quevedo.madrid/pluginfile.php/139812/mod_assign/intro/dragons-Paolo_Uccello_047.jpg]]
+
+Diagrama de flujo para Reino de dragones\\
+A menudo ayuda anotar todo lo que quiere que su juego o programa haga
+antes de comenzar a escribir código. Cuando usted hace esto, usted está
+diseñando el programa.
+
+Por ejemplo, puede ayudar dibujar un diagrama de flujo (en inglés
+flowchart). Un diagrama de flujo es una ilustración que muestra cada
+posible acción que puede ocurrir en el juego, y qué acciones llevan a
+qué otras acciones. La Figura 5-1 es un diagrama de flujo para Reino de
+dragones.
+
+Para ver qué pasa en el juego, coloque su dedo sobre el recuadro
+"Inicio". Luego siga la flecha desde ese recuadro hasta otro recuadro.
+Su dedo es como la ejecución del programa. El programa termina cuando
+llega al recuadro "Fin".
+
+**** 📖 ([[https://aulavirtual33.educa.madrid.org/ies.quevedo.madrid/mod/resource/view.php?id=100045][extraído del Capítulo 6 - Reino de dragones - del libro 'Inventa tus juegos con Python']]) 
+:PROPERTIES:
+:CUSTOM_ID: extraído-del-capítulo-6---reino-de-dragones---del-libro-inventa-tus-juegos-con-python
+:END:
+****  💯 Rúbrica de Calificación :
+:PROPERTIES:
+:CUSTOM_ID: rúbrica-de-calificación
+:END:
+****** Se valorará  entre otras cosas :
+:PROPERTIES:
+:CUSTOM_ID: se-valorará-entre-otras-cosas
+:END:
+- 
+  ***** Diagramas de flujo (mostrando la lógica creativa del juego)
+  :PROPERTIES:
+  :CUSTOM_ID: diagramas-de-flujo-mostrando-la-lógica-creativa-del-juego
+  :END:
+
+- 
+  ***** Uso de la palabra reservada return
+  :PROPERTIES:
+  :CUSTOM_ID: uso-de-la-palabra-reservada-return
+  :END:
+
+- 
+  ***** Entorno de variables (Global y Local)
+  :PROPERTIES:
+  :CUSTOM_ID: entorno-de-variables-global-y-local
+  :END:
+
+- 
+  ***** Parámetros y Argumentos
+  :PROPERTIES:
+  :CUSTOM_ID: parámetros-y-argumentos
+  :END:
+
+- 
+  ***** La función sleep() para hacer el jugo más realista...
+  :PROPERTIES:
+  :CUSTOM_ID: la-función-sleep-para-hacer-el-jugo-más-realista
+  :END:
+
+- 
+  ***** y sobre todo... 🌀 tu creatividad ! 💃
+  :PROPERTIES:
+  :CUSTOM_ID: y-sobre-todo-tu-creatividad
+  :END:
 
 ** DONE Práctica 3.1 — Modelando bases de datos SQLite con Python
 CLOSED: [2026-03-12 Sat 12:00]
