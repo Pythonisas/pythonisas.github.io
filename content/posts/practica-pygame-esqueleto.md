@@ -94,18 +94,18 @@ class Ajustes:
     def __init__(self):
         """Inicializa los ajustes del juego."""
         # Ajustes de pantalla
-        self.screen_width = 1200
-        self.screen_height = 800
-        self.bg_color = (230, 230, 230)
+        self.ancho_pantalla = 1200
+        self.alto_pantalla = 800
+        self.color_fondo = (230, 230, 230)
 ```
 
-| **Linea**       | **¿Que hace?**                                                    |
-|-----------------|-------------------------------------------------------------------|
-| `class Ajustes` | Define la clase. No hereda de nada (objeto simple).               |
-| `__init__`      | Constructor: se ejecuta al crear `Ajustes()`.                     |
-| `screen_width`  | Ancho de la ventana en pixeles.                                   |
-| `screen_height` | Alto de la ventana en pixeles.                                    |
-| `bg_color`      | Color de fondo como tupla RGB `(R, G, B)`. Aqui es un gris claro. |
+| **Linea**        | **¿Que hace?**                                                    |
+|------------------|-------------------------------------------------------------------|
+| `class Ajustes`  | Define la clase. No hereda de nada (objeto simple).               |
+| `__init__`       | Constructor: se ejecuta al crear `Ajustes()`.                     |
+| `ancho_pantalla` | Ancho de la ventana en pixeles.                                   |
+| `alto_pantalla`  | Alto de la ventana en pixeles.                                    |
+| `color_fondo`    | Color de fondo como tupla RGB `(R, G, B)`. Aqui es un gris claro. |
 
 ---
 
@@ -147,25 +147,25 @@ class InvasionAlienigena:
         self.clock = ___.time.Clock()
         self.ajustes = ___()
 
-        self.screen = ___.display.set_mode(
+        self.pantalla = ___.display.set_mode(
             (self.ajustes.___, self.ajustes.___))
-        ___.display.set_caption("Alien Invasion")
+        ___.display.set_caption("Invasión Alienígena")
 ```
 
-| **Instruccion**                | **¿Que hace?**                                                                      |
-|--------------------------------|-------------------------------------------------------------------------------------|
-| `pygame.init()`                | Inicializa todos los subsistemas de Pygame (video, audio, eventos...).              |
-| `pygame.time.Clock()`          | Crea un reloj para controlar los FPS (fotogramas por segundo).                      |
-| `Ajustes()`                    | Crea una instancia de nuestra configuracion y la guarda en `self.ajustes`.          |
-| `pygame.display.set_mode(...)` | Crea la ventana del juego con las dimensiones de `ajustes`. Devuelve una _surface_. |
-| `set_caption(...)`             | Pone el titulo de la ventana.                                                       |
+| **Instruccion**                   | **¿Que hace?**                                                                      |
+|-----------------------------------|-------------------------------------------------------------------------------------|
+| `pygame.init()`                   | Inicializa todos los subsistemas de Pygame (video, audio, eventos...).              |
+| `pygame.time.Clock()`             | Crea un reloj para controlar los FPS (fotogramas por segundo).                      |
+| `Ajustes()`                       | Crea una instancia de nuestra configuracion y la guarda en `self.ajustes`.          |
+| `pygame.display.set_mode(...)`    | Crea la ventana del juego con las dimensiones de `ajustes`. Devuelve una _surface_. |
+| `pygame.display.set_caption(...)` | Pone el titulo de la ventana.                                                       |
 
 > 💡 **¿Que es una _surface_?** En Pygame, una _surface_ es un lienzo rectangular
 > donde se pueden dibujar imagenes, formas y texto. La pantalla completa
-> (`self.screen`) es la _surface_ principal.
+> (`self.pantalla`) es la _surface_ principal.
 
 
-### 2.3 — El bucle principal: `run_game()` {#2-dot-3-el-bucle-principal-run-game}
+### 2.3 — El bucle principal: `ejecutar_juego()` {#2-dot-3-el-bucle-principal-ejecutar-juego}
 
 El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 
@@ -176,7 +176,7 @@ El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 <!--listend-->
 
 ```python
-def run_game(self):
+def ejecutar_juego(self):
     """Inicia el bucle principal del juego."""
     while ___:
         # 1. Vigilar eventos de teclado y raton.
@@ -187,22 +187,22 @@ def run_game(self):
         # 2. (Por ahora no hay nada que actualizar)
 
         # 3. Redibujar la pantalla en cada pasada del bucle.
-        self.screen.___(self.ajustes.___)
+        self.pantalla.___(self.ajustes.___)
 
         # Hacer visible la pantalla recien dibujada.
         ___.display.___()
         self.clock.___(60)
 ```
 
-| **Instruccion**         | **¿Que hace?**                                                                 |
-|-------------------------|--------------------------------------------------------------------------------|
-| `while True`            | Bucle infinito: el juego corre hasta que el jugador cierre la ventana.         |
-| `pygame.event.get()`    | Devuelve la lista de eventos pendientes (teclas, clics, cierre...).            |
-| `pygame.QUIT`           | Evento que se dispara al pulsar la ✕ de la ventana.                            |
-| `sys.exit()`            | Termina el programa limpiamente.                                               |
-| `self.screen.fill(...)` | Pinta toda la pantalla con el color de fondo (borra el fotograma anterior).    |
-| `pygame.display.flip()` | Intercambia el bufer: muestra lo que acabamos de dibujar.                      |
-| `self.clock.tick(60)`   | Limita el bucle a 60 FPS. Sin esto, el bucle correria tan rapido como pudiese. |
+| **Instruccion**           | **¿Que hace?**                                                                 |
+|---------------------------|--------------------------------------------------------------------------------|
+| `while True`              | Bucle infinito: el juego corre hasta que el jugador cierre la ventana.         |
+| `pygame.event.get()`      | Devuelve la lista de eventos pendientes (teclas, clics, cierre...).            |
+| `pygame.QUIT`             | Evento que se dispara al pulsar la ✕ de la ventana.                            |
+| `sys.exit()`              | Termina el programa limpiamente.                                               |
+| `self.pantalla.fill(...)` | Pinta toda la pantalla con el color de fondo (borra el fotograma anterior).    |
+| `pygame.display.flip()`   | Intercambia el bufer: muestra lo que acabamos de dibujar.                      |
+| `self.clock.tick(60)`     | Limita el bucle a 60 FPS. Sin esto, el bucle correria tan rapido como pudiese. |
 
 > 💡 **¿Por que `flip()` y no dibujar directamente?**
 > Pygame usa _doble bufer_: dibujamos en un bufer oculto y luego lo
@@ -214,8 +214,8 @@ def run_game(self):
 ```python
 if __name__ == '___':
     # Crear una instancia del juego y ejecutarlo.
-    ai = ___()
-    ai.___()
+    ia = ___()
+    ia.___()
 ```
 
 ---
@@ -248,13 +248,13 @@ if __name__ == '___':
 
 ## Conceptos clave {#conceptos-clave}
 
-| **Concepto**                | **Donde lo ves**                                                    |
-|-----------------------------|---------------------------------------------------------------------|
-| **Composicion**             | `InvasionAlienigena` tiene `self.ajustes = Ajustes()`               |
-| **Game loop**               | `while True` + eventos + redibujado + FPS                           |
-| **Surface y doble bufer**   | `self.screen` es la surface principal, `flip()` intercambia buferes |
-| **Eventos Pygame**          | `pygame.event.get()` + `pygame.QUIT`                                |
-| **Modulo de configuracion** | `ajustes.py` — un solo lugar para todos los ajustes                 |
+| **Concepto**                | **Donde lo ves**                                                      |
+|-----------------------------|-----------------------------------------------------------------------|
+| **Composicion**             | `InvasionAlienigena` tiene `self.ajustes = Ajustes()`                 |
+| **Game loop**               | `while True` + eventos + redibujado + FPS                             |
+| **Surface y doble bufer**   | `self.pantalla` es la surface principal, `flip()` intercambia buferes |
+| **Eventos Pygame**          | `pygame.event.get()` + `pygame.QUIT`                                  |
+| **Modulo de configuracion** | `ajustes.py` — un solo lugar para todos los ajustes                   |
 
 ---
 
