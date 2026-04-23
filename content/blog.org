@@ -2064,13 +2064,13 @@ Verifica:
 
 #+begin_example
 PRACTICA3.6/
-├── alien_invasion.py   ← Programa principal (completa los huecos)
+├── invasion_alienigena.py   ← Programa principal (completa los huecos)
 └── ajustes.py         ← Configuración del juego (se da completo)
 #+end_example
 
 ---
 
-*** Paso 1 — La clase =Ajustes=
+*** 🚀 Paso 1 — La clase =Ajustes=
 
 Antes de escribir el juego, creamos un modulo aparte con /todos/ los valores configurables. Asi evitamos numeros magicos dispersos por el codigo.
 
@@ -2089,22 +2089,22 @@ class Ajustes:
     def __init__(self):
         """Inicializa los ajustes del juego."""
         # Ajustes de pantalla
-        self.screen_width = 1200
-        self.screen_height = 800
-        self.bg_color = (230, 230, 230)
+        self.ancho_pantalla = 1200
+        self.alto_pantalla = 800
+        self.color_fondo = (230, 230, 230)
 #+end_src
 
 | *Linea*            | *¿Que hace?*                                                        |
 |--------------------+----------------------------------------------------------------------|
 | =class Ajustes=   | Define la clase. No hereda de nada (objeto simple).                  |
 | =__init__=         | Constructor: se ejecuta al crear =Ajustes()=.                       |
-| =screen_width=     | Ancho de la ventana en pixeles.                                      |
-| =screen_height=    | Alto de la ventana en pixeles.                                       |
-| =bg_color=         | Color de fondo como tupla RGB =(R, G, B)=. Aqui es un gris claro.   |
+| =ancho_pantalla=     | Ancho de la ventana en pixeles.                                      |
+| =alto_pantalla=    | Alto de la ventana en pixeles.                                       |
+| =color_fondo=         | Color de fondo como tupla RGB =(R, G, B)=. Aqui es un gris claro.   |
 
 ---
 
-*** Paso 2 — Completa =alien_invasion.py=
+*** 🚀🚀Paso 2 — Completa =invasion_alienigena.py=
 
 Tu trabajo: *completa los huecos marcados con =___=*.
 
@@ -2141,9 +2141,9 @@ class InvasionAlienigena:
         self.clock = ___.time.Clock()
         self.ajustes = ___()
 
-        self.screen = ___.display.set_mode(
+        self.pantalla = ___.display.set_mode(
             (self.ajustes.___, self.ajustes.___))
-        ___.display.set_caption("Alien Invasion")
+        ___.display.set_caption("Invasión Alienígena")
 #+end_src
 
 | *Instruccion*                  | *¿Que hace?*                                                                          |
@@ -2152,15 +2152,15 @@ class InvasionAlienigena:
 | =pygame.time.Clock()=         | Crea un reloj para controlar los FPS (fotogramas por segundo).                         |
 | =Ajustes()=                  | Crea una instancia de nuestra configuracion y la guarda en =self.ajustes=.            |
 | =pygame.display.set_mode(...)= | Crea la ventana del juego con las dimensiones de =ajustes=. Devuelve una /surface/.   |
-| =set_caption(...)=            | Pone el titulo de la ventana.                                                          |
+| =pygame.display.set_caption(...)= | Pone el titulo de la ventana.                                                          |
 
 #+begin_quote
 💡 *¿Que es una /surface/?* En Pygame, una /surface/ es un lienzo rectangular
 donde se pueden dibujar imagenes, formas y texto. La pantalla completa
-(=self.screen=) es la /surface/ principal.
+(=self.pantalla=) es la /surface/ principal.
 #+end_quote
 
-**** 2.3 — El bucle principal: =run_game()=
+**** 2.3 — El bucle principal: =ejecutar_juego()=
 
 El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 1. *Leer eventos* (teclado, raton, cierre de ventana)
@@ -2168,7 +2168,7 @@ El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 3. *Redibujar pantalla* (pintar todo de nuevo)
 
 #+begin_src python
-    def run_game(self):
+    def ejecutar_juego(self):
         """Inicia el bucle principal del juego."""
         while ___:
             # 1. Vigilar eventos de teclado y raton.
@@ -2179,7 +2179,7 @@ El corazon de todo videojuego es un bucle infinito que repite tres pasos:
             # 2. (Por ahora no hay nada que actualizar)
 
             # 3. Redibujar la pantalla en cada pasada del bucle.
-            self.screen.___(self.ajustes.___)
+            self.pantalla.___(self.ajustes.___)
 
             # Hacer visible la pantalla recien dibujada.
             ___.display.___()
@@ -2192,7 +2192,7 @@ El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 | =pygame.event.get()=       | Devuelve la lista de eventos pendientes (teclas, clics, cierre...).                  |
 | =pygame.QUIT=              | Evento que se dispara al pulsar la ✕ de la ventana.                                  |
 | =sys.exit()=               | Termina el programa limpiamente.                                                     |
-| =self.screen.fill(...)=    | Pinta toda la pantalla con el color de fondo (borra el fotograma anterior).          |
+| =self.pantalla.fill(...)=    | Pinta toda la pantalla con el color de fondo (borra el fotograma anterior).          |
 | =pygame.display.flip()=    | Intercambia el bufer: muestra lo que acabamos de dibujar.                            |
 | =self.clock.tick(60)=      | Limita el bucle a 60 FPS. Sin esto, el bucle correria tan rapido como pudiese.       |
 
@@ -2207,8 +2207,8 @@ intercambiamos con el visible. Esto evita parpadeos (/flickering/).
 #+begin_src python
 if __name__ == '___':
     # Crear una instancia del juego y ejecutarlo.
-    ai = ___()
-    ai.___()
+    ia = ___()
+    ia.___()
 #+end_src
 
 ---
@@ -2216,8 +2216,10 @@ if __name__ == '___':
 *** Entrega
 
 - [ ] =ajustes.py= — completo y funcional
-- [ ] =alien_invasion.py= — con todos los huecos completados
-- [ ] Al ejecutar =python3 alien_invasion.py= se abre una ventana que se cierra con la ✕
+- [ ] =invasion_alienigena.py= — con todos los huecos completados
+- [ ] Al ejecutar =python3 invasion_alienigena.py= se abre una ventana que se cierra con la ✕
+
+>    RECORDATORIO: ve organizando las entregas de las prácticas por carpetas ( P3.1-SQLite, P3.2-Pyrro... etc). GraciassS 
 
 ---
 
@@ -2242,7 +2244,7 @@ if __name__ == '___':
 |---------------------------+-----------------------------------------------------------------------|
 | *Composicion*             | =InvasionAlienigena= tiene =self.ajustes = Ajustes()=                    |
 | *Game loop*               | =while True= + eventos + redibujado + FPS                            |
-| *Surface y doble bufer*   | =self.screen= es la surface principal, =flip()= intercambia buferes  |
+| *Surface y doble bufer*   | =self.pantalla= es la surface principal, =flip()= intercambia buferes  |
 | *Eventos Pygame*          | =pygame.event.get()= + =pygame.QUIT=                                 |
 | *Modulo de configuracion* | =ajustes.py= — un solo lugar para todos los ajustes                 |
 

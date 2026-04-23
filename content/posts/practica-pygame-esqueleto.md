@@ -67,14 +67,14 @@ python3 -c "import pygame; print(pygame.ver)"
 
 ```text
 PRACTICA3.6/
-├── alien_invasion.py   ← Programa principal (completa los huecos)
-└── settings.py         ← Configuración del juego (se da completo)
+├── invasion_alienigena.py   ← Programa principal (completa los huecos)
+└── ajustes.py         ← Configuración del juego (se da completo)
 ```
 
 ---
 
 
-## Paso 1 — La clase `Settings` {#paso-1-la-clase-settings}
+## 🚀 Paso 1 — La clase `Ajustes` {#paso-1-la-clase-ajustes}
 
 Antes de escribir el juego, creamos un modulo aparte con _todos_ los valores configurables. Asi evitamos numeros magicos dispersos por el codigo.
 
@@ -85,10 +85,10 @@ Antes de escribir el juego, creamos un modulo aparte con _todos_ los valores con
 3.  Mas adelante podremos añadir _ajustes dinamicos_ sin tocar el resto
 
 
-### `settings.py` — Se te da completo {#settings-dot-py-se-te-da-completo}
+### `ajustes.py` — Se te da completo {#ajustes-dot-py-se-te-da-completo}
 
 ```python
-class Settings:
+class Ajustes:
     """Clase que almacena toda la configuración de Invasión Alienígena."""
 
     def __init__(self):
@@ -99,18 +99,18 @@ class Settings:
         self.bg_color = (230, 230, 230)
 ```
 
-| **Linea**        | **¿Que hace?**                                                    |
-|------------------|-------------------------------------------------------------------|
-| `class Settings` | Define la clase. No hereda de nada (objeto simple).               |
-| `__init__`       | Constructor: se ejecuta al crear `Settings()`.                    |
-| `screen_width`   | Ancho de la ventana en pixeles.                                   |
-| `screen_height`  | Alto de la ventana en pixeles.                                    |
-| `bg_color`       | Color de fondo como tupla RGB `(R, G, B)`. Aqui es un gris claro. |
+| **Linea**       | **¿Que hace?**                                                    |
+|-----------------|-------------------------------------------------------------------|
+| `class Ajustes` | Define la clase. No hereda de nada (objeto simple).               |
+| `__init__`      | Constructor: se ejecuta al crear `Ajustes()`.                     |
+| `screen_width`  | Ancho de la ventana en pixeles.                                   |
+| `screen_height` | Alto de la ventana en pixeles.                                    |
+| `bg_color`      | Color de fondo como tupla RGB `(R, G, B)`. Aqui es un gris claro. |
 
 ---
 
 
-## Paso 2 — Completa `alien_invasion.py` {#paso-2-completa-alien-invasion-dot-py}
+## 🚀🚀Paso 2 — Completa `invasion_alienigena.py` {#paso-2-completa-invasion-alienigena-dot-py}
 
 Tu trabajo: **completa los huecos marcados con `___`**.
 
@@ -129,36 +129,36 @@ from ___ import ___
 |------------|----------------------------------------------------------------|
 | `sys`      | Para `sys.exit()`: salir limpiamente del programa.             |
 | `pygame`   | La biblioteca grafica que gestiona ventana, eventos, dibujo... |
-| `Settings` | Nuestra clase de configuracion (del archivo `settings.py`).    |
+| `Ajustes`  | Nuestra clase de configuracion (del archivo `ajustes.py`).     |
 
 > 💡 Convencion PEP 8: primero _biblioteca estandar_ (`sys`), despues _terceros_
-> (`pygame`), y por ultimo _propios_ (`Settings`).
+> (`pygame`), y por ultimo _propios_ (`Ajustes`).
 
 
-### 2.2 — La clase `AlienInvasion` y su constructor {#2-dot-2-la-clase-alieninvasion-y-su-constructor}
+### 2.2 — La clase `InvasionAlienigena` y su constructor {#2-dot-2-la-clase-invasionalienigena-y-su-constructor}
 
 ```python
-class AlienInvasion:
+class InvasionAlienigena:
     """Clase principal que gestiona los recursos y el comportamiento del juego."""
 
     def __init__(self):
         """Inicializa el juego y crea los recursos."""
         ___.init()
         self.clock = ___.time.Clock()
-        self.settings = ___()
+        self.ajustes = ___()
 
         self.screen = ___.display.set_mode(
-            (self.settings.___, self.settings.___))
+            (self.ajustes.___, self.ajustes.___))
         ___.display.set_caption("Alien Invasion")
 ```
 
-| **Instruccion**                | **¿Que hace?**                                                                       |
-|--------------------------------|--------------------------------------------------------------------------------------|
-| `pygame.init()`                | Inicializa todos los subsistemas de Pygame (video, audio, eventos...).               |
-| `pygame.time.Clock()`          | Crea un reloj para controlar los FPS (fotogramas por segundo).                       |
-| `Settings()`                   | Crea una instancia de nuestra configuracion y la guarda en `self.settings`.          |
-| `pygame.display.set_mode(...)` | Crea la ventana del juego con las dimensiones de `settings`. Devuelve una _surface_. |
-| `set_caption(...)`             | Pone el titulo de la ventana.                                                        |
+| **Instruccion**                | **¿Que hace?**                                                                      |
+|--------------------------------|-------------------------------------------------------------------------------------|
+| `pygame.init()`                | Inicializa todos los subsistemas de Pygame (video, audio, eventos...).              |
+| `pygame.time.Clock()`          | Crea un reloj para controlar los FPS (fotogramas por segundo).                      |
+| `Ajustes()`                    | Crea una instancia de nuestra configuracion y la guarda en `self.ajustes`.          |
+| `pygame.display.set_mode(...)` | Crea la ventana del juego con las dimensiones de `ajustes`. Devuelve una _surface_. |
+| `set_caption(...)`             | Pone el titulo de la ventana.                                                       |
 
 > 💡 **¿Que es una _surface_?** En Pygame, una _surface_ es un lienzo rectangular
 > donde se pueden dibujar imagenes, formas y texto. La pantalla completa
@@ -187,7 +187,7 @@ def run_game(self):
         # 2. (Por ahora no hay nada que actualizar)
 
         # 3. Redibujar la pantalla en cada pasada del bucle.
-        self.screen.___(self.settings.___)
+        self.screen.___(self.ajustes.___)
 
         # Hacer visible la pantalla recien dibujada.
         ___.display.___()
@@ -223,9 +223,11 @@ if __name__ == '___':
 
 ## Entrega {#entrega}
 
--   [ ] `settings.py` — completo y funcional
--   [ ] `alien_invasion.py` — con todos los huecos completados
--   [ ] Al ejecutar `python3 alien_invasion.py` se abre una ventana que se cierra con la ✕
+-   [ ] `ajustes.py` — completo y funcional
+-   [ ] `invasion_alienigena.py` — con todos los huecos completados
+-   [ ] Al ejecutar `python3 invasion_alienigena.py` se abre una ventana que se cierra con la ✕
+
+&gt;    RECORDATORIO: ve organizando las entregas de las prácticas por carpetas ( P3.1-SQLite, P3.2-Pyrro... etc). GraciassS
 
 ---
 
@@ -248,28 +250,28 @@ if __name__ == '___':
 
 | **Concepto**                | **Donde lo ves**                                                    |
 |-----------------------------|---------------------------------------------------------------------|
-| **Composicion**             | `AlienInvasion` tiene `self.settings = Settings()`                  |
+| **Composicion**             | `InvasionAlienigena` tiene `self.ajustes = Ajustes()`               |
 | **Game loop**               | `while True` + eventos + redibujado + FPS                           |
 | **Surface y doble bufer**   | `self.screen` es la surface principal, `flip()` intercambia buferes |
 | **Eventos Pygame**          | `pygame.event.get()` + `pygame.QUIT`                                |
-| **Modulo de configuracion** | `settings.py` — un solo lugar para todos los ajustes                |
+| **Modulo de configuracion** | `ajustes.py` — un solo lugar para todos los ajustes                 |
 
 ---
 
 
 ## Rubrica {#rubrica}
 
-| **Criterio**                             | **Puntos** |
-|------------------------------------------|------------|
-| `settings.py` correcto                   | 1          |
-| Imports correctos (PEP 8)                | 1          |
-| Constructor `AlienInvasion` completo     | 2.5        |
-| Game loop (eventos + fill + flip + tick) | 3          |
-| Punto de entrada `__main__`              | 0.5        |
-| Ejecucion sin errores                    | 1          |
-| Codigo limpio                            | 1          |
-| **Total base**                           | **10**     |
-| BONUS (hasta +3, max 10)                 | +3         |
+| **Criterio**                              | **Puntos** |
+|-------------------------------------------|------------|
+| `ajustes.py` correcto                     | 1          |
+| Imports correctos (PEP 8)                 | 1          |
+| Constructor `InvasionAlienigena` completo | 2.5        |
+| Game loop (eventos + fill + flip + tick)  | 3          |
+| Punto de entrada `__main__`               | 0.5        |
+| Ejecucion sin errores                     | 1          |
+| Codigo limpio                             | 1          |
+| **Total base**                            | **10**     |
+| BONUS (hasta +3, max 10)                  | +3         |
 
 ---
 
