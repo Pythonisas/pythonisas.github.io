@@ -5,7 +5,7 @@
 
 * Active Issues
 
-** BUG [Bug description]
+** BUG ox-hugo export error 
 :PROPERTIES:
 :STATUS:   ACTIVE
 :CREATED:  [2026-03-13]
@@ -13,21 +13,19 @@
 :END:
 
 *** Steps to Reproduce
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
+C-c C-e H A
 
 *** Expected Behavior
-[What should happen]
+ox-hugo exports
 
 *** Actual Behavior
-[What actually happens]
+it does not export 
 
 *** Investigation Notes
-- [Notes from debugging]
+- se last *Messages*
 
 *** Potential Fix
-- [Ideas for resolution]
+- ?
 
 * Resolved Issues
 

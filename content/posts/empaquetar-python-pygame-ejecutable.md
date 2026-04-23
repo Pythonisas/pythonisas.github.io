@@ -1,6 +1,6 @@
 +++
 title = "Empaquetar un juego Python+Pygame como ejecutable"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-03-15T12:00:00+01:00
 publishDate = 2026-03-14
 url = "/pyinstallerexe/"
@@ -46,47 +46,47 @@ VERDE       = (0, 200,   0)
 TITULO      = "Mini Snake – fenix & LLM friends"
 
 def inicializar():
-	pygame.init()
-	pantalla = pygame.display.set_mode((ANCHO, ALTO))
-	pygame.display.set_caption(TITULO)
-	return pantalla, pygame.time.Clock()
+    pygame.init()
+    pantalla = pygame.display.set_mode((ANCHO, ALTO))
+    pygame.display.set_caption(TITULO)
+    return pantalla, pygame.time.Clock()
 
 def procesar_eventos():
-	for evento in pygame.event.get():
-		if evento.type == pygame.QUIT:
-			pygame.quit()
-			sys.exit()
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
 def dibujar(pantalla, pos):
-	pantalla.fill(NEGRO)
-	pygame.draw.rect(pantalla, VERDE, (*pos, 20, 20))
-	pygame.display.flip()
+    pantalla.fill(NEGRO)
+    pygame.draw.rect(pantalla, VERDE, (*pos, 20, 20))
+    pygame.display.flip()
 
 def mover(pos, dx, dy):
-	return (pos[0] + dx, pos[1] + dy)
+    return (pos[0] + dx, pos[1] + dy)
 
 def bucle_principal(pantalla, reloj):
-	pos  = (ANCHO // 2, ALTO // 2)
-	dx, dy = 4, 0
-	teclas = {
-		pygame.K_UP:    (0,  -4),
-		pygame.K_DOWN:  (0,   4),
-		pygame.K_LEFT:  (-4,  0),
-		pygame.K_RIGHT: (4,   0),
-	}
-	while True:
-		procesar_eventos()
-		pulsadas = pygame.key.get_pressed()
-		for tecla, (ndx, ndy) in teclas.items():
-			if pulsadas[tecla]:
-				dx, dy = ndx, ndy
-		pos = mover(pos, dx, dy)
-		dibujar(pantalla, pos)
-		reloj.tick(FPS)
+    pos  = (ANCHO // 2, ALTO // 2)
+    dx, dy = 4, 0
+    teclas = {
+        pygame.K_UP:    (0,  -4),
+        pygame.K_DOWN:  (0,   4),
+        pygame.K_LEFT:  (-4,  0),
+        pygame.K_RIGHT: (4,   0),
+    }
+    while True:
+        procesar_eventos()
+        pulsadas = pygame.key.get_pressed()
+        for tecla, (ndx, ndy) in teclas.items():
+            if pulsadas[tecla]:
+                dx, dy = ndx, ndy
+        pos = mover(pos, dx, dy)
+        dibujar(pantalla, pos)
+        reloj.tick(FPS)
 
 if __name__ == "__main__":
-	pantalla, reloj = inicializar()
-	bucle_principal(pantalla, reloj)
+    pantalla, reloj = inicializar()
+    bucle_principal(pantalla, reloj)
 ```
 
 Guarda el archivo como `snake.py`.
@@ -180,12 +180,12 @@ pyinstaller --onefile --noconsole \
 ```python
 # snake.spec  (fragmento relevante)
 a = Analysis(
-	['snake.py'],
-	datas=[
-		('assets/sprite.png', 'assets'),
-		('assets/musica.ogg', 'assets'),
-	],
-	...
+    ['snake.py'],
+    datas=[
+        ('assets/sprite.png', 'assets'),
+        ('assets/musica.ogg', 'assets'),
+    ],
+    ...
 )
 ```
 
@@ -208,9 +208,9 @@ import sys
 from pathlib import Path
 
 def ruta_asset(nombre: str) -> Path:
-	"""Devuelve la ruta correcta del asset en cualquier entorno."""
-	base = Path(getattr(sys, '_MEIPASS', Path(__file__).parent))
-	return base / nombre
+    """Devuelve la ruta correcta del asset en cualquier entorno."""
+    base = Path(getattr(sys, '_MEIPASS', Path(__file__).parent))
+    return base / nombre
 
 imagen = pygame.image.load(str(ruta_asset("assets/sprite.png")))
 ```
@@ -249,30 +249,30 @@ on: [push]
 
 jobs:
   build-linux:
-	runs-on: ubuntu-latest
-	steps:
-	  - uses: actions/checkout@v4
-	  - uses: actions/setup-python@v5
-		with: { python-version: '3.12' }
-	  - run: pip install pygame pyinstaller
-	  - run: pyinstaller --onefile --noconsole snake.py
-	  - uses: actions/upload-artifact@v4
-		with:
-		  name: snake-linux
-		  path: dist/snake
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pygame pyinstaller
+      - run: pyinstaller --onefile --noconsole snake.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snake-linux
+          path: dist/snake
 
   build-windows:
-	runs-on: windows-latest
-	steps:
-	  - uses: actions/checkout@v4
-	  - uses: actions/setup-python@v5
-		with: { python-version: '3.12' }
-	  - run: pip install pygame pyinstaller
-	  - run: pyinstaller --onefile --noconsole snake.py
-	  - uses: actions/upload-artifact@v4
-		with:
-		  name: snake-windows
-		  path: dist/snake.exe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pygame pyinstaller
+      - run: pyinstaller --onefile --noconsole snake.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snake-windows
+          path: dist/snake.exe
 ```
 
 Con este workflow obtienes **ambos binarios** automáticamente en cada push.
@@ -288,7 +288,7 @@ python -m nuitka --onefile --enable-plugin=pygame snake.py
 
 # Windows
 python -m nuitka --onefile --windows-disable-console \
-				 --enable-plugin=pygame snake.py
+                 --enable-plugin=pygame snake.py
 ```
 
 Nuitka compila Python a C y luego a binario nativo → **más rápido**

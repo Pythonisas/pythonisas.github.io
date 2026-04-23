@@ -1,6 +1,6 @@
 +++
 title = "Inicio"
-author = ["fenix"]
+author = ["Jordi"]
 publishDate = 2022-01-01
 draft = false
 +++
@@ -20,6 +20,14 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 -   [Uso de entornos virtuales mágicos](/entornos-virtuales/)
 -   [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
+
+## Prácticas {#prácticas}
+
+-   [Práctica 3.1 — Modelando bases de datos SQLite con Python](/sqlite/)
+-   [Práctica 3.2 — Pyrro: perros ASCII con clases](/poo/)
+-   [POO — Naves espaciales, coches y Python](/poo2/)
+-   [Práctica 3.3 — Modelando Naves espaciales con Python](/poo3/)
+-   [Práctica 3.4 — Clases, herencia y coches](/poo4/)
 
 
 ## Recursos {#recursos}

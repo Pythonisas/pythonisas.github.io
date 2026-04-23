@@ -1,5 +1,5 @@
 +++
-title = "Práctica 3.5 — Mejora POO del duelo de naves espaciales"
+title = "Práctica 3.5 — Refactoriza el duelo de naves espaciales"
 author = ["Jordi"]
 date = 2026-04-14T12:00:00+02:00
 publishDate = 2026-04-13
@@ -17,7 +17,7 @@ Alguien ha escrito un **juego de combate espacial** increible. Tiene de todo: me
 
 Pero hay un problema: **la clase `Nave` esta practicamente vacia**.
 
-En esta practica vas a tomar ese juego como punto de partida y **mejorar su arquitectura POO** sin cambiar como funciona. El juego seguira siendo el mismo — pero su codigo sera mejor.
+En esta practica vas a tomar ese juego como punto de partida y **mejorar su arquitectura POO** sin cambiar como funciona. El juego seguira siendo el mismo — pero su codigo sera mejor. Es lo que llamamos "refactorizar" el código fuente.
 
 ---
 
@@ -314,7 +314,7 @@ Sube tu fichero `duelo_naves_poo.py` refactorizado con:
 | **Encapsulacion**        | La logica de modificar escudo/combustible vive DENTRO de la clase     |
 | **`self`**               | Todos los metodos acceden al estado del objeto via `self.atributo`    |
 | **Proteccion de estado** | Los metodos validan limites (0-100) — el objeto se protege a si mismo |
-| **Refactoring**          | Mejorar la estructura del codigo sin cambiar su comportamiento        |
+| **Refactorización**      | Mejorar la estructura del codigo sin cambiar su comportamiento        |
 | **`-=` y `min()`**       | Operadores de incremento/decremento con limites                       |
 
 ---

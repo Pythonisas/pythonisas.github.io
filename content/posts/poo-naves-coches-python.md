@@ -1,24 +1,23 @@
 +++
 title = "POO — Naves espaciales, coches y Python"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-03-15T12:00:00+01:00
 publishDate = 2026-03-15
-url = "/poo2/"
 tags = ["prácticas"]
+url = "/poo2/"
 draft = false
 +++
 
-
 ## Tabla de Contenido {#tabla-de-contenido}
 
-1.  [Trabajando con Clases e Instancias — Naves Espaciales](#trabajando-con-clases-e-instancias)
-2.  [La Clase `Coche`](#la-clase-coche)
-3.  [Establecer un Valor por Defecto para un Atributo](#establecer-valor-por-defecto)
-4.  [Modificando los Valores de Atributos](#modificando-valores-de-atributos)
-5.  [Resumen de Conceptos](#resumen-de-conceptos)
+1.  [Trabajando con Clases e Instancias — Naves Espaciales](#trabajando-con-clases-e-instancias-naves-espaciales)
+2.  [La Clase Coche](#la-clase-coche)
+3.  [Establecer un Valor por Defecto](#establecer-un-valor-por-defecto-para-un-atributo-de-nuestro-coche)
+4.  [Modificando los Valores de Atributos](#modificando-los-valores-de-atributos-de-nuestro-coche)
+5.
 
 
-## Trabajando con Clases e Instancias — Naves Espaciales {#trabajando-con-clases-e-instancias}
+## Trabajando con Clases e Instancias — Naves Espaciales {#trabajando-con-clases-e-instancias-naves-espaciales}
 
 ¿Por que naves? Porque mas adelante (Capitulo 12) crearemos nuestro
 propio videojuego **Alien Invasion** con Pygame, donde la clase `Ship`
@@ -53,24 +52,24 @@ esta clase.
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
 mi_nuevo_coche = Coche('audi', 'a4', 2024)
 print(mi_nuevo_coche.nombra_descriptivamente())
 ```
 
-```
+```text
 2024 Audi A4
 ```
 
@@ -83,7 +82,7 @@ print(mi_nuevo_coche.nombra_descriptivamente())
 -   Llamamos a `nombra_descriptivamente()` para mostrar que coche tenemos.
 
 
-## Establecer un Valor por Defecto para un Atributo de 'nuestro coche' {#establecer-valor-por-defecto}
+## Establecer un Valor por Defecto para un Atributo de 'nuestro coche' {#establecer-un-valor-por-defecto-para-un-atributo-de-nuestro-coche}
 
 Cuando se crea una instancia, los atributos pueden definirse **sin
 necesidad de pasarlos como parametros**. Estos atributos se definen
@@ -96,43 +95,43 @@ que nos ayude a leer el cuentakilometros de cada coche.
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
-		self.cuentakilomentros_lectura = 0           # valor por defecto
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilomentros_lectura = 0           # valor por defecto
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-	def lee_cuentakilometros(self):
-		"""Imprime el kilometraje del coche."""
-		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
 
 mi_nuevo_coche = Coche('audi', 'a4', 2024)
 print(mi_nuevo_coche.nombra_descriptivamente())
 mi_nuevo_coche.lee_cuentakilometros()
 ```
 
-```
+```text
 2024 Audi A4
 Este coche ha recorrido 0 kilometros.
 ```
 
 
-#### Que ocurre aqui {#que-ocurre-aqui-2}
+#### Que ocurre aqui {#que-ocurre-aqui}
 
 -   Python crea un nuevo atributo `cuentakilomentros_lectura` y le asigna el valor inicial `0` — no hace falta pasarlo como argumento al crear la instancia.
 -   El metodo `lee_cuentakilometros()` simplemente imprime el valor actual del cuentakilometros.
 -   Nuestro coche empieza con 0 millas. Pocos coches se venden con exactamente 0 millas, asi que necesitamos una forma de cambiar este valor...
 
 
-## Modificando los Valores de Atributos de 'nuestro coche' {#modificando-valores-de-atributos}
+## Modificando los Valores de Atributos de 'nuestro coche' {#modificando-los-valores-de-atributos-de-nuestro-coche}
 
 Se puede cambiar el valor de un atributo de **tres formas**:
 
@@ -143,30 +142,30 @@ Se puede cambiar el valor de un atributo de **tres formas**:
 Veamos cada enfoque.
 
 
-### Forma 1 — Modificar un atributo directamente {#forma-1}
+### Forma 1 — Modificar un atributo directamente {#forma-1-modificar-un-atributo-directamente}
 
 La forma mas sencilla es acceder al atributo directamente a traves de
 la instancia usando la **notacion de punto**:
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
-		self.cuentakilomentros_lectura = 0
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilomentros_lectura = 0
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-	def lee_cuentakilometros(self):
-		"""Imprime el kilometraje del coche."""
-		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
 
 mi_nuevo_coche = Coche('audi', 'a4', 2024)
 print(mi_nuevo_coche.nombra_descriptivamente())
@@ -175,7 +174,7 @@ mi_nuevo_coche.cuentakilomentros_lectura = 23            # acceso directo
 mi_nuevo_coche.lee_cuentakilometros()
 ```
 
-```
+```text
 2024 Audi A4
 Este coche ha recorrido 23 kilometros.
 ```
@@ -187,7 +186,7 @@ A veces querras acceder a los atributos directamente asi, pero otras
 veces preferiras escribir un **metodo** que actualice el valor por ti.
 
 
-### Forma 2 — Modificar un atributo mediante un metodo {#forma-2}
+### Forma 2 — Modificar un atributo mediante un metodo {#forma-2-modificar-un-atributo-mediante-un-metodo}
 
 Es util tener metodos que actualicen ciertos atributos. En lugar de
 acceder directamente, pasas el nuevo valor a un metodo que se encarga
@@ -195,27 +194,27 @@ de la actualizacion internamente.
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
-		self.cuentakilomentros_lectura = 0
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilomentros_lectura = 0
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-	def lee_cuentakilometros(self):
-		"""Imprime el kilometraje del coche."""
-		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
 
-	def actualiza_cuentakilomentros(self, kilometraje):
-		"""Establece la lectura del cuentakilometros al valor dado."""
-		self.cuentakilomentros_lectura = kilometraje
+    def actualiza_cuentakilomentros(self, kilometraje):
+        """Establece la lectura del cuentakilometros al valor dado."""
+        self.cuentakilomentros_lectura = kilometraje
 
 mi_nuevo_coche = Coche('audi', 'a4', 2024)
 print(mi_nuevo_coche.nombra_descriptivamente())
@@ -224,7 +223,7 @@ mi_nuevo_coche.actualiza_cuentakilomentros(23)              # a traves de metodo
 mi_nuevo_coche.lee_cuentakilometros()
 ```
 
-```
+```text
 2024 Audi A4
 Este coche ha recorrido 23 kilometros.
 ```
@@ -237,33 +236,33 @@ _retroceder_ el cuentakilometros:
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
-		self.cuentakilomentros_lectura = 0
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilomentros_lectura = 0
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-	def lee_cuentakilometros(self):
-		"""Imprime el kilometraje del coche."""
-		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
 
-	def actualiza_cuentakilomentros(self, kilometraje):
-		"""
-		Establece la lectura del cuentakilometros al valor dado.
-		Rechaza el cambio si intenta retroceder el cuentakilometros.
-		"""
-		if kilometraje >= self.cuentakilomentros_lectura:
-			self.cuentakilomentros_lectura = kilometraje
-		else:
-			print("¡No puedes retroceder el cuentakilometros!")
+    def actualiza_cuentakilomentros(self, kilometraje):
+        """
+        Establece la lectura del cuentakilometros al valor dado.
+        Rechaza el cambio si intenta retroceder el cuentakilometros.
+        """
+        if kilometraje >= self.cuentakilomentros_lectura:
+            self.cuentakilomentros_lectura = kilometraje
+        else:
+            print("¡No puedes retroceder el cuentakilometros!")
 
 mi_nuevo_coche = Coche('audi', 'a4', 2024)
 mi_nuevo_coche.actualiza_cuentakilomentros(23)
@@ -273,7 +272,7 @@ mi_nuevo_coche.lee_cuentakilometros()
 mi_nuevo_coche.actualiza_cuentakilomentros(10)
 ```
 
-```
+```text
 Este coche ha recorrido 23 kilometros.
 ¡No puedes retroceder el cuentakilometros!
 ```
@@ -284,7 +283,7 @@ sentido antes de modificar el atributo. Si el valor proporcionado es
 **menor**, se muestra una advertencia.
 
 
-### Forma 3 — Incrementar un atributo mediante un metodo {#forma-3}
+### Forma 3 — Incrementar un atributo mediante un metodo {#forma-3-incrementar-un-atributo-mediante-un-metodo}
 
 A veces querras **sumar** una cantidad al valor de un atributo, en lugar
 de asignarle un valor completamente nuevo.
@@ -294,37 +293,37 @@ compra y el registro.
 
 ```python
 class Coche:
-	"""Intento sencillo de representar un coche."""
+    """Intento sencillo de representar un coche."""
 
-	def __init__(self, fabricante, modelo, año):
-		"""Inicializa los atributos para describir un coche."""
-		self.fabricante = fabricante
-		self.modelo = modelo
-		self.año = año
-		self.cuentakilomentros_lectura = 0
+    def __init__(self, fabricante, modelo, año):
+        """Inicializa los atributos para describir un coche."""
+        self.fabricante = fabricante
+        self.modelo = modelo
+        self.año = año
+        self.cuentakilomentros_lectura = 0
 
-	def nombra_descriptivamente(self):
-		"""Devuelve un nombre descriptivo con formato legible."""
-		nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
-		return nombre_descriptivo.title()
+    def nombra_descriptivamente(self):
+        """Devuelve un nombre descriptivo con formato legible."""
+        nombre_descriptivo = f"{self.año} {self.fabricante} {self.modelo}"
+        return nombre_descriptivo.title()
 
-	def lee_cuentakilometros(self):
-		"""Imprime el kilometraje del coche."""
-		print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
+    def lee_cuentakilometros(self):
+        """Imprime el kilometraje del coche."""
+        print(f"Este coche ha recorrido {self.cuentakilomentros_lectura} kilometros.")
 
-	def actualiza_cuentakilomentros(self, kilometraje):
-		"""
-		Establece la lectura del cuentakilometros al valor dado.
-		Rechaza el cambio si intenta retroceder el cuentakilometros.
-		"""
-		if kilometraje >= self.cuentakilomentros_lectura:
-			self.cuentakilomentros_lectura = kilometraje
-		else:
-			print("¡No puedes hacer retroceder el cuentakilometros!")
+    def actualiza_cuentakilomentros(self, kilometraje):
+        """
+        Establece la lectura del cuentakilometros al valor dado.
+        Rechaza el cambio si intenta retroceder el cuentakilometros.
+        """
+        if kilometraje >= self.cuentakilomentros_lectura:
+            self.cuentakilomentros_lectura = kilometraje
+        else:
+            print("¡No puedes hacer retroceder el cuentakilometros!")
 
-	def incrementa_cuentakilomentros(self, miles):
-		"""Suma la cantidad dada a la lectura del cuentakilometros."""
-		self.cuentakilomentros_lectura += miles
+    def incrementa_cuentakilomentros(self, miles):
+        """Suma la cantidad dada a la lectura del cuentakilometros."""
+        self.cuentakilomentros_lectura += miles
 
 mi_coche_usado = Coche('opel', 'corsa', 2019)
 print(mi_coche_usado.nombra_descriptivamente())
@@ -336,14 +335,14 @@ mi_coche_usado.incrementa_cuentakilomentros(100)
 mi_coche_usado.lee_cuentakilometros()
 ```
 
-```
+```text
 2019 Opel Corsa
 Este coche ha recorrido 23500 kilometros.
 Este coche ha recorrido 23600 kilometros.
 ```
 
 
-#### Que ocurre aqui {#que-ocurre-aqui-3}
+#### Que ocurre aqui {#que-ocurre-aqui}
 
 -   `incrementa_cuentakilomentros()` recibe un numero de millas y **suma** ese valor a `self.cuentakilomentros_lectura`.
 -   Primero creamos un coche usado (`mi_coche_usado`).
@@ -360,11 +359,11 @@ Este coche ha recorrido 23600 kilometros.
 
 ## Resumen de Conceptos {#resumen-de-conceptos}
 
-| **Concepto** | **Descripcion** | **Ejemplo** |
-|:---|:---|:---|
-| **Atributo con parametro** | Se pasa al crear la instancia | `self.fabricante = fabricante` |
-| **Atributo por defecto** | Se define en `__init__()` sin parametro | `self.cuentakilomentros_lectura = 0` |
-| **Acceso directo** | Modificar atributo con notacion de punto | `coche.cuentakilomentros_lectura = 23` |
-| **Metodo setter** | Metodo que asigna un nuevo valor | `actualiza_cuentakilomentros(23)` |
-| **Metodo incremento** | Metodo que suma al valor existente | `incrementa_cuentakilomentros(100)` |
-| **Logica de proteccion** | Validacion dentro del setter | `if kilometraje >= self.cuentakilomentros...` |
+| **Concepto**               | **Descripcion**                          | **Ejemplo**                                   |
+|----------------------------|------------------------------------------|-----------------------------------------------|
+| **Atributo con parametro** | Se pasa al crear la instancia            | `self.fabricante = fabricante`                |
+| **Atributo por defecto**   | Se define en `__init__()` sin parametro  | `self.cuentakilomentros_lectura = 0`          |
+| **Acceso directo**         | Modificar atributo con notacion de punto | `coche.cuentakilomentros_lectura = 23`        |
+| **Metodo setter**          | Metodo que asigna un nuevo valor         | `actualiza_cuentakilomentros(23)`             |
+| **Metodo incremento**      | Metodo que suma al valor existente       | `incrementa_cuentakilomentros(100)`           |
+| **Logica de proteccion**   | Validacion dentro del setter             | `if kilometraje >` self.cuentakilomentros...= |

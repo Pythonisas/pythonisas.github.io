@@ -1,13 +1,13 @@
 +++
 title = "Uso de entornos virtuales mágicos"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-01-15T12:00:00+01:00
 publishDate = 2026-01-15
 url = "/entornos-virtuales/"
 draft = false
 +++
 
-## ¿Por qué entornos virtuales?
+## ¿Por qué entornos virtuales? {#por-qué-entornos-virtuales}
 
 Durante el desarrollo de aplicaciones en Python, pueden surgir problemas relacionados con el uso de diferentes versiones de bibliotecas. Por ejemplo, dos aplicaciones diferentes pueden necesitar la misma biblioteca, pero de diferentes versiones. O puede que necesites asegurar el funcionamiento correcto de una aplicación independientemente de las actualizaciones de la versión de la biblioteca que utiliza.
 
@@ -20,9 +20,8 @@ Usaremos el módulo **venv**, que viene integrado en Python desde la versión 3.
 
 > **Importante:** antes de empezar, debes tener instalado Python 3 y pip. Si usas Windows, reemplaza `pip3` por `pip` y `python3` por `python`.
 
----
 
-## Creación de un proyecto
+## Creación de un proyecto {#creación-de-un-proyecto}
 
 Empecemos creando un proyecto. Primero, crea una carpeta para el proyecto y accede a ella:
 
@@ -31,7 +30,8 @@ mkdir my_python_project
 cd my_python_project
 ```
 
-## Creación del entorno virtual
+
+## Creación del entorno virtual {#creación-del-entorno-virtual}
 
 Crea un entorno virtual dentro de la carpeta del proyecto:
 
@@ -45,7 +45,8 @@ python3 -m venv venv
 
 Esto crea una carpeta `venv/` que contiene una copia del intérprete de Python y un directorio `lib/` donde se instalarán los paquetes de este proyecto — completamente aislados del sistema.
 
-## Activación del entorno virtual
+
+## Activación del entorno virtual {#activación-del-entorno-virtual}
 
 Para activar el entorno virtual en **Linux/macOS**:
 
@@ -65,7 +66,8 @@ Cuando el entorno está activo, verás el nombre del entorno entre paréntesis a
 (venv) usuario@maquina:~/my_python_project$
 ```
 
-## Comprobación de paquetes instalados
+
+## Comprobación de paquetes instalados {#comprobación-de-paquetes-instalados}
 
 Comprueba los paquetes pip instalados dentro del entorno virtual:
 
@@ -89,7 +91,8 @@ pip3 list
 
 Ahora verás `requests` y sus dependencias, instaladas solo dentro de este entorno.
 
-## Salida del entorno virtual
+
+## Salida del entorno virtual {#salida-del-entorno-virtual}
 
 Para salir (desactivar) el entorno virtual:
 
@@ -99,7 +102,8 @@ deactivate
 
 El prompt vuelve a la normalidad — ya no estás dentro del entorno aislado.
 
-## Exportar paquetes instalados (requirements.txt)
+
+## Exportar paquetes instalados (requirements.txt) {#exportar-paquetes-instalados--requirements-dot-txt}
 
 Para crear un archivo con la lista de paquetes instalados y sus versiones:
 
@@ -109,7 +113,8 @@ pip3 freeze > requirements.txt
 
 Este fichero `requirements.txt` permite reproducir el mismo entorno en otra máquina.
 
-## Importar paquetes en otro entorno
+
+## Importar paquetes en otro entorno {#importar-paquetes-en-otro-entorno}
 
 En otra máquina (o en un entorno nuevo), crea un nuevo entorno virtual, actívalo, e importa los paquetes:
 
@@ -119,7 +124,8 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-## Resumen de comandos
+
+## Resumen de comandos {#resumen-de-comandos}
 
 -   **Crear entorno** — `python3 -m venv venv`
 -   **Activar (Linux/macOS)** — `source venv/bin/activate`

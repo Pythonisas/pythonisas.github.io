@@ -11,9 +11,36 @@ draft = false
 {{< figure src="/images/space-invaders_retro3.jpg" >}}
 
 
-## Descripcion {#descripcion}
+## 🚀Planificando Tu Proyecto {#planificando-tu-proyecto}
 
-Vamos a construir el esqueleto de un juego llamado **Invasión Alienígena** usando [Pygame](https://www.pygame.org/). Al finalizar esta practica seras capaz de crear una ventana grafica, separar la configuracion en su propio modulo, implementar el _game loop_ y gestionar eventos.
+Cuando estás construyendo un proyecto grande, es importante preparar un plan antes de empezar a escribir código. Tu plan te mantendrá enfocado y hará más probable que completes el proyecto.
+
+Escribamos una descripción de la jugabilidad general. Aunque la siguiente descripción no cubre cada detalle de Invasión Alienígena, proporciona una idea clara de cómo empezar a construir el juego:
+
+En nuestro juego **\*Invasión Alienígena**,
+
+-   el jugador controla una nave espacial que aparece en la parte inferior central de la pantalla.
+
+-   el jugador puede mover la nave a derecha e izquierda usando las teclas de flecha y disparar balas usando la barra espaciadora.
+
+    Cuando el juego comienza, una flota de alienígenas llena el cielo y se mueve a lo largo y hacia abajo de la pantalla.
+
+-   El jugador dispara y destruye a los alienígenas.
+
+-   Si el jugador destruye todos los alienígenas, aparece una nueva flota que se mueve más rápido que la anterior.
+
+-   Si algún alienígena golpea la nave del jugador o alcanza la parte inferior de la pantalla, el jugador pierde una nave.
+
+-   Si el jugador pierde tres naves, el juego termina.
+
+Para la primera fase de desarrollo, haremos una nave que pueda moverse a derecha e izquierda cuando el jugador presione las teclas de flecha y disparar balas cuando el jugador presione la barra espaciadora.
+
+Después de configurar este comportamiento, podremos crear los alienígenas y perfeccionar la jugabilidad.
+
+
+## 🚀Descripcion {#descripcion}
+
+Vamos a construir el esqueleto del  **Invasión Alienígena** usando [Pygame](https://www.pygame.org/). Al finalizar esta practica seras capaz de crear una ventana grafica, separar la configuracion en su propio modulo, implementar el _game loop_ y gestionar eventos.
 
 > 📖 Basado en el Capítulo 12 de _Python Crash Course, 3rd Edition_ — Eric Matthes
 

@@ -1,10 +1,10 @@
 +++
 title = "Práctica 3.3 — Modelando Naves espaciales con Python"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-03-16T12:00:00+01:00
 publishDate = 2026-03-16
-url = "/poo3/"
 tags = ["prácticas"]
+url = "/poo3/"
 draft = false
 +++
 
@@ -19,9 +19,9 @@ draft = false
 Anteriormente modelamos un `Coche`. Vamos ahora a modelar una **nave espacial** usando Programacion Orientada a Objetos (POO).
 La practica se compone de **dos scripts progresivos**:
 
-| **Script** | **Enfoque** | **Concepto clave** |
-|:---|:---|:---|
-| `nave_basica.py` | Clase sencilla con constructor y metodo | **Clase, `__init__`, atributos, metodos** |
+| **Script**        | **Enfoque**                                  | **Concepto clave**                             |
+|-------------------|----------------------------------------------|------------------------------------------------|
+| `nave_basica.py`  | Clase sencilla con constructor y metodo      | **Clase, `__init__`, atributos, metodos**      |
 | `nave_combate.py` | Clase completa con modificacion de atributos | **Setters, incrementos, logica de proteccion** |
 
 > Primero construiras la nave con lo basico (`nave_basica.py`), y despues le daras escudos, combustible y la meteras en combate (`nave_combate.py`).
@@ -39,7 +39,7 @@ Completa los huecos marcados con `___` y `...` en los dos ficheros incompletos q
 ---
 
 
-## Fichero 1: `nave_basica.py` (clase sencilla) {#fichero-1-nave-basica}
+## Fichero 1: `nave_basica.py` (clase sencilla) {#fichero-1-nave-basica-dot-py--clase-sencilla}
 
 Este script define una clase basica con constructor y un metodo. Completa los huecos:
 
@@ -72,7 +72,7 @@ print(nave_2.___())
 ```
 
 
-### Pistas para `nave_basica.py` {#pistas-nave-basica}
+### Pistas para `nave_basica.py` {#pistas-para-nave-basica-dot-py}
 
 -   Una **clase** se define con `class NombreClase:` — el nombre de nuestra clase es `NaveEspacial`
 -   El metodo **constructor** se llama `__init__` — se ejecuta automaticamente al crear cada objeto
@@ -84,7 +84,7 @@ print(nave_2.___())
 ---
 
 
-## Fichero 2: `nave_combate.py` (clase completa con combate) {#fichero-2-nave-combate}
+## Fichero 2: `nave_combate.py` (clase completa con combate) {#fichero-2-nave-combate-dot-py--clase-completa-con-combate}
 
 Aqui ampliamos la nave con escudo, combustible y metodos de combate. Completa los huecos:
 
@@ -181,14 +181,14 @@ if __name__ == "___":
 ```
 
 
-### Pistas para `nave_combate.py` {#pistas-nave-combate}
+### Pistas para `nave_combate.py` {#pistas-para-nave-combate-dot-py}
 
 -   Los atributos por defecto (`nivel_escudo`, `combustible`) se definen dentro de `__init__` **sin** pasarlos como parametro
 -   En `actualizar_escudo()`: piensa que operador de comparacion necesitas — ¿"menor que" o "mayor que"?
 -   `recibir_daño()` y `consumir_combustible()` **restan** del valor actual: el operador es `-=`
 -   `recargar()` **suma** al valor actual: el operador es `+=`
 -   `self` aparece como primer parametro en **todos** los metodos — ¡no lo olvides en `consumir_combustible`!
--   `__name__ == "___"` — ¿Que valor especial tiene `__name__` cuando ejecutas un script directamente? (pista: empieza por doble guion bajo)
+-   `__name__ =` "<span class="underline">_</span>"= — ¿Que valor especial tiene `__name__` cuando ejecutas un script directamente? (pista: empieza por doble guion bajo)
 -   Para llamar a metodos: `objeto.nombre_del_metodo(argumentos)`
 
 ---
@@ -197,17 +197,17 @@ if __name__ == "___":
 ## Salida esperada {#salida-esperada}
 
 
-### `nave_basica.py` {#nave-basica-salida}
+### `nave_basica.py` {#nave-basica-dot-py}
 
-```
+```text
 Halcon Milenario — Carguero Ligero (Max. 1050 Km/S)
 X-Wing — Caza Estelar (Max. 1050 Km/S)
 ```
 
 
-### `nave_combate.py` {#nave-combate-salida}
+### `nave_combate.py` {#nave-combate-dot-py}
 
-```
+```text
 X-Wing — Caza Estelar (Max. 1050 Km/S)
 Escudo: 100% | Combustible: 100%
 
@@ -237,34 +237,34 @@ Escudo: 25% | Combustible: 85%
 ---
 
 
-## BONUS — Amplia la nave (para nota maxima) {#bonus}
+## BONUS — Amplia la nave (para nota maxima) {#bonus-amplia-la-nave--para-nota-maxima}
 
 Si quieres ir a por el **10**, elige **una o mas** de estas ampliaciones:
 
-| **Bonus** | **Descripcion** | **Puntos** |
-|:---|:---|:---:|
-| Metodo `__str__()` | Implementa `__str__` para que `print(mi_nave)` muestre la descripcion de la nave directamente | **+0.5** |
-| Metodo `reparar_escudo(puntos)` | Crea un metodo que sume puntos al escudo (sin superar 100%) — similar a `recargar()` pero para el escudo | **+0.5** |
-| Simulacion extendida | Crea una segunda nave enemiga, hazlas combatir entre si (que una le haga `recibir_daño` a la otra) y muestra el estado final de ambas | **+0.5** |
+| **Bonus**                    | **Descripcion**                                                                                                                       | **Puntos** |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|------------|
+| Metodo `__str__()`           | Implementa `__str__` para que `print(mi_nave)` muestre la descripcion de la nave directamente                                         | +0.5       |
+| Metodo `reparar_escudo(pts)` | Crea un metodo que sume puntos al escudo (sin superar 100%) — similar a `recargar()` pero para el escudo                              | +0.5       |
+| Simulacion extendida         | Crea una segunda nave enemiga, hazlas combatir entre si (que una le haga `recibir_daño` a la otra) y muestra el estado final de ambas | +0.5       |
 
 > Con el bonus puedes llegar hasta **10** puntos (maximo). No es necesario hacer todos.
 
 ---
 
 
-## Conceptos clave que aprenderas {#conceptos-clave}
+## Conceptos clave que aprenderas {#conceptos-clave-que-aprenderas}
 
-| **Concepto** | **Donde lo ves** |
-|:---|:---|
-| **Clase y constructor `__init__`** | `class NaveEspacial:` → `def __init__(self, ...)` |
-| **Atributos de instancia** | `self.nombre`, `self.tipo`, `self.velocidad_maxima` |
-| **Atributos con valor por defecto** | `self.nivel_escudo = 100`, `self.combustible = 100` |
-| **Metodos de instancia** | `descripcion()`, `estado()`, `recibir_daño()`, etc. |
-| **`self`** | Primer parametro de todos los metodos |
-| **Setter (Forma 2)** | `actualizar_escudo(nuevo_nivel)` — asigna con validacion |
-| **Incremento/Decremento (Forma 3)** | `+=` y `-=` dentro de metodos |
-| **`if __name__ == "__main__"`** | Patron estandar para scripts ejecutables |
+| **Concepto**                                                                              | **Donde lo ves**                                         |
+|-------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| **Clase y constructor `__init__`**                                                        | `class NaveEspacial:` → `def __init__(self, ...)`        |
+| **Atributos de instancia**                                                                | `self.nombre`, `self.tipo`, `self.velocidad_maxima`      |
+| **Atributos con valor por defecto**                                                       | `self.nivel_escudo = 100`, `self.combustible = 100`      |
+| **Metodos de instancia**                                                                  | `descripcion()`, `estado()`, `recibir_daño()`, etc.      |
+| **`self`**                                                                                | Primer parametro de todos los metodos                    |
+| **Setter (Forma 2)**                                                                      | `actualizar_escudo(nuevo_nivel)` — asigna con validacion |
+| **Incremento/Decremento (Forma 3)**                                                       | `+=` y `-=` dentro de metodos                            |
+| **`if __name__ =` "<span class="underline"><span class="underline">main</span></span>"=** | Patron estandar para scripts ejecutables                 |
 
 ---
 
-> "Las naves de Star Wars y Alien no se programan solas... pero con POO, casi."
+> _"Las naves de Star Wars y Alien no se programan solas... pero con POO, casi."_

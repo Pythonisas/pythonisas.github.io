@@ -1,24 +1,23 @@
 +++
 title = "Práctica 3.4 — Clases, herencia y coches"
-author = ["fenix"]
+author = ["Jordi"]
 date = 2026-03-23T12:00:00+01:00
 publishDate = 2026-03-23
-url = "/poo4/"
 tags = ["prácticas"]
+url = "/poo4/"
 draft = false
 +++
-
 
 ## Tabla de Contenidos {#tabla-de-contenidos}
 
 1.  [Herencia](#herencia)
-2.  [El metodo `__init__()` en una Clase Hija](#init-clase-hija)
-3.  [Definir Atributos y Metodos para la Clase Hija](#atributos-metodos-clase-hija)
+2.  [El metodo __init__() en una Clase Hija](#el-metodo-init--en-una-clase-hija)
+3.  [Definir Atributos y Metodos para la Clase Hija](#definir-atributos-y-metodos-para-la-clase-hija)
 4.  [Instancias como Atributos](#instancias-como-atributos)
-5.  [Añadir mas detalle a la clase `Bateria`](#mas-detalle-bateria)
-6.  [Resumen de Conceptos](#resumen-de-conceptos)
-7.  [Diagrama de la Jerarquia](#diagrama-jerarquia)
-8.  [Progresion del codigo — las 4 versiones](#progresion-codigo)
+5.  [Añadir mas detalle a la clase Bateria](#añadir-mas-detalle-a-la-clase-bateria)
+6.  [Resumen de Conceptos](/poo4/#resumen-de-conceptos)
+7.  [Diagrama de la Jerarquia](#diagrama-de-la-jerarquia)
+8.  [Progresion del codigo](#progresion-del-codigo-las-4-versiones)
 
 
 ## Herencia {#herencia}
@@ -40,7 +39,7 @@ es libre de **definir atributos y metodos nuevos** propios.
 > crear un tipo mas especifico: el **coche electrico**.
 
 
-## El metodo `__init__()` en una Clase Hija {#init-clase-hija}
+## El metodo `__init__()` en una Clase Hija {#el-metodo-init--en-una-clase-hija}
 
 Cuando escribes una clase hija, lo primero que Python necesita hacer
 es **inicializar los atributos de la clase padre**. Para ello, el
@@ -53,7 +52,7 @@ solamente en los atributos y comportamientos especificos de los
 coches electricos.
 
 
-### Version 0 — La herencia mas basica {#version-0}
+### Version 0 — La herencia mas basica {#version-0-la-herencia-mas-basica}
 
 Empecemos creando una version sencilla de `CocheElectrico` que haga
 todo lo que puede hacer `Coche`:
@@ -102,14 +101,12 @@ mi_leaf = CocheElectrico('nissan', 'leaf', 2024)
 print(mi_leaf.nombra_descriptivamente())
 ```
 
-Salida:
-
-```
+```text
 2024 Nissan Leaf
 ```
 
 
-#### Que ocurre aqui {#que-ocurre-aqui-v0}
+#### Que ocurre aqui {#que-ocurre-aqui}
 
 -   Empezamos con `Coche`. Cuando creas una clase hija, la clase padre debe estar definida **antes** en el mismo archivo. Aqui situamos `Coche` primero.
 -   Definimos la clase hija: `CocheElectrico`. El nombre de la clase padre debe ir **entre parentesis** en la definicion de la clase hija: `class CocheElectrico(Coche):`
@@ -119,7 +116,7 @@ Salida:
 > **En resumen:** aparte de `__init__()`, todavia no hay atributos ni metodos propios de un coche electrico. De momento, solo estamos comprobando que la herencia funciona correctamente.
 
 
-## Definir Atributos y Metodos para la Clase Hija {#atributos-metodos-clase-hija}
+## Definir Atributos y Metodos para la Clase Hija {#definir-atributos-y-metodos-para-la-clase-hija}
 
 Una vez que tienes una clase hija que hereda de la padre, puedes
 añadir cualquier **atributo y metodo nuevo** que sea necesario para
@@ -129,7 +126,7 @@ Vamos a añadir un atributo especifico de los coches electricos (el
 tamaño de la bateria) y un metodo para informar sobre el.
 
 
-### Version 1 — Atributos y metodos propios de la clase hija {#version-1}
+### Version 1 — Atributos y metodos propios de la clase hija {#version-1-atributos-y-metodos-propios-de-la-clase-hija}
 
 ```python
 class Coche:
@@ -184,15 +181,13 @@ print(mi_leaf.nombra_descriptivamente())
 mi_leaf.describir_bateria()
 ```
 
-Salida:
-
-```
+```text
 2024 Nissan Leaf
 Este coche tiene una bateria de 40 kWh.
 ```
 
 
-#### Que ocurre aqui {#que-ocurre-aqui-v1}
+#### Que ocurre aqui {#que-ocurre-aqui}
 
 -   Añadimos el atributo `self.tamaño_bateria` y le asignamos un valor inicial de `40` (kWh). Este atributo se asociara a todas las instancias creadas a partir de `CocheElectrico` pero **no** a las instancias de `Coche`.
 -   Tambien añadimos el metodo `describir_bateria()`, que imprime informacion sobre la bateria. Este metodo solo estara disponible para instancias de `CocheElectrico`.
@@ -218,7 +213,7 @@ Entonces usamos una instancia de `Bateria` como **atributo** de
 `CocheElectrico`:
 
 
-### Version 2 — Instancias como atributos (composicion) {#version-2}
+### Version 2 — Instancias como atributos (composicion) {#version-2-instancias-como-atributos--composicion}
 
 ```python
 class Coche:
@@ -281,15 +276,13 @@ print(mi_leaf.nombra_descriptivamente())
 mi_leaf.bateria.describir_bateria()
 ```
 
-Salida:
-
-```
+```text
 2024 Nissan Leaf
 Este coche tiene una bateria de 40 kWh.
 ```
 
 
-#### Que ocurre aqui {#que-ocurre-aqui-v2}
+#### Que ocurre aqui {#que-ocurre-aqui}
 
 -   Definimos una nueva clase llamada `Bateria` que **no hereda de ninguna otra clase**. Su `__init__()` tiene un parametro `tamaño_bateria` con valor por defecto `40`. El metodo `describir_bateria()` tambien se ha movido aqui, desde `CocheElectrico`.
 -   En `CocheElectrico`, ahora añadimos un atributo `self.bateria`. Esta linea le dice a Python que cree una nueva instancia de `Bateria` (con el valor por defecto de 40 kWh) y la asigne al atributo `self.bateria`. Esto ocurrira **cada vez que se llame a** `__init__()`; cualquier instancia de `CocheElectrico` tendra automaticamente una instancia de `Bateria` asociada.
@@ -298,7 +291,7 @@ Este coche tiene una bateria de 40 kWh.
 > **¿Por que composicion?** Esto puede parecer mucho trabajo extra. Pero ahora puedes describir la bateria con todo el detalle que quieras **sin ensuciar** la clase `CocheElectrico`. Ademas, la clase `Bateria` es reutilizable: podria usarse en una moto electrica, un patinete, o cualquier otro vehiculo.
 
 
-## Añadir mas detalle a la clase `Bateria` {#mas-detalle-bateria}
+## Añadir mas detalle a la clase `Bateria` {#añadir-mas-detalle-a-la-clase-bateria}
 
 Cuando la bateria es su propia clase, es natural seguir
 enriqueciendola. Vas a añadir tu mismo/a un metodo `obtener_autonomia()` que
@@ -306,15 +299,17 @@ informe de la distancia que el coche puede recorrer segun el tamaño
 de la bateria:
 
 
-## Objetivo de la practica : ampliar las caracteristicas del coche {#objetivo-practica}
+## Objetivo de la practica : ampliar las caracteristicas del coche {#objetivo-de-la-practica-ampliar-las-caracteristicas-del-coche}
 
 
-### Inventa una Version 3 que implemente sobre la Version 2 un Metodo `obtener_autonomia()` {#version-3}
+### Inventa una Version 3 que implemente sobre la Version 2 un Metodo `obtener_autonomia()` {#inventa-una-version-3-que-implemente-sobre-la-version-2-un-metodo-obtener-autonomia}
 
 > **Tu tarea:** Estudia cada version, ejecutala, modificala.
 > Experimenta cambiando valores, añadiendo metodos, creando nuevas
 > subclases. La mejor forma de aprender POO es _romper cosas y
 > arreglarlas_.
+
+<!--quoteend-->
 
 > **Reflexion sobre el diseño:** En este punto podemos preguntarnos:
 > ¿Donde deberia vivir un metodo como `obtener_autonomia()`? ¿En
@@ -332,21 +327,21 @@ Demuestra tu arte como programador/a,
 
 ## Resumen de Conceptos {#resumen-de-conceptos}
 
-| **Concepto** | **Descripcion** | **Ejemplo** |
-|:---|:---|:---|
-| **Herencia** | Una clase hija adquiere atributos/metodos del padre | `class CocheElectrico(Coche):` |
-| **Clase padre (superclase)** | La clase original de la que se hereda | `Coche` |
-| **Clase hija (subclase)** | La nueva clase que hereda y especializa | `CocheElectrico` |
-| **`super()`** | Llama a un metodo de la clase padre | `super().__init__(fabricante, modelo, año)` |
-| **Atributo propio de la hija** | Atributo que solo existe en la subclase | `self.tamaño_bateria = 40` |
-| **Metodo propio de la hija** | Metodo exclusivo de la subclase | `describir_bateria()` |
-| **Composicion** | Usar una instancia de otra clase como atributo | `self.bateria = Bateria()` |
-| **Doble notacion de punto** | Acceder a atributos de un objeto anidado | `mi_leaf.bateria.describir_bateria()` |
+| **Concepto**                   | **Descripcion**                                     | **Ejemplo**                                 |
+|--------------------------------|-----------------------------------------------------|---------------------------------------------|
+| **Herencia**                   | Una clase hija adquiere atributos/metodos del padre | `class CocheElectrico(Coche):`              |
+| **Clase padre (superclase)**   | La clase original de la que se hereda               | `Coche`                                     |
+| **Clase hija (subclase)**      | La nueva clase que hereda y especializa             | `CocheElectrico`                            |
+| **`super()`**                  | Llama a un metodo de la clase padre                 | `super().__init__(fabricante, modelo, año)` |
+| **Atributo propio de la hija** | Atributo que solo existe en la subclase             | `self.tamaño_bateria = 40`                  |
+| **Metodo propio de la hija**   | Metodo exclusivo de la subclase                     | `describir_bateria()`                       |
+| **Composicion**                | Usar una instancia de otra clase como atributo      | `self.bateria = Bateria()`                  |
+| **Doble notacion de punto**    | Acceder a atributos de un objeto anidado            | `mi_leaf.bateria.describir_bateria()`       |
 
 
-## Diagrama de la Jerarquia {#diagrama-jerarquia}
+## Diagrama de la Jerarquia {#diagrama-de-la-jerarquia}
 
-```
+```text
  ┌─────────────┐
  │   Coche     │  ← clase padre (superclase)
  │─────────────│
@@ -379,17 +374,17 @@ Demuestra tu arte como programador/a,
 ```
 
 
-## Progresion del codigo — las 4 versiones {#progresion-codigo}
+## Progresion del codigo — las 4 versiones {#progresion-del-codigo-las-4-versiones}
 
 A continuacion tienes un resumen de como hemos ido construyendo el
 codigo, paso a paso:
 
-| **Version** | **Fichero** | **Que añade** |
-|:---|:---|:---|
-| **v0** | `coche_electrico_v0.py` | Herencia basica: `CocheElectrico(Coche)` + `super()` |
-| **v1** | `coche_electrico_v1.py` | Atributo (`tamaño_bateria`) y metodo propios |
-| **v2** | `coche_electrico_v2.py` | Composicion: clase `Bateria` como atributo |
-| | A Crear por Ti | Caracteristicas adicionales del vehiculo. |
-| **v3** | `coche_electrico_v3.py?` | Metodo `obtener_autonomia()` en `Bateria` ? |
+| **Version** | **Fichero**              | **Que añade**                                        |
+|-------------|--------------------------|------------------------------------------------------|
+| **v0**      | `coche_electrico_v0.py`  | Herencia basica: `CocheElectrico(Coche)` + `super()` |
+| **v1**      | `coche_electrico_v1.py`  | Atributo (`tamaño_bateria`) y metodo propios         |
+| **v2**      | `coche_electrico_v2.py`  | Composicion: clase `Bateria` como atributo           |
+|             | A Crear por Ti           | Caracteristicas adicionales del vehiculo.            |
+| **v3**      | `coche_electrico_v3.py?` | Metodo `obtener_autonomia()` en `Bateria` ?          |
 
 Happy coding !
