@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.6 — Invasión Alienígena I: El esqueleto del juego"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-04-20T12:00:00+02:00
 publishDate = 2026-04-20
 tags = ["prácticas"]
@@ -165,7 +165,7 @@ class InvasionAlienigena:
 > (`self.pantalla`) es la _surface_ principal.
 
 
-### 2.3 — El bucle principal: `ejecutar_juego()` {#2-dot-3-el-bucle-principal-ejecutar-juego}
+### 2.3 — El bucle principal: `ejecutar_juego() :-)` {#2-dot-3-el-bucle-principal-ejecutar-juego}
 
 El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 

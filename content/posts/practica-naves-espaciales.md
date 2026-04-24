@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.3 — Modelando Naves espaciales con Python"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-03-16T12:00:00+01:00
 publishDate = 2026-03-16
 tags = ["prácticas"]

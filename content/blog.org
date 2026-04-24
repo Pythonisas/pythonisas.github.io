@@ -2160,7 +2160,7 @@ donde se pueden dibujar imagenes, formas y texto. La pantalla completa
 (=self.pantalla=) es la /surface/ principal.
 #+end_quote
 
-**** 2.3 — El bucle principal: =ejecutar_juego()=
+**** 2.3 — El bucle principal: =ejecutar_juego() :-)=
 
 El corazon de todo videojuego es un bucle infinito que repite tres pasos:
 1. *Leer eventos* (teclado, raton, cierre de ventana)
