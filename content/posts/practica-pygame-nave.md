@@ -1,5 +1,5 @@
 +++
-title = "Practica 3.7 – Invasion Alienigena II: Añadiendo-la-imagen-de-la-Nave"
+title = "Practica 3.7 - Invasion Alienigena II: Añadiendo-la-imagen-de-la-Nave"
 author = ["Fénix"]
 date = 2026-04-27T12:00:00+02:00
 publishDate = 2026-04-27

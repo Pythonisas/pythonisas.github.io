@@ -28,6 +28,9 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 -   [POO — Naves espaciales, coches y Python](/poo2/)
 -   [Práctica 3.3 — Modelando Naves espaciales con Python](/poo3/)
 -   [Práctica 3.4 — Clases, herencia y coches](/poo4/)
+-   [Práctica 3.6 — Invasión Alienígena I: El esqueleto del juego](/pygame1/)
+-   [Práctica 3.7 — Invasión Alienígena II: Añadiendo la nave](/pygame2/)
+-   [Práctica 3.8 — Invasión Alienígena III: Pilotando la nave](/pygame3/)
 
 
 ## Recursos {#recursos}
