@@ -1998,6 +1998,7 @@ Sube tu fichero =duelo_naves_poo.py= refactorizado con:
 #+end_quote
 
 ** DONE Práctica 3.6 — Invasión Alienígena I: El esqueleto del juego
+
 CLOSED: [2026-04-20 Sun 12:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-pygame-esqueleto
@@ -2248,6 +2249,9 @@ if __name__ == '___':
 | *Eventos Pygame*          | =pygame.event.get()= + =pygame.QUIT=                                 |
 | *Modulo de configuracion* | =ajustes.py= — un solo lugar para todos los ajustes                 |
 
+[[/images/Composicion-en-Pygame.png]]
+
+
 ---
 
 *** Rubrica
@@ -2387,16 +2391,9 @@ El ultimo bonus anticipa la Practica 3.8. Si lo implementas aqui, llevaras venta
 
 ---
 
-*** Conceptos clave
+*** Conceptos clave :
 
-| *Concepto*                | *Donde lo ves*                                                        |
-|---------------------------+-----------------------------------------------------------------------|
-| *pygame.image.load()*     | Carga una imagen de disco y devuelve una surface                      |
-| *get_rect()*              | Obtiene el rectangulo de una surface (posicion + tamanyo)             |
-| *midbottom, center...*    | Atributos de =rect= para colocar elementos                           |
-| *blit()*                  | Dibuja una surface sobre otra en la posicion del rect                 |
-| *Orden de dibujado*       | fill -> sprites -> flip                                               |
-| *Composicion ampliada*    | =InvasionAlienigena= tiene =Ajustes= Y =Nave= como atributos        |
+[[/images/Guia-de-inicio_Arquitectura-de-un-Juego-en-Pygame.png]]
 
 ---
 

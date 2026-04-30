@@ -1,6 +1,6 @@
 +++
 title = "POO — Naves espaciales, coches y Python"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-03-15T12:00:00+01:00
 publishDate = 2026-03-15
 tags = ["prácticas"]

@@ -4,8 +4,33 @@
 #+identifier: 20260313T000001
 
 * Active Issues
+** DOING 'hugo serve' not re-rerendering images immediatelly
+OPENED: [2026-04-30]
+:PROPERTIES:
+:STATUS:   FIXED
+:CREATED:  [2026-04-30]
+:SEVERITY: MEDIUM
+:END:
+*** Steps to Reproduce
+- $ hugo serve
+- modify some post/image 
 
-** BUG ox-hugo export error 
+
+*** Expected Behavior
+'hugo serve' to re-rerender images immediatelly
+
+*** Actual Behavior
+hugo serve' not re-rerendering images immediatelly
+
+
+
+- Resolution: ?
+
+
+
+* Resolved Issues
+
+** DONE BUG ox-hugo export error 
 :PROPERTIES:
 :STATUS:   ACTIVE
 :CREATED:  [2026-03-13]
@@ -27,13 +52,3 @@ it does not export
 *** Potential Fix
 - ?
 
-* Resolved Issues
-
-** FIXED [Example fixed bug]
-CLOSED: [2026-03-13]
-:PROPERTIES:
-:STATUS:   FIXED
-:CREATED:  [2026-03-13]
-:SEVERITY: MEDIUM
-:END:
-- Resolution: [How it was fixed]

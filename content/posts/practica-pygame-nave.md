@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.7 – Invasion Alienigena II: Añadiendo-la-imagen-de-la-Nave"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-04-27T12:00:00+02:00
 publishDate = 2026-04-27
 tags = ["practicas"]
@@ -118,16 +118,9 @@ Si dibujas la nave antes de `fill()`, el fondo la tapa. Si la dibujas despues de
 ---
 
 
-## Conceptos clave {#conceptos-clave}
+## Conceptos clave : {#conceptos-clave}
 
-| **Concepto**             | **Donde lo ves**                                             |
-|--------------------------|--------------------------------------------------------------|
-| **pygame.image.load()**  | Carga una imagen de disco y devuelve una surface             |
-| **get_rect()**           | Obtiene el rectangulo de una surface (posicion + tamanyo)    |
-| **midbottom, center...** | Atributos de `rect` para colocar elementos                   |
-| **blit()**               | Dibuja una surface sobre otra en la posicion del rect        |
-| **Orden de dibujado**    | fill -&gt; sprites -&gt; flip                                |
-| **Composicion ampliada** | `InvasionAlienigena` tiene `Ajustes` Y `Nave` como atributos |
+{{< figure src="/images/Guia-de-inicio_Arquitectura-de-un-Juego-en-Pygame.png" >}}
 
 ---
 
