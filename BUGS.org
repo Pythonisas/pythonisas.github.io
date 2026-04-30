@@ -4,6 +4,7 @@
 #+identifier: 20260313T000001
 
 * Active Issues
+
 ** DOING 'hugo serve' not re-rerendering images immediatelly
 OPENED: [2026-04-30]
 :PROPERTIES:
@@ -51,4 +52,28 @@ it does not export
 
 *** Potential Fix
 - ?
+
+* DONE BUG ox-hugo not exporting .md files properly?
+:PROPERTIES:
+:STATUS:   ACTIVE
+:CREATED:  [2026-02-20]
+:SEVERITY: [HIGH/MEDIUM/LOW]
+:END:
+
+** Steps to Reproduce
+1. add modify content
+2. C-c C-e H A 
+
+** Expected Behavior
+ox-hugo to export.md files properly 
+
+** Actual Behavior
+ox-hugo is not exporting .md files properly?
+
+** Investigation Notes
+- 
+
+** Potential Fix
+- ?
+ 
 

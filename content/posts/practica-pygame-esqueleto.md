@@ -164,6 +164,8 @@ class InvasionAlienigena:
 > donde se pueden dibujar imagenes, formas y texto. La pantalla completa
 > (`self.pantalla`) es la _surface_ principal.
 
+{{< figure src="/images/Composicion-en-Pygame.png" >}}
+
 
 ### 2.3 — El bucle principal: `ejecutar_juego() :-)` {#2-dot-3-el-bucle-principal-ejecutar-juego}
 
@@ -193,6 +195,8 @@ def ejecutar_juego(self):
         ___.display.___()
         self.clock.___(60)
 ```
+
+{{< figure src="/images/el-bucle-del-juego.png" >}}
 
 | **Instruccion**           | **¿Que hace?**                                                                 |
 |---------------------------|--------------------------------------------------------------------------------|
