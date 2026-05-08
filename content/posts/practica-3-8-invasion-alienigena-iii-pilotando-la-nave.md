@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.8 - Invasion Alienigena III: Pilotando la Nave"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2026-05-01
 tags = ["prácticas"]
 url = "/pygame3/"
@@ -190,7 +190,7 @@ def ejecutar_juego(self):
 
         self.pantalla.fill(self.ajustes.color_fondo)
         self.nave.dibujarme()
-        pygame.pantalla.flip()
+        pygame.display.flip()
         self.clock.tick(60)
 ```
 

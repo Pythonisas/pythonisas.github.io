@@ -1,6 +1,6 @@
 +++
 title = "Inicio"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2022-01-01
 draft = false
 +++
@@ -31,6 +31,7 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 -   [Práctica 3.6 — Invasión Alienígena I: El esqueleto del juego](/pygame1/)
 -   [Práctica 3.7 — Invasión Alienígena II: Añadiendo la nave](/pygame2/)
 -   [Práctica 3.8 — Invasión Alienígena III: Pilotando la nave](/pygame3/)
+-   [Práctica 3.9 — Invasión Alienígena IV: Disparando balas](/pygame4/)
 
 
 ## Recursos {#recursos}
