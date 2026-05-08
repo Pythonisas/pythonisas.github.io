@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.4 — Clases, herencia y coches"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-03-23T12:00:00+01:00
 publishDate = 2026-03-23
 tags = ["prácticas"]

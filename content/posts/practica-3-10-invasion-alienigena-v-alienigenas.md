@@ -1,270 +1,168 @@
 +++
 title = "Practica 3.10 - Invasion Alienigena V: Alienigenas!"
-author = ["Jordi"]
+author = ["Fénix"]
 tags = ["prácticas"]
 url = "/pygame5/"
 draft = true
 +++
 
-## Objetivo {#objetivo}
+## Mision: Llenar el cielo de enemigos {#mision-llenar-el-cielo-de-enemigos}
 
-Tu nave dispara, pero no tiene a quien disparar. En esta practica vas a poblar la pantalla de alienigenas: primero uno solo, luego una fila entera, y finalmente una flota completa que ocupa la mitad superior de la ventana.
+**Contexto galactico:** Tus armas funcionan, pero los radares muestran una señal inquietante: los alienigenas se acercan en formacion. Los estrategas de la Resistencia necesitan que llenes la mitad superior de la pantalla con una flota enemiga — organizados en filas y columnas, como un ejercito que avanza.
 
-Este es un salto de complejidad importante. Vas a aprender a:
-
--   Crear objetos en masa con bucles anidados
--   Calcular posiciones con aritmetica de rectangulos
--   Usar `pygame.sprite.Group` para gestionar decenas de sprites a la vez
--   Dibujar un grupo entero con una sola llamada (`.draw()`)
--   Refactorizar progresivamente mientras el codigo crece
-
-Al terminar, tu juego mostrara una flota de alienigenas alineados en filas y columnas, listos para la batalla.
+El reto no es solo "poner sprites": es un problema de **generacion procedural**. ¿Cuantos alienigenas caben en una fila? ¿Cuantas filas caben antes de llegar a la zona de la nave? Tu codigo debe calcularlo automaticamente segun el tamaño de la pantalla y del sprite — sin numeros magicos hardcodeados.
 
 > Basado en el Capitulo 13 de _Python Crash Course, 3rd Edition_ -- Eric Matthes
 
 ---
 
 
-## Punto de partida {#punto-de-partida}
+## Los problemas de ingenieria {#los-problemas-de-ingenieria}
 
-Tu P3.9 funcional: una nave que se mueve y dispara balas.
+1.  **El sprite individual** — Necesitas una clase `Alienigena` que cargue una imagen y se posicione con margenes correctos. Similar a `Nave`, pero con un detalle: `self.x` como float (¿para que, si todavia no se mueve? Piensalo — o lo descubriras en P3.11)
 
-```text
-PRACTICA3.10/
-+-- invasion_alienigena.py   <-- tu P3.9 (vas a ampliar)
-+-- ajustes.py               <-- tu P3.9 (sin cambios por ahora)
-+-- nave.py                  <-- tu P3.9 (sin cambios)
-+-- bala.py                  <-- tu P3.9 (sin cambios)
-+-- alienigena.py            <-- NUEVO fichero
-+-- images/
-    +-- nave.bmp
-    +-- alienigena.bmp       <-- NUEVA imagen
-```
+2.  **La generacion procedural** — ¿Cuantos alienigenas caben en una fila? No puedes hardcodear "8 alienigenas". Si cambias el tamaño de la pantalla o del sprite, el numero debe recalcularse solo. Necesitas aritmetica de rects
+
+3.  **La dimension vertical** — Una fila no es suficiente. Necesitas apilar filas, dejando espacio entre ellas y reservando la zona inferior para la nave. Esto requiere bucles anidados
+
+4.  **Dibujar 50 sprites de golpe** — Con las balas, las dibujabas una a una. Con 50 alienigenas, eso es ineficiente. Pygame ofrece `Group.draw()` — una sola llamada que dibuja todo el grupo
+
+---
+
+
+## Herramientas a tu disposicion {#herramientas-a-tu-disposicion}
+
+| **Herramienta**          | **Para que sirve**                                                      |
+|--------------------------|-------------------------------------------------------------------------|
+| `pygame.sprite.Sprite`   | Tu `Alienigena` hereda de aqui (igual que `Bala`)                       |
+| `pygame.image.load()`    | Cargar la imagen del alien desde `images/alienigena.bmp`                |
+| `.get_rect()`            | Obtener el rectangulo de la imagen (con `.width`, `.height`, `.size`)   |
+| `Group.draw(superficie)` | Dibuja todos los sprites del grupo de golpe usando su `imagen` y `rect` |
+| `rect.size`              | Devuelve `(ancho, alto)` — atajo para ambas dimensiones                 |
 
 Necesitaras una imagen para el alienigena. Puedes usar la del libro ([recursos PCC](https://ehmatthes.github.io/pcc_3e)) o buscar una propia. Guardala en `images/alienigena.bmp`.
 
 ---
 
 
-## Paso 1 -- Crear la clase `Alienigena` {#paso-1-crear-la-clase-alienigena}
+## Desafio 1: El primer alien {#desafio-1-el-primer-alien}
 
-El alienigena es muy parecido a la nave: un sprite con imagen que se coloca en pantalla. Crea `alienigena.py`:
+Antes de construir la flota, haz que aparezca **un solo alienigena** en la esquina superior izquierda. Si uno funciona, 50 funcionaran.
 
-```python
-import pygame
-from pygame.sprite import Sprite
+**Requisitos:**
 
-class Alienigena(Sprite):
-    """Representa un alienigena individual de la flota."""
+-   Nuevo fichero `alienigena.py` con clase `Alienigena(Sprite)`
+-   Carga `images/alienigena.bmp` y obtiene su `rect`
+-   Se posiciona con un margen: `self.rect.x = self.rect.width` (un ancho de distancia al borde)
+-   Se guarda `self.x = float(self.rect.x)` (¿por que float si no se mueve? Pregunta de diseño para P3.11)
+-   Crea un `pygame.sprite.Group` en `InvasionAlienigena` y usa `.draw()` para pintarlo
 
-    def __init__(self, ia_juego):
-        """Inicializa el alienigena y su posicion de partida."""
-        super().__init__()
-        self.pantalla = ia_juego.pantalla
-
-        # Cargar imagen y obtener su rect
-        self.imagen = pygame.image.load('images/alienigena.bmp')
-        self.rect = self.imagen.get_rect()
-
-        # Colocar cerca de la esquina superior izquierda
-        self.rect.x = self.rect.width
-        self.rect.y = self.rect.height
-
-        # Guardar posicion horizontal como float
-        self.x = float(self.rect.x)
-```
-
-¿Por que `self.rect.x = self.rect.width`? Para dejar un margen a la izquierda igual al ancho del propio alienigena. Asi no queda pegado al borde.
-
-¿Por que `self.x` como float? Porque mas adelante (P3.11) haremos que la flota se mueva, y necesitaremos velocidades fraccionarias — el mismo patron que usaste en la nave.
+**Diagnostico:** ejecuta el juego. Deberia aparecer un alien arriba a la izquierda. Si no lo ves, revisa que llamas a `.draw()` en la fase de dibujo.
 
 ---
 
 
-## Paso 2 -- Mostrar el primer alienigena {#paso-2-mostrar-el-primer-alienigena}
+## Desafio 2: La primera fila {#desafio-2-la-primera-fila}
 
-Antes de construir la flota entera, comprueba que un solo alienigena aparece bien en pantalla.
+Un solo alien no da miedo. Llena toda la fila superior.
 
+**El problema:** ¿cuantos alienigenas caben? Depende del ancho de la pantalla y del ancho del sprite. Tu codigo debe calcularlo, no hardcodearlo.
 
-### 2.1 Grupo de alienigenas {#2-dot-1-grupo-de-alienigenas}
+**Pistas de diseño:**
 
-En el constructor de `InvasionAlienigena`, crea un grupo y llama a un metodo que construira la flota:
+-   El espaciado entre aliens es igual al ancho de un alien (asi quedan uniformes)
+-   El margen derecho: deja al menos 2 anchos de alien libres para que no quede pegado al borde
+-   Usa un `while` que incremente la posicion X en `2 * ancho_alienigena` en cada iteracion
+-   Extrae la creacion individual a `_crear_alienigena(x_posicion)` para mantener `_crear_flota()` legible
 
-```python
-self.alienigenas = pygame.sprite.Group()
-self._crear_flota()
-```
-
-
-### 2.2 Metodo `_crear_flota()` (version minima) {#2-dot-2-metodo-crear-flota--version-minima}
-
-Por ahora, crea un solo alienigena para verificar que todo funciona:
-
-```python
-def _crear_flota(self):
-    """Crea la flota de alienigenas."""
-    alienigena = Alienigena(self)
-    self.alienigenas.add(alienigena)
-```
-
-
-### 2.3 Dibujar el grupo {#2-dot-3-dibujar-el-grupo}
-
-En `_actualizar_pantalla()` (o en tu fase de dibujo), añade una sola linea:
-
-```python
-self.alienigenas.draw(self.pantalla)
-```
-
-A diferencia de las balas (que dibujabas una a una con `dibujar_bala()`), los grupos de sprites con imagen se dibujan de golpe con `.draw(superficie)`. Pygame usa el `self.imagen` y `self.rect` de cada sprite del grupo automaticamente.
-
-Ejecuta el juego. Deberia aparecer un alienigena en la esquina superior izquierda.
+**Diagnostico:** `print(len(self.alienigenas))` te dice cuantos aliens has generado. ¿Cambia si modificas `ancho_pantalla` en `Ajustes`? Si no cambia, algo esta hardcodeado.
 
 ---
 
 
-## Paso 3 -- Llenar una fila {#paso-3-llenar-una-fila}
+## Desafio 3: La flota completa {#desafio-3-la-flota-completa}
 
-Un solo alienigena no da mucho miedo. Vamos a llenar toda la fila superior.
+Una fila es el principio. Ahora apila filas verticalmente hasta llenar la mitad superior de la pantalla.
 
-La idea: coloca alienigenas uno al lado del otro, con un espacio entre ellos igual a su propio ancho. Sigue añadiendo mientras quepan en la pantalla.
+**El problema:** ¿cuantas filas caben? Necesitas reservar espacio abajo para la nave y las balas (al menos 3 alturas de alien).
 
-```python
-def _crear_flota(self):
-    """Crea la flota de alienigenas."""
-    alienigena = Alienigena(self)
-    ancho_alienigena = alienigena.rect.width
+**Pista:** envuelve tu bucle horizontal en otro bucle vertical. El externo controla Y (filas), el interno controla X (columnas). Al terminar cada fila, resetea X al margen izquierdo y avanza Y.
 
-    x_actual = ancho_alienigena
-    while x_actual < (self.ajustes.ancho_pantalla - 2 * ancho_alienigena):
-        self._crear_alienigena(x_actual)
-        x_actual += 2 * ancho_alienigena
-```
-
-¿Por que `2 * ancho_alienigena`? Porque avanzamos el ancho del alienigena + un espacio igual a su ancho. Asi quedan separados uniformemente.
-
-¿Por que el limite es `ancho_pantalla - 2 * ancho_alienigena`? Para dejar un margen a la derecha y que el ultimo alienigena no quede pegado al borde.
-
-
-### 3.1 El metodo auxiliar `_crear_alienigena()` {#3-dot-1-el-metodo-auxiliar-crear-alienigena}
-
-Extrae la creacion de cada alienigena a su propio metodo para mantener `_crear_flota()` legible:
-
-```python
-def _crear_alienigena(self, x_posicion):
-    """Crea un alienigena y lo coloca en la fila."""
-    nuevo_alienigena = Alienigena(self)
-    nuevo_alienigena.x = x_posicion
-    nuevo_alienigena.rect.x = x_posicion
-    self.alienigenas.add(nuevo_alienigena)
-```
-
-Ejecuta el juego. Deberia aparecer una fila completa de alienigenas arriba.
-
----
-
-
-## Paso 4 -- Añadir filas (la flota completa) {#paso-4-añadir-filas--la-flota-completa}
-
-Una fila no es suficiente. Vamos a apilar filas verticalmente hasta llenar la mitad superior de la pantalla.
-
-Envuelve el bucle horizontal en otro bucle vertical:
-
-```python
-def _crear_flota(self):
-    """Crea la flota completa de alienigenas."""
-    alienigena = Alienigena(self)
-    ancho_alienigena, alto_alienigena = alienigena.rect.size
-
-    x_actual, y_actual = ancho_alienigena, alto_alienigena
-    while y_actual < (self.ajustes.alto_pantalla - 3 * alto_alienigena):
-        while x_actual < (self.ajustes.ancho_pantalla - 2 * ancho_alienigena):
-            self._crear_alienigena(x_actual, y_actual)
-            x_actual += 2 * ancho_alienigena
-
-        # Fila terminada: resetear X, avanzar Y
-        x_actual = ancho_alienigena
-        y_actual += 2 * alto_alienigena
-```
-
-Tres detalles:
-
--   `alienigena.rect.size` devuelve una tupla `(ancho, alto)` — un atajo para obtener ambas dimensiones
--   El limite vertical es `alto_pantalla - 3 * alto_alienigena` para dejar espacio abajo para la nave y las balas
--   Al terminar cada fila, `x_actual` vuelve al margen izquierdo y `y_actual` baja dos alturas (alienigena + espacio)
-
-Actualiza `_crear_alienigena()` para aceptar la posicion Y:
-
-```python
-def _crear_alienigena(self, x_posicion, y_posicion):
-    """Crea un alienigena y lo coloca en la flota."""
-    nuevo_alienigena = Alienigena(self)
-    nuevo_alienigena.x = x_posicion
-    nuevo_alienigena.rect.x = x_posicion
-    nuevo_alienigena.rect.y = y_posicion
-    self.alienigenas.add(nuevo_alienigena)
-```
-
-Ejecuta el juego. La pantalla deberia mostrar una flota completa de alienigenas en filas y columnas.
+**Diagnostico:** el `print(len(self.alienigenas))` deberia mostrar decenas de aliens. Si cambias `alto_pantalla`, deberian aparecer mas o menos filas automaticamente.
 
 ---
 
 
 ## Entrega {#entrega}
 
--   [ ] `alienigena.py` -- clase `Alienigena(Sprite)` con imagen, rect, posicion float
--   [ ] `invasion_alienigena.py` -- grupo `self.alienigenas`, `_crear_flota()` con filas y columnas, `_crear_alienigena()`, `.draw()` en pantalla
--   [ ] `images/alienigena.bmp` -- imagen del alienigena incluida
--   [ ] La flota aparece correctamente (varias filas, espaciado uniforme)
--   [ ] La nave y las balas siguen funcionando
--   [ ] Pulsar X o Q cierra el juego
+```text
+PRACTICA3.10/
++-- invasion_alienigena.py
++-- ajustes.py
++-- nave.py
++-- bala.py
++-- alienigena.py            <-- NUEVO
++-- images/
+    +-- nave.bmp
+    +-- alienigena.bmp       <-- NUEVA
+```
 
-&gt;    RECORDATORIO: organiza las entregas por carpetas (P3.6 a P3.10)
+Requisitos funcionales:
+
+-   [ ] La flota aparece con varias filas y columnas, espaciado uniforme
+-   [ ] El numero de aliens se calcula automaticamente (sin numeros magicos)
+-   [ ] `_crear_alienigena()` como metodo auxiliar separado
+-   [ ] La nave y las balas siguen funcionando
+-   [ ] `Group.draw()` para pintar toda la flota de golpe
 
 ---
 
 
-## BONUS -- Para nota maxima {#bonus-para-nota-maxima}
+## Uso etico de la IA {#uso-etico-de-la-ia}
 
-| **Bonus**                     | **Descripcion**                                                    | **Puntos** |
-|-------------------------------|--------------------------------------------------------------------|------------|
-| Alienigenas con imagen propia | Usar un sprite personalizado (no el default del libro)             | **+0.5**   |
-| Colores alternos por fila     | Filas pares e impares con imagenes o colores diferentes            | **+0.75**  |
-| Flota centrada                | Calcular margen para que la flota quede centrada horizontalmente   | **+0.5**   |
-| Ajustes en `Ajustes`          | `velocidad_alienigena` preparada (aunque aun no se use)            | **+0.25**  |
-| Animacion basica              | Los alienigenas cambian ligeramente de frame (2 sprites alternos)  | **+1**     |
-| Contador de alienigenas       | Mostrar en terminal o pantalla cuantos alienigenas hay en la flota | **+0.5**   |
+Mismas reglas que P3.9: la IA esta permitida con transparencia. Si la usas, incluye el prompt y explica en tus palabras:
 
-> En la P3.11 la flota cobrara vida: se movera lateralmente, bajara, y podra destruir tu nave. Cuanto mas solida sea tu flota ahora, mas facil sera añadir esa mecanica.
+&gt; **"¿Por que se guarda `self.x = float(self.rect.x)` si el alien todavia no se mueve?"**
+
+---
+
+
+## Rubrica por competencias {#rubrica-por-competencias}
+
+| **Criterio**                               | **Maestro (9-10)**                                                   | **Aprendiz (6-8)**                                 | **Recluta (0-5)**                   | **Peso** |
+|--------------------------------------------|----------------------------------------------------------------------|----------------------------------------------------|-------------------------------------|----------|
+| **Clase Alienigena**                       | Hereda de Sprite, imagen cargada, rect con margenes, float preparado | Funciona pero margenes hardcodeados o sin float    | No hay clase o no carga imagen      | **25%**  |
+| **Generacion procedural (filas+columnas)** | Bucles anidados que calculan posiciones segun tamaño pantalla/sprite | Una fila funciona pero filas multiples incompletas | Aliens posicionados manualmente     | **30%**  |
+| **Arquitectura (_crear_alienigena)**       | Metodo auxiliar extraido, `_crear_flota()` legible                   | Funciona pero toda la logica en un solo metodo     | Sin separacion de responsabilidades | **20%**  |
+| **Group.draw() y ejecucion**               | Flota visible, nave+balas funcionan, `.draw()` usado                 | Flota aparece pero con errores visuales menores    | No ejecuta o flota no visible       | **15%**  |
+| **Pensamiento critico / IA**               | Explica por que float, documenta prompts                             | Indica uso de IA sin explicar decisiones           | Copia sin comprension               | **10%**  |
+
+---
+
+
+## Bonus de ingenieria (hasta +2.5) {#bonus-de-ingenieria--hasta-plus-2-dot-5}
+
+| **Bonus**                 | **Descripcion**                                      | **Puntos** |
+|---------------------------|------------------------------------------------------|------------|
+| Sprite personalizado      | Imagen propia en vez del default del libro           | **+0.5**   |
+| Flota centrada            | Calculo de margen para centrado horizontal           | **+0.5**   |
+| Colores alternos por fila | Filas pares e impares con sprites o tonos diferentes | **+0.75**  |
+| Animacion basica          | 2 frames alternos para los alienigenas               | **+1.0**   |
 
 ---
 
 
 ## Conceptos clave {#conceptos-clave}
 
-| **Concepto**                              | **Donde lo ves**                                                     |
-|-------------------------------------------|----------------------------------------------------------------------|
-| **Clase Sprite con imagen**               | `Alienigena(Sprite)` carga `alienigena.bmp` igual que `Nave`         |
-| **Group.draw()**                          | Dibuja todos los sprites del grupo de golpe usando su imagen y rect  |
-| **Bucles anidados**                       | While externo (filas Y) contiene while interno (columnas X)          |
-| **Aritmetica de rects**                   | `rect.size`, `rect.width`, `rect.height` para calcular espaciado     |
-| **Refactorizacion: \_crear_alienigena()** | Extraer la creacion individual para que `_crear_flota()` sea legible |
-| **Margen calculado**                      | Dejar espacio en bordes: `ancho - 2 * ancho_alien` como limite       |
-
----
-
-
-## Rubrica {#rubrica}
-
-| **Criterio**                                                    | **Puntos** |
-|-----------------------------------------------------------------|------------|
-| `alienigena.py` -- clase completa (Sprite, imagen, rect, float) | 3          |
-| `invasion_alienigena.py` -- flota con filas y columnas          | 3          |
-| `_crear_alienigena()` -- metodo auxiliar separado               | 1          |
-| Imagen `alienigena.bmp` incluida                                | 1          |
-| Ejecucion (flota visible, nave+balas funcionan)                 | 2          |
-| **Total base**                                                  | **10**     |
-| BONUS (hasta +3.5, max 10)                                      | +3.5       |
+| **Concepto**                | **Donde lo ves**                                                    |
+|-----------------------------|---------------------------------------------------------------------|
+| **Sprite con imagen**       | `Alienigena(Sprite)` carga `alienigena.bmp` igual que `Nave`        |
+| **Group.draw()**            | Una llamada dibuja todos los sprites del grupo                      |
+| **Generacion procedural**   | Bucles que calculan cuantos aliens caben segun dimensiones          |
+| **Bucles anidados**         | While externo (filas Y) contiene while interno (columnas X)         |
+| **Aritmetica de rects**     | `rect.size`, `rect.width`, `rect.height` para calcular espaciado    |
+| **Margenes calculados**     | `ancho_pantalla - 2 * ancho_alien` como limite — no numeros magicos |
+| **Preparar para el futuro** | `self.x = float(...)` aunque el alien aun no se mueva               |
 
 ---
 

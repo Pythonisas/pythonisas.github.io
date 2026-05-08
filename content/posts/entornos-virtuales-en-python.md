@@ -1,6 +1,6 @@
 +++
 title = "Uso de entornos virtuales mágicos"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-01-15T12:00:00+01:00
 publishDate = 2026-01-15
 url = "/entornos-virtuales/"

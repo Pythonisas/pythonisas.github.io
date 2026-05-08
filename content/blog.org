@@ -1745,106 +1745,106 @@ Las mecanicas del juego:
 Descarga el fichero de partida: [[/code/poo5/duelo_naves.py][duelo_naves.py]]
 
 #+begin_src python :tangle ../static/code/poo5/duelo_naves.py
-#!/usr/bin/env python3
-import random
-import time
+  #!/usr/bin/env python3
+  import random
+  import time
 
-class Nave:
-    def __init__(self, nombre, escudo, combustible):
-        self.nombre = nombre
-        self.escudo = escudo
-        self.combustible = combustible
+  class Nave:
+      def __init__(self, nombre, escudo, combustible):
+          self.nombre = nombre
+          self.escudo = escudo
+          self.combustible = combustible
 
-    def estado_visual(self):
-        barra = "█" * (self.escudo // 10)
-        return f"[{barra:<10}] {self.escudo}%"
+      def estado_visual(self):
+          barra = "█" * (self.escudo // 10)
+          return f"[{barra:<10}] {self.escudo}%"
 
-def iniciar_duelo():
-    print("\n" + "!"*50)
-    print("   ¡ALERTA DE COMBATE! NAVE PIRATA DETECTADA")
-    print("!"*50)
+  def iniciar_duelo():
+      print("\n" + "!"*50)
+      print("   ¡ALERTA DE COMBATE! NAVE PIRATA DETECTADA")
+      print("!"*50)
 
-    nombre_usuario = input("Capitán, nombre de su nave: ").upper()
-    jugador = Nave(nombre_usuario, 100, 100)
-    enemigo = Nave("CRUCERO PIRATA", 120, 999)
+      nombre_usuario = input("Capitán, nombre de su nave: ").upper()
+      jugador = Nave(nombre_usuario, 100, 100)
+      enemigo = Nave("CRUCERO PIRATA", 120, 999)
 
-    while jugador.escudo > 0 and enemigo.escudo > 0:
-        # Interfaz de combate
-        print(f"\n🚀 {jugador.nombre}: {jugador.estado_visual()} | ⛽ Combustible: {jugador.combustible}%")
-        print(f"🏴‍☠️ {enemigo.nombre}: {enemigo.estado_visual()}")
-        print("-" * 50)
+      while jugador.escudo > 0 and enemigo.escudo > 0:
+          # Interfaz de combate
+          print(f"\n🚀 {jugador.nombre}: {jugador.estado_visual()} | ⛽ Combustible: {jugador.combustible}%")
+          print(f"🏴‍☠️ {enemigo.nombre}: {enemigo.estado_visual()}")
+          print("-" * 50)
 
-        print("¿ÓRDENES?")
-        print("1. DISPARAR (-10 comb. | -20 daño)")
-        print("2. MEGA-LÁSER (-30 comb. | -50 daño)")
-        print("3. REPARAR (+25 escudo | -15 comb.)")
-        print("4. ESQUIVAR (Evita el siguiente golpe | -10 comb.)")
+          print("¿ÓRDENES?")
+          print("1. DISPARAR (-10 comb. | -20 daño)")
+          print("2. MEGA-LÁSER (-30 comb. | -50 daño)")
+          print("3. REPARAR (+25 escudo | -15 comb.)")
+          print("4. ESQUIVAR (Evita el siguiente golpe | -10 comb.)")
 
-        opcion = input("\nSeleccione (1-4): ").strip()
+          opcion = input("\nSeleccione (1-4): ").strip()
 
-        esquivando = False
+          esquivando = False
 
-        if opcion == "1":
-            if jugador.combustible >= 10:
-                jugador.combustible -= 10
-                daño = 20
-                enemigo.escudo -= daño
-                print(f"🎯 ¡Impacto! El pirata sufre -{daño} de daño.")
-                # BONUS: Robar combustible
-                if random.random() < 0.4:
-                    robo = random.randint(5, 15)
-                    jugador.combustible = min(100, jugador.combustible + robo)
-                    print(f"📦 ¡Has succionado {robo}% de combustible del enemigo!")
-            else: print("⚠️ ¡Sin energía para disparar!")
+          if opcion == "1":
+              if jugador.combustible >= 10:
+                  jugador.combustible -= 10
+                  daño = 20
+                  enemigo.escudo -= daño
+                  print(f"🎯 ¡Impacto! El pirata sufre -{daño} de daño.")
+                  # BONUS: Robar combustible
+                  if random.random() < 0.4:
+                      robo = random.randint(5, 15)
+                      jugador.combustible = min(100, jugador.combustible + robo)
+                      print(f"📦 ¡Has succionado {robo}% de combustible del enemigo!")
+              else: print("⚠️ ¡Sin energía para disparar!")
 
-        elif opcion == "2":
-            if jugador.combustible >= 30:
-                jugador.combustible -= 30
-                enemigo.escudo -= 50
-                print("⚡ ¡BUM! La mega-carga sacude al crucero pirata.")
-            else: print("⚠️ Energía insuficiente para el Mega-Láser.")
+          elif opcion == "2":
+              if jugador.combustible >= 30:
+                  jugador.combustible -= 30
+                  enemigo.escudo -= 50
+                  print("⚡ ¡BUM! La mega-carga sacude al crucero pirata.")
+              else: print("⚠️ Energía insuficiente para el Mega-Láser.")
 
-        elif opcion == "3":
-            if jugador.combustible >= 15:
-                jugador.combustible -= 15
-                jugador.escudo = min(100, jugador.escudo + 25)
-                print("🛠️  Reparando planchas de casco...")
-            else: print("⚠️ No hay energía para reparaciones.")
+          elif opcion == "3":
+              if jugador.combustible >= 15:
+                  jugador.combustible -= 15
+                  jugador.escudo = min(100, jugador.escudo + 25)
+                  print("🛠️  Reparando planchas de casco...")
+              else: print("⚠️ No hay energía para reparaciones.")
 
-        elif opcion == "4":
-            if jugador.combustible >= 10:
-                jugador.combustible -= 10
-                esquivando = True
-                print("✈️  Maniobra evasiva iniciada.")
-            else: print("⚠️ Demasiado pesado para esquivar.")
+          elif opcion == "4":
+              if jugador.combustible >= 10:
+                  jugador.combustible -= 10
+                  esquivando = True
+                  print("✈️  Maniobra evasiva iniciada.")
+              else: print("⚠️ Demasiado pesado para esquivar.")
 
-        else:
-            print("❌ ERROR DE SISTEMA: Orden no válida.")
-            continue # Salta el turno del enemigo si te equivocas de tecla
+          else:
+              print("❌ ERROR DE SISTEMA: Orden no válida.")
+              continue # Salta el turno del enemigo si te equivocas de tecla
 
-        # Turno del Enemigo
-        if enemigo.escudo > 0:
-            time.sleep(1)
-            if esquivando:
-                print("\n💨 ¡El pirata dispara pero fallas por los pelos!")
-            else:
-                ataque_enemigo = random.randint(15, 25)
-                jugador.escudo -= ataque_enemigo
-                print(f"\n💥 ¡EL PIRATA RESPONDE! Te quita {ataque_enemigo}% de escudo.")
+          # Turno del Enemigo
+          if enemigo.escudo > 0:
+              time.sleep(1)
+              if esquivando:
+                  print("\n💨 ¡El pirata dispara pero fallas por los pelos!")
+              else:
+                  ataque_enemigo = random.randint(15, 25)
+                  jugador.escudo -= ataque_enemigo
+                  print(f"\n💥 ¡EL PIRATA RESPONDE! Te quita {ataque_enemigo}% de escudo.")
 
-        # Verificar combustible crítico
-        if jugador.combustible <= 0:
-            print("\n🪫 COMBUSTIBLE AGOTADO. Te has quedado a la deriva...")
-            jugador.escudo = 0
+          # Verificar combustible crítico
+          if jugador.combustible <= 0:
+              print("\n🪫 COMBUSTIBLE AGOTADO. Te has quedado a la deriva...")
+              jugador.escudo = 0
 
-    # Resultado final
-    if jugador.escudo > 0:
-        print(f"\n🏆 ¡VICTORIA! El espacio vuelve a ser seguro para la {jugador.nombre}.")
-    else:
-        print("\n💀 DERROTA. Tu nave se ha convertido en chatarra espacial.")
+      # Resultado final
+      if jugador.escudo > 0:
+          print(f"\n🏆 ¡VICTORIA! El espacio vuelve a ser seguro para la {jugador.nombre}.")
+      else:
+          print("\n💀 DERROTA. Tu nave se ha convertido en chatarra espacial.")
 
-if __name__ == "__main__":
-    iniciar_duelo()
+  if __name__ == "__main__":
+      iniciar_duelo()
 #+end_src
 
 ---
@@ -2670,7 +2670,7 @@ Los bonus de refactorizacion allanan el camino para la P3.9 (en la que añadirem
 #+end_quote
 
 
-** TODO Practica 3.9 - Invasion Alienigena IV: Disparando Balas
+** DONE Practica 3.9 - Invasion Alienigena IV: Disparando Balas
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-3-9-invasion-alienigena-iv-disparando-balas
 :EXPORT_HUGO_SECTION: posts
@@ -2679,17 +2679,13 @@ Los bonus de refactorizacion allanan el camino para la P3.9 (en la que añadirem
 :EXPORT_HUGO_TAGS: prácticas
 :END:
 
-*** El problema
+[[/images/space-invaders.png]]
 
-Tu nave se mueve... pero es inofensiva. Necesita armas.
+*** Mision: El Condensador de Particulas
 
-Al pulsar ESPACIO, la nave debera disparar proyectiles que suban por la pantalla. Suena simple, pero hay tres problemas de ingenieria escondidos:
+*Contexto galactico:* La nave ya se desplaza por el cuadrante, pero la inteligencia de la Resistencia informa que los alienigenas estan a punto de entrar en rango. Los ingenieros han instalado un cañon de plasma experimental, pero el software de control es inestable.
 
-1. *La fuga de memoria* — Cada disparo crea un objeto nuevo. Si no los destruyes cuando salen de pantalla, el juego acumula cientos de balas invisibles que consumen RAM. ¿Como detectas y eliminas objetos que ya no sirven?
-
-2. *El dilema de la coleccion* — Necesitas guardar todas las balas activas en algun sitio, actualizarlas todas cada frame, y dibujarlas todas. ¿Como gestionas una coleccion que crece y encoge dinamicamente?
-
-3. *El recurso limitado* — Si el jugador puede disparar sin limite, el juego pierde toda la tension. ¿Como limitas las balas en pantalla para que apuntar bien sea obligatorio?
+Tu mision no es solo "hacer que dispare", sino resolver tres problemas criticos de ingenieria que podrian destruir el computador de a bordo en plena batalla.
 
 #+begin_quote
 Basado en el Capitulo 12 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
@@ -2697,70 +2693,89 @@ Basado en el Capitulo 12 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
 
 ---
 
-*** Lo que necesitas saber antes de empezar
+*** Los problemas de ingenieria
 
-- =pygame.sprite.Sprite= — clase base para objetos que Pygame sabe agrupar. Tu =Bala= heredara de ella
-- =pygame.sprite.Group= — coleccion de sprites con superpoderes: =.update()= llama a =actualizar()= de todos, =.sprites()= los lista, =.add()= y =.remove()= los gestionan
-- =pygame.Rect(x, y, ancho, alto)= — crea un rectangulo sin imagen (la bala no necesita un .bmp)
-- =pygame.draw.rect(superficie, color, rect)= — dibuja un rectangulo solido en pantalla
+Como desarrollador/a jefe del proyecto, te enfrentas a:
+
+1. *Las balas fantasma (Fuga de memoria)* — En las pruebas iniciales, cada bala disparada sigue existiendo en el sistema incluso despues de salir de pantalla. Si el piloto dispara demasiado, el juego se ralentiza hasta colapsar. ¿Como detectas y eliminas estos objetos fantasma?
+
+2. *Gestion de energia (Recurso limitado)* — El condensador de la nave no es infinito. Si el jugador puede disparar sin limite, el juego pierde toda tension. Este valor debe ser ajustable sin tocar el codigo de la bala.
+
+3. *Arquitectura modular* — No queremos codigo monolitico. El flujo de eventos, la actualizacion de posiciones y la limpieza de memoria deben vivir en metodos independientes y limpios.
+
+---
+
+*** Herramientas a tu disposicion
+
+Antes de empezar, familiarizate con estas piezas de Pygame:
+
+| *Herramienta*                  | *Para que sirve*                                                      |
+|--------------------------------+-----------------------------------------------------------------------|
+| =pygame.sprite.Sprite=         | Clase base para objetos agrupables. Tu =Bala= heredara de ella       |
+| =pygame.sprite.Group=          | Coleccion con superpoderes: =.update()= actualiza todos, =.add()= / =.remove()= los gestiona |
+| =pygame.Rect(x, y, ancho, alto)= | Crea un rectangulo sin imagen (la bala no necesita un .bmp)        |
+| =pygame.draw.rect(sup, color, rect)= | Dibuja un rectangulo solido en pantalla                        |
 
 ---
 
 *** Desafio 1: Armar la nave
 
-Tu nave necesita poder disparar. Cuando el jugador pulse ESPACIO:
+Tu nave necesita poder disparar. Cuando el jugador pulse =ESPACIO=:
 - Se crea una bala nueva en la punta de la nave
 - La bala sube a velocidad constante
-- Se dibuja como un rectangulo (sin imagen)
+- Se dibuja como un rectangulo solido (sin imagen)
 
-*Pistas tecnicas:*
-- La bala es un nuevo fichero (=bala.py=) con una clase que hereda de =Sprite=
-- Necesita =actualizar()= (mover hacia arriba) y =dibujar_bala()= (pintar el rectangulo)
-- La posicion inicial: =self.rect.midtop = ia_juego.nave.rect.midtop=
-- Recuerda el patron float: =self.y = float(self.rect.y)= para velocidades fraccionarias
+*Requisitos tecnicos:*
+- Nuevo fichero =bala.py= con clase que hereda de =Sprite=
+- Metodos: =actualizar()= (mover hacia arriba) y =dibujar_bala()= (pintar el rectangulo)
+- El =rect= de la bala se construye con =pygame.Rect()= y se posiciona en =ia_juego.nave.rect.midtop=
+- Patron float para velocidades fraccionarias: =self.y = float(self.rect.y)=
 - Centraliza los ajustes (velocidad, tamaño, color) en =ajustes.py=
+- Usa un =pygame.sprite.Group= para almacenar todas las balas activas
 
 ---
 
-*** Desafio 2: La fuga de memoria
+*** Desafio 2: Diagnosticar la fuga de memoria
 
-Implementa el disparo y ejecuta el juego. Ahora añade esta linea en tu game loop, despues de actualizar las balas:
+Implementa el disparo y ejecuta el juego. Ahora añade esta linea de diagnostico en tu game loop, despues de actualizar las balas:
 
 #+begin_src python
 print(len(self.balas))
 #+end_src
 
-Dispara 10 veces y observa la consola. ¿El numero baja cuando las balas salen de pantalla? Si no baja, tienes una *fuga de memoria*: las balas siguen vivas aunque no se vean.
+Dispara 10 veces y observa la consola:
+- ¿El numero baja cuando las balas salen de pantalla?
+- ¿O sigue subiendo indefinidamente?
 
-*Tu mision:* haz que el contador vuelva a 0 despues de que las balas salgan por arriba.
+Si no baja, tienes una *fuga de memoria*: las balas siguen vivas consumiendo recursos aunque no se vean.
 
-*Pista:* =bala.rect.bottom <= 0= indica que la bala ha salido. Pero cuidado: no puedes modificar una coleccion mientras la recorres. ¿Como lo resuelves?
+*Tu mision:* programa una rutina que elimine fisicamente las balas del grupo cuando =bala.rect.bottom <= 0=.
 
-*IMPORTANTE:* una vez que verifiques que funciona, *elimina el print()*. Escribir en consola cada frame ralentiza el juego mas que dibujar graficos.
+*Trampa tecnica:* Python no permite modificar una coleccion mientras la recorres. ¿Como iteras sobre las balas para borrar las que sobran sin romper el bucle?
+
+*IMPORTANTE:* una vez verificado, *elimina el =print()=*. Escribir en consola cada frame ralentiza mas que dibujar graficos.
 
 ---
 
 *** Desafio 3: Energia limitada
 
-Sin limite, el jugador puede llenar la pantalla de balas manteniendo ESPACIO pulsado. Eso destruye la tension del juego.
+Sin limite, el jugador puede inundar la pantalla manteniendo ESPACIO pulsado. Eso destruye el diseño del juego.
 
-*Tu mision:* limita a 3 balas simultaneas en pantalla. Si ya hay 3, pulsar ESPACIO no hace nada hasta que alguna desaparezca.
+*Tu mision:* limita a 3 balas simultaneas. Si ya hay 3, pulsar ESPACIO no hace nada hasta que alguna desaparezca.
 
-*Pregunta de diseño:* ¿donde colocas este limite? ¿En la clase =Bala=, en el game loop, o en =Ajustes=? Justifica tu decision.
+*Pregunta de diseño (incluye la respuesta en un comentario de tu codigo):* ¿Donde colocas este limite? ¿En la clase =Bala=, en el metodo de disparo, o en =Ajustes=? ¿Por que?
 
 ---
 
-*** Desafio 4: Codigo limpio
+*** Desafio 4: Arquitectura limpia
 
-Tu game loop se ha complicado. Tienes logica de eventos, actualizacion de nave, actualizacion de balas, limpieza de balas, y dibujo — todo mezclado.
+Tu game loop se ha complicado. Tienes logica de eventos, actualizacion de nave, actualizacion de balas, limpieza de balas y dibujo — todo entremezclado.
 
-*Tu mision:* extrae la logica de balas a un metodo privado =_actualizar_balas()=. El game loop deberia quedar en 5-6 lineas legibles.
+*Tu mision:* extrae la logica de balas a un metodo privado =_actualizar_balas()=. El game loop deberia quedar en 5-6 lineas legibles, donde cada linea describe *que* se hace, no *como*.
 
 ---
 
 *** Entrega
-
-Tu proyecto deberia tener esta estructura:
 
 #+begin_example
 PRACTICA3.9/
@@ -2781,15 +2796,36 @@ Requisitos funcionales:
 
 ---
 
-*** Rubrica por niveles
+*** Uso etico y critico de la IA
 
-| *Nivel*    | *Descripcion*                                                                          |
-|------------+----------------------------------------------------------------------------------------|
-| *Maestro*  | Los 4 desafios resueltos. Codigo modular. Sabe explicar por que se usa =.copy()= para borrar balas y por que =float= para la posicion. Si uso IA: incluye prompt y demuestra comprension |
-| *Aprendiz* | Disparo funciona + limpieza de memoria + limite de balas. Algun detalle menor pendiente (game loop no del todo limpio, o ajustes hardcodeados en vez de en =Ajustes=) |
-| *Recluta*  | El disparo funciona pero sin limpieza de memoria o sin limite de balas. O el codigo funciona pero no sabe explicar por que |
+En esta practica, el uso de herramientas de IA (ChatGPT, Claude, Copilot) esta *permitido* bajo estas condiciones:
 
-*Sobre el uso de IA:* puedes usar ChatGPT, Copilot, Claude o cualquier herramienta. Pero si lo haces, incluye en un comentario al inicio del fichero: (1) el prompt que usaste, y (2) explica en tus palabras por que se usa =self.balas.copy()= en vez de =self.balas= para el bucle de limpieza.
+1. *Transparencia:* si usas un prompt para generar codigo, incluyelo como comentario multilínea al inicio del fichero
+2. *Comprension:* debes ser capaz de explicar por que iteramos sobre una *copia* del grupo (=self.balas.copy()=) para eliminar elementos
+
+Quien copia sin entender obtiene codigo que funciona hoy y se rompe mañana. Quien entiende lo que copia, lo puede adaptar a cualquier problema futuro.
+
+---
+
+*** Rubrica por competencias
+
+| *Criterio*                             | *Maestro (9-10)*                                  | *Aprendiz (6-8)*                                  | *Recluta (0-5)*                        | *Peso* |
+|----------------------------------------+---------------------------------------------------+---------------------------------------------------+----------------------------------------+--------|
+| *Ingenieria de la clase Bala*          | Hereda de Sprite, =super()=, rect dinamico en la punta de la nave, float para posicion | Funciona pero posicionamiento rigido o sin herencia optima | No hay clase Bala o no usa rects       |  *30%* |
+| *Gestion de memoria y recursos*        | Diagnostica con =print()=, elimina con =.copy()=, explica por que es necesario | Elimina balas pero sin demostrar comprension del problema | Balas se acumulan infinitamente        |  *30%* |
+| *Arquitectura y refactorizacion*       | Game loop limpio. =_actualizar_balas()= y =_disparar_bala()= extraidos | Funciona pero metodos sobrecargados (mezcla eventos con dibujo) | Todo dentro de =ejecutar_juego()=      |  *20%* |
+| *Configuracion centralizada*           | Todos los parametros en =Ajustes=. Limite funcional | Algunos valores hardcodeados en vez de en Ajustes  | Sin control de limites o sin ajustes   |  *10%* |
+| *Pensamiento critico / IA*             | Documenta prompts, justifica decisiones tecnicas   | Indica uso de IA pero sin explicar la logica       | Copia directa sin comprension          |  *10%* |
+
+---
+
+*** Bonus de ingenieria (hasta +2.5)
+
+| *Bonus*                          | *Descripcion*                                                         | *Puntos* |
+|----------------------------------+-----------------------------------------------------------------------+----------|
+| Sonido de pulso                  | Carga y reproduce un efecto de sonido al crear cada =Bala=            | *+0.5*   |
+| Fuego en rafaga                  | Mantener ESPACIO pulsado dispara automaticamente cada 200ms (cooldown)| *+1.0*   |
+| Municion dinamica                | Las balas cambian de color o tamaño gradualmente al alejarse de la nave | *+1.0* |
 
 ---
 
@@ -2802,9 +2838,9 @@ Requisitos funcionales:
 | *pygame.draw.rect()*              | Dibujar un rectangulo solido en pantalla (sin imagen, solo color)     |
 | *pygame.sprite.Group*             | Coleccion de sprites: =update()= y =sprites()= en bloque             |
 | *Instanciacion dinamica*          | Cada ESPACIO crea un =Bala(self)= nuevo en tiempo de ejecucion       |
-| *Fuga de memoria*                 | Objetos que ya no se ven pero siguen consumiendo recursos             |
+| *Fuga de memoria (balas fantasma)* | Objetos invisibles que siguen consumiendo RAM si no se eliminan       |
 | *Iteracion segura con .copy()*    | No puedes borrar de una coleccion mientras la recorres                |
-| *Limitar recursos del jugador*    | =balas_permitidas= obliga a apuntar bien — diseño de juego           |
+| *Recurso limitado*                | =balas_permitidas= obliga al jugador a apuntar bien — game design    |
 
 ---
 
@@ -2813,7 +2849,7 @@ Requisitos funcionales:
 #+end_quote
 
 
-** TODO Practica 3.10 - Invasion Alienigena V: Alienigenas!
+** DOING Practica 3.10 - Invasion Alienigena V: Alienigenas!
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-3-10-invasion-alienigena-v-alienigenas
 :EXPORT_HUGO_SECTION: posts
@@ -2821,18 +2857,11 @@ Requisitos funcionales:
 :EXPORT_HUGO_TAGS: prácticas
 :END:
 
-*** Objetivo
+*** Mision: Llenar el cielo de enemigos
 
-Tu nave dispara, pero no tiene a quien disparar. En esta practica vas a poblar la pantalla de alienigenas: primero uno solo, luego una fila entera, y finalmente una flota completa que ocupa la mitad superior de la ventana.
+*Contexto galactico:* Tus armas funcionan, pero los radares muestran una señal inquietante: los alienigenas se acercan en formacion. Los estrategas de la Resistencia necesitan que llenes la mitad superior de la pantalla con una flota enemiga — organizados en filas y columnas, como un ejercito que avanza.
 
-Este es un salto de complejidad importante. Vas a aprender a:
-- Crear objetos en masa con bucles anidados
-- Calcular posiciones con aritmetica de rectangulos
-- Usar =pygame.sprite.Group= para gestionar decenas de sprites a la vez
-- Dibujar un grupo entero con una sola llamada (=.draw()=)
-- Refactorizar progresivamente mientras el codigo crece
-
-Al terminar, tu juego mostrara una flota de alienigenas alineados en filas y columnas, listos para la batalla.
+El reto no es solo "poner sprites": es un problema de *generacion procedural*. ¿Cuantos alienigenas caben en una fila? ¿Cuantas filas caben antes de llegar a la zona de la nave? Tu codigo debe calcularlo automaticamente segun el tamaño de la pantalla y del sprite — sin numeros magicos hardcodeados.
 
 #+begin_quote
 Basado en el Capitulo 13 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
@@ -2840,208 +2869,126 @@ Basado en el Capitulo 13 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
 
 ---
 
-*** Punto de partida
+*** Los problemas de ingenieria
 
-Tu P3.9 funcional: una nave que se mueve y dispara balas.
+1. *El sprite individual* — Necesitas una clase =Alienigena= que cargue una imagen y se posicione con margenes correctos. Similar a =Nave=, pero con un detalle: =self.x= como float (¿para que, si todavia no se mueve? Piensalo — o lo descubriras en P3.11)
 
-#+begin_example
-PRACTICA3.10/
-+-- invasion_alienigena.py   <-- tu P3.9 (vas a ampliar)
-+-- ajustes.py               <-- tu P3.9 (sin cambios por ahora)
-+-- nave.py                  <-- tu P3.9 (sin cambios)
-+-- bala.py                  <-- tu P3.9 (sin cambios)
-+-- alienigena.py            <-- NUEVO fichero
-+-- images/
-    +-- nave.bmp
-    +-- alienigena.bmp       <-- NUEVA imagen
-#+end_example
+2. *La generacion procedural* — ¿Cuantos alienigenas caben en una fila? No puedes hardcodear "8 alienigenas". Si cambias el tamaño de la pantalla o del sprite, el numero debe recalcularse solo. Necesitas aritmetica de rects
+
+3. *La dimension vertical* — Una fila no es suficiente. Necesitas apilar filas, dejando espacio entre ellas y reservando la zona inferior para la nave. Esto requiere bucles anidados
+
+4. *Dibujar 50 sprites de golpe* — Con las balas, las dibujabas una a una. Con 50 alienigenas, eso es ineficiente. Pygame ofrece =Group.draw()= — una sola llamada que dibuja todo el grupo
+
+---
+
+*** Herramientas a tu disposicion
+
+| *Herramienta*                   | *Para que sirve*                                                     |
+|---------------------------------+----------------------------------------------------------------------|
+| =pygame.sprite.Sprite=          | Tu =Alienigena= hereda de aqui (igual que =Bala=)                   |
+| =pygame.image.load()=           | Cargar la imagen del alien desde =images/alienigena.bmp=             |
+| =.get_rect()=                   | Obtener el rectangulo de la imagen (con =.width=, =.height=, =.size=) |
+| =Group.draw(superficie)=        | Dibuja todos los sprites del grupo de golpe usando su =imagen= y =rect= |
+| =rect.size=                     | Devuelve =(ancho, alto)= — atajo para ambas dimensiones             |
 
 Necesitaras una imagen para el alienigena. Puedes usar la del libro ([[https://ehmatthes.github.io/pcc_3e][recursos PCC]]) o buscar una propia. Guardala en =images/alienigena.bmp=.
 
 ---
 
-*** Paso 1 -- Crear la clase =Alienigena=
+*** Desafio 1: El primer alien
 
-El alienigena es muy parecido a la nave: un sprite con imagen que se coloca en pantalla. Crea =alienigena.py=:
+Antes de construir la flota, haz que aparezca *un solo alienigena* en la esquina superior izquierda. Si uno funciona, 50 funcionaran.
 
-#+begin_src python
-import pygame
-from pygame.sprite import Sprite
+*Requisitos:*
+- Nuevo fichero =alienigena.py= con clase =Alienigena(Sprite)=
+- Carga =images/alienigena.bmp= y obtiene su =rect=
+- Se posiciona con un margen: =self.rect.x = self.rect.width= (un ancho de distancia al borde)
+- Se guarda =self.x = float(self.rect.x)= (¿por que float si no se mueve? Pregunta de diseño para P3.11)
+- Crea un =pygame.sprite.Group= en =InvasionAlienigena= y usa =.draw()= para pintarlo
 
-class Alienigena(Sprite):
-    """Representa un alienigena individual de la flota."""
-
-    def __init__(self, ia_juego):
-        """Inicializa el alienigena y su posicion de partida."""
-        super().__init__()
-        self.pantalla = ia_juego.pantalla
-
-        # Cargar imagen y obtener su rect
-        self.imagen = pygame.image.load('images/alienigena.bmp')
-        self.rect = self.imagen.get_rect()
-
-        # Colocar cerca de la esquina superior izquierda
-        self.rect.x = self.rect.width
-        self.rect.y = self.rect.height
-
-        # Guardar posicion horizontal como float
-        self.x = float(self.rect.x)
-#+end_src
-
-¿Por que =self.rect.x = self.rect.width=? Para dejar un margen a la izquierda igual al ancho del propio alienigena. Asi no queda pegado al borde.
-
-¿Por que =self.x= como float? Porque mas adelante (P3.11) haremos que la flota se mueva, y necesitaremos velocidades fraccionarias — el mismo patron que usaste en la nave.
+*Diagnostico:* ejecuta el juego. Deberia aparecer un alien arriba a la izquierda. Si no lo ves, revisa que llamas a =.draw()= en la fase de dibujo.
 
 ---
 
-*** Paso 2 -- Mostrar el primer alienigena
+*** Desafio 2: La primera fila
 
-Antes de construir la flota entera, comprueba que un solo alienigena aparece bien en pantalla.
+Un solo alien no da miedo. Llena toda la fila superior.
 
-**** 2.1 Grupo de alienigenas
+*El problema:* ¿cuantos alienigenas caben? Depende del ancho de la pantalla y del ancho del sprite. Tu codigo debe calcularlo, no hardcodearlo.
 
-En el constructor de =InvasionAlienigena=, crea un grupo y llama a un metodo que construira la flota:
+*Pistas de diseño:*
+- El espaciado entre aliens es igual al ancho de un alien (asi quedan uniformes)
+- El margen derecho: deja al menos 2 anchos de alien libres para que no quede pegado al borde
+- Usa un =while= que incremente la posicion X en =2 * ancho_alienigena= en cada iteracion
+- Extrae la creacion individual a =_crear_alienigena(x_posicion)= para mantener =_crear_flota()= legible
 
-#+begin_src python
-self.alienigenas = pygame.sprite.Group()
-self._crear_flota()
-#+end_src
-
-**** 2.2 Metodo =_crear_flota()= (version minima)
-
-Por ahora, crea un solo alienigena para verificar que todo funciona:
-
-#+begin_src python
-def _crear_flota(self):
-    """Crea la flota de alienigenas."""
-    alienigena = Alienigena(self)
-    self.alienigenas.add(alienigena)
-#+end_src
-
-**** 2.3 Dibujar el grupo
-
-En =_actualizar_pantalla()= (o en tu fase de dibujo), añade una sola linea:
-
-#+begin_src python
-self.alienigenas.draw(self.pantalla)
-#+end_src
-
-A diferencia de las balas (que dibujabas una a una con =dibujar_bala()=), los grupos de sprites con imagen se dibujan de golpe con =.draw(superficie)=. Pygame usa el =self.imagen= y =self.rect= de cada sprite del grupo automaticamente.
-
-Ejecuta el juego. Deberia aparecer un alienigena en la esquina superior izquierda.
+*Diagnostico:* =print(len(self.alienigenas))= te dice cuantos aliens has generado. ¿Cambia si modificas =ancho_pantalla= en =Ajustes=? Si no cambia, algo esta hardcodeado.
 
 ---
 
-*** Paso 3 -- Llenar una fila
+*** Desafio 3: La flota completa
 
-Un solo alienigena no da mucho miedo. Vamos a llenar toda la fila superior.
+Una fila es el principio. Ahora apila filas verticalmente hasta llenar la mitad superior de la pantalla.
 
-La idea: coloca alienigenas uno al lado del otro, con un espacio entre ellos igual a su propio ancho. Sigue añadiendo mientras quepan en la pantalla.
+*El problema:* ¿cuantas filas caben? Necesitas reservar espacio abajo para la nave y las balas (al menos 3 alturas de alien).
 
-#+begin_src python
-def _crear_flota(self):
-    """Crea la flota de alienigenas."""
-    alienigena = Alienigena(self)
-    ancho_alienigena = alienigena.rect.width
+*Pista:* envuelve tu bucle horizontal en otro bucle vertical. El externo controla Y (filas), el interno controla X (columnas). Al terminar cada fila, resetea X al margen izquierdo y avanza Y.
 
-    x_actual = ancho_alienigena
-    while x_actual < (self.ajustes.ancho_pantalla - 2 * ancho_alienigena):
-        self._crear_alienigena(x_actual)
-        x_actual += 2 * ancho_alienigena
-#+end_src
-
-¿Por que =2 * ancho_alienigena=? Porque avanzamos el ancho del alienigena + un espacio igual a su ancho. Asi quedan separados uniformemente.
-
-¿Por que el limite es =ancho_pantalla - 2 * ancho_alienigena=? Para dejar un margen a la derecha y que el ultimo alienigena no quede pegado al borde.
-
-**** 3.1 El metodo auxiliar =_crear_alienigena()=
-
-Extrae la creacion de cada alienigena a su propio metodo para mantener =_crear_flota()= legible:
-
-#+begin_src python
-def _crear_alienigena(self, x_posicion):
-    """Crea un alienigena y lo coloca en la fila."""
-    nuevo_alienigena = Alienigena(self)
-    nuevo_alienigena.x = x_posicion
-    nuevo_alienigena.rect.x = x_posicion
-    self.alienigenas.add(nuevo_alienigena)
-#+end_src
-
-Ejecuta el juego. Deberia aparecer una fila completa de alienigenas arriba.
-
----
-
-*** Paso 4 -- Añadir filas (la flota completa)
-
-Una fila no es suficiente. Vamos a apilar filas verticalmente hasta llenar la mitad superior de la pantalla.
-
-Envuelve el bucle horizontal en otro bucle vertical:
-
-#+begin_src python
-def _crear_flota(self):
-    """Crea la flota completa de alienigenas."""
-    alienigena = Alienigena(self)
-    ancho_alienigena, alto_alienigena = alienigena.rect.size
-
-    x_actual, y_actual = ancho_alienigena, alto_alienigena
-    while y_actual < (self.ajustes.alto_pantalla - 3 * alto_alienigena):
-        while x_actual < (self.ajustes.ancho_pantalla - 2 * ancho_alienigena):
-            self._crear_alienigena(x_actual, y_actual)
-            x_actual += 2 * ancho_alienigena
-
-        # Fila terminada: resetear X, avanzar Y
-        x_actual = ancho_alienigena
-        y_actual += 2 * alto_alienigena
-#+end_src
-
-Tres detalles:
-- =alienigena.rect.size= devuelve una tupla =(ancho, alto)= — un atajo para obtener ambas dimensiones
-- El limite vertical es =alto_pantalla - 3 * alto_alienigena= para dejar espacio abajo para la nave y las balas
-- Al terminar cada fila, =x_actual= vuelve al margen izquierdo y =y_actual= baja dos alturas (alienigena + espacio)
-
-Actualiza =_crear_alienigena()= para aceptar la posicion Y:
-
-#+begin_src python
-def _crear_alienigena(self, x_posicion, y_posicion):
-    """Crea un alienigena y lo coloca en la flota."""
-    nuevo_alienigena = Alienigena(self)
-    nuevo_alienigena.x = x_posicion
-    nuevo_alienigena.rect.x = x_posicion
-    nuevo_alienigena.rect.y = y_posicion
-    self.alienigenas.add(nuevo_alienigena)
-#+end_src
-
-Ejecuta el juego. La pantalla deberia mostrar una flota completa de alienigenas en filas y columnas.
+*Diagnostico:* el =print(len(self.alienigenas))= deberia mostrar decenas de aliens. Si cambias =alto_pantalla=, deberian aparecer mas o menos filas automaticamente.
 
 ---
 
 *** Entrega
 
-- [ ] =alienigena.py= -- clase =Alienigena(Sprite)= con imagen, rect, posicion float
-- [ ] =invasion_alienigena.py= -- grupo =self.alienigenas=, =_crear_flota()= con filas y columnas, =_crear_alienigena()=, =.draw()= en pantalla
-- [ ] =images/alienigena.bmp= -- imagen del alienigena incluida
-- [ ] La flota aparece correctamente (varias filas, espaciado uniforme)
-- [ ] La nave y las balas siguen funcionando
-- [ ] Pulsar X o Q cierra el juego
+#+begin_example
+PRACTICA3.10/
++-- invasion_alienigena.py
++-- ajustes.py
++-- nave.py
++-- bala.py
++-- alienigena.py            <-- NUEVO
++-- images/
+    +-- nave.bmp
+    +-- alienigena.bmp       <-- NUEVA
+#+end_example
 
->    RECORDATORIO: organiza las entregas por carpetas (P3.6 a P3.10)
+Requisitos funcionales:
+- [ ] La flota aparece con varias filas y columnas, espaciado uniforme
+- [ ] El numero de aliens se calcula automaticamente (sin numeros magicos)
+- [ ] =_crear_alienigena()= como metodo auxiliar separado
+- [ ] La nave y las balas siguen funcionando
+- [ ] =Group.draw()= para pintar toda la flota de golpe
 
 ---
 
-*** BONUS -- Para nota maxima
+*** Uso etico de la IA
+
+Mismas reglas que P3.9: la IA esta permitida con transparencia. Si la usas, incluye el prompt y explica en tus palabras:
+
+> *"¿Por que se guarda =self.x = float(self.rect.x)= si el alien todavia no se mueve?"*
+
+---
+
+*** Rubrica por competencias
+
+| *Criterio*                               | *Maestro (9-10)*                                    | *Aprendiz (6-8)*                                    | *Recluta (0-5)*                          | *Peso* |
+|------------------------------------------+-----------------------------------------------------+-----------------------------------------------------+------------------------------------------+--------|
+| *Clase Alienigena*                       | Hereda de Sprite, imagen cargada, rect con margenes, float preparado | Funciona pero margenes hardcodeados o sin float    | No hay clase o no carga imagen           |  *25%* |
+| *Generacion procedural (filas+columnas)* | Bucles anidados que calculan posiciones segun tamaño pantalla/sprite | Una fila funciona pero filas multiples incompletas | Aliens posicionados manualmente          |  *30%* |
+| *Arquitectura (_crear_alienigena)*       | Metodo auxiliar extraido, =_crear_flota()= legible   | Funciona pero toda la logica en un solo metodo     | Sin separacion de responsabilidades      |  *20%* |
+| *Group.draw() y ejecucion*               | Flota visible, nave+balas funcionan, =.draw()= usado | Flota aparece pero con errores visuales menores    | No ejecuta o flota no visible            |  *15%* |
+| *Pensamiento critico / IA*               | Explica por que float, documenta prompts             | Indica uso de IA sin explicar decisiones           | Copia sin comprension                    |  *10%* |
+
+---
+
+*** Bonus de ingenieria (hasta +2.5)
 
 | *Bonus*                         | *Descripcion*                                                      | *Puntos* |
 |---------------------------------+--------------------------------------------------------------------+----------|
-| Alienigenas con imagen propia   | Usar un sprite personalizado (no el default del libro)             | *+0.5*   |
-| Colores alternos por fila       | Filas pares e impares con imagenes o colores diferentes            | *+0.75*  |
-| Flota centrada                  | Calcular margen para que la flota quede centrada horizontalmente   | *+0.5*   |
-| Ajustes en =Ajustes=            | =velocidad_alienigena= preparada (aunque aun no se use)           | *+0.25*  |
-| Animacion basica                | Los alienigenas cambian ligeramente de frame (2 sprites alternos)  | *+1*     |
-| Contador de alienigenas         | Mostrar en terminal o pantalla cuantos alienigenas hay en la flota | *+0.5*   |
-
-#+begin_quote
-En la P3.11 la flota cobrara vida: se movera lateralmente, bajara, y podra destruir tu nave. Cuanto mas solida sea tu flota ahora, mas facil sera añadir esa mecanica.
-#+end_quote
+| Sprite personalizado            | Imagen propia en vez del default del libro                         | *+0.5*   |
+| Flota centrada                  | Calculo de margen para centrado horizontal                         | *+0.5*   |
+| Colores alternos por fila       | Filas pares e impares con sprites o tonos diferentes               | *+0.75*  |
+| Animacion basica                | 2 frames alternos para los alienigenas                             | *+1.0*   |
 
 ---
 
@@ -3049,26 +2996,13 @@ En la P3.11 la flota cobrara vida: se movera lateralmente, bajara, y podra destr
 
 | *Concepto*                        | *Donde lo ves*                                                          |
 |-----------------------------------+-------------------------------------------------------------------------|
-| *Clase Sprite con imagen*         | =Alienigena(Sprite)= carga =alienigena.bmp= igual que =Nave=           |
-| *Group.draw()*                    | Dibuja todos los sprites del grupo de golpe usando su imagen y rect     |
+| *Sprite con imagen*               | =Alienigena(Sprite)= carga =alienigena.bmp= igual que =Nave=           |
+| *Group.draw()*                    | Una llamada dibuja todos los sprites del grupo                          |
+| *Generacion procedural*           | Bucles que calculan cuantos aliens caben segun dimensiones              |
 | *Bucles anidados*                 | While externo (filas Y) contiene while interno (columnas X)             |
 | *Aritmetica de rects*             | =rect.size=, =rect.width=, =rect.height= para calcular espaciado       |
-| *Refactorizacion: _crear_alienigena()* | Extraer la creacion individual para que =_crear_flota()= sea legible |
-| *Margen calculado*                | Dejar espacio en bordes: =ancho - 2 * ancho_alien= como limite         |
-
----
-
-*** Rubrica
-
-| *Criterio*                                                     | *Puntos* |
-|----------------------------------------------------------------+----------|
-| =alienigena.py= -- clase completa (Sprite, imagen, rect, float)|        3 |
-| =invasion_alienigena.py= -- flota con filas y columnas         |        3 |
-| =_crear_alienigena()= -- metodo auxiliar separado              |        1 |
-| Imagen =alienigena.bmp= incluida                               |        1 |
-| Ejecucion (flota visible, nave+balas funcionan)                |        2 |
-| *Total base*                                                   |     *10* |
-| BONUS (hasta +3.5, max 10)                                     |     +3.5 |
+| *Margenes calculados*             | =ancho_pantalla - 2 * ancho_alien= como limite — no numeros magicos    |
+| *Preparar para el futuro*         | =self.x = float(...)= aunque el alien aun no se mueva                  |
 
 ---
 
@@ -3085,255 +3019,146 @@ En la P3.11 la flota cobrara vida: se movera lateralmente, bajara, y podra destr
 :EXPORT_HUGO_TAGS: prácticas
 :END:
 
-*** Objetivo
+*** Mision: La flota cobra vida
 
-Tu flota de alienigenas esta en pantalla... pero no se mueve. En esta practica vas a darle vida: la flota se desplazara lateralmente, bajara un escalon al tocar un borde, y tus balas podran destruir alienigenas. Cuando la flota quede vacia, aparecera una nueva oleada.
+*Contexto galactico:* La flota alienigena llena el cielo, pero esta congelada — como una foto de familia siniestra. La inteligencia de la Resistencia avisa: en cuanto actives sus motores, se moveran en formacion, bajaran al tocar los bordes, y solo tus balas podran detenerlos. Si limpias una oleada, vendra otra. Y otra. Y otra.
 
-Vas a aprender a:
-- Mover un grupo de sprites de forma coordinada
-- Usar una variable de direccion (=1= / =-1=) para invertir el sentido del movimiento
-- Detectar colisiones entre dos grupos de sprites (=groupcollide=)
-- Regenerar contenido dinamicamente (nueva flota al limpiar la anterior)
-- Refactorizar: extraer logica compleja a metodos privados
+Esta practica tiene cuatro problemas de ingenieria que hacen que tu juego pase de "demo estatica" a "juego de verdad":
 
-Al terminar, tu juego tendra alienigenas que se mueven, bajan, y se destruyen cuando les disparas. Empieza a parecerse a un juego de verdad.
+1. *Movimiento coordinado* — 50 alienigenas deben moverse juntos. ¿Como haces que TODOS cambien de direccion cuando UNO toca el borde? Pista: una variable que vale =1= o =-1= y se multiplica por la velocidad
+
+2. *El problema del break* — Si 8 alienigenas tocan el borde a la vez y cada uno dispara un cambio de direccion, la flota baja 8 veces en un solo frame. ¿Como evitas esta reaccion en cadena?
+
+3. *Colisiones entre grupos* — Tus balas y los alienigenas son dos colecciones de sprites independientes. Necesitas comparar cada bala con cada alien para detectar impactos. ¿Hacerlo a mano con bucles anidados? Pygame tiene algo mejor
+
+4. *Regeneracion infinita* — Cuando destruyes toda la flota, ¿que pasa? La pantalla queda vacia. Necesitas detectar que el grupo esta vacio y crear una oleada nueva — sin que las balas de la oleada anterior maten aliens recien nacidos
 
 #+begin_quote
-Basado en el Capitulo 13 del libro /Python Crash Course, 3rd Edition/ -- Eric Matthes
+Basado en el Capitulo 13 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
 #+end_quote
 
 ---
 
-*** Punto de partida
+*** Herramientas a tu disposicion
 
-Tu P3.10 funcional: una nave que dispara balas y una flota estatica de alienigenas.
-
-#+begin_example
-PRACTICA3.11/
-+-- invasion_alienigena.py   <-- tu P3.10 (vas a ampliar)
-+-- ajustes.py               <-- tu P3.10 (vas a ampliar)
-+-- nave.py                  <-- tu P3.10 (sin cambios)
-+-- bala.py                  <-- tu P3.10 (sin cambios)
-+-- alienigena.py            <-- tu P3.10 (vas a ampliar)
-+-- images/
-    +-- nave.bmp
-    +-- alienigena.bmp
-#+end_example
-
-No necesitas ficheros nuevos. Todo el trabajo es ampliar los ficheros existentes.
+| *Herramienta*                              | *Para que sirve*                                                    |
+|--------------------------------------------+---------------------------------------------------------------------|
+| =direccion_flota = 1= (o =-1=)            | Multiplicador de velocidad: =1= derecha, =-1= izquierda            |
+| =rect.right=, =rect.left=                 | Bordes del sprite para detectar limites de pantalla                 |
+| =pygame.sprite.groupcollide(g1, g2, b1, b2)= | Compara dos grupos rect a rect, elimina los que colisionan       |
+| =if not grupo:=                            | Python trata colecciones vacias como =False=                       |
+| =grupo.empty()=                            | Vacia un grupo de sprites de golpe                                 |
 
 ---
 
-*** Paso 1 -- Mover los alienigenas
+*** Desafio 1: Poner la flota en marcha
 
-Los alienigenas necesitan moverse. Añade la velocidad en =ajustes.py=:
+Haz que los alienigenas se muevan lateralmente. Todos deben compartir la misma velocidad y direccion — centralizadas en =Ajustes=.
 
-#+begin_src python
-# Ajustes de alienigenas
-self.velocidad_alienigena = 1.0
-#+end_src
+*Requisitos:*
+- =velocidad_alienigena=, =velocidad_caida_flota= y =direccion_flota= en =ajustes.py=
+- =actualizar()= en =Alienigena= que mueva usando =velocidad * direccion=
+- =self.alienigenas.update()= en el game loop
 
-Ahora dale al alienigena la capacidad de moverse. En =alienigena.py=, guarda una referencia a los ajustes y añade un metodo =actualizar()=:
-
-#+begin_src python
-def __init__(self, ia_juego):
-    """Inicializa el alienigena y su posicion de partida."""
-    super().__init__()
-    self.pantalla = ia_juego.pantalla
-    self.ajustes = ia_juego.ajustes
-
-    # Cargar imagen y obtener su rect
-    self.imagen = pygame.image.load('images/alienigena.bmp')
-    self.rect = self.imagen.get_rect()
-
-    # Colocar cerca de la esquina superior izquierda
-    self.rect.x = self.rect.width
-    self.rect.y = self.rect.height
-
-    # Guardar posicion horizontal como float
-    self.x = float(self.rect.x)
-
-def actualizar(self):
-    """Mueve el alienigena lateralmente."""
-    self.x += self.ajustes.velocidad_alienigena * self.ajustes.direccion_flota
-    self.rect.x = self.x
-#+end_src
-
-¿Que hace =actualizar()=? Desplaza la posicion horizontal del alienigena. La direccion depende de =direccion_flota=: si vale =1=, se mueve a la derecha; si vale =-1=, a la izquierda. El truco es que *todos* los alienigenas comparten los mismos ajustes, asi que toda la flota se mueve a la vez.
+*Diagnostico:* ejecuta el juego. La flota deberia moverse a la derecha... y desaparecer por el borde. Normal: aun no has puesto limites.
 
 ---
 
-*** Paso 2 -- Detectar los bordes de la pantalla
+*** Desafio 2: Bordes y cambio de direccion
 
-Antes de que la flota se mueva de verdad, necesitamos que los alienigenas sepan cuando han llegado al borde de la pantalla.
+Cuando *cualquier* alienigena toque un borde, *toda* la flota debe bajar un escalon y cambiar de sentido.
 
-Añade este metodo a la clase =Alienigena=:
+*El problema del break:* si recorres todos los aliens y cada uno que toca el borde dispara un cambio de direccion, la flota baja multiples veces por frame. Necesitas salir del bucle en cuanto detectas el primer alien en el borde.
 
-#+begin_src python
-def verificar_bordes(self):
-    """Devuelve True si el alienigena esta en un borde de la pantalla."""
-    pantalla_rect = self.pantalla.get_rect()
-    return (self.rect.right >= pantalla_rect.right) or (self.rect.left <= 0)
-#+end_src
+*Requisitos:*
+- =verificar_bordes()= en =Alienigena= — informa, no actua
+- =_verificar_bordes_flota()= en =InvasionAlienigena= — recorre, detecta, y sale con =break=
+- =_cambiar_direccion_flota()= — baja todos + invierte =direccion_flota *= -1=
 
-Cada alienigena puede comprobar si su borde derecho ha llegado al borde derecho de la pantalla, o si su borde izquierdo ha llegado a 0. Devuelve =True= en cualquiera de los dos casos.
+*Diagnostico:* la flota deberia rebotar de un lado a otro, bajando un escalon en cada rebote.
 
 ---
 
-*** Paso 3 -- Cambiar direccion y bajar
+*** Desafio 3: Destruir alienigenas
 
-Ahora necesitas dos ajustes nuevos en =ajustes.py=:
+Tus balas atraviesan la flota sin hacer nada. Necesitas deteccion de colisiones entre dos grupos de sprites.
 
-#+begin_src python
-# Ajustes de alienigenas
-self.velocidad_alienigena = 1.0
-self.velocidad_caida_flota = 10
-self.direccion_flota = 1  # 1 = derecha, -1 = izquierda
-#+end_src
+*Tu mision:* cuando una bala toque un alienigena, ambos desaparecen.
 
-Y dos metodos nuevos en =InvasionAlienigena=:
+*Pista:* =pygame.sprite.groupcollide(self.balas, self.alienigenas, True, True)= — los dos =True= eliminan tanto la bala como el alien que colisionan. Una linea hace todo el trabajo.
 
-#+begin_src python
-def _verificar_bordes_flota(self):
-    """Responde si algun alienigena ha llegado a un borde."""
-    for alienigena in self.alienigenas.sprites():
-        if alienigena.verificar_bordes():
-            self._cambiar_direccion_flota()
-            break
-
-def _cambiar_direccion_flota(self):
-    """Baja toda la flota y cambia su direccion."""
-    for alienigena in self.alienigenas.sprites():
-        alienigena.rect.y += self.ajustes.velocidad_caida_flota
-    self.ajustes.direccion_flota *= -1
-#+end_src
-
-La logica es sencilla:
-- =_verificar_bordes_flota()= recorre todos los alienigenas. Si *alguno* toca un borde, invoca =_cambiar_direccion_flota()= y sale del bucle con =break=.
-- =_cambiar_direccion_flota()= baja *todos* los alienigenas (sumando =velocidad_caida_flota= a su Y) e invierte la direccion multiplicando por =-1=.
-
-El =break= es importante: sin el, si varios alienigenas tocan el borde a la vez, la direccion se invertiria multiples veces en el mismo frame.
+*Pregunta de diseño:* ¿que pasa si pones =False= en vez de =True= para las balas? ¿Y para los aliens? Experimenta y observa la diferencia.
 
 ---
 
-*** Paso 4 -- Refactorizar: =_actualizar_alienigenas()=
+*** Desafio 4: Oleadas infinitas
 
-Antes de añadir mas logica al bucle principal, es buen momento para agrupar la actualizacion de alienigenas en su propio metodo privado:
+Destruye toda la flota. ¿Que pasa? La pantalla queda vacia.
 
-#+begin_src python
-def _actualizar_alienigenas(self):
-    """Verifica bordes y actualiza posiciones de toda la flota."""
-    self._verificar_bordes_flota()
-    self.alienigenas.update()
-#+end_src
+*Tu mision:* cuando el grupo de alienigenas quede vacio, limpia las balas existentes y genera una flota nueva.
 
-Ahora tu bucle principal (=ejecutar_juego()=) queda mas limpio. Donde antes llamabas a =self.alienigenas.update()=, sustituye por:
+*Trampa tecnica:* si no limpias las balas antes de crear la nueva flota, las balas que estaban subiendo mataran aliens recien creados antes de que el jugador los vea. =self.balas.empty()= resuelve esto.
 
-#+begin_src python
-self._actualizar_alienigenas()
-#+end_src
-
-Ejecuta el juego. La flota deberia moverse a la derecha, bajar un escalon al tocar el borde derecho, moverse a la izquierda, bajar al tocar el borde izquierdo, y asi sucesivamente.
-
----
-
-*** Paso 5 -- Disparar alienigenas
-
-Tus balas atraviesan la flota sin hacer nada. Vamos a arreglar eso.
-
-En =_actualizar_balas()= (el metodo donde ya eliminas las balas que salen de pantalla), añade la deteccion de colisiones:
-
-#+begin_src python
-def _actualizar_balas(self):
-    """Actualiza la posicion de las balas y elimina las antiguas."""
-    self.balas.update()
-
-    # Eliminar balas que han salido de pantalla
-    for bala in self.balas.copy():
-        if bala.rect.bottom <= 0:
-            self.balas.remove(bala)
-
-    self._verificar_colisiones_bala_alienigena()
-#+end_src
-
-Y el metodo de colisiones:
-
-#+begin_src python
-def _verificar_colisiones_bala_alienigena(self):
-    """Detecta colisiones entre balas y alienigenas."""
-    # Eliminar balas y alienigenas que han colisionado
-    colisiones = pygame.sprite.groupcollide(
-        self.balas, self.alienigenas, True, True)
-#+end_src
-
-=groupcollide()= compara cada sprite de un grupo con cada sprite del otro. Los dos =True= significan:
-- Primer =True=: eliminar la bala que colisiona
-- Segundo =True=: eliminar el alienigena que colisiona
-
-Asi, cuando una bala toca un alienigena, ambos desaparecen.
-
-Ejecuta el juego y dispara. Los alienigenas deberian desaparecer al ser alcanzados.
-
----
-
-*** Paso 6 -- Regenerar la flota
-
-Si destruyes todos los alienigenas... ¿que pasa? Nada. La pantalla queda vacia. Vamos a crear una nueva oleada cada vez que la flota sea eliminada.
-
-Añade esta logica al final de =_verificar_colisiones_bala_alienigena()=:
-
-#+begin_src python
-def _verificar_colisiones_bala_alienigena(self):
-    """Detecta colisiones entre balas y alienigenas."""
-    colisiones = pygame.sprite.groupcollide(
-        self.balas, self.alienigenas, True, True)
-
-    if not self.alienigenas:
-        # Destruir balas existentes y crear nueva flota
-        self.balas.empty()
-        self._crear_flota()
-#+end_src
-
-=if not self.alienigenas= es =True= cuando el grupo esta vacio (Python trata los contenedores vacios como =False=). En ese caso:
-1. =self.balas.empty()= elimina todas las balas que quedaran en pantalla
-2. =self._crear_flota()= genera una flota nueva desde cero
-
-Ejecuta el juego, destruye toda la flota, y comprueba que aparece una nueva.
+*Diagnostico:* destruye toda la flota. Deberia aparecer una nueva instantaneamente.
 
 ---
 
 *** Entrega
 
-- [ ] =alienigena.py= -- =actualizar()= mueve lateralmente, =verificar_bordes()= detecta bordes
-- [ ] =ajustes.py= -- =velocidad_alienigena=, =velocidad_caida_flota=, =direccion_flota=
-- [ ] =invasion_alienigena.py= -- =_actualizar_alienigenas()=, =_verificar_bordes_flota()=, =_cambiar_direccion_flota()=, colisiones con =groupcollide=, regenerar flota
-- [ ] La flota se mueve lateralmente y baja al tocar un borde
-- [ ] Las balas destruyen alienigenas
-- [ ] Al eliminar toda la flota, aparece una nueva oleada
-- [ ] La nave y las balas siguen funcionando correctamente
+No hay ficheros nuevos — todo es ampliar los existentes:
 
->    RECORDATORIO: organiza las entregas por carpetas (P3.6 a P3.11)
+#+begin_example
+PRACTICA3.11/
++-- invasion_alienigena.py   <-- ampliado
++-- ajustes.py               <-- ampliado
++-- alienigena.py            <-- ampliado
++-- nave.py                  <-- sin cambios
++-- bala.py                  <-- sin cambios
++-- images/
+#+end_example
+
+Requisitos funcionales:
+- [ ] La flota se mueve lateralmente y baja al tocar un borde
+- [ ] Las balas destruyen alienigenas (=groupcollide=)
+- [ ] Al eliminar toda la flota, aparece una nueva oleada
+- [ ] El game loop esta limpio (=_actualizar_alienigenas()= como metodo privado)
+- [ ] Sin reaccion en cadena al tocar bordes (=break= correcto)
 
 ---
 
-*** BONUS -- Para nota maxima
+*** Uso etico de la IA
+
+Mismas reglas que P3.9 y P3.10. Si usas IA, incluye prompt y explica:
+
+> *"¿Por que es necesario el =break= en =_verificar_bordes_flota()=? ¿Que pasaria sin el?"*
+
+> *"¿Que significan los dos =True= en =groupcollide()=?"*
+
+---
+
+*** Rubrica por competencias
+
+| *Criterio*                              | *Maestro (9-10)*                                     | *Aprendiz (6-8)*                                  | *Recluta (0-5)*                          | *Peso* |
+|-----------------------------------------+------------------------------------------------------+---------------------------------------------------+------------------------------------------+--------|
+| *Movimiento coordinado*                 | =actualizar()= con velocidad*direccion, ajustes centralizados | Se mueve pero direccion hardcodeada o sin ajustes | No se mueve o sale de pantalla           |  *25%* |
+| *Bordes y cambio de direccion*          | =verificar_bordes()= + =break= correcto + baja+invierte | Cambia de direccion pero con bug de reaccion en cadena | No detecta bordes                      |  *25%* |
+| *Colisiones bala-alien*                 | =groupcollide= funcional, ambos desaparecen          | Colisiones parciales o solo desaparece uno         | Balas atraviesan aliens                  |  *20%* |
+| *Regeneracion de oleadas*               | Detecta grupo vacio, limpia balas, crea nueva flota  | Regenera pero sin limpiar balas (aliens mueren al nacer) | Sin regeneracion                       |  *15%* |
+| *Arquitectura + pensamiento critico*    | =_actualizar_alienigenas()= limpio, explica break y groupcollide | Funciona pero game loop desordenado            | Sin refactorizacion                      |  *15%* |
+
+---
+
+*** Bonus de ingenieria (hasta +3)
 
 | *Bonus*                           | *Descripcion*                                                        | *Puntos* |
 |-----------------------------------+----------------------------------------------------------------------+----------|
-| Velocidad progresiva              | La flota se mueve mas rapido con cada oleada nueva                   | *+0.75*  |
-| Contador de puntos en terminal    | Imprimir puntos en consola al destruir un alienigena                 | *+0.5*   |
-| Sonido al impactar                | Reproducir un sonido cuando una bala destruye un alienigena          | *+0.75*  |
-| Explosion visual                  | Mostrar brevemente un sprite de explosion al destruir un alienigena  | *+1*     |
-| Oleadas con mas filas             | Cada nueva flota tiene una fila mas que la anterior                  | *+0.5*   |
-| Gotas de lluvia (13-3)            | Crear una cuadricula de gotas que cae hasta desaparecer abajo        | *+1*     |
-| Lluvia continua (13-4)            | Al desaparecer una fila de gotas, aparece una nueva arriba           | *+0.75*  |
+| Velocidad progresiva              | Cada oleada nueva incrementa =velocidad_alienigena=                  | *+0.75*  |
+| Sonido al impactar                | =pygame.mixer= al destruir un alien                                  | *+0.75*  |
+| Oleadas con mas filas             | Cada nueva flota tiene 1 fila extra                                  | *+0.5*   |
+| Gotas de lluvia (PCC 13-3)        | Cuadricula de gotas que cae hasta desaparecer abajo                  | *+1.0*   |
 
 #+begin_quote
-Los ejercicios 13-3 y 13-4 son los /TRY IT YOURSELF/ del libro. Intentarlos es la mejor forma de consolidar lo aprendido.
-#+end_quote
-
-#+begin_quote
-En las siguientes Practicas los alienigenas podran destruir tu nave y el juego tendra vidas, "Game Over!", y boton de reinicio. La flota ya no sera solo decorativa.
+En las siguientes practicas los alienigenas podran destruir tu nave y el juego tendra vidas, "Game Over!" y boton de reinicio.
 #+end_quote
 
 ---
@@ -3342,26 +3167,12 @@ En las siguientes Practicas los alienigenas podran destruir tu nave y el juego t
 
 | *Concepto*                          | *Donde lo ves*                                                          |
 |-------------------------------------+-------------------------------------------------------------------------|
-| *Variable de direccion*             | =direccion_flota= (1/-1) multiplicada por velocidad invierte el sentido |
+| *Direccion como multiplicador*      | =direccion_flota= (1/-1) multiplicada por velocidad invierte el sentido |
 | *Deteccion de bordes*               | =verificar_bordes()= compara =rect.right/left= con bordes de pantalla  |
-| *Patron verificar-y-actuar*         | =_verificar_bordes_flota()= recorre, detecta, y delega en =_cambiar_direccion_flota()= |
-| *groupcollide()*                    | Compara dos grupos sprite a sprite y elimina los que colisionan         |
+| *El problema del break*             | Sin =break=, multiples aliens en borde = multiples bajadas por frame    |
+| *groupcollide()*                    | Compara dos grupos rect a rect y elimina los que colisionan             |
 | *Regeneracion de contenido*         | =if not grupo:= detecta grupo vacio y dispara =_crear_flota()=         |
-| *Refactorizacion: metodo privado*   | =_actualizar_alienigenas()= agrupa logica para mantener el bucle limpio |
-
----
-
-*** Rubrica
-
-| *Criterio*                                                       | *Puntos* |
-|------------------------------------------------------------------+----------|
-| =alienigena.py= -- =actualizar()= + =verificar_bordes()=        |        3 |
-| =invasion_alienigena.py= -- direccion, bordes, colisiones        |        3 |
-| =ajustes.py= -- velocidad + direccion + caida                   |        1 |
-| Colisiones bala-alienigena funcionan                             |        1 |
-| Ejecucion (flota se mueve, baja, aliens destruibles, regenera)  |        2 |
-| *Total base*                                                     |     *10* |
-| BONUS (hasta +5.25, max 10)                                     |    +5.25 |
+| *Limpiar antes de regenerar*        | =.empty()= evita que balas viejas maten aliens nuevos                   |
 
 ---
 
@@ -3378,18 +3189,17 @@ En las siguientes Practicas los alienigenas podran destruir tu nave y el juego t
 :EXPORT_HUGO_TAGS: prácticas
 :END:
 
-*** Objetivo
+*** Mision: El enemigo contraataca
 
-Tu flota se mueve y tus balas destruyen alienigenas, pero el codigo de colisiones esta metido dentro de =_actualizar_balas()= y crece sin control. Ademas, los alienigenas son inofensivos: aunque lleguen a tu nave, no pasa nada.
+*Contexto galactico:* Tus armas funcionan y la flota cae bajo tus disparos. Pero los alienigenas no son estupidos: han aprendido a acercarse. Si uno toca tu nave o llega al fondo de la pantalla, sera catastrofico. Ademas, tu codigo de colisiones crece sin control dentro de un metodo que ya hace demasiadas cosas.
 
-En esta practica vas a:
-- Refactorizar el codigo de colisiones en su propio metodo
-- Aprender a ajustar velocidades para mejorar la jugabilidad
-- Usar un truco de /balas gigantes/ para testear mas rapido
-- Detectar cuando un alienigena alcanza tu nave (=spritecollideany=)
-- Detectar cuando un alienigena llega al fondo de la pantalla
+Tres problemas de ingenieria en esta practica:
 
-Al terminar, tu juego reaccionara cuando un alienigena toque la nave o llegue abajo. Todavia no habra "Game Over" (eso sera la P3.13), pero el juego ya distingue entre ganar y perder.
+1. *Deuda tecnica* — Tu =_actualizar_balas()= se ha convertido en un metodo monstruo: actualiza posiciones, limpia balas viejas, detecta colisiones Y regenera la flota. Cada responsabilidad extra que le añadas lo hara mas fragil. ¿Como lo descompones antes de que sea inmantenible?
+
+2. *El enemigo como amenaza real* — Los alienigenas se mueven y bajan, pero tu nave es invulnerable. Necesitas dos tipos de deteccion: alien toca la nave (=sprite vs grupo=) y alien llega al fondo (=rect.bottom vs alto_pantalla=). Son problemas similares pero requieren herramientas diferentes
+
+3. *Testear lo que construyes* — Destruir 50 alienigenas uno a uno para probar la regeneracion es tedioso. Los ingenieros de juegos usan trucos: /balas gigantes/, /balas inmortales/, valores extremos. ¿Como testeas rapido sin romper el juego final?
 
 #+begin_quote
 Basado en el Capitulo 13 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
@@ -3397,239 +3207,133 @@ Basado en el Capitulo 13 de /Python Crash Course, 3rd Edition/ -- Eric Matthes
 
 ---
 
-*** Punto de partida
+*** Herramientas a tu disposicion
 
-Tu P3.11 funcional: flota que se mueve, balas que destruyen alienigenas, y nueva oleada al vaciar la flota.
-
-#+begin_example
-PRACTICA3.12/
-+-- invasion_alienigena.py   <-- tu P3.11 (vas a refactorizar y ampliar)
-+-- ajustes.py               <-- tu P3.11 (vas a ajustar velocidad)
-+-- nave.py                  <-- tu P3.11 (sin cambios)
-+-- bala.py                  <-- tu P3.11 (sin cambios)
-+-- alienigena.py            <-- tu P3.11 (sin cambios)
-+-- images/
-    +-- nave.bmp
-    +-- alienigena.bmp
-#+end_example
+| *Herramienta*                              | *Para que sirve*                                                       |
+|--------------------------------------------+------------------------------------------------------------------------|
+| =pygame.sprite.spritecollideany(sprite, grupo)= | ¿Algun miembro del grupo toca este sprite? Devuelve el primero o =None= |
+| =pygame.sprite.groupcollide(g1, g2, b1, b2)= | Ya la conoces de P3.11 — grupo contra grupo                          |
+| =rect.bottom >= alto_pantalla=             | Detectar si un sprite ha llegado al fondo                              |
+| =ancho_bala = 300=                         | Truco de testing: balas gigantes para barrer la flota en segundos      |
+| =groupcollide(balas, aliens, False, True)= | Bala inmortal que no desaparece al impactar (solo para testing)        |
 
 ---
 
-*** Paso 1 -- Refactorizar: =_verificar_colisiones_bala_alienigena()=
+*** Desafio 1: Pagar la deuda tecnica
 
-En la P3.11, la deteccion de colisiones y la regeneracion de la flota estan dentro de =_actualizar_balas()=. Ese metodo ya hace demasiadas cosas: actualiza posiciones, elimina balas viejas, detecta colisiones y regenera la flota. Vamos a extraer la logica de colisiones a su propio metodo:
+Tu =_actualizar_balas()= hace demasiadas cosas. Antes de añadir nada nuevo, refactoriza: extrae la logica de colisiones + regeneracion a =_verificar_colisiones_bala_alienigena()=.
 
-#+begin_src python
-def _actualizar_balas(self):
-    """Actualiza la posicion de las balas y elimina las antiguas."""
-    self.balas.update()
+*Resultado esperado:* =_actualizar_balas()= solo gestiona posiciones y limpieza. =_verificar_colisiones_bala_alienigena()= solo gestiona impactos y oleadas nuevas. Cada metodo, una responsabilidad.
 
-    # Eliminar balas que han salido de pantalla
-    for bala in self.balas.copy():
-        if bala.rect.bottom <= 0:
-            self.balas.remove(bala)
-
-    self._verificar_colisiones_bala_alienigena()
-
-def _verificar_colisiones_bala_alienigena(self):
-    """Responde a colisiones entre balas y alienigenas."""
-    # Eliminar balas y alienigenas que han colisionado
-    colisiones = pygame.sprite.groupcollide(
-        self.balas, self.alienigenas, True, True)
-
-    if not self.alienigenas:
-        # Destruir balas existentes y crear nueva flota
-        self.balas.empty()
-        self._crear_flota()
-#+end_src
-
-Ahora =_actualizar_balas()= hace una sola cosa: gestionar la posicion de las balas. Y =_verificar_colisiones_bala_alienigena()= se encarga de las colisiones y la regeneracion. Cada metodo tiene una responsabilidad clara.
-
-¿Por que importa esto? Porque en las siguientes practicas vas a añadir mas logica (puntuacion, vidas, nivel de dificultad). Si todo esta en un solo metodo gigante, sera imposible de mantener.
+*Pregunta de diseño:* ¿por que importa separar esto ahora? Porque en las practicas siguientes vas a añadir puntuacion, vidas y niveles de dificultad. Si todo esta en un metodo gigante, cada cambio rompera algo.
 
 ---
 
-*** Paso 2 -- Ajustar la velocidad de las balas
+*** Desafio 2: La caja de herramientas del tester
 
-La velocidad de las balas afecta directamente a la jugabilidad. Si son demasiado lentas, el juego frustra. Si son demasiado rapidas, no hay desafio.
+Antes de seguir, aprende a testear rapido. Cambia temporalmente =ancho_bala = 300= en =Ajustes= y dispara. Puedes barrer la flota en segundos.
 
-En =ajustes.py=, ajusta =velocidad_bala= hasta encontrar un valor que te guste:
+Prueba tambien =groupcollide(self.balas, self.alienigenas, False, True)= — el primer =False= hace que la bala NO desaparezca al impactar. Una bala inmortal que atraviesa toda la flota.
 
-#+begin_src python
-# Ajustes de balas
-self.velocidad_bala = 2.5
-self.ancho_bala = 3
-self.alto_bala = 15
-self.color_bala = (60, 60, 60)
-self.balas_permitidas = 3
-#+end_src
-
-Prueba con =2.0=, =2.5= y =3.0=. El valor perfecto depende de tu pantalla y de tu gusto. Recuerda que el juego se ira acelerando en practicas futuras, asi que no lo hagas demasiado facil al principio.
-
----
-
-*** Paso 3 -- Truco: balas gigantes para testear
-
-Probar que la regeneracion de la flota funciona es tedioso si tienes que destruir decenas de alienigenas uno a uno. Hay un truco: haz las balas enormes temporalmente.
-
-En =ajustes.py=, cambia el ancho:
-
-#+begin_src python
-self.ancho_bala = 300  # Solo para testear!
-#+end_src
-
-Con balas de 300 pixeles de ancho, puedes barrer la flota en segundos y comprobar que aparece una nueva oleada. Tambien puedes probar con =3000= para eliminar la flota de un solo disparo.
-
-[[/images/balas-gigantes-test.png]]
+*Diagnostico:* ¿aparece una nueva oleada al vaciar la flota? ¿Las balas viejas matan aliens recien nacidos? Si pasa lo segundo, revisa que llamas a =.empty()= antes de =_crear_flota()=.
 
 #+begin_quote
-/Recuerda restaurar =self.ancho_bala = 3= cuando termines de testear. No entregues el juego con balas gigantes!/
+/Restaura =ancho_bala = 3= antes de entregar. Las balas gigantes son para el ingeniero, no para el jugador./
 #+end_quote
 
-Tambien puedes combinar con el primer argumento =False= de =groupcollide()= para crear una /bala superpoderosa/ que atraviesa toda la pantalla sin desaparecer:
+---
 
-#+begin_src python
-# Bala que NO desaparece al colisionar (solo para testing)
-colisiones = pygame.sprite.groupcollide(
-    self.balas, self.alienigenas, False, True)
-#+end_src
+*** Desafio 3: El enemigo puede hacerte daño
+
+Hasta ahora los alienigenas son decorativos. Necesitas detectar dos situaciones de derrota:
+
+*Situacion A — Alien toca la nave:*
+
+Pygame ofrece =spritecollideany(sprite, grupo)= — compara un sprite individual contra todos los miembros de un grupo. Devuelve el primer alien que colisiona, o =None= si ninguno toca.
+
+¿Donde lo colocas? Al final de =_actualizar_alienigenas()=, despues de mover la flota.
+
+*Situacion B — Alien llega al fondo:*
+
+No hay funcion magica para esto. Recorre los alienigenas y comprueba si =rect.bottom >= alto_pantalla=. Si alguno lo cumple, es game over (con =break= para no seguir comprobando).
+
+*Diagnostico:* ejecuta el juego, deja que la flota baje, y comprueba que aparece un mensaje en consola al colisionar o al llegar al fondo.
+
+*Pregunta de comprension:*
+> *"¿Cual es la diferencia entre =groupcollide()= y =spritecollideany()=? ¿Cuando usas cada una?"*
 
 ---
 
-*** Paso 4 -- Detectar colision alien-nave
+*** Desafio 4: Preparar el terreno — =_nave_alcanzada()=
 
-Hasta ahora, los alienigenas son decorativos: se mueven, bajan, pero no pueden hacerte daño. Vamos a cambiar eso.
-
-Pygame ofrece =spritecollideany()= para comprobar si un sprite individual ha colisionado con algun miembro de un grupo. Añade esta comprobacion al final de =_actualizar_alienigenas()=:
-
-#+begin_src python
-def _actualizar_alienigenas(self):
-    """Verifica bordes y actualiza posiciones de toda la flota."""
-    self._verificar_bordes_flota()
-    self.alienigenas.update()
-
-    # Detectar colision alien-nave
-    if pygame.sprite.spritecollideany(self.nave, self.alienigenas):
-        print("*** ¡Nave alcanzada! ***")
-#+end_src
-
-=spritecollideany()= recibe dos argumentos:
-- Un sprite individual (=self.nave=)
-- Un grupo de sprites (=self.alienigenas=)
-
-Recorre el grupo y devuelve el primer alienigena que colisiona con la nave. Si ninguno colisiona, devuelve =None=. Como =None= es /falsy/, el =if= solo se activa cuando hay colision.
-
-Ejecuta el juego, deja que los alienigenas bajen hasta tu nave y comprueba que aparece =*** ¡Nave alcanzada! ***= en la terminal.
-
-¿Cual es la diferencia con =groupcollide()=?
-- =groupcollide()=: compara *grupo contra grupo* (balas vs alienigenas)
-- =spritecollideany()=: compara *un sprite contra un grupo* (nave vs alienigenas)
-
----
-
-*** Paso 5 -- Detectar alienigenas que llegan al fondo
-
-Un alienigena no necesita tocar tu nave para ser una amenaza. Si un alienigena llega al fondo de la pantalla, tambien deberia contar como un impacto.
-
-Añade un metodo que compruebe si algun alienigena ha llegado abajo:
-
-#+begin_src python
-def _verificar_alienigenas_fondo(self):
-    """Comprueba si algun alienigena ha llegado al fondo de la pantalla."""
-    for alienigena in self.alienigenas.sprites():
-        if alienigena.rect.bottom >= self.ajustes.alto_pantalla:
-            # Tratar como si la nave hubiera sido alcanzada
-            print("*** ¡Alienigena llego al fondo! ***")
-            break
-#+end_src
-
-Llama a este metodo desde =_actualizar_alienigenas()=:
-
-#+begin_src python
-def _actualizar_alienigenas(self):
-    """Verifica bordes y actualiza posiciones de toda la flota."""
-    self._verificar_bordes_flota()
-    self.alienigenas.update()
-
-    # Detectar colision alien-nave
-    if pygame.sprite.spritecollideany(self.nave, self.alienigenas):
-        print("*** ¡Nave alcanzada! ***")
-
-    # Detectar alienigenas que llegan al fondo
-    self._verificar_alienigenas_fondo()
-#+end_src
-
-Ahora el juego detecta dos condiciones de derrota: alienigena toca la nave, o alienigena llega al fondo. Por ahora solo imprimimos un mensaje. En la P3.13 añadiremos vidas, reinicio y Game Over.
-
----
-
-*** Paso 6 -- Crear =_nave_alcanzada()= (preparando el terreno)
-
-Los dos =print()= que acabas de añadir hacen lo mismo: responder a una situacion en la que el jugador "pierde". En vez de repetir la logica, vamos a crear un metodo dedicado:
+Los dos puntos de deteccion (alien toca nave, alien llega al fondo) disparan la misma reaccion. En vez de repetir codigo, centraliza la respuesta en un metodo:
 
 #+begin_src python
 def _nave_alcanzada(self):
-    """Responde a la nave siendo alcanzada por un alienigena."""
+    """Responde cuando la nave es alcanzada."""
     print("*** ¡Nave alcanzada! ***")
 #+end_src
 
-Ahora sustituye los dos =print()= por llamadas a =_nave_alcanzada()=:
+¿Por que crear un metodo que solo tiene un =print()=? Porque en la P3.13 ese metodo hara mucho mas: restar una vida, reiniciar la flota, recentrar la nave, pausar. Al tenerlo aislado, solo tendras que expandirlo sin tocar el resto.
 
-#+begin_src python
-def _actualizar_alienigenas(self):
-    """Verifica bordes y actualiza posiciones de toda la flota."""
-    self._verificar_bordes_flota()
-    self.alienigenas.update()
-
-    # Detectar colision alien-nave
-    if pygame.sprite.spritecollideany(self.nave, self.alienigenas):
-        self._nave_alcanzada()
-
-    # Detectar alienigenas que llegan al fondo
-    self._verificar_alienigenas_fondo()
-
-def _verificar_alienigenas_fondo(self):
-    """Comprueba si algun alienigena ha llegado al fondo."""
-    for alienigena in self.alienigenas.sprites():
-        if alienigena.rect.bottom >= self.ajustes.alto_pantalla:
-            self._nave_alcanzada()
-            break
-#+end_src
-
-¿Por que crear un metodo que solo tiene un =print()=? Porque en la P3.13 ese metodo hara mucho mas: restar una vida, reiniciar la flota, recentrar la nave, y pausar brevemente. Al tenerlo ya aislado, solo tendras que expandir =_nave_alcanzada()= sin tocar el resto del codigo.
+Esto se llama el *principio de preparacion*: escribir codigo que sea facil de ampliar, aunque hoy parezca excesivo.
 
 ---
 
 *** Entrega
 
-- [ ] =invasion_alienigena.py= -- =_verificar_colisiones_bala_alienigena()= como metodo separado
-- [ ] =invasion_alienigena.py= -- =spritecollideany()= detecta colision alien-nave
-- [ ] =invasion_alienigena.py= -- =_verificar_alienigenas_fondo()= detecta alienigenas en el fondo
-- [ ] =invasion_alienigena.py= -- =_nave_alcanzada()= centraliza la respuesta
-- [ ] =ajustes.py= -- =velocidad_bala= ajustada (valor razonable, no gigante)
-- [ ] El juego imprime mensajes al colisionar o llegar al fondo
-- [ ] =ancho_bala= restaurado a valor normal (no 300)
-- [ ] Todo lo anterior (movimiento, balas, flota) sigue funcionando
+#+begin_example
+PRACTICA3.12/
++-- invasion_alienigena.py   <-- refactorizado y ampliado
++-- ajustes.py               <-- velocidad ajustada, ancho_bala restaurado
++-- nave.py                  <-- sin cambios
++-- bala.py                  <-- sin cambios
++-- alienigena.py            <-- sin cambios
++-- images/
+#+end_example
 
->    RECORDATORIO: organiza las entregas por carpetas (P3.6 a P3.12)
+Requisitos funcionales:
+- [ ] =_verificar_colisiones_bala_alienigena()= como metodo separado
+- [ ] =spritecollideany()= detecta colision alien-nave
+- [ ] =_verificar_alienigenas_fondo()= detecta alienigenas en el fondo
+- [ ] =_nave_alcanzada()= centraliza la respuesta
+- [ ] =ancho_bala= restaurado a valor normal (no 300)
+- [ ] Todo lo anterior sigue funcionando
 
 ---
 
-*** BONUS -- Para nota maxima
+*** Uso etico de la IA
+
+Si usas IA, incluye prompt y explica:
+
+> *"¿Cual es la diferencia entre =groupcollide()= y =spritecollideany()=? ¿Cuando usas cada una?"*
+
+> *"¿Por que creamos =_nave_alcanzada()= ahora si solo tiene un =print()=?"*
+
+---
+
+*** Rubrica por competencias
+
+| *Criterio*                               | *Maestro (9-10)*                                         | *Aprendiz (6-8)*                                    | *Recluta (0-5)*                       | *Peso* |
+|------------------------------------------+----------------------------------------------------------+-----------------------------------------------------+---------------------------------------+--------|
+| *Refactorizacion (deuda tecnica)*        | Colisiones extraidas a metodo propio, responsabilidad unica | Funciona pero colisiones aun dentro de _actualizar_balas | Sin refactorizacion                 |  *25%* |
+| *Deteccion alien-nave*                   | =spritecollideany= funcional, =_nave_alcanzada()= invocado | Detecta pero sin centralizar respuesta              | Nave invulnerable                     |  *25%* |
+| *Deteccion alien-fondo*                  | =_verificar_alienigenas_fondo()= con break + =_nave_alcanzada()= | Detecta pero sin break o sin metodo centralizado  | Sin deteccion de fondo                |  *20%* |
+| *Testing y ajustes*                      | Evidencia de haber testeado (velocidad ajustada, ancho restaurado) | Ajustes presentes pero sin evidencia de testing   | Valores por defecto sin tocar         |  *15%* |
+| *Pensamiento critico / IA*              | Explica groupcollide vs spritecollideany, documenta prompts | Indica IA pero sin explicar diferencias            | Copia sin comprension                 |  *15%* |
+
+---
+
+*** Bonus de ingenieria (hasta +2.5)
 
 | *Bonus*                               | *Descripcion*                                                                    | *Puntos* |
 |---------------------------------------+----------------------------------------------------------------------------------+----------|
-| Disparo lateral (13-5)                | Adaptar el juego para que la nave este a la izquierda y los aliens vengan por la derecha | *+1.5*   |
-| Efecto visual al colisionar           | La nave parpadea o cambia de color al ser alcanzada                              | *+0.5*   |
-| Sonido al impacto nave-alien          | =pygame.mixer.Sound= al detectar colision                                       | *+0.5*   |
-| Marcador de alienigenas restantes     | Mostrar en terminal cuantos alienigenas quedan en la oleada actual               | *+0.25*  |
+| Disparo lateral (PCC 13-5)            | Nave a la izquierda, aliens vienen por la derecha                                | *+1.5*   |
+| Efecto visual al colisionar           | La nave parpadea o cambia de color                                               | *+0.5*   |
+| Sonido al impacto                     | =pygame.mixer.Sound= al detectar colision                                       | *+0.5*   |
 
 #+begin_quote
-El ejercicio 13-5 es el /TRY IT YOURSELF/ del libro para esta seccion. Intentarlo es la mejor forma de consolidar lo aprendido.
-#+end_quote
-
-#+begin_quote
-En la P3.13 añadiremos vidas, la bandera =juego_activo=, reinicio de nave, pausa entre oleadas y Game Over. El juego dejara de ser inmortal.
+En la P3.13 el juego dejara de ser inmortal: vidas, =juego_activo=, reinicio de nave, y Game Over.
 #+end_quote
 
 ---
@@ -3638,27 +3342,12 @@ En la P3.13 añadiremos vidas, la bandera =juego_activo=, reinicio de nave, paus
 
 | *Concepto*                          | *Donde lo ves*                                                                    |
 |-------------------------------------+-----------------------------------------------------------------------------------|
-| *Refactorizacion: extraer metodo*   | =_verificar_colisiones_bala_alienigena()= nace de =_actualizar_balas()=           |
+| *Deuda tecnica*                     | Metodos que crecen sin control — refactorizar antes de que sea tarde              |
 | *Responsabilidad unica*             | Cada metodo hace una sola cosa: actualizar, verificar, responder                  |
-| *spritecollideany()*                | Compara un sprite individual contra un grupo (nave vs flota)                      |
-| *groupcollide() vs spritecollideany()* | Grupo-vs-grupo vs sprite-vs-grupo: dos herramientas para dos situaciones       |
-| *Testing con valores extremos*      | =ancho_bala = 300= para probar regeneracion de flota rapidamente                 |
-| *Preparar para el futuro*           | =_nave_alcanzada()= empieza con =print()= pero esta listo para expandirse        |
-
----
-
-*** Rubrica
-
-| *Criterio*                                                               | *Puntos* |
-|--------------------------------------------------------------------------+----------|
-| Refactorizacion: =_verificar_colisiones_bala_alienigena()= separado      |        2 |
-| =spritecollideany()= detecta colision alien-nave                         |        2 |
-| =_verificar_alienigenas_fondo()= detecta alienigenas en el fondo         |        2 |
-| =_nave_alcanzada()= centraliza la respuesta                              |        1 |
-| =ajustes.py= -- velocidad de balas ajustada, ancho restaurado            |        1 |
-| Ejecucion (todo funciona, mensajes aparecen en terminal)                 |        2 |
-| *Total base*                                                             |     *10* |
-| BONUS (hasta +2.75, max 10)                                             |    +2.75 |
+| *spritecollideany()*                | Sprite individual vs grupo — nave contra flota                                    |
+| *groupcollide() vs spritecollideany()* | Dos herramientas para dos situaciones: grupo-vs-grupo vs sprite-vs-grupo       |
+| *Testing con valores extremos*      | Balas gigantes, balas inmortales — testear rapido sin romper el juego final        |
+| *Principio de preparacion*          | =_nave_alcanzada()= hoy es un =print()=, mañana gestionara vidas y reinicio      |
 
 ---
 

@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.1 — Modelando bases de datos SQLite con Python"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-03-12T12:00:00+01:00
 publishDate = 2026-03-12
 tags = ["prácticas"]

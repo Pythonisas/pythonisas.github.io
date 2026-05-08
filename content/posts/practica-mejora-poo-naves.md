@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.5 — Refactoriza el duelo de naves espaciales"
-author = ["Jordi"]
+author = ["Fénix"]
 date = 2026-04-14T12:00:00+02:00
 publishDate = 2026-04-13
 tags = ["prácticas"]
