@@ -1,6 +1,6 @@
 +++
 title = "Práctica 3.6 — Invasión Alienígena I: El esqueleto del juego"
-author = ["Fénix"]
+author = ["Jordi"]
 date = 2026-04-20T12:00:00+02:00
 publishDate = 2026-04-20
 tags = ["prácticas"]

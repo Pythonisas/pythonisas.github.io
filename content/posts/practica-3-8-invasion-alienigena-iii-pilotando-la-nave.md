@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.8 - Invasion Alienigena III: Pilotando la Nave"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2026-05-01
 tags = ["prácticas"]
 url = "/pygame3/"

@@ -1,6 +1,6 @@
 +++
 title = "Pygames en itch.io — ¡a Jugarr!"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2026-04-17
 tags = ["pygame", "juegos"]
 url = "/pygames-itch-io/"

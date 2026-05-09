@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.11 - Invasion Alienigena VI: Haciendo que la Flota se Mueva"
-author = ["Fénix"]
+author = ["Jordi"]
 tags = ["prácticas"]
 url = "/pygame6/"
 draft = true

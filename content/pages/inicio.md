@@ -1,6 +1,6 @@
 +++
 title = "Inicio"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2022-01-01
 draft = false
 +++

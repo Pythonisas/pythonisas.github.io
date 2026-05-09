@@ -2720,6 +2720,8 @@ Antes de empezar, familiarizate con estas piezas de Pygame:
 
 *** Desafio 1: Armar la nave
 
+[[/images/invasion_alienigena-nave-disparando.png]]
+
 Tu nave necesita poder disparar. Cuando el jugador pulse =ESPACIO=:
 - Se crea una bala nueva en la punta de la nave
 - La bala sube a velocidad constante

@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.10 - Invasion Alienigena V: Alienigenas!"
-author = ["Fénix"]
+author = ["Jordi"]
 tags = ["prácticas"]
 url = "/pygame5/"
 draft = true

@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.9 - Invasion Alienigena IV: Disparando Balas"
-author = ["Fénix"]
+author = ["Jordi"]
 publishDate = 2026-05-01
 tags = ["prácticas"]
 url = "/pygame4/"
@@ -49,6 +49,8 @@ Antes de empezar, familiarizate con estas piezas de Pygame:
 
 
 ## Desafio 1: Armar la nave {#desafio-1-armar-la-nave}
+
+{{< figure src="/images/invasion_alienigena-nave-disparando.png" >}}
 
 Tu nave necesita poder disparar. Cuando el jugador pulse `ESPACIO`:
 

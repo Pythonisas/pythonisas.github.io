@@ -1,6 +1,6 @@
 +++
 title = "Practica 3.12 - Invasion Alienigena VII: Disparando a los Alienigenas"
-author = ["Fénix"]
+author = ["Jordi"]
 tags = ["prácticas"]
 url = "/pygame7/"
 draft = true
