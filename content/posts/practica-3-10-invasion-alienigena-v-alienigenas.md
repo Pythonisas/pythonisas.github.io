@@ -3,7 +3,7 @@ title = "Practica 3.10 - Invasion Alienigena V: Alienigenas!"
 author = ["Jordi"]
 tags = ["prácticas"]
 url = "/pygame5/"
-draft = true
+draft = false
 +++
 
 ## Mision: Llenar el cielo de enemigos {#mision-llenar-el-cielo-de-enemigos}
@@ -114,15 +114,6 @@ Requisitos funcionales:
 -   [ ] `_crear_alienigena()` como metodo auxiliar separado
 -   [ ] La nave y las balas siguen funcionando
 -   [ ] `Group.draw()` para pintar toda la flota de golpe
-
----
-
-
-## Uso etico de la IA {#uso-etico-de-la-ia}
-
-Mismas reglas que P3.9: la IA esta permitida con transparencia. Si la usas, incluye el prompt y explica en tus palabras:
-
-&gt; **"¿Por que se guarda `self.x = float(self.rect.x)` si el alien todavia no se mueve?"**
 
 ---
 

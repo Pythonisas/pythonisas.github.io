@@ -2851,7 +2851,7 @@ Quien copia sin entender obtiene codigo que funciona hoy y se rompe mañana. Qui
 #+end_quote
 
 
-** DOING Practica 3.10 - Invasion Alienigena V: Alienigenas!
+** DONE Practica 3.10 - Invasion Alienigena V: Alienigenas!
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-3-10-invasion-alienigena-v-alienigenas
 :EXPORT_HUGO_SECTION: posts
@@ -2960,14 +2960,6 @@ Requisitos funcionales:
 - [ ] =_crear_alienigena()= como metodo auxiliar separado
 - [ ] La nave y las balas siguen funcionando
 - [ ] =Group.draw()= para pintar toda la flota de golpe
-
----
-
-*** Uso etico de la IA
-
-Mismas reglas que P3.9: la IA esta permitida con transparencia. Si la usas, incluye el prompt y explica en tus palabras:
-
-> *"¿Por que se guarda =self.x = float(self.rect.x)= si el alien todavia no se mueve?"*
 
 ---
 
