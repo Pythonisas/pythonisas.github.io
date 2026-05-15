@@ -1,10 +1,14 @@
 +++
 title = "Practica 3.10 - Invasion Alienigena V: Alienigenas!"
 author = ["Jordi"]
+publishDate = 2026-05-15
 tags = ["prácticas"]
 url = "/pygame5/"
 draft = false
 +++
+
+{{< figure src="/images/space-invaders_4.jpg" >}}
+
 
 ## Mision: Llenar el cielo de enemigos {#mision-llenar-el-cielo-de-enemigos}
 

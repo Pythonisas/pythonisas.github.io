@@ -2855,9 +2855,12 @@ Quien copia sin entender obtiene codigo que funciona hoy y se rompe mañana. Qui
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-3-10-invasion-alienigena-v-alienigenas
 :EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_PUBLISHDATE: 2026-05-15
 :EXPORT_HUGO_URL: /pygame5/
 :EXPORT_HUGO_TAGS: prácticas
 :END:
+
+[[/images/space-invaders_4.jpg]]
 
 *** Mision: Llenar el cielo de enemigos
 
