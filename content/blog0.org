@@ -1,0 +1,1775 @@
+#+hugo_base_dir: ../
+#+hugo_section: posts
+#+title: Pythonisas — Primer Trimestre (Academia Pythonisa)
+
+# Primer trimestre de 2ASIR: fundamentos de Python desde cero.
+# Basado en los capítulos 1-9 de «Inventa tus propios juegos de computadora con Python»
+# (Al Sweigart, traducción de JáquerEspeis, CC BY-NC-SA).
+# Las SOLUCIONES NO van aquí (repo público): ~/EducaMadrid-NC/PROGRAMACION/soluciones-1T/
+# Tangle del código incompleto: C-c C-v t  (genera static/code/pythonN/*.py)
+
+* Posts — Primer Trimestre
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: posts
+:END:
+
+** TODO Grimorio básico de Python
+:PROPERTIES:
+:EXPORT_FILE_NAME: grimorio-basico-python
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /grimorio/
+:EXPORT_HUGO_TAGS: recursos
+:END:
+
+[[/images/pythonisa.png]]
+
+*** Tu libro de hechizos de bolsillo
+
+Toda aprendiz de la Academia lleva encima un /grimorio/: una chuleta con los hechizos básicos que usará una y otra vez. Este es el tuyo. No hace falta memorizarlo: tenlo abierto en una pestaña mientras programas, y vuelve a él cada vez que dudes.
+
+#+begin_quote
+Resumen de los capítulos 1 a 9 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python][traducción de JáquerEspeis]], CC BY-NC-SA)
+#+end_quote
+
+---
+
+*** Tipos de datos
+
+| *Tipo*  | *Qué guarda*          | *Ejemplos*                 | *Conversión*  |
+|---------+-----------------------+----------------------------+---------------|
+| =int=   | Números enteros       | =42=, =-7=, =0=            | =int('42')=   |
+| =float= | Números con decimales | =3.14=, =-0.5=, =2.0=      | =float('3.5')= |
+| =str=   | Texto (cadenas)       | ='hola'=, ="Pythonisa"=, =''= | =str(7)=   |
+| =bool=  | Verdadero o falso     | =True=, =False=            | =bool(0)=     |
+
+⚠️ =input()= *siempre* devuelve un =str=. Si necesitas un número, conviértelo: =int(input())=.
+
+---
+
+*** Operadores
+
+| *Operador* | *Significado*         | *Ejemplo*       | *Resultado* |
+|------------+-----------------------+-----------------+-------------|
+| =+=        | Suma / concatena      | =2 + 3=, ='ab' + 'c'= | =5=, ='abc'= |
+| =-=        | Resta                 | =10 - 4=        | =6=         |
+| =*=        | Multiplica / repite   | =3 * 4=, ='ja' * 3= | =12=, ='jajaja'= |
+| =/=        | División (con decimales) | =7 / 2=      | =3.5=       |
+| =//=       | División entera       | =7 // 2=        | =3=         |
+| =%=        | Resto (módulo)        | =7 % 2=         | =1=         |
+| =**=       | Potencia              | =2 ** 10=       | =1024=      |
+
+*Comparación* (devuelven =True= o =False=): ~==~ igual · ~!=~ distinto · =<= · =>= · ~<=~ · ~>=~
+
+*Booleanos:* =and= (las dos ciertas) · =or= (al menos una cierta) · =not= (lo contrario)
+
+⚠️ ~=~ *guarda* un valor en una variable. ~==~ *pregunta* si dos valores son iguales.
+
+---
+
+*** Estructuras de control
+
+#+begin_src python
+# Decidir
+if intentos < 6:
+    print('Sigue intentándolo')
+elif intentos == 6:
+    print('Último intento')
+else:
+    print('Se acabó')
+
+# Repetir mientras se cumpla una condición
+while respuesta != 'salir':
+    respuesta = input()
+
+# Repetir un número fijo de veces / recorrer una secuencia
+for letra in 'python':
+    print(letra)
+
+for i in range(3):      # 0, 1, 2
+    print(i)
+
+# Salir de un bucle antes de tiempo
+while True:
+    if input() == 'fin':
+        break
+#+end_src
+
+---
+
+*** Funciones
+
+#+begin_src python
+def saludar(nombre):              # nombre es un PARÁMETRO
+    mensaje = 'Hola, ' + nombre   # mensaje es LOCAL: solo existe aquí dentro
+    return mensaje                # devuelve un valor a quien llamó
+
+texto = saludar('Hipatia')        # 'Hipatia' es un ARGUMENTO
+print(texto)
+#+end_src
+
+---
+
+*** Cadenas y listas
+
+| *Hechizo*               | *Qué hace*                           | *Ejemplo → Resultado*                    |
+|-------------------------+--------------------------------------+------------------------------------------|
+| =len(x)=                | Longitud                             | =len('dragón')= → =6=                    |
+| =.lower()= / =.upper()= | Minúsculas / mayúsculas              | ='SÍ'.lower()= → ='sí'=                  |
+| =.split()=              | Parte una cadena en una lista        | ='a b c'.split()= → =['a', 'b', 'c']=    |
+| =x[i]=                  | Elemento en la posición =i= (desde 0) | ='gato'[0]= → ='g'=                     |
+| =x[i:j]=                | Corte: de =i= hasta =j= (sin incluir) | ='pythonisa'[0:6]= → ='python'=          |
+| =.append(x)=            | Añade al final de una lista          | =pociones.append('elixir')=              |
+| =.reverse()=            | Da la vuelta a una lista             | =[1, 2, 3]= → =[3, 2, 1]=                |
+| =x in y=                | ¿Está =x= dentro de =y=?             | ='a' in 'gato'= → =True=                 |
+| =f'...{var}...'=        | f-string: mete variables en el texto | =f'Hola, {nombre}'=                      |
+
+---
+
+*** Módulos que usaremos
+
+| *Módulo* | *Hechizo*              | *Para qué*                                   |
+|----------+------------------------+----------------------------------------------|
+| =random= | =random.randint(1, 20)= | Número entero al azar entre 1 y 20 (ambos incluidos) |
+| =random= | =random.choice(lista)= | Elemento al azar de una lista                |
+| =time=   | =time.sleep(2)=        | Pausa de 2 segundos (¡suspense!)             |
+
+---
+
+*** Nombres de variables: las reglas de la Academia
+
+- ✅ =snake_case=: palabras en minúscula separadas por =_= → =mi_nombre=, =intentos_realizados=
+- ✅ Sin tildes ni eñes en los nombres → =numero=, =anio=, no =número= ni =año=
+- ✅ Nombres que expliquen lo que guardan → =palabra_secreta= mejor que =p=
+- ✅ Constantes (valores que no cambian) en MAYÚSCULAS → =IMAGENES_AHORCADO=
+- ❌ No pueden empezar por número ni tener espacios o guiones → =2vidas=, =mi nombre=, =mi-nombre=
+
+---
+
+*** Los errores más frecuentes
+
+| *Error*          | *Qué suele significar*                                        |
+|------------------+---------------------------------------------------------------|
+| =SyntaxError=    | Has escrito algo que Python no entiende: falta =:=, un paréntesis o una comilla |
+| =IndentationError= | La sangría (los espacios al principio de línea) no cuadra   |
+| =NameError=      | Usas una variable que no existe (¿mal escrita? ¿aún no creada?) |
+| =TypeError=      | Mezclas tipos que no casan: ='5' + 5=                         |
+| =ValueError=     | El tipo es correcto pero el valor no: =int('hola')=           |
+
+💡 Python 3.11 marca con =^^^^= el punto exacto del error. *Lee el mensaje de abajo arriba*: la última línea te dice qué pasó, las de arriba dónde.
+
+** DONE Práctica 1.1 — Academia Pythonisa I: Tus primeros hechizos
+CLOSED: [2026-09-21 Mon 10:00]
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-1-primeros-hechizos
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python1/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+[[/images/pythonisa.png]]
+
+*** Misión: Despertar a la serpiente
+
+*Contexto mágico:* Bienvenida, bienvenido a la *Academia de las Pythonisas*. Hasta hoy has escrito HTML y CSS: le /describías/ al navegador cómo tenía que verse una página. Aquí vas a aprender otra magia: *dar órdenes*. Tú escribes instrucciones, y la serpiente —el intérprete de Python— las ejecuta una tras otra, al pie de la letra.
+
+Tu primera lección tiene tres partes: *hablar con la serpiente* (la consola interactiva), *guardar cosas en cajas* (las variables) y *escribir tu primer pergamino* (un programa =.py= que se puede guardar y volver a ejecutar).
+
+#+begin_quote
+Basado en los Capítulos 1 y 2 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo1.md][Cap. 1: La consola interactiva]] · [[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo2.md][Cap. 2: Escribiendo programas]])
+#+end_quote
+
+---
+
+*** Los problemas a resolver
+
+1. *Hablar con la consola* — ¿Cuánto da =2 + 3 * 4=? ¿Y =7 / 2= frente a =7 // 2=? La consola evalúa /expresiones/ (valores + operadores) y te devuelve un resultado. Tienes que aprender a *predecir* qué va a responder
+
+2. *Guardar valores* — Una variable es una caja con una etiqueta: guardas un valor y lo recuperas por su nombre. Pero si guardas algo nuevo en la misma caja, el valor anterior desaparece
+
+3. *Del eco al pergamino* — Lo que escribes en la consola se olvida al cerrarla. Para que tu magia perdure, la escribes en el *editor*, la guardas como fichero =.py= y la ejecutas cuantas veces quieras
+
+4. *Nombrar bien las cosas* — Python acepta casi cualquier nombre, pero la Academia tiene sus reglas (y el resto del mundo Python también: la guía de estilo *PEP 8*)
+
+---
+
+*** Tu taller: la consola de Python
+
+En clase usaremos *Python 3.11*. Para empezar a programar más allá 1 o 2 líneas, más adelante, recomendaremos usar el sencillo *Sublime* como editor o [[https://thonny.org/][Thonny]] (o los clásicos editores /Nano/, /Emacs/... o /Vim/).
+
+En esta primera práctica no necesitas nada de eso: te basta con *una terminal* y *un editor de texto cualquiera*.
+
+| *Orden / tecla*        | *Para qué sirve*                                                       |
+|------------------------+------------------------------------------------------------------------|
+| =python3=              | Arranca la consola interactiva: aparece el símbolo =>>>=               |
+| =>>>=                  | Python espera una orden: la escribes, pulsas Enter y te responde       |
+| Flecha ↑               | Recupera la última orden que escribiste (para no repetirla a mano)     |
+| =exit()= o =Ctrl+D=    | Sale de la consola y vuelve al terminal                                |
+| =python3 fichero.py=   | Ejecuta un programa que has guardado                                   |
+
+💡 ¿Qué versión de Python tienes? Escribe en la consola =import sys= y después =sys.version=.
+
+# TODO captura: [[/images/p1-1-consola.png]] — terminal con el prompt >>> y un par de expresiones
+
+---
+
+*** Herramientas a tu disposición
+
+| *Herramienta*          | *Para qué sirve*                                                   |
+|------------------------+--------------------------------------------------------------------|
+| =+ - * /=              | Sumar, restar, multiplicar, dividir (=/= siempre da decimales)     |
+| =//= y =%=             | División entera y resto                                            |
+| =**=                   | Potencia: =2 ** 3= → =8=                                           |
+| =( )=                  | Cambiar el orden de evaluación: =(2 + 3) * 4=                      |
+| ~variable = valor~     | Guardar un valor en una caja con nombre                            |
+| ='texto'= o ="texto"=  | Una cadena (/string/)                                              |
+| =+= entre cadenas      | Concatenar: ='Hola' + 'Mundo'= → ='HolaMundo'= (¡sin espacio!)     |
+| =print(...)=           | Mostrar algo por pantalla                                          |
+| =input()=              | Esperar a que la persona escriba algo y pulse Enter                |
+| =#=                    | Comentario: Python ignora el resto de la línea                     |
+
+---
+
+*** Desafío 1: La calculadora de la serpiente
+
+Abre una terminal, escribe =python3= y trabaja en la *consola interactiva*. Para cada expresión, *primero apunta en papel lo que crees que dará*, y después compruébalo.
+
+#+begin_example
+>>> 2 + 2
+>>> 2 + 3 * 4
+>>> (2 + 3) * 4
+>>> 8 * 3 / 2 + 2 + 7 - 9
+>>> 7 / 2
+>>> 7 // 2
+>>> 7 % 2
+>>> 2 ** 10
+>>> 5 +
+#+end_example
+
+La última está mal *a propósito*. Lee el mensaje de error: ¿qué te está diciendo Python? ¿Dónde pone las marcas =^=?
+
+*Diagnóstico:* si alguna predicción ha fallado, pregúntate *en qué orden* ha hecho Python las operaciones. Igual que en matemáticas: primero =**=, luego =* / // %=, y por último =+ -=.
+
+---
+
+*** Desafío 2: Cajas mágicas
+
+Sigue en la Shell. Ahora vas a guardar valores en variables:
+
+#+begin_example
+>>> pociones = 15
+>>> pociones
+>>> pociones + 5
+>>> pociones
+>>> pociones = pociones + 5
+>>> pociones
+>>> pociones = 'ninguna'
+>>> pociones
+>>> hechizos + 1
+#+end_example
+
+Fíjate en tres cosas:
+- =pociones + 5= *calcula* un valor, pero no lo guarda. =pociones = pociones + 5= sí lo guarda
+- Una misma caja puede cambiar de número a texto: guardar un valor nuevo /borra/ el anterior
+- =hechizos= no existe: ¿qué error te da?
+
+*Diagnóstico:* para mirar dentro de una caja en cualquier momento, escribe su nombre y pulsa Enter. La consola te responde con lo que guarda.
+
+Copia *toda tu sesión de la consola* (desafíos 1 y 2) en un fichero =consola.txt=.
+
+---
+
+*** Desafío 3: ¡Hola, Academia!
+
+Ahora sí: tu primer programa. Sal de la consola (=exit()=), abre tu editor de texto, escribe esto y guárdalo como =hola_academia.py=. Después ejecútalo desde la terminal con =python3 hola_academia.py=:
+
+#+begin_src python
+# Este programa saluda y pregunta por tu nombre.
+print('¡Hola, Academia!')
+print('¿Cómo te llamas?')
+mi_nombre = input()
+print('Es un placer conocerte, ' + mi_nombre)
+#+end_src
+
+Cuando funcione, *amplíalo*. El programa debe preguntar también:
+- el nombre de tu /familiar/ (tu mascota mágica: gato, cuervo, dragón de bolsillo...)
+- tu elemento favorito (fuego, agua, tierra, aire, bits...)
+
+Y al final debe anunciar tu *nombre de Pythonisa*, uniendo todo con =+=. Por ejemplo:
+
+#+begin_example
+Desde hoy serás conocida como: Ada del Fuego, guardiana del cuervo Pixel
+#+end_example
+
+*Diagnóstico:* si te sale =Adadel Fuego= todo junto, recuerda que =+= pega las cadenas /tal cual/: los espacios tienes que ponerlos tú dentro de las comillas.
+
+---
+
+*** Las reglas de los nombres
+
+¿Te has fijado en que escribimos =mi_nombre= y no =miNombre= ni =mi_nómbre=? En la Academia seguimos la guía de estilo oficial de Python (PEP 8):
+
+- ✅ *snake_case*: minúsculas y palabras separadas por =_= → =mi_nombre=, =nombre_familiar=
+- ✅ *Sin tildes ni eñes* en los nombres de variables y de ficheros
+- ✅ Nombres que se entiendan → =elemento_favorito= mejor que =ef=
+
+¿Por qué sin tildes, si Python 3 las admite? Por *portabilidad*. Tus programas viajarán entre Windows (en casa) y Linux (en el servidor del aula): un fichero llamado =adivinaElNúmero.py= puede aparecer como =adivinaElN├║mero.py= al copiarlo de un sistema a otro, y una variable con tilde es fácil de escribir mal en otro teclado. Los nombres simples, en minúscula y sin tildes funcionan igual en todas partes. /Los textos entre comillas sí pueden llevar todas las tildes que quieras./
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.1/
++-- consola.txt          <-- sesión de la Shell (desafíos 1 y 2)
++-- hola_academia.py     <-- tu primer programa, ampliado
++-- explicacion.md       <-- tus respuestas a "Explica tu código"
+#+end_example
+
+Súbela al *servidor SFTP del aula* (usuario y servidor: los que te indique tu profe):
+
+#+begin_example
+$ sftp tu_usuario@servidor-del-aula
+sftp> put -r PRACTICA1.1
+sftp> ls
+sftp> bye
+#+end_example
+
+También puedes usar FileZilla con el protocolo *SFTP*.
+
+Requisitos funcionales:
+- [ ] =consola.txt= incluye todas las expresiones de los desafíos 1 y 2, incluidos los errores
+- [ ] =hola_academia.py= se ejecuta sin errores con =python3 hola_academia.py=
+- [ ] El programa pide al menos 3 datos con =input()= y compone el nombre de Pythonisa
+- [ ] Los nombres de variables siguen =snake_case=, sin tildes
+- [ ] El programa lleva al menos un comentario =#= explicando qué hace
+
+---
+
+*** Explica tu código
+
+En =explicacion.md= responde *con tus palabras* (no hace falta que sea largo):
+
+1. ¿Por qué =7 / 2= y =7 // 2= dan resultados distintos?
+2. En tu programa, ¿qué hay guardado en =mi_nombre= justo después de ejecutarse =input()=?
+3. ¿Qué pasa con el valor viejo de una variable cuando le guardas uno nuevo?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                     | *Hechicería (9-10)*                                           | *Aprendizaje (6-8)*                                  | *Iniciación (0-5)*                         | *Peso* |
+|--------------------------------+---------------------------------------------------------------+------------------------------------------------------+--------------------------------------------+--------|
+| *Consola y expresiones*        | Todas las expresiones probadas, errores incluidos y comentados | Casi todas probadas, sin comentar los errores       | Faltan muchas o no hay =consola.txt=       |  *25%* |
+| *Variables*                    | Guarda, recupera y sobrescribe valores; entiende la diferencia | Usa variables pero confunde calcular con guardar    | No usa variables                           |  *20%* |
+| *Programa =hola_academia.py=*  | Ampliado, 3+ =input()=, concatenación con espacios correctos  | Funciona pero sin ampliar o con espacios que faltan | No ejecuta                                 |  *30%* |
+| *Nombres y estilo*             | =snake_case= sin tildes, nombres claros, comentarios útiles   | Nombres correctos pero poco claros o sin comentarios | camelCase, tildes o nombres de una letra  |  *15%* |
+| *Explica tu código*            | Respuestas claras, con sus palabras y ejemplos propios        | Respuestas correctas pero copiadas del enunciado    | Sin =explicacion.md= o respuestas vacías   |  *10%* |
+
+---
+
+*** Bonus (hasta +2)
+
+| *Bonus*                  | *Descripción*                                                         | *Puntos* |
+|--------------------------+-----------------------------------------------------------------------+----------|
+| Firma en arte ASCII      | El programa termina mostrando tu nombre o un dibujo con caracteres    | *+0.5*   |
+| Multiplicar cadenas      | Descubre qué hace ='ja' * 3= y úsalo en tu programa                   | *+0.5*   |
+| Cazadora de errores      | Provoca a propósito un =TypeError= (='5' + 5=) y explica por qué ocurre | *+0.5* |
+| Nombre aleatorio (pista: =import random=) | Investiga cómo elegir el elemento al azar          | *+0.5*   |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                 | *Dónde lo ves*                                                       |
+|----------------------------+----------------------------------------------------------------------|
+| *Expresión*                | =2 + 3 * 4=: valores y operadores que se evalúan a un único valor    |
+| *Precedencia*              | =*= se calcula antes que =+=; los paréntesis mandan                  |
+| *Entero vs decimal*        | =7 // 2= → =3= (=int=), =7 / 2= → =3.5= (=float=)                    |
+| *Variable*                 | =pociones = 15=: una caja con etiqueta                               |
+| *Sobrescribir*             | =pociones = 'ninguna'= borra el =15= anterior                        |
+| *Cadena (string)*          | ='¡Hola, Academia!'=: texto entre comillas                           |
+| *Concatenación*            | ='Es un placer, ' + mi_nombre=                                       |
+| *Llamada a función*        | =print(...)=, =input()=: nombre + paréntesis                         |
+| *Programa*                 | Un fichero =.py= con instrucciones que se ejecutan de arriba abajo   |
+
+---
+
+#+begin_quote
+/"Toda gran hechicera empezó escribiendo 2 + 2 y esperando, nerviosa, a que la serpiente respondiera 4."/
+#+end_quote
+
+** DONE Práctica 1.2 — Academia Pythonisa II: Adivina el Número
+CLOSED: [2026-09-21 Mon 10:05]
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-2-adivina-el-numero
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python2/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+*** Misión: La esfera adivinatoria
+
+*Contexto mágico:* En el aula de Adivinación hay una esfera de cristal que /piensa/ un número secreto entre 1 y 20. Quien quiera consultarla tiene *seis intentos* para acertarlo. Después de cada intento, la esfera brilla en rojo (/demasiado alto/) o en azul (/demasiado bajo/). La esfera se ha estropeado, y te toca a ti construir una nueva... en Python.
+
+Es tu primer *juego* de verdad. Un programa corto, pero con todos los ingredientes de uno grande: azar, repetición, decisiones y datos que escribe la persona que juega.
+
+#+begin_quote
+Basado en el Capítulo 3 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo3.md][Cap. 3: Adivina el número]])
+#+end_quote
+
+Así se ve una partida (lo que escribe la jugadora va en *negrita*):
+
+#+begin_example
+¡Hola! ¿Cómo te llamas?
+Ada
+Bueno, Ada, estoy pensando en un número entre 1 y 20.
+Intenta adivinar.
+10
+Tu estimación es muy alta.
+Intenta adivinar.
+2
+Tu estimación es muy baja.
+Intenta adivinar.
+4
+¡Buen trabajo, Ada! Has adivinado mi número en 3 intentos.
+#+end_example
+
+---
+
+*** Los problemas a resolver
+
+1. *El azar* — Python no trae de serie la magia de los números aleatorios: está guardada en un /módulo/ llamado =random=. Hay que *importarlo* antes de usarlo
+
+2. *Repetir* — Pedir un número, comprobarlo, volver a pedir... hasta seis veces. No vas a copiar el mismo código seis veces: necesitas un *bucle* =while=
+
+3. *Los tipos de datos* — =input()= siempre devuelve *texto*. Y para Python, ='4'= (texto) y =4= (número) *no son lo mismo*: no puedes comparar =< 4= con una cadena. Hay que *convertir*
+
+4. *Decidir* — ¿Muy alto? ¿Muy bajo? ¿Acierto? Cada caso necesita una *condición* y una sentencia =if=
+
+5. *Salir antes de tiempo* — Si aciertas al segundo intento, no tiene sentido seguir preguntando. Necesitas *romper* el bucle con =break=
+
+---
+
+*** Herramientas a tu disposición
+
+| *Herramienta*                 | *Para qué sirve*                                                     |
+|-------------------------------+----------------------------------------------------------------------|
+| =import random=               | Trae el módulo de números aleatorios a tu programa                   |
+| =random.randint(1, 20)=       | Devuelve un entero al azar entre 1 y 20 (/ambos incluidos/)          |
+| =while condicion:=            | Repite el bloque de debajo /mientras/ la condición sea =True=        |
+| =if condicion:=               | Ejecuta el bloque de debajo /solo si/ la condición es =True=         |
+| ~< > <= >= == !=~            | Comparan dos valores y devuelven =True= o =False=                    |
+| =int()=, =float()=, =str()=, =bool()= | Convierten un valor a otro tipo                              |
+| =break=                       | Sale del bucle inmediatamente                                        |
+
+---
+
+*** Tu taller: ahora sí, Thonny
+
+La consola interactiva está muy bien para probar cosas sueltas, pero este juego ya tiene varias líneas que se repiten y se anidan. A partir de aquí usaremos *Thonny* con *Python 3.11*: un editor pensado para aprender, con depurador incorporado (lo estrenarás en la P1.5) y sin configuraciones raras.
+
+| *Zona / atajo*     | *Para qué sirve*                                                          |
+|--------------------+---------------------------------------------------------------------------|
+| *Editor* (arriba)  | Donde escribes tus programas =.py=                                        |
+| *Shell* (abajo)    | La misma consola interactiva de la P1.1: el símbolo =>>>= espera órdenes  |
+| =F5= o botón ▶     | Ejecuta el programa del editor                                            |
+| =Ctrl+S=           | Guarda el fichero (Thonny te pedirá nombre la primera vez)                |
+| =Ctrl+O=           | Abre un fichero guardado                                                  |
+| /Ver → Variables/  | Muestra una tabla con todas tus variables y sus valores. *¡Actívalo ya!* |
+
+💡 ¿Qué versión de Python usa tu Thonny? Escribe en la Shell: =import sys= y después =sys.version=.
+
+# TODO captura: [[/images/p1-2-thonny-ventana.png]] — editor + shell + panel de variables
+
+---
+
+*** Antes de empezar: bloques y sangría
+
+En Python, los *bloques* de código se marcan con la *sangría*: los espacios al principio de la línea. Todo lo que tiene 4 espacios después de un =while= o un =if= /pertenece/ a él. Cuando la sangría vuelve atrás, el bloque termina.
+
+#+begin_example
+while intentos_realizados < 6:        <-- empieza el bloque del while
+....estimacion = int(input())
+....if estimacion < numero_secreto:   <-- empieza el bloque del if
+........print('Muy baja.')
+....if estimacion == numero_secreto:
+........break
+print('Fin del juego')                <-- ya estamos fuera del while
+#+end_example
+
+Thonny pone la sangría automáticamente cuando pulsas Enter después de =:=. Para *salir* del bloque, borra los espacios con la tecla de retroceso.
+
+⚠️ La diferencia entre ~=~ y ~==~: ~=~ *guarda* (~numero = 5~), ~==~ *pregunta* (~numero == 5~ → =True= o =False=). Es el error más típico de este trimestre.
+
+---
+
+*** Descarga el fichero incompleto
+
+- [[/code/python2/adivina_incompleto.py][adivina_incompleto.py]]
+
+Renómbralo a =adivina_el_numero.py=. Completa los huecos marcados con =___= y =...=:
+
+#+begin_src python :tangle ../static/code/python2/adivina_incompleto.py
+# adivina_el_numero.py — Práctica 1.2: La esfera adivinatoria
+# Completa los huecos marcados con ___ y ...
+import ___
+
+intentos_realizados = 0
+
+print('¡Hola! ¿Cómo te llamas?')
+mi_nombre = ___()
+
+numero_secreto = random.___(1, 20)
+print('Bueno, ' + mi_nombre + ', estoy pensando en un número entre 1 y 20.')
+
+while intentos_realizados < ___:
+    print('Intenta adivinar.')
+    estimacion = input()
+    estimacion = ___(estimacion)   # ¿Por qué hace falta esta línea?
+
+    intentos_realizados = intentos_realizados + 1
+
+    if estimacion < numero_secreto:
+        print('Tu estimación es muy baja.')
+
+    if estimacion ___ numero_secreto:
+        print('Tu estimación es muy alta.')
+
+    if estimacion == numero_secreto:
+        ___
+
+if estimacion == numero_secreto:
+    intentos_realizados = ___(intentos_realizados)
+    print('¡Buen trabajo, ' + mi_nombre + '! Has adivinado mi número en ' +
+          intentos_realizados + ' intentos.')
+
+if estimacion ___ numero_secreto:
+    ...   # Muestra cuál era el número secreto
+#+end_src
+
+---
+
+*** Desafío 1: La esfera piensa
+
+Antes de construir el juego entero, asegúrate de que la esfera sabe *pensar un número*.
+
+*Requisitos:*
+- Completa el =import= y la llamada a =random.randint()=
+- Añade *temporalmente* =print(numero_secreto)= justo después, para ver qué número ha pensado
+- Ejecuta el programa varias veces: ¿sale siempre un número distinto? ¿Alguna vez sale el 1 o el 20?
+
+*Diagnóstico:* si te aparece =NameError: name 'random' is not defined=, te falta el =import= (o está después de usarlo: el =import= va arriba del todo).
+
+💡 Ese =print(numero_secreto)= es un *truco de depuración*: te deja ver lo que el programa esconde. Déjalo mientras pruebas y *bórralo* antes de entregar... o la esfera no tendrá ningún misterio.
+
+---
+
+*** Desafío 2: El bucle de intentos
+
+Haz que la esfera te deje intentarlo *hasta seis veces* y te diga si vas alta o baja.
+
+*Primero, un laboratorio de conversiones.* En la Shell, prueba y apunta qué pasa:
+
+#+begin_example
+>>> '4' == 4
+>>> int('4') == 4
+>>> int('42') + 8
+>>> float('3.5')
+>>> str(7) + '7'
+>>> bool(0)
+>>> bool('hola')
+>>> int('hola')
+#+end_example
+
+*Requisitos:*
+- Completa la condición del =while= para que se repita 6 veces como máximo
+- Convierte =estimacion= a número entero antes de compararla
+- Completa el operador que falta para "muy alta"
+
+*Diagnóstico:* si te sale =TypeError: '<' not supported between instances of 'str' and 'int'=, Python te está diciendo que intentas comparar un texto con un número. ¿Qué línea convierte el texto en número?
+
+---
+
+*** Desafío 3: El veredicto final
+
+Cuando la jugadora acierte, el bucle debe *terminar enseguida*. Y al salir, la esfera tiene que dar su veredicto.
+
+*Requisitos:*
+- Completa el =break= cuando se acierta
+- Si ha acertado, muestra en cuántos intentos. Ojo: para /concatenar/ un número con texto, primero hay que convertirlo con =str()=
+- Si no ha acertado, sustituye el =...= por un mensaje que revele el número secreto
+
+*Diagnóstico:* juega dos partidas: una en la que aciertes y otra en la que falles *a propósito* los seis intentos. Tienen que salir mensajes distintos. Si al fallar no aparece nada, revisa la condición del último =if=.
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.2/
++-- adivina_el_numero.py   <-- el juego completo (¡sin el print del número secreto!)
++-- explicacion.md         <-- tus respuestas a "Explica tu código"
+#+end_example
+
+Súbela al *servidor SFTP del aula*:
+
+#+begin_example
+$ sftp tu_usuario@servidor-del-aula
+sftp> put -r PRACTICA1.2
+sftp> bye
+#+end_example
+
+Requisitos funcionales:
+- [ ] El número secreto cambia en cada partida
+- [ ] Se puede intentar un máximo de 6 veces
+- [ ] Después de cada intento, el juego dice "muy alta" o "muy baja"
+- [ ] Si se acierta, el bucle termina y se muestra el número de intentos
+- [ ] Si no se acierta, se revela el número secreto
+- [ ] Nombres en =snake_case= y comentarios en las partes clave
+
+---
+
+*** Explica tu código
+
+En =explicacion.md= responde con tus palabras:
+
+1. ¿Qué pasa si quitas la línea =estimacion = int(estimacion)=? Pruébalo y cuenta qué error sale y por qué
+2. ¿Qué diferencia hay entre ~intentos_realizados = 0~ e ~intentos_realizados == 0~?
+3. ¿Qué hace =break=? ¿Qué pasaría si no estuviera?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                          | *Hechicería (9-10)*                                               | *Aprendizaje (6-8)*                                 | *Iniciación (0-5)*                       | *Peso* |
+|-------------------------------------+-------------------------------------------------------------------+-----------------------------------------------------+------------------------------------------+--------|
+| *Azar (=import= + =randint=)*       | Número aleatorio correcto en cada partida                         | Funciona pero el rango no es 1-20                   | Número fijo o sin =import=               |  *15%* |
+| *Bucle =while= y bloques*           | 6 intentos exactos, sangría impecable                             | El bucle funciona pero el número de intentos falla  | Sin bucle o errores de sangría           |  *25%* |
+| *Conversión de tipos*               | =int()= y =str()= donde tocan; lo explica                         | Convierte pero sin entender por qué                 | =TypeError= al ejecutar                  |  *20%* |
+| *Condiciones, =if= y =break=*       | Alta, baja y acierto correctos; =break= al acertar                | Algún caso no se detecta bien                       | Las comparaciones no funcionan           |  *20%* |
+| *Experiencia de juego*              | Mensajes claros, veredicto final en los dos casos                 | Falta el mensaje de derrota o es confuso            | No hay veredicto final                   |  *10%* |
+| *Explica tu código*                 | Respuestas claras, con pruebas propias                            | Respuestas correctas pero sin probar                | Sin =explicacion.md=                     |  *10%* |
+
+---
+
+*** Bonus (hasta +2.5)
+
+| *Bonus*                       | *Descripción*                                                                 | *Puntos* |
+|-------------------------------+-------------------------------------------------------------------------------+----------|
+| Intervalo programable         | La jugadora elige el rango (1-50, 1-100...) antes de empezar                  | *+0.5*   |
+| Intentos según dificultad     | Fácil, normal o difícil cambian el número de intentos                         | *+0.5*   |
+| Entrada a prueba de despistes | Si escriben letras en vez de un número, el juego no se rompe (pista: =.isdigit()=) | *+0.5* |
+| Adivina la letra              | Versión alternativa: la esfera piensa una letra del alfabeto en vez de un número | *+1.0* |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                   | *Dónde lo ves*                                                           |
+|------------------------------+--------------------------------------------------------------------------|
+| *Sentencia =import=*         | =import random= trae un módulo a tu programa                             |
+| *=random.randint()=*         | Número entero al azar entre dos valores, ambos incluidos                 |
+| *Bucle =while=*              | Repite mientras =intentos_realizados < 6= sea =True=                     |
+| *Bloque*                     | Las líneas con la misma sangría debajo de un =while= o un =if=           |
+| *Booleano*                   | =True= / =False=: el resultado de toda comparación                       |
+| *Operadores de comparación*  | ~< > <= >= == !=~                                                        |
+| *~=~ frente a ~==~*          | ~=~ guarda, ~==~ pregunta                                                |
+| *Conversión de tipos*        | =int(estimacion)=, =str(intentos_realizados)=                            |
+| *Sentencia =if=*             | Ejecuta un bloque solo si la condición se cumple                         |
+| *=break=*                    | Sale del bucle antes de que la condición sea falsa                       |
+| *Control de flujo*           | El orden en que se ejecutan las líneas cambia según las condiciones      |
+
+---
+
+#+begin_quote
+/"La esfera no adivina nada: solo sabe comparar. Y ahora tú también."/
+#+end_quote
+
+** TODO Práctica 1.3 — Academia Pythonisa III: El Bufón de la Academia
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-3-el-bufon-de-la-academia
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python3/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+*** Misión: Hacer reír al tribunal
+
+*Contexto mágico:* Cada fin de trimestre, la Academia celebra el *Banquete de los Bits*, y este año te toca ser el Bufón o la Bufona. Tu programa tiene que contar chistes con buen ritmo: la pregunta, una pausa (¡el suspense!) y el remate. Parece fácil, pero enseguida te encontrarás con un enemigo inesperado: *las comillas*. ¿Cómo escribes un apóstrofo dentro de una cadena que ya empieza con comillas simples?
+
+Esta práctica es corta y te servirá para dominar =print()=... y para aprender el *conjuro mejorado* que usaremos a partir de ahora: las *f-strings*.
+
+#+begin_quote
+Basado en el Capítulo 4 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo4.md][Cap. 4: Un programa que cuenta chistes]])
+#+end_quote
+
+---
+
+*** Los problemas a resolver
+
+1. *El ritmo* — Un chiste necesita una pausa antes del remate. ¿Cómo hace un programa para /esperar/ a que la persona pulse Enter?
+
+2. *Comillas dentro de comillas* — ='¿Por qué vuelan los pájaros pa'l sur?'= rompe el programa. ¿Por qué? ¿Cómo lo arreglas?
+
+3. *Caracteres invisibles* — Saltos de línea, tabuladores, la propia barra =\=... Hay caracteres que no se pueden escribir tal cual: necesitan un /código de escape/
+
+4. *Terminar la línea (o no)* — =print()= siempre salta de línea al acabar. A veces no quieres que lo haga
+
+5. *Concatenar cansa* — ='Hola, ' + nombre + ', tienes ' + str(edad) + ' años'= es largo y fácil de equivocar. Hay un hechizo mejor
+
+---
+
+*** Herramientas a tu disposición
+
+| *Herramienta*          | *Para qué sirve*                                                        |
+|------------------------+-------------------------------------------------------------------------|
+| =input()= sin guardar  | Pausa hasta que se pulse Enter (no hace falta guardar lo que escriben)  |
+| =print()= vacío        | Imprime una línea en blanco                                             |
+| ="..."= y ='...'=      | Si el texto lleva ~'~, rodéalo de ~"~ (y al revés)                     |
+| =\'= y =\"=            | Comilla escapada: se imprime la comilla, no cierra la cadena            |
+| =\n=                   | Salto de línea                                                          |
+| =\t=                   | Tabulador                                                               |
+| =\\=                   | Una barra invertida de verdad                                           |
+| ~end=''~               | ~print('Hola', end='')~ no salta de línea al terminar                   |
+| =f'...{variable}...'=  | f-string: mete el valor de las variables directamente en el texto       |
+
+---
+
+*** Desafío 1: Tu repertorio
+
+Este es el esqueleto de un chiste, sacado del libro:
+
+#+begin_src python
+print('¿Qué sale del cruce entre un mono y un pato?')
+input()
+print('¡Un monopatín!')
+print()
+#+end_src
+
+*Requisitos:*
+- Crea =chistes.py= con *al menos 4 chistes tuyos* (o de tu familia, o de internet: ¡pero que sean para todos los públicos!)
+- Cada chiste tiene pregunta, pausa con =input()= y remate
+- Al menos uno debe tener /dos/ pausas (pregunta → "no sé, ¿qué?" → remate)
+
+*Diagnóstico:* si el programa no para entre la pregunta y el remate, revisa que tienes el =input()= en medio.
+
+---
+
+*** Desafío 2: La guerra de las comillas
+
+*Requisitos:*
+- Al menos un chiste debe llevar un apóstrofo o unas comillas /dentro/ del texto. Resuélvelo de *las dos formas*: cambiando el tipo de comillas y usando =\'= o =\"=
+- Crea un *cartel del Banquete* con =\n= y =\t= en /un solo/ =print()=. Por ejemplo:
+
+#+begin_example
+=== BANQUETE DE LOS BITS ===
+	Presenta:	La Bufona Ada
+	Hora:		cuando compile
+#+end_example
+
+- Usa ~end=''~ al menos una vez para que dos =print()= seguidos salgan en la misma línea
+
+*Diagnóstico:* si Thonny te colorea medio programa del color de las cadenas, es que una comilla ha cerrado la cadena antes de tiempo. Busca la primera línea donde cambia el color.
+
+💡 *Truco de bruja:* si pones una =r= delante de la cadena (=r'C:\nueva'=), Python *no* interpreta las barras: es una /cadena en bruto/. Te vendrá genial para el arte ASCII del Ahorcado.
+
+---
+
+*** Desafío 3: El conjuro mejorado (f-strings)
+
+Haz que tu Bufón *pregunte el nombre* del público al principio y lo use en los chistes.
+
+Primero hazlo *concatenando*, como hasta ahora:
+
+#+begin_src python
+nombre = input('¿Cómo te llamas? ')
+print('Oye, ' + nombre + ', ¿sabes cuál es el colmo de una programadora?')
+#+end_src
+
+Y después *reescríbelo con una f-string*:
+
+#+begin_src python
+print(f'Oye, {nombre}, ¿sabes cuál es el colmo de una programadora?')
+#+end_src
+
+La =f= delante de las comillas le dice a Python: /todo lo que esté entre llaves ={ }= es una variable, sustitúyela por su valor/. Y además convierte los números a texto sola, sin =str()=:
+
+#+begin_src python
+chistes_contados = 4
+print(f'Hoy te he contado {chistes_contados} chistes, {nombre}.')
+#+end_src
+
+*Requisitos:*
+- El programa pide el nombre y lo usa al menos en 2 chistes
+- Al final muestra cuántos chistes ha contado, usando una f-string con un número
+- Deja *una* línea con concatenación comentada (con =#=) junto a su versión f-string, para comparar
+
+*Diagnóstico:* si en pantalla sale literalmente ={nombre}=, te has olvidado la =f= delante de las comillas.
+
+A partir de esta práctica, *usa f-strings* siempre que mezcles texto y variables.
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.3/
++-- chistes.py        <-- tu repertorio completo
++-- explicacion.md    <-- tus respuestas a "Explica tu código"
+#+end_example
+
+Súbela al *servidor SFTP del aula* (=put -r PRACTICA1.3=).
+
+Requisitos funcionales:
+- [ ] Al menos 4 chistes con pausa antes del remate
+- [ ] Comillas dentro de una cadena resueltas de las dos formas
+- [ ] Cartel con =\n= y =\t= en un solo =print()=
+- [ ] ~end=''~ usado al menos una vez
+- [ ] El nombre del público aparece en f-strings
+
+---
+
+*** Explica tu código
+
+1. ¿Por qué ='pa'l sur'= da error y ="pa'l sur"= no?
+2. ¿Qué diferencia hay entre =print('a\nb')= y =print(r'a\nb')=? Pruébalo
+3. ¿Qué ventajas le ves a la f-string frente a la concatenación con =+=?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                      | *Hechicería (9-10)*                                           | *Aprendizaje (6-8)*                              | *Iniciación (0-5)*                       | *Peso* |
+|---------------------------------+---------------------------------------------------------------+--------------------------------------------------+------------------------------------------+--------|
+| *Ritmo y estructura*            | 4+ chistes, pausas bien colocadas, uno con doble pausa        | Chistes correctos pero sin doble pausa           | Menos de 3 chistes o sin pausas          |  *20%* |
+| *Comillas y escapes*            | Resuelve las comillas de las dos formas; =\n=, =\t= correctos | Solo una forma, o el cartel sale descuadrado     | Errores de sintaxis por comillas         |  *25%* |
+| *=end=*                         | Lo usa con sentido (no solo por cumplir)                      | Lo usa pero sin efecto visible                   | No aparece                               |  *10%* |
+| *f-strings*                     | Nombre y contador con f-strings; comparación con concatenación | f-strings correctas pero sin la comparación    | Sigue concatenando o sale ={nombre}=     |  *25%* |
+| *Estilo y creatividad*          | Chistes propios, nombres claros, salida bien presentada       | Chistes del libro con pocos cambios              | Copia literal del libro                  |  *10%* |
+| *Explica tu código*             | Respuestas claras, con pruebas propias                        | Correctas pero sin probar                        | Sin =explicacion.md=                     |  *10%* |
+
+---
+
+*** Bonus (hasta +1.5)
+
+| *Bonus*                 | *Descripción*                                                          | *Puntos* |
+|-------------------------+------------------------------------------------------------------------+----------|
+| Arte ASCII del Bufón    | Un gorro de bufón o una careta dibujada con caracteres (¿con =r'''...'''=?) | *+0.5* |
+| Suspense con puntos     | Los puntos suspensivos aparecen uno a uno (pista: ~end=''~ e =import time=) | *+0.5* |
+| Aplausómetro            | Tras cada chiste pregunta "¿te ha hecho gracia? (s/n)" y cuenta los "s" | *+0.5*  |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                | *Dónde lo ves*                                                    |
+|---------------------------+-------------------------------------------------------------------|
+| *=input()= como pausa*    | No guardas el valor: solo esperas el Enter                        |
+| *Comillas simples y dobles* | ="pa'l sur"=: las de fuera no pueden aparecer dentro sin escapar |
+| *Carácter de escape*      | =\n=, =\t=, =\'=, =\"=, =\\=                                      |
+| *Cadena en bruto*         | =r'...'=: las barras =\= se quedan tal cual                       |
+| *Argumento de palabra clave* | ~end=''~ cambia cómo termina =print()=                         |
+| *f-string*                | =f'Hola, {nombre}'=: variables dentro del texto                   |
+
+---
+
+#+begin_quote
+/"Un chiste sin pausa es como un programa sin =input()=: se acaba antes de empezar."/
+#+end_quote
+
+** TODO Práctica 1.4 — Academia Pythonisa IV: Reino de Dragones
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-4-reino-de-dragones
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python4/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+*** Misión: Las dos cuevas
+
+*Contexto mágico:* La Academia organiza su primera *expedición al Reino de Dragones*. Allí, cada dragón vive en su cueva junto a su tesoro. Algunos son amistosos y lo comparten; otros están hambrientos y se comen a quien entre. Delante de ti hay dos cuevas... y no sabes qué dragón vive en cada una.
+
+Hasta ahora tus programas eran una lista de órdenes de arriba abajo. Este juego es el primero que *organizarás en funciones*: pequeños hechizos con nombre que puedes invocar cuando los necesites. Y antes de escribir una sola línea, lo *diseñarás* con un diagrama de flujo.
+
+#+begin_quote
+Basado en el Capítulo 5 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo5.md][Cap. 5: Reino de dragones]])
+#+end_quote
+
+Así se ve una partida:
+
+#+begin_example
+Estás en una tierra llena de dragones. Frente a ti
+hay dos cuevas. En una de ellas, el dragón es generoso y amigable
+y compartirá su tesoro contigo. El otro dragón es codicioso
+y está hambriento, y te devorará inmediatamente.
+
+¿A qué cueva quieres entrar? (1 o 2)
+1
+Te aproximas a la cueva...
+Es oscura y espeluznante...
+¡Un gran dragón aparece súbitamente frente a ti! Abre sus fauces y...
+
+¡Te engulle de un bocado!
+¿Quieres jugar de nuevo? (sí o no)
+no
+#+end_example
+
+---
+
+*** Los problemas a resolver
+
+1. *Diseñar antes de programar* — ¿Qué pasos tiene el juego? ¿Dónde hay que decidir? ¿Dónde se vuelve atrás? Un *diagrama de flujo* te responde antes de escribir código
+
+2. *Organizar en funciones* — Mostrar la introducción, elegir cueva, explorarla... Cada tarea es una función con =def=. El programa principal solo las /invoca/
+
+3. *Pasar información* — =explorar_cueva()= necesita saber qué cueva has elegido. Se lo das como *argumento*, y ella lo recibe como *parámetro*
+
+4. *Devolver resultados* — =elegir_cueva()= tiene que /devolver/ la cueva elegida al programa principal. Para eso está =return=
+
+5. *Validar la entrada* — Si escriben =3= o =patata=, hay que volver a preguntar. Hace falta un =while= con una condición doble: =and=
+
+6. *¿Dónde vive cada variable?* — Una variable creada dentro de una función /no existe fuera/. Es el *entorno local* frente al *global*
+
+7. *El suspense* — Un =time.sleep(2)= entre frase y frase convierte un programa en una historia
+
+---
+
+*** Herramientas a tu disposición
+
+| *Herramienta*              | *Para qué sirve*                                                     |
+|----------------------------+----------------------------------------------------------------------|
+| ~def nombre(parametro):~   | Define una función (un hechizo con nombre)                           |
+| =return valor=             | La función devuelve un valor a quien la llamó                        |
+| =nombre(argumento)=        | Llama (invoca) a la función                                          |
+| =and=, =or=, =not=         | Combinan condiciones                                                 |
+| ='''...'''=                | Cadena de varias líneas                                              |
+| =import time=              | Módulo del tiempo                                                    |
+| =time.sleep(segundos)=     | Pausa el programa                                                    |
+
+*Tablas de verdad* (pruébalas en la Shell):
+
+| *A*     | *B*     | *=A and B=* | *=A or B=* | *=not A=* |
+|---------+---------+-------------+------------+-----------|
+| =True=  | =True=  | =True=      | =True=     | =False=   |
+| =True=  | =False= | =False=     | =True=     | =False=   |
+| =False= | =True=  | =False=     | =True=     | =True=    |
+| =False= | =False= | =False=     | =False=    | =True=    |
+
+---
+
+*** Desafío 1: Diseña el juego (diagrama de flujo)
+
+Antes de programar, dibuja el *diagrama de flujo* del juego. Cada caja es una acción; cada flecha, el camino a la siguiente. Donde el camino se divide, hay una *decisión*.
+
+*Requisitos:*
+- Cajas de *Inicio* y *Fin*
+- Todas las acciones: mostrar introducción, elegir cueva, comprobar dragón, ganar/perder, jugar de nuevo
+- La flecha que *vuelve atrás* si la jugadora quiere jugar otra vez
+- La flecha que vuelve atrás si escribe una cueva que no existe (¡esta no está en el libro!)
+
+Hazlo en papel (y fotografíalo) o en [[https://app.diagrams.net][draw.io]] (y expórtalo a PNG). Cuando lo tengas, compáralo con el del libro:
+
+#+caption: Diagrama de flujo de Reino de Dragones (Al Sweigart, CC BY-NC-SA)
+[[/images/p1-4-diagrama-dragones.png]]
+
+*Diagnóstico:* pon el dedo en /Inicio/ y sigue las flechas: tu dedo es la ejecución del programa. ¿Puedes llegar a /Fin/ por todos los caminos? ¿Hay algún camino sin salida?
+
+---
+
+*** Desafío 2: Completa el código
+
+- [[/code/python4/dragones_incompleto.py][dragones_incompleto.py]]
+
+Renómbralo a =dragones.py=. Completa los huecos =___= y =...=:
+
+#+begin_src python :tangle ../static/code/python4/dragones_incompleto.py
+# dragones.py — Práctica 1.4: Reino de Dragones
+# Completa los huecos marcados con ___ y ...
+import random
+import ___
+
+
+def mostrar_introduccion():
+    print('''Estás en una tierra llena de dragones. Frente a ti
+hay dos cuevas. En una de ellas, el dragón es generoso y amigable
+y compartirá su tesoro contigo. El otro dragón es codicioso
+y está hambriento, y te devorará inmediatamente.''')
+    print()
+
+
+def elegir_cueva():
+    cueva = ''
+    while cueva != '1' ___ cueva != '2':
+        print('¿A qué cueva quieres entrar? (1 o 2)')
+        cueva = input()
+
+    ___ cueva
+
+
+def explorar_cueva(cueva_elegida):
+    print('Te aproximas a la cueva...')
+    time.sleep(2)
+    print('Es oscura y espeluznante...')
+    time.___(2)
+    print('¡Un gran dragón aparece súbitamente frente a ti! Abre sus fauces y...')
+    print()
+    time.sleep(2)
+
+    cueva_amigable = random.randint(1, 2)
+
+    if cueva_elegida == ___(cueva_amigable):
+        print('¡Te regala su tesoro!')
+    else:
+        ...
+
+
+jugar_de_nuevo = 'sí'
+while jugar_de_nuevo == 'sí' ___ jugar_de_nuevo == 's':
+    mostrar_introduccion()
+    numero_de_cueva = ___()
+    explorar_cueva(___)
+
+    print('¿Quieres jugar de nuevo? (sí o no)')
+    jugar_de_nuevo = input()
+#+end_src
+
+*Pistas:*
+- En =elegir_cueva()= el bucle debe repetirse mientras la cueva *no sea* 1 *y* *no sea* 2
+- ¿Por qué comparamos con =str(cueva_amigable)= y no con =cueva_amigable= a secas? (Recuerda la P1.2: ¿qué tipo devuelve =input()=?)
+- El =while= final debe seguir si responden =sí= *o* =s=
+
+*Diagnóstico:* escribe =3=, =hola= y una cadena vacía cuando te pregunte la cueva. El juego tiene que volver a preguntar las tres veces. Si acepta el =3=, revisa el =and=.
+
+---
+
+*** Desafío 3: El experimento de los entornos
+
+Añade *temporalmente* al final del programa (fuera de cualquier función):
+
+#+begin_src python
+print(cueva_amigable)
+#+end_src
+
+Ejecuta. ¿Qué error sale? ¿Por qué, si la variable /existe/ dentro de =explorar_cueva()=?
+
+Ahora prueba lo contrario: dentro de =explorar_cueva()= añade =print(jugar_de_nuevo)=. ¿Funciona? ¿Por qué?
+
+*Diagnóstico:* abre /Ver → Variables/ mientras juegas. Verás que las variables de una función aparecen... y desaparecen cuando la función termina.
+
+Borra estas pruebas antes de entregar y explica lo que has descubierto en =explicacion.md=.
+
+---
+
+*** Desafío 4: Tu propio reino
+
+Ahora que funciona, hazlo *tuyo*. Elige al menos *una* ampliación y añádela también a tu diagrama de flujo:
+
+- Una *tercera cueva* (¿con un dragón dormido?)
+- Un *segundo encuentro* si sobrevives (un puente, un acertijo...)
+- Una función =mostrar_tesoro(monedas)= que reciba un parámetro y muestre el tesoro ganado
+- Otra historia completamente distinta con la misma estructura: dos puertas, dos pociones, dos portales...
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.4/
++-- dragones.py            <-- el juego completo y ampliado
++-- diagrama_flujo.png     <-- foto o exportación de draw.io (con tu ampliación)
++-- explicacion.md         <-- tus respuestas a "Explica tu código"
+#+end_example
+
+Súbela al *servidor SFTP del aula* (=put -r PRACTICA1.4=).
+
+Requisitos funcionales:
+- [ ] El juego se organiza en funciones con =def=
+- [ ] =elegir_cueva()= valida la entrada y *devuelve* la cueva con =return=
+- [ ] =explorar_cueva()= recibe la cueva como *parámetro*
+- [ ] Se puede volver a jugar respondiendo =sí= o =s=
+- [ ] Hay pausas con =time.sleep()=
+- [ ] El diagrama de flujo refleja *tu* versión del juego, incluida la ampliación
+
+---
+
+*** Explica tu código
+
+1. ¿Qué diferencia hay entre /parámetro/ y /argumento/? Señala uno de cada en tu código
+2. ¿Qué pasaría si quitas el =return cueva= de =elegir_cueva()=? Pruébalo
+3. ¿Qué descubriste en el Desafío 3 sobre dónde "viven" las variables?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                               | *Hechicería (9-10)*                                           | *Aprendizaje (6-8)*                                | *Iniciación (0-5)*                       | *Peso* |
+|------------------------------------------+---------------------------------------------------------------+----------------------------------------------------+------------------------------------------+--------|
+| *Diagrama de flujo*                      | Completo, con bucles de repetición y validación, y la ampliación | Correcto pero sin validación o sin ampliación   | Incompleto o sin diagrama                |  *20%* |
+| *Funciones (=def=, =return=, parámetros)* | Funciones claras, =return= y parámetros bien usados          | Funciona pero alguna función no devuelve o no recibe | Todo el código fuera de funciones      |  *30%* |
+| *Bucles y operadores booleanos*          | Validación con =and=, repetición con =or=, sin fallos         | Una de las dos condiciones falla                   | Acepta entradas no válidas               |  *15%* |
+| *Entornos global y local*                | Explica con precisión el experimento del Desafío 3            | Lo prueba pero la explicación es vaga              | No lo realiza                            |  *10%* |
+| *Suspense y creatividad*                 | =sleep()= bien dosificado, ampliación original                | Ampliación mínima                                  | Sin ampliación                           |  *15%* |
+| *Explica tu código*                      | Respuestas claras, con pruebas propias                        | Correctas pero sin probar                          | Sin =explicacion.md=                     |  *10%* |
+
+---
+
+*** Bonus (hasta +2)
+
+| *Bonus*                   | *Descripción*                                                                  | *Puntos* |
+|---------------------------+--------------------------------------------------------------------------------+----------|
+| Arte ASCII del dragón     | El dragón aparece dibujado (usa =r'''...'''=)                                  | *+0.5*   |
+| Marcador                  | Cuenta partidas ganadas y perdidas, y lo muestra al terminar (con f-strings)  | *+0.5*   |
+| Dragones con carácter     | Cada cueva puede tener un dragón distinto, elegido al azar entre varios        | *+1.0*   |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                | *Dónde lo ves*                                                           |
+|---------------------------+--------------------------------------------------------------------------|
+| *Diagrama de flujo*       | El mapa del juego antes de programarlo                                   |
+| *Sentencia =def=*         | =def elegir_cueva():= crea una función                                   |
+| *Llamada a función*       | =elegir_cueva()= la ejecuta                                              |
+| *Parámetro / argumento*   | =def explorar_cueva(cueva_elegida)= / =explorar_cueva(numero_de_cueva)= |
+| *=return=*                | =return cueva= devuelve el valor al programa principal                   |
+| *Operadores booleanos*    | ~cueva != '1' and cueva != '2'~                                          |
+| *Entorno local*           | =cueva_amigable= solo existe dentro de =explorar_cueva()=                |
+| *Entorno global*          | =jugar_de_nuevo= existe en todo el programa                              |
+| *Cadena multilínea*       | La introducción entre ='''...'''=                                        |
+| *=time.sleep()=*          | Pausas para crear suspense                                               |
+
+---
+
+#+begin_quote
+/"Una función es un hechizo con nombre: lo escribes una vez y lo invocas mil."/
+#+end_quote
+
+** TODO Práctica 1.5 — Academia Pythonisa V: Cazabugs
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-5-cazabugs
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python5/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+*** Misión: Cazar lo invisible
+
+*Contexto mágico:* En los pasillos de la Academia viven unas criaturas diminutas que se cuelan en los programas: los *bugs*. Algunos son escandalosos y rompen el programa nada más empezar. Otros son silenciosos: el programa funciona... pero hace algo distinto de lo que querías. Esos son los peores.
+
+Para cazarlos, la Academia te entrega tu primera herramienta profesional: *el depurador*. Con él puedes congelar el tiempo, avanzar tu programa línea a línea y mirar dentro de cada variable.
+
+#+begin_quote
+Basado en el Capítulo 6 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo6.md][Cap. 6: Usando el depurador]]). El libro usa IDLE; aquí lo adaptamos al depurador de *Thonny*.
+#+end_quote
+
+---
+
+*** Los problemas a resolver
+
+1. *Reconocer al bicho* — No todos los bugs son iguales:
+   - *Errores de sintaxis*: Python no entiende lo que has escrito. No arranca
+   - *Errores de ejecución*: arranca, pero se estrella a mitad (=TypeError=, =NameError=...)
+   - *Errores de lógica*: no se estrella nunca... pero el resultado está mal. *Ningún mensaje te avisa*
+
+2. *Ver lo que no se ve* — Un programa se ejecuta en milésimas de segundo. Necesitas *frenarlo* y ejecutarlo paso a paso
+
+3. *No perder la tarde* — Ir paso a paso por 1000 vueltas de un bucle es inhumano. Necesitas decirle al depurador: /para solo aquí/
+
+---
+
+*** Tu kit de cazabugs: el depurador de Thonny
+
+| *Botón / atajo*               | *Qué hace*                                                            |
+|-------------------------------+-----------------------------------------------------------------------|
+| 🐞 /Depurar/ (=Ctrl+F5=)       | Ejecuta el programa bajo el depurador: se para en la primera línea    |
+| /Paso por encima/ (=F6=)      | Ejecuta la línea entera y pasa a la siguiente                         |
+| /Paso dentro/ (=F7=)          | Entra dentro de la línea: evalúa cada trozo de la expresión, o entra en tu función |
+| /Paso fuera/                  | Termina la función actual y vuelve a quien la llamó                   |
+| /Continuar/ (=F8=)            | Sigue a velocidad normal hasta el siguiente punto de interrupción     |
+| /Detener/ (=Ctrl+F2=)         | Para el programa                                                      |
+| Clic en el número de línea    | Pone (o quita) un *punto de interrupción*: un punto rojo              |
+| /Ver → Variables/             | Tabla con todas las variables y sus valores en cada momento           |
+
+💡 Si no ves los números de línea: /Herramientas → Opciones → Editor → Mostrar números de línea/.
+
+# TODO captura: [[/images/p1-5-thonny-depurador.png]] — barra de botones del depurador
+
+---
+
+*** Desafío 1: Paso a paso por el Reino de Dragones
+
+Abre tu =dragones.py= de la práctica 1.4.
+
+*Requisitos:*
+- Pulsa =Ctrl+F5=. El programa se para en la primera línea (resaltada)
+- Avanza con =F6= (/paso por encima/) y observa en qué orden se ejecutan las líneas. ¿Por qué se /salta/ los =def= la primera vez?
+- Cuando llegue a =numero_de_cueva = elegir_cueva()=, pulsa =F7= (/paso dentro/): ¡entras dentro de la función!
+- Con /Ver → Variables/ abierto, observa cómo aparece =cueva= y cómo desaparece al salir de la función
+
+*Diagnóstico:* si al pulsar =F7= en =time.sleep(2)= no pasa nada especial, es normal: las funciones de Python no se abren, solo las tuyas.
+
+# TODO captura: [[/images/p1-5-thonny-paso-dentro.png]] — dentro de elegir_cueva() con el panel de variables
+
+---
+
+*** Desafío 2: Encuentra el bug
+
+Descarga este programa: [[/code/python5/sumas_con_bug.py][sumas_con_bug.py]]. Pregunta una suma y comprueba la respuesta... o eso debería hacer.
+
+#+begin_src python :tangle ../static/code/python5/sumas_con_bug.py
+# sumas_con_bug.py — Práctica 1.5: ¡este programa tiene un bug!
+import random
+
+numero1 = random.randint(1, 10)
+numero2 = random.randint(1, 10)
+print('¿Cuánto es ' + str(numero1) + ' + ' + str(numero2) + '?')
+respuesta = input()
+if respuesta == numero1 + numero2:
+    print('¡Correcto!')
+else:
+    print('¡Nooo! La respuesta es ' + str(numero1 + numero2))
+#+end_src
+
+Ejecútalo con =F5= y responde *bien*. Verás algo así:
+
+#+begin_example
+¿Cuánto es 9 + 2?
+11
+¡Nooo! La respuesta es 11
+#+end_example
+
+No hay ningún mensaje de error. Es un *error de lógica*.
+
+*Requisitos:*
+- Depura con =Ctrl+F5= y avanza hasta la línea del =if=
+- Ahí, pulsa =F7= varias veces: Thonny irá sustituyendo cada trozo de la condición por su valor, hasta que veas exactamente qué está comparando
+- Mira también el panel de variables: ¿qué tipo de valor hay en =respuesta=? ¿Y en =numero1=?
+- Corrige el bug y guarda el programa arreglado como =sumas.py=
+
+*Diagnóstico:* si no lo ves, fíjate en las comillas. En el panel de variables, ¿qué hay en =respuesta=: =11= o ='11'=?
+
+---
+
+*** Desafío 3: Puntos de interrupción
+
+Descarga [[/code/python5/lanzar_moneda.py][lanzar_moneda.py]]. Lanza una moneda 1000 veces y va contando las caras.
+
+#+begin_src python :tangle ../static/code/python5/lanzar_moneda.py
+# lanzar_moneda.py — Práctica 1.5: puntos de interrupción
+import random
+
+print('Lanzaré una moneda 1000 veces. ¿Cuántas veces saldrá cara? (Pulsa Enter para empezar)')
+input()
+lanzamientos = 0
+caras = 0
+while lanzamientos < 1000:
+    if random.randint(0, 1) == 1:
+        caras = caras + 1
+    lanzamientos = lanzamientos + 1
+
+    if lanzamientos == 900:
+        print('900 lanzamientos y ha salido cara ' + str(caras) + ' veces.')
+    if lanzamientos == 100:
+        print('En 100 lanzamientos, ha salido cara ' + str(caras) + ' veces.')
+    if lanzamientos == 500:
+        print('A mitad de camino, ha salido cara ' + str(caras) + ' veces.')
+
+print()
+print('De 1000 lanzamientos, ha salido cara ' + str(caras) + ' veces.')
+print('¿Te has acercado?')
+#+end_src
+
+Ir paso a paso aquí son miles de clics. Mejor:
+
+*Requisitos:*
+- Pon *tres puntos de interrupción* (clic en el número de línea) en los tres =print()= de dentro del bucle
+- Pulsa =Ctrl+F5= y luego =F8= (/Continuar/): el programa correrá a toda velocidad y *se parará solo* en cada punto rojo
+- En cada parada, apunta los valores de =lanzamientos= y =caras=
+- ¿En qué orden se para? ¿Por qué no es 100 → 500 → 900 si en el código el 900 está primero?
+
+*Diagnóstico:* si el programa no se para en los puntos rojos, comprueba que has usado =Ctrl+F5= (depurar) y no =F5= (ejecutar).
+
+# TODO captura: [[/images/p1-5-thonny-breakpoints.png]] — tres puntos de interrupción en lanzar_moneda.py
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.5/
++-- sumas.py                 <-- el programa arreglado
++-- bitacora.md              <-- tu bitácora de caza (ver abajo)
++-- captura_paso_dentro.png  <-- Desafío 2: Thonny mostrando la comparación que falla
++-- captura_breakpoints.png  <-- Desafío 3: parado en un punto de interrupción
+#+end_example
+
+Súbela al *servidor SFTP del aula* (=put -r PRACTICA1.5=).
+
+*La bitácora de caza* (=bitacora.md=) tiene una ficha por cada bug del Desafío 2, y otra por *un bug real tuyo* de cualquier práctica anterior:
+
+#+begin_example
+## Bug: ...
+- Síntoma: qué veía (o qué no veía)
+- Tipo: sintaxis / ejecución / lógica
+- Hipótesis: qué creía que pasaba
+- Lo que vi en el depurador: ...
+- Solución: ...
+#+end_example
+
+Requisitos funcionales:
+- [ ] =sumas.py= dice "¡Correcto!" cuando la respuesta es correcta
+- [ ] La bitácora tiene al menos 2 fichas completas
+- [ ] Las capturas muestran el depurador en acción
+- [ ] Anotados los valores de =lanzamientos= y =caras= en las tres paradas
+
+---
+
+*** Explica tu código
+
+(En esta práctica, lo incluyes en =bitacora.md=.)
+
+1. ¿Qué diferencia hay entre /paso por encima/ (=F6=) y /paso dentro/ (=F7=)?
+2. ¿Por qué el bug del Desafío 2 no daba ningún mensaje de error?
+3. ¿Por qué el depurador se paraba antes en el 100 que en el 900?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                        | *Hechicería (9-10)*                                           | *Aprendizaje (6-8)*                                | *Iniciación (0-5)*                      | *Peso* |
+|-----------------------------------+---------------------------------------------------------------+----------------------------------------------------+-----------------------------------------+--------|
+| *Uso del depurador paso a paso*   | Usa =F6= y =F7= con intención, sabe entrar y salir de funciones | Avanza paso a paso pero sin entrar en funciones  | No usa el depurador                     |  *25%* |
+| *Caza del bug*                    | Lo encuentra con el depurador y lo corrige con =int()=        | Lo corrige pero sin usar el depurador              | No lo corrige                           |  *25%* |
+| *Puntos de interrupción*          | Tres puntos, valores anotados, explica el orden               | Usa puntos pero no anota o no explica              | No los usa                              |  *20%* |
+| *Bitácora de caza*                | Fichas completas, incluido un bug real propio                 | Fichas incompletas o sin bug propio                | Sin bitácora                            |  *20%* |
+| *Explica tu código*               | Respuestas claras con ejemplos                                | Correctas pero vagas                               | Sin respuestas                          |  *10%* |
+
+---
+
+*** Bonus (hasta +1.5)
+
+| *Bonus*                 | *Descripción*                                                         | *Puntos* |
+|-------------------------+-----------------------------------------------------------------------+----------|
+| Bug plantado            | Mete un error de lógica en tu =dragones.py= y pásaselo a otra persona para que lo cace con el depurador (documéntalo) | *+1.0* |
+| Moneda trucada          | Modifica =lanzar_moneda.py= para que la cara salga el 70% de las veces (pista: =randint(1, 10)=) | *+0.5* |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                   | *Dónde lo ves*                                                      |
+|------------------------------+---------------------------------------------------------------------|
+| *Error de sintaxis*          | Python no arranca: =SyntaxError=                                    |
+| *Error de ejecución*         | Se estrella a mitad: =TypeError=, =NameError=, =ValueError=          |
+| *Error de lógica*            | Funciona, pero mal: ~'11' == 11~ es =False= y no avisa              |
+| *Depurador*                  | Ejecuta el programa bajo tu control (=Ctrl+F5=)                     |
+| *Paso a paso*                | =F6= por encima, =F7= por dentro                                    |
+| *Punto de interrupción*      | Punto rojo: /para aquí/ (=F8= para llegar hasta él)                 |
+| *Inspección de variables*    | /Ver → Variables/: el contenido de cada caja en cada instante       |
+
+---
+
+#+begin_quote
+/"El ordenador hace exactamente lo que le dices. El bug no está en la máquina: está en la distancia entre lo que dijiste y lo que querías decir."/
+#+end_quote
+
+** TODO Práctica 1.6 — Academia Pythonisa VI: El Ahorcado
+:PROPERTIES:
+:EXPORT_FILE_NAME: practica-1-6-el-ahorcado
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_URL: /python6/
+:EXPORT_HUGO_TAGS: prácticas
+:END:
+
+*** Misión: La palabra prohibida
+
+*Contexto mágico:* En la biblioteca de la Academia hay un libro maldito que solo se abre si alguien adivina su *palabra secreta*, letra a letra. Cada letra equivocada hace aparecer una parte más del ahorcado en la portada... y a la séptima, el libro se cierra para siempre.
+
+Es el *proyecto final del trimestre*, y el programa más largo que has escrito hasta ahora. Por eso lo harás como lo hacen los profesionales: *primero el diseño* (diagrama de flujo), *luego el código* y *finalmente las ampliaciones*.
+
+#+begin_quote
+Basado en los Capítulos 7, 8 y 9 de /Inventa tus propios juegos de computadora con Python/ -- Al Sweigart ([[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo7.md][Cap. 7: Diseño con diagramas de flujo]] · [[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo8.md][Cap. 8: El código del Ahorcado]] · [[https://github.com/JaquerEspeis/inventar-con-python/blob/master/capitulo9.md][Cap. 9: Extendiendo el Ahorcado]])
+#+end_quote
+
+Así se ve una partida:
+
+#+begin_example
+A H O R C A D O
+
+  +---+
+      |
+      |
+      |
+     ===
+
+Letras incorrectas:
+_ _ _
+Adivina una letra.
+a
+...
+  +---+
+  O   |
+      |
+      |
+     ===
+
+Letras incorrectas: o
+g a _
+Adivina una letra.
+t
+¡Sí! La palabra secreta es "gato". ¡Has ganado!
+¿Quieres jugar de nuevo? (sí o no)
+#+end_example
+
+---
+
+*** Los problemas a resolver
+
+1. *El diseño* — Hay bucles dentro de bucles, validaciones, dos formas de terminar (ganar o perder) y la opción de volver a jugar. Sin un mapa, te perderás
+
+2. *Dibujar el ahorcado* — Siete dibujos de arte ASCII, cada uno de varias líneas. Necesitas guardarlos en *una lista* de cadenas multilínea, y elegir cuál mostrar según los fallos
+
+3. *Muchas palabras* — Escribir una lista de 60 palabras con comillas y comas es un rollo. =split()= la construye a partir de una sola cadena
+
+4. *Mostrar =g a _ o=* — Hay que recorrer la palabra letra a letra (bucle =for=) y sustituir cada =_= por la letra acertada. Para eso, *cortes* (=slices=)
+
+5. *Validar la letra* — ¿Es una sola letra? ¿Ya la había probado? ¿Es un número? Varias condiciones encadenadas: =if= / =elif= / =else=
+
+6. *¿Ha ganado?* — Hay que comprobar si /todas/ las letras de la palabra están entre las acertadas
+
+---
+
+*** Herramientas a tu disposición
+
+| *Herramienta*                 | *Para qué sirve*                                                         |
+|-------------------------------+--------------------------------------------------------------------------|
+| =r'''...'''=                  | Cadena multilínea /en bruto/ (las =\= del dibujo no son escapes)         |
+| =MAYUSCULAS = ...=            | Constante: un valor que no debe cambiar                                  |
+| =[a, b, c]=                   | Lista: varios valores en una sola variable                               |
+| =lista[i]=                    | Elemento en la posición =i= (¡se empieza a contar en 0!)                 |
+| =len(x)=                      | Número de elementos de una lista (o letras de una cadena)                |
+| ='a b c'.split()=             | Convierte una cadena en una lista de palabras                            |
+| =.lower()= / =.upper()=       | Pasa a minúsculas / mayúsculas                                           |
+| =.append()= / =.reverse()=    | Añade al final / da la vuelta a una lista                                |
+| =for x in secuencia:=         | Repite el bloque una vez por cada elemento                               |
+| =range(n)= / =list(range(n))= | Los números del 0 al =n-1=                                               |
+| =cadena[i:j]=                 | Corte: los caracteres desde =i= hasta =j= (sin incluir =j=)              |
+| =elif=                        | "Si no, y si..."                                                         |
+| =x in y= / =x not in y=       | ¿Está (o no) =x= dentro de =y=?                                          |
+
+---
+
+*** Desafío 1: El mapa del libro maldito (diagrama de flujo)
+
+*Antes de programar*, dibuja el diagrama de flujo del Ahorcado. Constrúyelo por capas, como en el capítulo 7:
+
+1. Empieza con *Inicio* y *Fin*
+2. Añade las acciones en orden: generar palabra, mostrar tablero, pedir letra
+3. Divide el camino: ¿la letra está en la palabra o no?
+4. Añade las dos formas de terminar: ha adivinado todas las letras / ha agotado los intentos
+5. Añade los *bucles*: volver a pedir letra si el juego no ha terminado, volver a pedirla si ya la había probado, volver a empezar si quiere jugar de nuevo
+
+*Requisitos:*
+- Papel (fotografiado) o [[https://app.diagrams.net][draw.io]] (exportado a PNG)
+- Tiene que aparecer la ampliación que elijas en el Desafío 3 (puedes completarlo al final)
+
+Cuando lo tengas, compáralo con el del libro. ¿Qué flecha falta en el del libro? (Pista: ¿qué pasa después de "La letra está en la palabra secreta" si /todavía/ no ha ganado?)
+
+#+caption: Diagrama de flujo del Ahorcado (Al Sweigart, CC BY-NC-SA)
+[[/images/p1-6-diagrama-ahorcado.png]]
+
+---
+
+*** Desafío 2: El código del Ahorcado
+
+*Primero, un laboratorio de listas.* En la Shell:
+
+#+begin_example
+>>> animales = 'gato perro buho'.split()
+>>> animales
+>>> animales[0]
+>>> animales[2]
+>>> len(animales)
+>>> animales.append('dragon')
+>>> animales
+>>> animales.reverse()
+>>> animales
+>>> list(range(5))
+>>> palabra = 'pythonisa'
+>>> palabra[0:6]
+>>> palabra[6:]
+>>> 'y' in palabra
+#+end_example
+
+Ahora descarga el fichero incompleto:
+
+- [[/code/python6/ahorcado_incompleto.py][ahorcado_incompleto.py]]
+
+Renómbralo a =ahorcado.py=. Completa los huecos =___= y =...=:
+
+#+begin_src python :tangle ../static/code/python6/ahorcado_incompleto.py
+# ahorcado.py — Práctica 1.6: El Ahorcado
+# Completa los huecos marcados con ___ y ...
+import random
+
+IMAGENES_AHORCADO = [r'''
+  +---+
+      |
+      |
+      |
+     ===''', r'''
+  +---+
+  O   |
+      |
+      |
+     ===''', r'''
+  +---+
+  O   |
+  |   |
+      |
+     ===''', r'''
+  +---+
+  O   |
+ /|   |
+      |
+     ===''', r'''
+  +---+
+  O   |
+ /|\  |
+      |
+     ===''', r'''
+  +---+
+  O   |
+ /|\  |
+ /    |
+     ===''', r'''
+  +---+
+  O   |
+ /|\  |
+ / \  |
+     ===''']
+
+PALABRAS = ('hormiga babuino tejon murcielago oso castor camello gato cobra '
+            'coyote cuervo ciervo perro burro pato aguila zorro rana cabra '
+            'ganso halcon leon lagarto llama topo mono raton mula nutria buho '
+            'panda loro paloma piton conejo rata salmon foca tiburon oveja '
+            'mofeta serpiente cisne tigre sapo trucha pavo tortuga ballena '
+            'lobo cebra').___()
+
+
+def obtener_palabra_al_azar(lista_de_palabras):
+    # Devuelve una palabra al azar de la lista.
+    indice = random.randint(0, ___(lista_de_palabras) - 1)
+    return lista_de_palabras[___]
+
+
+def mostrar_tablero(letras_incorrectas, letras_correctas, palabra_secreta):
+    print(IMAGENES_AHORCADO[len(letras_incorrectas)])
+    print()
+
+    print('Letras incorrectas:', end=' ')
+    for letra in ___:
+        print(letra, end=' ')
+    print()
+
+    espacios = '_' * len(palabra_secreta)
+
+    # Sustituye cada '_' por la letra acertada (¡cortes!)
+    for i in range(len(palabra_secreta)):
+        if palabra_secreta[i] in letras_correctas:
+            espacios = espacios[:i] + palabra_secreta[i] + espacios[___:]
+
+    # Muestra la palabra con un espacio entre letras
+    for letra in espacios:
+        print(letra, end=' ')
+    print()
+
+
+def obtener_intento(letras_probadas):
+    # Devuelve la letra introducida. Comprueba que sea UNA letra nueva.
+    while True:
+        print('Adivina una letra.')
+        intento = input()
+        intento = intento.___()
+        if len(intento) != 1:
+            print('Por favor, introduce una sola letra.')
+        ___ intento in letras_probadas:
+            print('Ya has probado esa letra. Elige otra.')
+        elif intento not in 'abcdefghijklmnñopqrstuvwxyz':
+            print('Por favor, introduce una LETRA.')
+        else:
+            return ___
+
+
+def jugar_de_nuevo():
+    # Devuelve True si quiere volver a jugar y False si no.
+    print('¿Quieres jugar de nuevo? (sí o no)')
+    return input().lower().startswith(___)
+
+
+print('A H O R C A D O')
+letras_incorrectas = ''
+letras_correctas = ''
+palabra_secreta = obtener_palabra_al_azar(PALABRAS)
+juego_terminado = False
+
+while True:
+    mostrar_tablero(letras_incorrectas, letras_correctas, palabra_secreta)
+
+    intento = obtener_intento(letras_incorrectas + letras_correctas)
+
+    if intento in palabra_secreta:
+        letras_correctas = letras_correctas + intento
+
+        # ¿Ha encontrado todas las letras?
+        encontradas_todas = True
+        for i in range(len(palabra_secreta)):
+            if palabra_secreta[i] not in letras_correctas:
+                encontradas_todas = ___
+                break
+        if encontradas_todas:
+            print(f'¡Sí! La palabra secreta es "{palabra_secreta}". ¡Has ganado!')
+            juego_terminado = True
+    else:
+        letras_incorrectas = letras_incorrectas + intento
+
+        # ¿Se ha quedado sin intentos?
+        if len(letras_incorrectas) == len(IMAGENES_AHORCADO) - 1:
+            mostrar_tablero(letras_incorrectas, letras_correctas, palabra_secreta)
+            print(f'¡Te has quedado sin intentos! La palabra era "{palabra_secreta}".')
+            juego_terminado = ___
+
+    if juego_terminado:
+        if jugar_de_nuevo():
+            ...   # Reinicia las letras y elige otra palabra secreta
+        else:
+            ___
+#+end_src
+
+*Pistas:*
+- En =espacios[:i] + palabra_secreta[i] + espacios[___:]=, quieres /todo lo de antes/ de la posición =i=, la letra nueva y /todo lo de después/. ¿Desde qué posición empieza "lo de después"?
+- ¿Por qué el juego termina cuando hay =len(IMAGENES_AHORCADO) - 1= fallos y no =len(IMAGENES_AHORCADO)=? Cuenta los dibujos
+- El =while True:= del final es un bucle infinito a propósito. ¿Qué palabra lo rompe?
+
+*Diagnóstico:* usa el depurador (=Ctrl+F5=) con un punto de interrupción dentro de =mostrar_tablero()= y observa cómo cambia =espacios= en cada vuelta del =for=. Es la mejor forma de /ver/ los cortes funcionando.
+
+---
+
+*** Desafío 3: Extiende el Ahorcado
+
+El juego funciona. Ahora conviértelo en *tu* libro maldito. Tienes que hacer *al menos dos* de estas tres ampliaciones:
+
+**** A) Categorías con un diccionario
+
+Un *diccionario* guarda parejas /clave: valor/. En vez de una lista de palabras, usa una lista por categoría:
+
+#+begin_src python
+PALABRAS = {
+    'Colores': 'rojo naranja amarillo verde azul violeta'.split(),
+    'Frutas': 'manzana pera sandia uva cereza mango fresa'.split(),
+    'Hechizos': ...,   # ¡inventa tu propia categoría!
+}
+#+end_src
+
+Modifica =obtener_palabra_al_azar()= para que:
+1. Elija una *categoría* al azar con =random.choice(list(diccionario.keys()))=
+2. Elija una *palabra* al azar de esa categoría con =random.choice(...)=
+3. Devuelva /las dos cosas/: =return [palabra, categoria]=
+
+Y recíbelas con una *asignación múltiple*:
+
+#+begin_src python
+palabra_secreta, categoria = obtener_palabra_al_azar(PALABRAS)
+#+end_src
+
+Muestra la categoría como pista en cada turno.
+
+**** B) Niveles de dificultad con =elif=
+
+Pregunta al principio: =F= (fácil), =M= (medio) o =D= (difícil). Según la respuesta, el juego da más o menos intentos. Pistas:
+- Añade 2 dibujos más a =IMAGENES_AHORCADO= para el nivel fácil (¿un ojo? ¿los dos?)
+- Con =del IMAGENES_AHORCADO[n]= puedes /quitar/ dibujos para los niveles más difíciles
+- Usa =if= / =elif= / =else= para decidir
+
+**** C) Tu propio ahorcado
+
+Cambia el tema entero: otro dibujo ASCII (una poción que se vacía, un castillo que se derrumba, una nave que se aleja...), otras palabras y otros mensajes. Tiene que seguir funcionando con la misma lógica.
+
+*Diagnóstico:* después de cada ampliación, juega al menos una partida completa ganando y otra perdiendo. Si falla, depura: ¿qué valor tienen =palabra_secreta= y =categoria= después de la asignación múltiple?
+
+---
+
+*** Entrega
+
+#+begin_example
+PRACTICA1.6/
++-- ahorcado.py            <-- el juego completo con tus ampliaciones
++-- diagrama_flujo.png     <-- tu diagrama (incluyendo las ampliaciones)
++-- explicacion.md         <-- tus respuestas a "Explica tu código"
+#+end_example
+
+Súbela al *servidor SFTP del aula* (=put -r PRACTICA1.6=).
+
+Requisitos funcionales:
+- [ ] El diagrama de flujo es tuyo y refleja tu versión del juego
+- [ ] El tablero muestra el dibujo, las letras incorrectas y la palabra con huecos
+- [ ] No se puede repetir una letra ni introducir algo que no sea una letra
+- [ ] Se detecta la victoria y la derrota
+- [ ] Se puede volver a jugar con una palabra nueva
+- [ ] Al menos dos ampliaciones del Desafío 3
+
+---
+
+*** Explica tu código
+
+1. Explica con un ejemplo qué hace =espacios[:i] + palabra_secreta[i] + espacios[i + 1:]= cuando la palabra es ="gato"= e =i= vale =1=
+2. ¿Por qué =IMAGENES_AHORCADO= está en mayúsculas? ¿Qué pasaría si el programa la modificara sin querer?
+3. ¿Qué diferencia hay entre una /lista/ y un /diccionario/? ¿Cuándo usarías cada uno?
+
+---
+
+*** Rúbrica por competencias
+
+| *Criterio*                              | *Hechicería (9-10)*                                            | *Aprendizaje (6-8)*                                 | *Iniciación (0-5)*                        | *Peso* |
+|-----------------------------------------+----------------------------------------------------------------+-----------------------------------------------------+-------------------------------------------+--------|
+| *Diagrama de flujo*                     | Completo, todos los bucles, incluye las ampliaciones           | Correcto pero le faltan bucles o ampliaciones       | Copia del libro o sin diagrama            |  *15%* |
+| *Listas, cadenas y métodos*             | =split()=, índices, =len()=, =lower()= usados con soltura     | Funciona pero con algún índice fuera de rango       | No construye la lista de palabras         |  *20%* |
+| *Bucles =for= y cortes*                 | Tablero correcto con cortes; entiende el =for= con =range()=  | Tablero correcto con pequeños fallos de formato     | El tablero no muestra las letras          |  *20%* |
+| *Validación con =if=/=elif=/=else=*     | Rechaza repeticiones, cadenas largas y no-letras               | Alguna validación falla                             | Sin validación                            |  *15%* |
+| *Ampliaciones (diccionario, dificultad, tema)* | Dos o más, bien integradas, con asignación múltiple     | Una ampliación completa                             | Ninguna ampliación                        |  *20%* |
+| *Explica tu código*                     | Respuestas claras, con ejemplos propios                        | Correctas pero sin ejemplos                         | Sin =explicacion.md=                      |  *10%* |
+
+---
+
+*** Bonus (hasta +2.5)
+
+| *Bonus*                   | *Descripción*                                                                    | *Puntos* |
+|---------------------------+----------------------------------------------------------------------------------+----------|
+| Las tres ampliaciones     | Categorías + dificultad + tema propio                                            | *+1.0*   |
+| Marcador de partidas      | Cuenta victorias y derrotas entre partidas y las muestra al salir                | *+0.5*   |
+| Palabras con tildes       | El juego acepta palabras como =dragón= y la letra =o= acierta también la =ó=     | *+1.0*   |
+
+---
+
+*** Conceptos clave
+
+| *Concepto*                  | *Dónde lo ves*                                                           |
+|-----------------------------+--------------------------------------------------------------------------|
+| *Diagrama de flujo*         | El diseño completo antes de programar                                    |
+| *Cadena multilínea*         | Cada dibujo entre =r'''...'''=                                           |
+| *Constante*                 | =IMAGENES_AHORCADO=, =PALABRAS=: en mayúsculas, no se modifican          |
+| *Lista e índices*           | =IMAGENES_AHORCADO[len(letras_incorrectas)]=                             |
+| *Métodos*                   | =.split()=, =.lower()=, =.startswith()=, =.append()=, =.reverse()=      |
+| *=range()= y =list()=*      | =for i in range(len(palabra_secreta)):=                                  |
+| *Bucle =for=*               | =for letra in letras_incorrectas:=                                       |
+| *Cortes (slices)*           | =espacios[:i] + palabra_secreta[i] + espacios[i + 1:]=                   |
+| *=elif=*                    | Validación de la letra en =obtener_intento()=                            |
+| *Diccionario*               | ={'Colores': [...], 'Frutas': [...]}=                                    |
+| *=random.choice()=*         | Elige un elemento al azar de una lista                                   |
+| *Asignación múltiple*       | =palabra_secreta, categoria = obtener_palabra_al_azar(PALABRAS)=         |
+
+---
+
+#+begin_quote
+/"Primero el mapa, después el camino. La que diseña antes de programar no se pierde en el bosque de los bucles."/
+#+end_quote

@@ -21,6 +21,12 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 -   [Para tus bases de datos ...¿Generar datos de prueba aleatoriamente?](https://pythonisas.github.io/Pythonisas)
 
 
+## Primer trimestre: Academia Pythonisa {#primer-trimestre}
+
+-   [Práctica 1.1 — Tus primeros hechizos](/python1/)
+-   [Práctica 1.2 — Adivina el Número](/python2/)
+
+
 ## Recursos {#recursos}
 
 -   [Documentación Oficial en ES](https://docs.python.org/es/3/)
