@@ -8,7 +8,7 @@ draft = false
 {{< figure src="/images/pythonisa.png" >}}
 
 Las Github (Web) Pages de la (auto)organización **Pythonisas**. Brujas del teclado.
-Alquimistas de los bits.
+Alquimistas de los bits, raperos del byte.
 
 Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
