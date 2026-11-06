@@ -25,6 +25,10 @@ Aquí cocinamos nuestras recetas, pócimas y encantamientos del teclado.
 
 -   [Práctica 1.1 — Tus primeros hechizos](/python1/)
 -   [Práctica 1.2 — Adivina el Número](/python2/)
+-   [Práctica 1.3 — El Bufón de la Academia](/python3/)
+-   [Práctica 1.4 — Reino de Dragones](/python4/)
+-   [Práctica 1.5 — Cazabugs](/python5/)
+-   [Práctica 1.6 — El Ahorcado](/python6/)
 
 
 ## Recursos {#recursos}

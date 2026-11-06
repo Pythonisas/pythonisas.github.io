@@ -685,7 +685,7 @@ En =explicacion.md= responde con tus palabras:
 /"La esfera no adivina nada: solo sabe comparar. Y ahora tú también."/
 #+end_quote
 
-** TODO Práctica 1.3 — Academia Pythonisa III: El Bufón de la Academia
+** DONE Práctica 1.3 — Academia Pythonisa III: El Bufón de la Academia
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-1-3-el-bufon-de-la-academia
 :EXPORT_HUGO_SECTION: posts
@@ -877,7 +877,7 @@ Requisitos funcionales:
 /"Un chiste sin pausa es como un programa sin =input()=: se acaba antes de empezar."/
 #+end_quote
 
-** TODO Práctica 1.4 — Academia Pythonisa IV: Reino de Dragones
+** DONE Práctica 1.4 — Academia Pythonisa IV: Reino de Dragones
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-1-4-reino-de-dragones
 :EXPORT_HUGO_SECTION: posts
@@ -1144,7 +1144,7 @@ Requisitos funcionales:
 /"Una función es un hechizo con nombre: lo escribes una vez y lo invocas mil."/
 #+end_quote
 
-** TODO Práctica 1.5 — Academia Pythonisa V: Cazabugs
+** DONE Práctica 1.5 — Academia Pythonisa V: Cazabugs
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-1-5-cazabugs
 :EXPORT_HUGO_SECTION: posts

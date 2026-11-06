@@ -3,7 +3,7 @@ title = "Práctica 1.5 — Academia Pythonisa V: Cazabugs"
 author = ["Jordi"]
 tags = ["prácticas"]
 url = "/python5/"
-draft = true
+draft = false
 +++
 
 ## Misión: Cazar lo invisible {#misión-cazar-lo-invisible}

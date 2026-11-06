@@ -3,7 +3,7 @@ title = "Práctica 1.3 — Academia Pythonisa III: El Bufón de la Academia"
 author = ["Jordi"]
 tags = ["prácticas"]
 url = "/python3/"
-draft = true
+draft = false
 +++
 
 ## Misión: Hacer reír al tribunal {#misión-hacer-reír-al-tribunal}

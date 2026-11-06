@@ -3,7 +3,7 @@ title = "Práctica 1.4 — Academia Pythonisa IV: Reino de Dragones"
 author = ["Jordi"]
 tags = ["prácticas"]
 url = "/python4/"
-draft = true
+draft = false
 +++
 
 ## Misión: Las dos cuevas {#misión-las-dos-cuevas}
