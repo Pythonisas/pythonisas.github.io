@@ -3,7 +3,7 @@ title = "Práctica 1.6 — Academia Pythonisa VI: El Ahorcado"
 author = ["Jordi"]
 tags = ["prácticas"]
 url = "/python6/"
-draft = true
+draft = false
 +++
 
 ## Misión: La palabra prohibida {#misión-la-palabra-prohibida}

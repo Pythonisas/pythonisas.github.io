@@ -1373,7 +1373,7 @@ Requisitos funcionales:
 /"El ordenador hace exactamente lo que le dices. El bug no está en la máquina: está en la distancia entre lo que dijiste y lo que querías decir."/
 #+end_quote
 
-** TODO Práctica 1.6 — Academia Pythonisa VI: El Ahorcado
+** DONE Práctica 1.6 — Academia Pythonisa VI: El Ahorcado
 :PROPERTIES:
 :EXPORT_FILE_NAME: practica-1-6-el-ahorcado
 :EXPORT_HUGO_SECTION: posts
